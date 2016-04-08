@@ -29,7 +29,7 @@ gulp.task('javascript', function() {
 gulp.task('html', function() {
     gulp.src('./main/**/*.html')
         // .pipe(htmlmin({collapseWhitespace: true}))
-        .pipe(gulp.dest('./public/dist/html/'))
+        .pipe(gulp.dest('./public/html/'))
 });
 
 gulp.task('default', ['styles', 'javascript', 'html']);
