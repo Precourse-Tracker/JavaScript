@@ -1,0 +1,26 @@
+{
+  "name": "precourse-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Precourse-Tracker/precourse-tracker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Precourse-Tracker/precourse-tracker/issues"
+  },
+  "homepage": "https://github.com/Precourse-Tracker/precourse-tracker#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-uglifycss": "^1.0.6"
+  }
+}
