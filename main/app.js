@@ -1,33 +1,33 @@
-angular.module('myApp')
+angular.module('myApp', ['ui.router'])
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('login');
+  // $urlRouterProvider.otherwise('login');
 
   $stateProvider
   .state('login', {
     url: '/login',
-    templateUrl: './html/loginTemplate.html'
+    templateUrl: './html/login/loginTemplate.html'
   })
   .state('home', {
     url: '/home',
-    templateUrl: './html/homeTemplate.html'
+    templateUrl: './html/home/homeTemplate.html'
   })
   .state('lessons', {
     url: '/lessons',
-    templateUrl: '/html/lessonsTemplate.html'
+    templateUrl: '/html/lessons/lessonsTemplate.html'
   })
   .state('lessonTests', {
     url: '/lessonTests',
-    templateUrl: '/html/lessonTestsTemplate.html'
+    templateUrl: '/html/lessonsTests/lessonTestsTemplate.html'
   })
   .state('/assessment', {
     url: '/assessment',
-    templateUrl: '/html/assessmentTemplate.html'
+    templateUrl: '/html/assessment/assessmentTemplate.html'
   })
   .state('dashboard', {
     url: '/dashboard',
-    templateUrl: '/html/dashboardTemplate.html'
+    templateUrl: './html/dashboard/dashboardTemplate.html'
   })
 
-}) // end config
+}]) // end config

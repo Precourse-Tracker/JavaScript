@@ -15,7 +15,7 @@ gulp.task('styles', function() { // .scss is newer file version of .sass
     gulp.src('./main/styles/*.scss')
         // .pipe(stylus())
         .pipe(styles())
-        .pipe(uglifycss())
+        // .pipe(uglifycss())
         .pipe(concat('styles.css'))
         .pipe(gulp.dest('./public/styles'))
 });
