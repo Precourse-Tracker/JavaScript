@@ -4,6 +4,11 @@ $darkBlue: #406BB2;
 $lightBlue: #8FB9FF;
 $navFontColor: #FFF;
 
+@mixin menuBorder() {
+  border-left: 1px solid grey;
+  border-bottom: 1px solid grey;
+}
+
 ///////////////////
 // global styles //
 ///////////////////
@@ -41,14 +46,28 @@ a {
 
 }
 
+#profile-wrapper {
+
+}
+
+// #navigation-bar:hover.#menu-navigation {
+//   // color: blue;
+//   display: flex;
+// }
+
+#logo {
+
+}
+
 #menu-navigation {
   // width: 10vw;
   height: auto;
   font-family: 'Quicksand';
-  border-left: 1px solid grey;
-  border-bottom: 1px solid grey;
-  display: flex;
-  // justify-content: flex-end;
+  // border-left: 1px solid grey;
+  // border-bottom: 1px solid grey;
+  @include menuBorder;
+  // display: flex;
+  display: none;
   float: right;
 
   ul {
@@ -62,12 +81,4 @@ a {
     line-height: 35px;
     list-style: none;
   }
-}
-
-#profile-wrapper {
-
-}
-
-#logo {
-
 }

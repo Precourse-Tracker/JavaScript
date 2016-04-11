@@ -22,12 +22,15 @@ a {
   justify-content: space-between;
   align-items: center; }
 
+#navigation-bar:hover + #menu-navigation {
+  display: flex; }
+
 #menu-navigation {
   height: auto;
   font-family: 'Quicksand';
   border-left: 1px solid grey;
   border-bottom: 1px solid grey;
-  display: flex;
+  display: none;
   float: right; }
   #menu-navigation ul {
     padding-right: 25px; }
