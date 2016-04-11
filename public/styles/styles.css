@@ -13,19 +13,20 @@ a {
 
 #navigation-bar {
   width: 100vw;
-  height: 8vh;
+  height: 8.25vh;
   padding: 15px;
   font-family: 'Lato';
+  font-weight: bold;
   color: #FFF;
-  background: #406BB2;
+  background: #8FB9FF;
   display: flex;
   justify-content: space-between;
   align-items: center; }
 
 #profile-wrapper {
-  width: 48px;
-  height: 48px;
-  background: rgba(255, 255, 255, 0.2);
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -60,9 +61,9 @@ a {
 .home-top {
   width: 0;
   height: 0;
-  border-left: 250px solid transparent;
-  border-right: 250px solid transparent;
-  border-bottom: 360px solid #FFE3A8;
+  border-left: 300px solid transparent;
+  border-right: 300px solid transparent;
+  border-bottom: 350px solid #FFE3A8;
   margin-bottom: 8vh;
   margin-top: 8vh; }
 
