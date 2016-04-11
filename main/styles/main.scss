@@ -50,10 +50,6 @@ a {
 
 }
 
-// #navigation-bar:hover.#menu-navigation {
-//   // color: blue;
-//   display: flex;
-// }
 
 #logo {
 
@@ -82,11 +78,6 @@ a {
     list-style: none;
   }
 }
-
-
-
-
-
 
 
 #back {
@@ -224,4 +215,6 @@ input {
   padding: 8px 0;
   margin-top: 20px;
   }
+.expand {
+  display: block !important;
 }
