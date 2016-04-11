@@ -14,6 +14,7 @@ watcher.on('change', function(event) {
 gulp.task('styles', function() { // .scss is newer file version of .sass
     gulp.src('./main/styles/*.scss')
         // .pipe(stylus())
+        .pipe(sass())
         .pipe(uglifycss())
         .pipe(concat('styles.css'))
         .pipe(gulp.dest('./public/styles'))
