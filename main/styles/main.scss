@@ -37,6 +37,7 @@ a {
   font-family: 'Lato';
   font-weight: bold;
   color: $navFontColor;
+  // background: $darkBlue;
   background: $lightBlue;
   display: flex;
   justify-content: space-between;
@@ -94,6 +95,7 @@ a {
 // ----- home styles ----- //
 /////////////////////////////
 #home-wrapper {
+  font-family: 'Lato';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -101,27 +103,33 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: -1;
 }
 
 .home-top {
   // width: 650px;
   // height: 360px;
   // background: #FFE3A8;
-
   width: 0;
   height: 0;
   border-left: 300px solid transparent;
   border-right: 300px solid transparent;
   border-bottom: 350px solid #FFE3A8;
-
   margin-bottom: 8vh;
   margin-top: 8vh;
+
+  div {
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%);
+  }
 }
 
 .home-bottom {
   width: 150px;
   height: 70px;
-  font-family: 'Lato';
+  font-weight: bold;
   text-align: center;
   color: #FFF;
   background: $darkBlue;
@@ -133,3 +141,7 @@ a {
     margin: 20px;
   }
 }
+
+////////////////////////////////
+// ----- lessons styles ----- //
+////////////////////////////////
