@@ -22,9 +22,6 @@ a {
   justify-content: space-between;
   align-items: center; }
 
-#navigation-bar:hover + #menu-navigation {
-  display: flex; }
-
 #menu-navigation {
   height: auto;
   font-family: 'Quicksand';
@@ -38,3 +35,6 @@ a {
     color: #406BB2;
     line-height: 35px;
     list-style: none; }
+
+.expand {
+  display: flex; }
