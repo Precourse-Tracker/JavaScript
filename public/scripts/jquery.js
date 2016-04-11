@@ -1,10 +1,7 @@
 $(document).ready(function() {
 
-  console.log('document ready')
+  // console.log('jquery loaded')
 
-  $('#profile-wrapper').on('click', function() {
-    console.log('hi');
-    $('#menu-navigation').toggleClass('expand');
-  })
+
 
 }) // end jquery

@@ -37,4 +37,4 @@ a {
     list-style: none; }
 
 .expand {
-  display: flex; }
+  display: block !important; }
