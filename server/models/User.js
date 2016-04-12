@@ -11,10 +11,12 @@ const userSchema = new Schema ({
   password: {type: String, required: true, unique: true},
   cohort: {type: String, required: true},
   progress: [{
-    lesson: {type: Schema.Types.ObjectId, ref: 'Lesson'},
-    test: {type: Number}, //Shows users test percentage
-    assessment: [{
-      unit: {type: Schema.Types.ObjectId, ref: 'Unit'}
+    lessons: [{
+      name: type: String,
+      status: type: String, default: 'incomplete',
+      score: type: Number,
+      }]
+    assessment: type: Number
     }]
   }]
 })
