@@ -212,3 +212,55 @@ a {
   align-items: center; }
   .home-bottom span {
     margin: 20px; }
+
+.lessons-wrapper {
+  width: 220px;
+  height: 91vh;
+  background: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative; }
+
+.lessons {
+  max-height: 100%;
+  font-family: 'Quicksand';
+  color: grey;
+  margin-left: 10px;
+  overflow: auto;
+  margin-right: -17px;
+  padding-right: 0;
+  padding-bottom: 65px; }
+  .lessons h3 {
+    margin: 0;
+    cursor: pointer; }
+  .lessons h4 {
+    color: black;
+    font-weight: bolder;
+    margin-top: 0;
+    margin-left: 40%; }
+  .lessons ul {
+    margin: 0 auto 0 auto;
+    padding: 5px;
+    padding-left: 20px;
+    cursor: pointer; }
+  .lessons li {
+    list-style: none;
+    line-height: 35px;
+    cursor: pointer; }
+  .lessons .lesson-title {
+    color: black;
+    font-weight: bolder; }
+  .lessons .take-assessment {
+    width: 165px;
+    height: 65px;
+    color: white;
+    background: #406BB2;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    line-height: 22px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%); }
