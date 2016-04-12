@@ -214,7 +214,7 @@ a {
     margin: 20px; }
 
 .lessons-wrapper {
-  width: 220px;
+  width: 225px;
   height: 91vh;
   background: rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -223,14 +223,13 @@ a {
 .lessons {
   max-height: 100%;
   font-family: 'Quicksand';
-  color: grey;
   margin-left: 10px;
   overflow: auto;
   margin-right: -17px;
   padding-right: 0;
   padding-bottom: 65px; }
   .lessons h3 {
-    margin: 0;
+    margin: 5px 0 0 0;
     cursor: pointer; }
   .lessons h4 {
     color: black;
@@ -239,15 +238,21 @@ a {
   .lessons ul {
     margin: 0 auto 0 auto;
     padding: 5px;
-    padding-left: 20px;
+    padding-left: 10px;
     cursor: pointer; }
   .lessons li {
     list-style: none;
     line-height: 35px;
-    cursor: pointer; }
+    cursor: pointer;
+    color: #808080; }
   .lessons .lesson-title {
-    color: black;
-    font-weight: bolder; }
+    color: black; }
+    .lessons .lesson-title h3 {
+      font-size: 17px; }
+  .lessons .lesson-sections {
+    display: none; }
+  .lessons .expand {
+    display: block !important; }
   .lessons .take-assessment {
     width: 165px;
     height: 65px;
