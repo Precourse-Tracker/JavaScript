@@ -2,7 +2,7 @@ angular.module('myApp', ['ui.router'])
 
 .config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
 
-  // $urlRouterProvider.otherwise('login');
+  $urlRouterProvider.otherwise('login');
 
   $stateProvider
   .state('login', {
@@ -31,6 +31,47 @@ angular.module('myApp', ['ui.router'])
   })
 
 }]) // end config
+
+angular.module('myApp')
+
+.controller('loginController', function(){
+
+  $(document).ready(function(){
+  $('#goRight').on('click', function(){
+    $('#slideBox').animate({
+      'marginLeft' : '0'
+    })
+    $('.topLayer').animate({
+      'marginLeft' : '100%'
+    })
+  })
+  $('#goLeft').on('click', function(){
+    $('#slideBox').animate({
+      'marginLeft' : '50%'
+    })
+    $('.topLayer').animate({
+      'marginLeft': '0'
+    })
+  })
+})
+
+})
+
+angular.module('myApp')
+
+.directive('loginDirective', function() {
+
+  return {
+    restrict: 'E',
+    templateUrl: './html/login/loginTemplate.html',
+    link: function(scope, ele, attr) {
+
+  
+
+    }
+  }
+
+}) // end loginDirective
 
 angular.module('myApp')
 

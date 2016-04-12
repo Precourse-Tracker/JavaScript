@@ -4,7 +4,12 @@ angular.module('myApp')
 
   return {
     restrict: 'E',
-    templateUrl: './html/login/loginTemplate.html'
+    templateUrl: './html/login/loginTemplate.html',
+    link: function(scope, ele, attr) {
+
+  
+
+    }
   }
 
 }) // end loginDirective
