@@ -10,6 +10,8 @@ const User = require('./server/models/User.js');
 ///////CONTROLLERS/////////
 const userController = require('./server/controllers/userController.js');
 const unitController = require('./server/controllers/unitController.js');
+const progressController = require('./server/controllers/progressController.js');
+
 
 
 const app = express();
@@ -108,11 +110,21 @@ app.post('/api/signup', passport.authenticate('local-signup'), function(req, res
   res.sendStatus(200);
 });
 
-
-
 app.get('/api/logout', userController.loggedOut);
 
+//////progress tracker data//////
+app.get('/api/tracker', progressController.getTrackerData);
+
+
+
+
+
+
+
+/////////////Creating Data///////
 app.post('/api/lessons', unitController.createLesson);
+app.post('/api/assessment', unitController.createAssessment);
+
 
 //////////CHECK IF USER EXISTS////////
 app.get('/api/users', userController.getUsers);

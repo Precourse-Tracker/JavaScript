@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const assessmentSchema = new Schema({
-  questions [{
+  questions: [{
     question: {type: String, required: true, index: true},
     answer: {type: String, required: true, index: true}
   }],
