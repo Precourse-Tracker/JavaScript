@@ -110,9 +110,9 @@ app.post('/api/signup', passport.authenticate('local-signup'), function(req, res
 
 
 
-app.get('/logout', userController.loggedOut);
+app.get('/api/logout', userController.loggedOut);
 
-// app.post('/lessons', unitController.createLesson);
+app.post('/api/lessons', unitController.createLesson);
 
 //////////CHECK IF USER EXISTS////////
 app.get('/api/users', userController.getUsers);
