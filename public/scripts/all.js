@@ -15,15 +15,15 @@ angular.module('myApp', ['ui.router'])
   })
   .state('lessons', {
     url: '/lessons',
-    templateUrl: '/html/lessons/lessonsTemplate.html'
+    templateUrl: './html/lessons/lessonsTemplate.html'
   })
   .state('lessonTests', {
     url: '/lessonTests',
-    templateUrl: '/html/lessonsTests/lessonTestsTemplate.html'
+    templateUrl: './html/lessonsTests/lessonTestsTemplate.html'
   })
   .state('/assessment', {
     url: '/assessment',
-    templateUrl: '/html/assessment/assessmentTemplate.html'
+    templateUrl: './html/assessment/assessmentTemplate.html'
   })
   .state('dashboard', {
     url: '/dashboard',
