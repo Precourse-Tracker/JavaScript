@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
-const localStrategy = require('passport-local');
+const localStrategy = require('passport-local').Strategy;
 const User = require('./server/models/User.js');
 
 ///////CONTROLLERS/////////
@@ -49,17 +49,19 @@ passport.use('local-login', new localStrategy({
     usernameField: 'username',
     passwordField: 'password',
     passReqToCallback: true
-  }, function(req, username, password, done){
+  },(req, username, password, done) => {
+    console.log(req, username, password);
     User.findOne({
       'username': username
-    }, function(err, user){
+    },(err, user) => {
       console.log(user);
       if (err) return done(err);
       if (user) return done(null, false);
       else {
+        console.log(req.body);
         var newUser = new User(req.body);
-        // newUser.password = newUser.generateHash(req.body.password);
-        newUser.save(function(err, response){
+        newUser.password = newUser.generateHash(req.body.password);
+        newUser.save((err, response) => {
           if (err) return done(null, err);
           else return done(null, response);
         });
@@ -68,6 +70,7 @@ passport.use('local-login', new localStrategy({
   }));
 
   passport.serializeUser((user, cb) => {
+    console.log('user here is ', user)
     cb(null, user.id);
   });
 
@@ -76,6 +79,7 @@ passport.use('local-login', new localStrategy({
       if (err) {
         return cb(err);
       }
+      console.log('Going back with', user);
       cb(null, user);
     });
   });
@@ -94,19 +98,21 @@ app.use(passport.session());
 
 
 ///////////////API AUTH////////////
-app.post('/login', passport.authenticate('local-login', function(req, res){
+app.post('/api/login', passport.authenticate('local-login'), function(req, res){
   console.log('Logged in');
   res.status(200).send(req._id);
-}));
-
-app.post('/signup', passport.authenticate('local-signup'), function(req, res){
-  console.log(req);
-  res.status(200).send(req.body);
 });
+
+app.post('/api/signup', passport.authenticate('local-signup'), function(req, res){
+  console.log('Successfully created user');
+  res.sendStatus(200);
+});
+
+
 
 app.get('/logout', userController.loggedOut);
 
 // app.post('/lessons', unitController.createLesson);
 
 //////////CHECK IF USER EXISTS////////
-app.get('/users', userController.getUsers);
+app.get('/api/users', userController.getUsers);
