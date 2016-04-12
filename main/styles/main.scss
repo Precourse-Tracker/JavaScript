@@ -9,9 +9,9 @@ $navFontColor: #FFF;
   border-bottom: 1px solid grey;
 }
 
-///////////////////
-// global styles //
-///////////////////
+///////////////////////////////
+// ----- global styles ----- //
+///////////////////////////////
 html, body {
   box-sizing: border-box;
   padding: 0;
@@ -27,16 +27,18 @@ a {
   color: white;
 }
 
-///////////////////////
-// navigation styles //
-///////////////////////
+///////////////////////////////////
+// ----- navigation styles ----- //
+///////////////////////////////////
 #navigation-bar {
   width: 100vw;
-  height: 7vh;
+  height: 8.25vh;
   padding: 15px;
   font-family: 'Lato';
+  font-weight: bold;
   color: $navFontColor;
-  background: $darkBlue;
+  // background: $darkBlue;
+  background: $lightBlue;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,7 +49,13 @@ a {
 }
 
 #profile-wrapper {
-
+  width: 50px;
+  height: 50px;
+  background: rgba(255,255,255,0.30);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -82,3 +90,58 @@ a {
 .expand {
   display: block !important;
 }
+
+/////////////////////////////
+// ----- home styles ----- //
+/////////////////////////////
+#home-wrapper {
+  font-family: 'Lato';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: -1;
+}
+
+.home-top {
+  // width: 650px;
+  // height: 360px;
+  // background: #FFE3A8;
+  width: 0;
+  height: 0;
+  border-left: 300px solid transparent;
+  border-right: 300px solid transparent;
+  border-bottom: 350px solid #FFE3A8;
+  margin-bottom: 8vh;
+  margin-top: 8vh;
+
+  div {
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%);
+  }
+}
+
+.home-bottom {
+  width: 150px;
+  height: 70px;
+  font-weight: bold;
+  text-align: center;
+  color: #FFF;
+  background: $darkBlue;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+
+  span {
+    margin: 20px;
+  }
+}
+
+////////////////////////////////
+// ----- lessons styles ----- //
+////////////////////////////////
