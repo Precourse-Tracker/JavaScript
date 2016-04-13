@@ -12,7 +12,7 @@ watcher.on('change', function(event) {
 });
 
 gulp.task('styles', function() { // .scss is newer file version of .sass
-  gulp.src('./main/styles/*.scss')
+  gulp.src('./main/**/*.scss')
     // .pipe(stylus())
     .pipe(styles())
     // .pipe(uglifycss())
