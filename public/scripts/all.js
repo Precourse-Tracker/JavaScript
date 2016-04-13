@@ -19,7 +19,7 @@ angular.module('myApp', ['ui.router'])
   })
   .state('lessonTests', {
     url: '/lessonTests',
-    templateUrl: './html/lessonsTests/lessonTestsTemplate.html'
+    templateUrl: './html/lessonTests/lessonTestsTemplate.html'
   })
   .state('/assessment', {
     url: '/assessment',
@@ -34,8 +34,27 @@ angular.module('myApp', ['ui.router'])
 
 angular.module('myApp')
 
-.controller('loginController', function(){
+.controller('lessonTestsController', ["$scope", function($scope) {
 
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/default");
+editor.getSession().setMode("ace/mode/javascript");
+
+}])
+
+angular.module('myApp')
+
+.controller('loginController', ["$scope", "loginService", function($scope, loginService){
+
+  $scope.createUser = function(newUser) {
+      loginService.newUser(newUser);
+  };
+  $scope.userLogin = function(user) {
+    console.log('userLogin', user);
+    loginService.userLogin(user);
+  };
+
+// jquery animations
   $(document).ready(function(){
   $('#goRight').on('click', function(){
     $('#slideBox').animate({
@@ -55,7 +74,7 @@ angular.module('myApp')
   })
 })
 
-})
+}])
 
 angular.module('myApp')
 
@@ -72,6 +91,47 @@ angular.module('myApp')
   }
 
 }) // end loginDirective
+
+angular.module("myApp")
+
+.service('loginService', ["$q", "$http", "$state", function($q, $http, $state) {
+
+  this.userLogin = function(user) {
+    return $http({
+      method: 'POST',
+      data: user,
+      url: '/login'
+    }).success(function() {
+      $state.go('home');
+    });
+  };
+
+  this.logoutUser = function() {
+    return $http({
+      method: 'GET',
+      url: '/logout'
+    }).success(function() {
+       $state.go('login');
+    });
+  };
+
+  this.newUser = function(newUser) {
+    return $http({
+      method: 'POST',
+      data: newUser,
+      url: '/signup'
+    }).success(function() {
+    });
+  };
+
+  this.getProfile = function() {
+    return $http({
+      method: 'GET',
+      url: '/user/current'
+    });
+  };
+
+}]);
 
 angular.module('myApp')
 
