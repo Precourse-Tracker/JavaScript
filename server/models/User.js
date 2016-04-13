@@ -12,13 +12,12 @@ const userSchema = new Schema ({
   cohort: {type: String, required: true},
   progress: [{
     lessons: [{
-      name: type: String,
-      status: type: String, default: 'incomplete',
-      score: type: Number,
-      }]
-    assessment: type: Number
+      name: {type: String},
+      status: {type: String},
+      score: {type: Number},
+    }],
+    assessment: {type: Number}
     }]
-  }]
 })
 
 userSchema.methods.generateHash = function(password){

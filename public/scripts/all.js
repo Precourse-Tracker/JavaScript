@@ -33,9 +33,15 @@ angular.module('myApp', ['ui.router'])
 }]) // end config
 
 angular.module('myApp')
-
-.controller('loginController', function(){
-
+.controller('loginController', ["$scope", "loginService", function($scope, loginService){
+  $scope.createUser = function(newUser) {
+      loginService.newUser(newUser);
+  };
+  $scope.userLogin = function(user) {
+    console.log('userLogin', user);
+    loginService.userLogin(user);
+  };
+// jquery animations
   $(document).ready(function(){
   $('#goRight').on('click', function(){
     $('#slideBox').animate({
@@ -54,8 +60,7 @@ angular.module('myApp')
     })
   })
 })
-
-})
+}])
 
 angular.module('myApp')
 
@@ -72,6 +77,41 @@ angular.module('myApp')
   }
 
 }) // end loginDirective
+
+angular.module("myApp")
+.service('loginService', ["$q", "$http", "$state", function($q, $http, $state) {
+  this.userLogin = function(user) {
+    return $http({
+      method: 'POST',
+      data: user,
+      url: '/api/login'
+    }).success(function() {
+      $state.go('home');
+    });
+  };
+  this.logoutUser = function() {
+    return $http({
+      method: 'GET',
+      url: '/logout'
+    }).success(function() {
+       $state.go('login');
+    });
+  };
+  this.newUser = function(newUser) {
+    return $http({
+      method: 'POST',
+      data: newUser,
+      url: '/api/signup'
+    }).success(function() {
+    });
+  };
+  this.getProfile = function() {
+    return $http({
+      method: 'GET',
+      url: '/user/current'
+    });
+  };
+}]);
 
 angular.module('myApp')
 
