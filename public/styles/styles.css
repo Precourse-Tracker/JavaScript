@@ -1,53 +1,147 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:300|Quicksand);
-html, body {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-family: 'Lato'; }
 
-*, *::before, *::after {
-  box-sizing: border-box; }
 
-a {
-  text-decoration: none;
-  color: white; }
 
-#navigation-bar {
-  width: 100vw;
-  height: 8.25vh;
-  padding: 15px;
+#home-wrapper {
   font-family: 'Lato';
-  font-weight: bold;
-  color: #FFF;
-  background: #8FB9FF;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
-  justify-content: space-between;
-  align-items: center; }
+  flex-direction: column;
+  align-items: center;
+  z-index: -1; }
 
-#profile-wrapper {
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 100%;
+.home-top {
+  width: 0;
+  height: 0;
+  border-left: 300px solid transparent;
+  border-right: 300px solid transparent;
+  border-bottom: 350px solid #FFE3A8;
+  margin-bottom: 8vh;
+  margin-top: 8vh; }
+  .home-top div {
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%); }
+
+.home-bottom {
+  width: 150px;
+  height: 70px;
+  font-weight: bold;
+  text-align: center;
+  color: #FFF;
+  background: #406BB2;
+  border-radius: 5px;
+  display: flex;
+  align-items: center; }
+  .home-bottom span {
+    margin: 20px; }
+
+.lessons-wrapper {
+  width: 225px;
+  height: 91vh;
+  background: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative; }
+
+.lessons {
+  max-height: 100%;
+  font-family: 'Quicksand';
+  margin-left: 10px;
+  overflow: auto;
+  margin-right: -17px;
+  padding-right: 0;
+  padding-bottom: 65px; }
+  .lessons h3 {
+    margin: 5px 0 0 0;
+    cursor: pointer; }
+  .lessons h4 {
+    color: black;
+    font-weight: bolder;
+    margin: 0 auto 0 25%; }
+  .lessons ul {
+    margin: 0 auto 0 auto;
+    padding: 5px;
+    padding-left: 10px;
+    cursor: pointer; }
+  .lessons li {
+    list-style: none;
+    line-height: 35px;
+    cursor: pointer;
+    color: #808080; }
+  .lessons .lesson-title {
+    color: black; }
+    .lessons .lesson-title h3 {
+      font-size: 17px; }
+  .lessons .lesson-sections {
+    display: none; }
+  .lessons .expand {
+    display: block !important; }
+  .lessons .take-assessment {
+    width: 165px;
+    height: 65px;
+    color: white;
+    background: #406BB2;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    line-height: 22px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%); }
+
+.lessonTests h2 {
+  text-align: center;
+  color: #406BB2; }
+
+.lessonTests .multiple-choice-wrapper {
   display: flex;
   justify-content: center;
-  align-items: center; }
+  margin: 8em; }
 
-#menu-navigation {
-  height: auto;
-  font-family: 'Quicksand';
-  border-left: 1px solid grey;
-  border-bottom: 1px solid grey;
-  display: none;
-  float: right;
-  cursor: pointer; }
-  #menu-navigation ul {
-    padding-right: 25px; }
-  #menu-navigation li {
-    color: #406BB2;
-    line-height: 35px;
-    list-style: none; }
+.lessonTests .test-question {
+  line-height: 3em; }
+
+.lessonTests .quiz-options {
+  text-align: center; }
+
+.lessonTests button {
+  background-color: #ebebeb;
+  border: #fff 1px solid;
+  color: #406BB2;
+  width: 21.775em;
+  height: 6em;
+  transition: 0.3s;
+  text-align: center;
+  font-size: 1em;
+  font-family: 'lato';
+  border: none;
+  border-radius: 0;
+  line-height: 2rem;
+  padding: 0 1rem;
+  text-align: center;
+  position: relative;
+  margin: 2px auto; }
+
+.lessonTests button:hover, .lessonTests button:active, .lessonTests button:focus {
+  background-color: #8FB9FF;
+  color: #fff;
+  cursor: pointer;
+  outline: 0; }
+
+.lessonTests .code-input-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 10px 0; }
+
+.lessonTests #editor {
+  height: 40vh;
+  width: 90vw; }
 
 #login-section body {
   height: 100%;
@@ -176,88 +270,52 @@ a {
 #login-section .expand {
   display: block !important; }
 
-#home-wrapper {
+#navigation-bar {
+  width: 100vw;
+  height: 8.25vh;
+  padding: 15px;
   font-family: 'Lato';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: -1; }
-
-.home-top {
-  width: 0;
-  height: 0;
-  border-left: 300px solid transparent;
-  border-right: 300px solid transparent;
-  border-bottom: 350px solid #FFE3A8;
-  margin-bottom: 8vh;
-  margin-top: 8vh; }
-  .home-top div {
-    font-weight: bold;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%); }
-
-.home-bottom {
-  width: 150px;
-  height: 70px;
   font-weight: bold;
-  text-align: center;
   color: #FFF;
-  background: #406BB2;
-  border-radius: 5px;
+  background: #8FB9FF;
   display: flex;
+  justify-content: space-between;
   align-items: center; }
-  .home-bottom span {
-    margin: 20px; }
 
-.lessonTests h2 {
-  text-align: center;
-  color: #406BB2; }
-
-.lessonTests .multiple-choice-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 8em; }
-
-.lessonTests .test-question {
-  line-height: 3em; }
-
-.lessonTests .quiz-options {
-  text-align: center; }
-
-.lessonTests button {
-  background-color: #ebebeb;
-  border: #fff 1px solid;
-  color: #406BB2;
-  width: 21.775em;
-  height: 6em;
-  transition: 0.3s;
-  text-align: center;
-  font-size: 1em;
-  font-family: 'lato';
-  border: none;
-  border-radius: 0;
-  line-height: 2rem;
-  padding: 0 1rem;
-  text-align: center;
-  position: relative;
-  margin: 2px auto; }
-
-.lessonTests button:hover, .lessonTests button:active, .lessonTests button:focus {
-  background-color: #8FB9FF;
-  color: #fff;
+#profile-wrapper {
   cursor: pointer;
-  outline: 0; }
-
-.lessonTests .code-input-wrapper {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 100%;
   display: flex;
   justify-content: center;
-  margin: 10px 0 10px 0; }
+  align-items: center; }
 
-.lessonTests #editor {
-  height: 40vh;
-  width: 90vw; }
+#menu-navigation {
+  height: auto;
+  font-family: 'Quicksand';
+  border-left: 1px solid grey;
+  border-bottom: 1px solid grey;
+  display: none;
+  float: right;
+  cursor: pointer; }
+  #menu-navigation ul {
+    padding-right: 25px; }
+  #menu-navigation li {
+    color: #406BB2;
+    line-height: 35px;
+    list-style: none; }
+
+html, body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Lato'; }
+
+*, *::before, *::after {
+  box-sizing: border-box; }
+
+a {
+  text-decoration: none;
+  color: white; }
