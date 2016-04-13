@@ -1,5 +1,6 @@
 angular.module("myApp")
 .service('loginService', function($q, $http, $state) {
+
   this.userLogin = function(user) {
     return $http({
       method: 'POST',
@@ -9,6 +10,7 @@ angular.module("myApp")
       $state.go('home');
     });
   };
+
   this.logoutUser = function() {
     return $http({
       method: 'GET',
@@ -17,6 +19,7 @@ angular.module("myApp")
        $state.go('login');
     });
   };
+
   this.newUser = function(newUser) {
     return $http({
       method: 'POST',
@@ -25,6 +28,7 @@ angular.module("myApp")
     }).success(function() {
     });
   };
+
   this.getProfile = function() {
     return $http({
       method: 'GET',

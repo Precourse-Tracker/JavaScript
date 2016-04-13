@@ -19,7 +19,7 @@ angular.module('myApp', ['ui.router'])
   })
   .state('lessonTests', {
     url: '/lessonTests',
-    templateUrl: './html/lessonsTests/lessonTestsTemplate.html'
+    templateUrl: './html/lessonTests/lessonTestsTemplate.html'
   })
   .state('/assessment', {
     url: '/assessment',
@@ -33,7 +33,18 @@ angular.module('myApp', ['ui.router'])
 }]) // end config
 
 angular.module('myApp')
+
+.controller('lessonTestsController', ["$scope", function($scope) {
+
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/default");
+editor.getSession().setMode("ace/mode/javascript");
+
+}])
+
+angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
+
   $scope.createUser = function(newUser) {
       loginService.newUser(newUser);
   };
@@ -41,6 +52,7 @@ angular.module('myApp')
     console.log('userLogin', user);
     loginService.userLogin(user);
   };
+
 // jquery animations
   $(document).ready(function(){
   $('#goRight').on('click', function(){
@@ -80,6 +92,7 @@ angular.module('myApp')
 
 angular.module("myApp")
 .service('loginService', ["$q", "$http", "$state", function($q, $http, $state) {
+
   this.userLogin = function(user) {
     return $http({
       method: 'POST',
@@ -89,6 +102,7 @@ angular.module("myApp")
       $state.go('home');
     });
   };
+
   this.logoutUser = function() {
     return $http({
       method: 'GET',
@@ -97,6 +111,7 @@ angular.module("myApp")
        $state.go('login');
     });
   };
+
   this.newUser = function(newUser) {
     return $http({
       method: 'POST',
@@ -105,6 +120,7 @@ angular.module("myApp")
     }).success(function() {
     });
   };
+
   this.getProfile = function() {
     return $http({
       method: 'GET',
