@@ -106,7 +106,7 @@ angular.module('myApp')
     templateUrl: './html/login/loginTemplate.html',
     link: function(scope, ele, attr) {
 
-  
+
 
     }
   }
