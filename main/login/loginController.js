@@ -1,5 +1,4 @@
 angular.module('myApp')
-
 .controller('loginController', function($scope, loginService){
 
   $scope.createUser = function(newUser) {
@@ -29,5 +28,4 @@ angular.module('myApp')
     })
   })
 })
-
 })
