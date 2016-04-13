@@ -110,7 +110,6 @@ app.post('/api/signup', passport.authenticate('local-signup'), function(req, res
   res.status(200).json(req.body);
 });
 
-app.get('/api/logout', userController.loggedOut);
 
 //////progress tracker data//////
 app.get('/api/tracker', progressController.getTrackerData);
