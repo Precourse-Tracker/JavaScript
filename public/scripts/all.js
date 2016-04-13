@@ -154,6 +154,17 @@ angular.module("myApp")
 
 angular.module('myApp')
 
+.controller('navigationController', ["$scope", "loginService", function($scope, loginService) {
+
+  $scope.logoutUser = function() {
+  console.log('sucessful logout');
+  loginService.logoutUser();
+  };
+
+}])
+
+angular.module('myApp')
+
 .directive('navigationDirective', function() {
 
   return {

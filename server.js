@@ -88,7 +88,7 @@ passport.use('local-login', new localStrategy({
 
   /////////MIDDLEWARE///////////
 app.use(bodyParser.json());
-app.use(express.static(__dirname + './public'));
+app.use(express.static(__dirname + '/public'));
 app.use(cors());
 app.use(session({
   secret: 'l23lxz9znsafal',
