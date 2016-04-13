@@ -34,6 +34,16 @@ angular.module('myApp', ['ui.router'])
 
 angular.module('myApp')
 
+.controller('lessonTestsController', ["$scope", function($scope) {
+
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/default");
+editor.getSession().setMode("ace/mode/javascript");
+
+}])
+
+angular.module('myApp')
+
 .directive('lessonsSideBarDirective', function() {
 
   return {
@@ -56,17 +66,6 @@ angular.module('myApp')
 })  // end lessonsSideBarDirective
 
 angular.module('myApp')
-
-.controller('lessonTestsController', ["$scope", function($scope) {
-
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/default");
-editor.getSession().setMode("ace/mode/javascript");
-
-}])
-
-angular.module('myApp')
-
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
 
   $scope.createUser = function(newUser) {
@@ -96,7 +95,6 @@ angular.module('myApp')
     })
   })
 })
-
 }])
 
 angular.module('myApp')
@@ -116,14 +114,13 @@ angular.module('myApp')
 }) // end loginDirective
 
 angular.module("myApp")
-
 .service('loginService', ["$q", "$http", "$state", function($q, $http, $state) {
 
   this.userLogin = function(user) {
     return $http({
       method: 'POST',
       data: user,
-      url: '/login'
+      url: '/api/login'
     }).success(function() {
       $state.go('home');
     });
@@ -142,7 +139,7 @@ angular.module("myApp")
     return $http({
       method: 'POST',
       data: newUser,
-      url: '/signup'
+      url: '/api/signup'
     }).success(function() {
     });
   };
@@ -153,7 +150,6 @@ angular.module("myApp")
       url: '/user/current'
     });
   };
-
 }]);
 
 angular.module('myApp')
