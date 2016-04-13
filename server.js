@@ -124,6 +124,7 @@ app.get('/api/tracker', progressController.getTrackerData);
 /////////////Creating Data///////
 app.post('/api/lessons', unitController.createLesson);
 app.post('/api/assessment', unitController.createAssessment);
+app.post('/api/unit', unitController.createUnit);
 
 
 //////////CHECK IF USER EXISTS////////
