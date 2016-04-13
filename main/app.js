@@ -19,7 +19,7 @@ angular.module('myApp', ['ui.router'])
   })
   .state('lessonTests', {
     url: '/lessonTests',
-    templateUrl: './html/lessonsTests/lessonTestsTemplate.html'
+    templateUrl: './html/lessonTests/lessonTestsTemplate.html'
   })
   .state('/assessment', {
     url: '/assessment',
