@@ -75,6 +75,23 @@ a {
   width: 100%;
   height: 100%; }
 
+#unit-subview div {
+  width: 400px;
+  height: 250px;
+  background: teal; }
+  #unit-subview div:first-child {
+    width: 400px;
+    height: 250px;
+    background: blue; }
+  #unit-subview div:nth-child(3) {
+    width: 400px;
+    height: 250px;
+    background: #005151; }
+  #unit-subview div:last-child {
+    width: 400px;
+    height: 250px;
+    background: grey; }
+
 #home-wrapper {
   font-family: 'Lato';
   position: absolute;

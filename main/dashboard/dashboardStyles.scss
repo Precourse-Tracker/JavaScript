@@ -5,6 +5,11 @@ $darkBlue: #406BB2;
   height: 20px;
 }
 
+@mixin graphSizing {
+  width: 400px;
+  height: 250px;
+}
+
 /////////////////////////////////
 // ----- dashboard styles ----- /
 /////////////////////////////////
@@ -90,4 +95,27 @@ $darkBlue: #406BB2;
   width: 100%;
   height: 100%;
   // background: grey;
+}
+
+#unit-subview {
+
+  div {
+    @include graphSizing;
+    background: teal;
+
+    &:first-child {
+      @include graphSizing;
+      background: blue;
+    }
+
+    &:nth-child(3) {
+      @include graphSizing;
+      background: rgb(0,81,81);
+    }
+
+    &:last-child {
+      @include graphSizing;
+      background: grey;
+    }
+  }
 }
