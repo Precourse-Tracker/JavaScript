@@ -1,12 +1,11 @@
 angular.module("myApp")
-
 .service('loginService', function($q, $http, $state) {
 
   this.userLogin = function(user) {
     return $http({
       method: 'POST',
       data: user,
-      url: '/login'
+      url: '/api/login'
     }).success(function() {
       $state.go('home');
     });
@@ -25,7 +24,7 @@ angular.module("myApp")
     return $http({
       method: 'POST',
       data: newUser,
-      url: '/signup'
+      url: '/api/signup'
     }).success(function() {
     });
   };
@@ -36,5 +35,4 @@ angular.module("myApp")
       url: '/user/current'
     });
   };
-
 });

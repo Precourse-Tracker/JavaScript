@@ -1,5 +1,4 @@
 
-
 #home-wrapper {
   font-family: 'Lato';
   position: absolute;
@@ -86,6 +85,7 @@
 .lessonTests #editor {
   height: 40vh;
   width: 90vw; }
+
 
 .lessons-wrapper {
   width: 225px;
