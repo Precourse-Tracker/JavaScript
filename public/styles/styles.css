@@ -11,7 +11,6 @@ a {
   text-decoration: none;
   color: white; }
 
-
 #home-wrapper {
   font-family: 'Lato';
   position: absolute;
@@ -55,6 +54,7 @@ a {
   height: 91vh;
   position: relative; }
 
+<<<<<<< HEAD
 #dashboard {
   width: 80vw;
   height: 75vh;
@@ -63,6 +63,23 @@ a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); }
+=======
+
+.lessonTests h2 {
+  text-align: center;
+  color: #406BB2; }
+
+.lessonTests .multiple-choice-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 8em; }
+
+.lessonTests .test-question {
+  line-height: 3em; }
+
+.lessonTests .quiz-options {
+  text-align: center; }
+>>>>>>> master
 
 #dashboard-top {
   width: 100%;
