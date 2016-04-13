@@ -16,6 +16,7 @@ html, body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: 'Lato';
 }
 
 *, *::before, *::after {
@@ -286,3 +287,62 @@ input {
 ////////////////////////////////
 // ----- lessons styles ----- //
 ////////////////////////////////
+
+
+////////////////////////
+// lesson test styles //
+////////////////////////
+.lessonTests {
+
+  h2{
+    text-align: center;
+    color:$darkBlue;
+  }
+  .multiple-choice-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 8em;
+  }
+  .test-question {
+    line-height: 3em;
+  }
+  .quiz-options {
+    text-align: center;
+  }
+  button {
+    background-color: #ebebeb;
+  	border: #fff 1px solid;
+    color: $darkBlue;
+  	width: 21.775em;
+  	height: 6em;
+    transition: 0.3s;
+  	text-align: center;
+  	font-size: 1em;
+  	font-family: 'lato';
+    border: none;
+    border-radius: 0;
+    line-height: 2rem;
+    padding: 0 1rem;
+    text-align: center;
+    position: relative;
+    margin: 2px auto;
+  }
+
+  button:hover, button:active, button:focus{
+  	background-color: $lightBlue;
+    color: #fff;
+  	cursor: pointer;
+    outline: 0;
+  }
+
+  .code-input-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 10px 0;
+  }
+  #editor {
+    height: 40vh;
+    width: 90vw;
+  }
+
+}
