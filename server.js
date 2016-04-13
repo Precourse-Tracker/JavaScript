@@ -6,6 +6,7 @@ const cors = require('cors');
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const User = require('./server/models/User.js');
+const secret = require('./server/secret.js');
 
 ///////CONTROLLERS/////////
 const userController = require('./server/controllers/userController.js');
@@ -91,7 +92,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + './public'));
 app.use(cors());
 app.use(session({
-  secret: 'l23lxz9znsafal',
+  secret: secret.secret,
   resave: false,
   saveUninitialized: false
 }));
