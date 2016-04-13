@@ -116,7 +116,8 @@ app.get('/api/logout', userController.loggedOut);
 app.get('/api/tracker', progressController.getTrackerData);
 
 
-
+///////////LOGOUT USER//////////
+app.get('/logout', userController.logoutUser);
 
 
 
