@@ -34,13 +34,22 @@ angular.module('myApp', ['ui.router'])
 
 angular.module('myApp')
 
-.controller('lessonTestsController', ["$scope", function($scope) {
+.directive('unitTestMenuDirective', function() {
 
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/monokai");
-editor.getSession().setMode("ace/mode/javascript");
+  return {
+    restrict: 'AE',
+    // templateUrl: './html/dashboard/dashboardTopTemplate.html',
+    link: function(scope, ele, attr) {
 
-}])
+      $('#dashboard-top').click(function() {
+        // console.log(this);
+        $('#unit-test-menu').toggle('expand');
+      })
+
+    }
+  }
+
+})  // end unitTestMenuDirective
 
 angular.module('myApp')
 
@@ -64,6 +73,16 @@ angular.module('myApp')
   }
 
 })  // end lessonsSideBarDirective
+
+angular.module('myApp')
+
+.controller('lessonTestsController', ["$scope", function($scope) {
+
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/monokai");
+editor.getSession().setMode("ace/mode/javascript");
+
+}])
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
@@ -106,7 +125,7 @@ angular.module('myApp')
     templateUrl: './html/login/loginTemplate.html',
     link: function(scope, ele, attr) {
 
-
+  
 
     }
   }
