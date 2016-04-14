@@ -19,7 +19,7 @@ angular.module('myApp')
       // unit test graph changes for unit views and cohort compare
       $('#js-graph').click(function() {
         $('#js-graph-div').css('z-index', 2);
-        $('#js-graph-div').siblings().toggle().css('z-index', 0);
+        $('#js-graph-div').siblings().css('z-index', 0);
       })
 
       $('#html-graph').click(function() {
