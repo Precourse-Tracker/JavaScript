@@ -10,6 +10,12 @@ $navFontColor: #FFF;
 ///////////////////////////////////
 // ----- navigation styles ----- //
 ///////////////////////////////////
+#navigation-placeholder {
+  width: 100vw;
+  height: 8.25vh;
+  position: relative;
+}
+
 #navigation-bar {
   width: 100vw;
   height: 8.25vh;
@@ -21,6 +27,9 @@ $navFontColor: #FFF;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 1;
 }
 
 #home {
@@ -47,13 +56,17 @@ $navFontColor: #FFF;
   // width: 10vw;
   height: auto;
   font-family: 'Quicksand';
+  background: white;
   // border-left: 1px solid grey;
   // border-bottom: 1px solid grey;
   @include menuBorder;
   // display: flex;
   display: none;
-  float: right;
+  position: absolute;
+  right: 0;
+  // float: right;
   cursor: pointer;
+  z-index: 9;
 
   ul {
     // padding: 5px;
