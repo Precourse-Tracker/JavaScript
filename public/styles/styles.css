@@ -92,6 +92,7 @@ a {
     height: 250px;
     background: grey; }
 
+
 #home-wrapper {
   font-family: 'Lato';
   position: absolute;
@@ -129,7 +130,6 @@ a {
   align-items: center; }
   .home-bottom span {
     margin: 20px; }
-
 
 #side-bar-placeholder {
   width: 225px;
