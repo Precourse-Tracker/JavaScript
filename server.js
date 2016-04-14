@@ -53,15 +53,12 @@ passport.use('local-login', new localStrategy({
     passwordField: 'password',
     passReqToCallback: true
   },(req, username, password, done) => {
-    console.log(req, username, password);
     User.findOne({
       'username': username
     },(err, user) => {
-      console.log(user);
       if (err) return done(err);
       if (user) return done(null, false);
       else {
-        console.log(req.body);
         var newUser = new User(req.body);
         newUser.password = newUser.generateHash(req.body.password);
         newUser.save((err, response) => {
@@ -73,7 +70,6 @@ passport.use('local-login', new localStrategy({
   }));
 
   passport.serializeUser((user, cb) => {
-    console.log('user here is ', user)
     cb(null, user.id);
   });
 
@@ -82,7 +78,6 @@ passport.use('local-login', new localStrategy({
       if (err) {
         return cb(err);
       }
-      console.log('Going back with', user);
       cb(null, user);
     });
   });
@@ -106,7 +101,6 @@ app.post('/api/login', passport.authenticate('local-login', { failureRedirect: '
 });
 
 app.post('/api/signup', passport.authenticate('local-signup'), function(req, res){
-  console.log('Successfully created user');
   res.status(200).json(req.body);
 });
 
