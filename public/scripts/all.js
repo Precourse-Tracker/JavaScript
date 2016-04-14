@@ -34,16 +34,6 @@ angular.module('myApp', ['ui.router'])
 
 angular.module('myApp')
 
-.controller('lessonTestsController', ["$scope", function($scope) {
-
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/monokai");
-editor.getSession().setMode("ace/mode/javascript");
-
-}])
-
-angular.module('myApp')
-
 .directive('lessonsSideBarDirective', function() {
 
   return {
@@ -64,6 +54,16 @@ angular.module('myApp')
   }
 
 })  // end lessonsSideBarDirective
+
+angular.module('myApp')
+
+.controller('lessonTestsController', ["$scope", function($scope) {
+
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/monokai");
+editor.getSession().setMode("ace/mode/javascript");
+
+}])
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
@@ -106,7 +106,7 @@ angular.module('myApp')
     templateUrl: './html/login/loginTemplate.html',
     link: function(scope, ele, attr) {
 
-
+  
 
     }
   }
