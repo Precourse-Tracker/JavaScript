@@ -6,8 +6,10 @@ $darkBlue: #406BB2;
 }
 
 @mixin graphSizing {
-  width: 400px;
-  height: 250px;
+  width: 500px;
+  height: 400px;
+  border: 1px solid rgba(0,0,0,0.2);
+  background: white;
 }
 
 /////////////////////////////////
@@ -48,6 +50,10 @@ $darkBlue: #406BB2;
   justify-content: space-between;
   align-items: center;
   padding: 15px;
+
+  div {
+    cursor: pointer;
+  }
 }
 
 .graph-color-scheme {
@@ -77,6 +83,7 @@ $darkBlue: #406BB2;
   border-right: 1px solid grey;
   position: absolute;
   display: none;
+  z-index: 9;
 
   ul {
     margin: 10px auto 10px auto;
@@ -101,21 +108,32 @@ $darkBlue: #406BB2;
 
   div {
     @include graphSizing;
-    background: teal;
+    // background: teal;
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
 
     &:first-child {
-      @include graphSizing;
-      background: blue;
+      // background: blue;
+      z-index: 2;
     }
 
-    &:nth-child(3) {
-      @include graphSizing;
-      background: rgb(0,81,81);
+    // &:nth-child(3) {
+    //   background: rgb(0,81,81);
+    // }
+    //
+    // &:last-child {
+    //   background: grey;
+    // }
+
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
-    &:last-child {
-      @include graphSizing;
-      background: grey;
-    }
   }
 }
