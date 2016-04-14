@@ -11,7 +11,6 @@ a {
   text-decoration: none;
   color: white; }
 
-
 #dashboard-wrapper {
   width: 100vw;
   height: 91vh;
@@ -39,6 +38,8 @@ a {
   justify-content: space-between;
   align-items: center;
   padding: 15px; }
+  #dashboard-top div {
+    cursor: pointer; }
 
 .graph-color-scheme {
   display: flex;
@@ -61,7 +62,8 @@ a {
   border-bottom: 1px solid grey;
   border-right: 1px solid grey;
   position: absolute;
-  display: none; }
+  display: none;
+  z-index: 9; }
   #unit-test-menu ul {
     margin: 10px auto 10px auto;
     padding-left: 35px;
@@ -76,22 +78,22 @@ a {
   height: 100%; }
 
 #unit-subview div {
-  width: 400px;
-  height: 250px;
-  background: teal; }
+  width: 500px;
+  height: 400px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: white;
+  position: absolute;
+  top: 54%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; }
   #unit-subview div:first-child {
-    width: 400px;
-    height: 250px;
-    background: blue; }
-  #unit-subview div:nth-child(3) {
-    width: 400px;
-    height: 250px;
-    background: #005151; }
-  #unit-subview div:last-child {
-    width: 400px;
-    height: 250px;
-    background: grey; }
-
+    z-index: 2; }
+  #unit-subview div span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
 
 #home-wrapper {
   font-family: 'Lato';
@@ -130,6 +132,8 @@ a {
   align-items: center; }
   .home-bottom span {
     margin: 20px; }
+
+
 
 #side-bar-placeholder {
   width: 225px;
