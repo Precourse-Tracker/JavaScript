@@ -81,7 +81,7 @@ a {
 #unit-subview div {
   width: 500px;
   height: 400px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background: white;
   position: absolute;
   top: 54%;
@@ -181,7 +181,7 @@ a {
     display: none; }
   .lessons .expand {
     display: block !important; }
-  .lessons .take-assessment {
+  .lessons #take-assessment {
     width: 165px;
     height: 65px;
     color: white;

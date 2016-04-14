@@ -21,7 +21,7 @@ angular.module('myApp', ['ui.router'])
     url: '/lessonTests',
     templateUrl: './html/lessonTests/lessonTestsTemplate.html'
   })
-  .state('/assessment', {
+  .state('assessment', {
     url: '/assessment',
     templateUrl: './html/assessment/assessmentTemplate.html'
   })
