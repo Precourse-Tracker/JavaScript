@@ -1,5 +1,6 @@
 
 
+
 #home-wrapper {
   font-family: 'Lato';
   position: absolute;
@@ -37,7 +38,6 @@
   align-items: center; }
   .home-bottom span {
     margin: 20px; }
-
 
 .lessonTests h2 {
   text-align: center;
@@ -270,19 +270,6 @@
 #login-section .expand {
   display: block !important; }
 
-html, body {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-family: 'Lato'; }
-
-*, *::before, *::after {
-  box-sizing: border-box; }
-
-a {
-  text-decoration: none;
-  color: white; }
-
 #navigation-bar {
   width: 100vw;
   height: 8.25vh;
@@ -319,3 +306,16 @@ a {
     color: #406BB2;
     line-height: 35px;
     list-style: none; }
+
+html, body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Lato'; }
+
+*, *::before, *::after {
+  box-sizing: border-box; }
+
+a {
+  text-decoration: none;
+  color: white; }

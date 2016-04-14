@@ -32,6 +32,18 @@ angular.module('myApp', ['ui.router'])
 
 }]) // end config
 
+angular.module('myApp').service('WebWorkerService', ["assessmentService", "$http", "$q", function(assessmentService, $http, $q) {
+  
+}])
+
+angular.module('myApp').controller('assessmentController', ["$scope", "assessmentService", function($scope, assessmentService) {
+  
+}])
+
+angular.module('myApp').service('assessmentService', ["$q", "$http", "WebWorkerService", function($q, $http, WebWorkerService) {
+
+}])
+
 angular.module('myApp')
 
 .controller('lessonTestsController', ["$scope", function($scope) {

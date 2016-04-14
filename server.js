@@ -119,12 +119,15 @@ app.get('/api/tracker', progressController.getTrackerData);
 ///////////LOGOUT USER//////////
 app.get('/logout', userController.logoutUser);
 
+//////////GET DATA////////////
+app.get('/api/assessment/js', unitController.getJSAssessment);
+
 
 
 
 /////////////Creating Data///////
 app.post('/api/lessons', unitController.createLesson);
-app.post('/api/assessment', unitController.createAssessment);
+app.post('/api/assessment/js', unitController.createAssessment);
 app.post('/api/unit', unitController.createUnit);
 
 
