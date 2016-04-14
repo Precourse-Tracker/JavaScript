@@ -2,10 +2,14 @@ angular.module('myApp')
 .controller('loginController', function($scope, loginService){
 
   $scope.createUser = function(newUser) {
-      loginService.newUser(newUser);
+    loginService.newUser(newUser).then(function() {
+      $scope.newUser.username = '';
+      $scope.newUser.email = '';
+      $scope.newUser.password = '';
+      alert('You have successfully signed up. Please log in');
+    })
   };
   $scope.userLogin = function(user) {
-    console.log('userLogin', user);
     loginService.userLogin(user);
   };
 
