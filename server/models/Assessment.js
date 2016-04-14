@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+// look at using import instead or require
 const assessmentSchema = new Schema({
   questions: [{
     question: {type: String, required: true, index: true},

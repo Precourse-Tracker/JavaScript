@@ -34,11 +34,23 @@ angular.module('myApp', ['ui.router'])
 
 angular.module('myApp')
 
-.controller('lessonTestsController', ["$scope", function($scope) {
+.controller('assessmentController', ["$scope", function($scope) {
+
+
+
 
 var editor = ace.edit("editor");
-editor.setTheme("ace/theme/monokai");
+editor.setTheme("ace/theme/chrome");
 editor.getSession().setMode("ace/mode/javascript");
+
+var editor_1 = ace.edit("editor_1");
+editor_1.setTheme("ace/theme/chrome");
+editor_1.getSession().setMode("ace/mode/javascript");
+}])
+
+angular.module('myApp')
+
+.controller('lessonTestsController', ["$scope", function($scope) {
 
 }])
 

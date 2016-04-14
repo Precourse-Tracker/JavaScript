@@ -1,4 +1,25 @@
 
+#assessment-view .code-input-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 10px 0; }
+
+#assessment-view #editor {
+  height: 40vh;
+  width: 90vw; }
+
+#assessment-view #editor_1 {
+  height: 40vh;
+  width: 90vw; }
+
+#assessment-view .assessment-eval {
+  color: #406BB2;
+  display: flex;
+  justify-content: flex-end;
+  margin: 1em; }
+
+#assessment-view span:hover {
+  color: #8FB9FF; }
 
 #home-wrapper {
   font-family: 'Lato';
@@ -77,15 +98,6 @@
   color: #fff;
   cursor: pointer;
   outline: 0; }
-
-.lessonTests .code-input-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0 10px 0; }
-
-.lessonTests #editor {
-  height: 40vh;
-  width: 90vw; }
 
 .lessons-wrapper {
   width: 225px;
