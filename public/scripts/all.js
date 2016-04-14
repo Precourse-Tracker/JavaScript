@@ -34,10 +34,33 @@ angular.module('myApp', ['ui.router'])
 
 angular.module('myApp')
 
+.directive('lessonsSideBarDirective', function() {
+
+  return {
+    restrict: 'E',
+    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
+    link: function(scope, ele, attr) {
+      $('.lesson-title').click(function() {
+        // console.log(this.parentNode);
+        $('.lesson-sections', this.parentNode).toggle('expand');
+      })
+
+      // $('.lesson-group').click(function() {
+      //   // console.log(this.parentNode);
+      //   $('.lesson-title', this.parentNode).toggle('expand');
+      // })
+
+    }
+  }
+
+})  // end lessonsSideBarDirective
+
+angular.module('myApp')
+
 .controller('lessonTestsController', ["$scope", function($scope) {
 
 var editor = ace.edit("editor");
-editor.setTheme("ace/theme/default");
+editor.setTheme("ace/theme/monokai");
 editor.getSession().setMode("ace/mode/javascript");
 
 }])
@@ -131,26 +154,14 @@ angular.module("myApp")
 
 angular.module('myApp')
 
-.directive('lessonsSideBarDirective', function() {
+.controller('navigationController', ["$scope", "loginService", function($scope, loginService) {
 
-  return {
-    restrict: 'E',
-    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
-    link: function(scope, ele, attr) {
-      $('.lesson-title').click(function() {
-        // console.log(this.parentNode);
-        $('.lesson-sections', this.parentNode).toggle('expand');
-      })
+  $scope.logoutUser = function() {
+  console.log('sucessful logout');
+  loginService.logoutUser();
+  };
 
-      // $('.lesson-group').click(function() {
-      //   // console.log(this.parentNode);
-      //   $('.lesson-title', this.parentNode).toggle('expand');
-      // })
-
-    }
-  }
-
-})  // end lessonsSideBarDirective
+}])
 
 angular.module('myApp')
 
