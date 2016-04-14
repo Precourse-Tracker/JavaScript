@@ -69,6 +69,7 @@ angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
 
   $scope.createUser = function(newUser) {
+    console.log('newUser', newUser);
       loginService.newUser(newUser);
   };
   $scope.userLogin = function(user) {
@@ -136,6 +137,7 @@ angular.module("myApp")
   };
 
   this.newUser = function(newUser) {
+    console.log("service", newUser);
     return $http({
       method: 'POST',
       data: newUser,
