@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('../models/User.js');
 const Lesson = require('../models/Lesson.js');
-const Assessment = require('../models/Assessment.js');
+const JSAssessment = require('../models/JSAssessment.js');
 const Unit = require('../models/Unit.js');
 
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
     })
   },
   createAssessment(req,res, next) {
-    var assessment = new Assessment(req.body);
+    var assessment = new JSAssessment(req.body);
     assessment.save(function(err, resp) {
       if (err) {
         res.status(500).send(err)
@@ -34,6 +34,15 @@ module.exports = {
         res.status(500).send(err);
       } else {
         res.status(200).send(resp);
+      }
+    })
+  },
+  getJSAssessment(req, res, next) {
+    JSAssessment.find({}).populate("questions").exec((err, assessment) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(assessment);
       }
     })
   }

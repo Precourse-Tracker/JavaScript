@@ -32,6 +32,29 @@ angular.module('myApp', ['ui.router'])
 
 }]) // end config
 
+angular.module('myApp').controller('assessmentController', ["$scope", "assessmentService", function($scope, assessmentService) {
+
+  $scope.getAssessment = () => {
+    assessmentService.getLesson().then((assessment) => {
+      $scope.assessment = assessment;
+    })
+  }
+}])
+
+angular.module('myApp').service('assessmentService', ["$q", "$http", function($q, $http) {
+
+
+    this.getAssessment = () => {
+        return $http({
+            method: 'GET',
+            url: '/api/assessment/js'
+        }).then((response) => {
+            return response;
+        })
+    }
+}])
+
+
 angular.module('myApp')
 
 .directive('unitTestMenuDirective', function() {
