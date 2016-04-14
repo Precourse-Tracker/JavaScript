@@ -1,6 +1,5 @@
 
 
-
 #home-wrapper {
   font-family: 'Lato';
   position: absolute;
@@ -38,6 +37,7 @@
   align-items: center; }
   .home-bottom span {
     margin: 20px; }
+
 
 .lessonTests h2 {
   text-align: center;
