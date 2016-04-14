@@ -15,7 +15,8 @@ module.exports = {
   logoutUser(req, res, next) {
     req.logout();
     req.session.destroy();
-    res.redirect('/login');
+    console.log('user logged out!');
+    res.redirect('/')
   },
 
   getUsers(req, res) {

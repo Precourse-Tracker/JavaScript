@@ -1,6 +1,6 @@
 <div id="navigation-placeholder"></div>
 
-<section ng-controller="navigationController" id="navigation-bar">
+<section ng-controller = 'navigationController' id="navigation-bar">
 
     <div id="home">
         <a ui-sref="home">Home</a>
@@ -16,12 +16,12 @@
 
 </section>
 
-<div id="menu-navigation">
+<div id="menu-navigation" ng-controller='navigationController'>
 
   <ul>
     <a ui-sref="home"><li>Progression</li></a>
     <a ui-sref="dashboard"><li>Dashboard</li></a>
-    <a ng-click="logoutUser();" href=""><li>Logout</li></a>
+    <a ng-click="logoutUser()" href=""><li>Logout</li></a>
   </ul>
 
 </div>
