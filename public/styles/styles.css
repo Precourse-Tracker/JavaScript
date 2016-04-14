@@ -1,5 +1,6 @@
 
 
+
 #home-wrapper {
   font-family: 'Lato';
   position: absolute;
@@ -37,7 +38,6 @@
   align-items: center; }
   .home-bottom span {
     margin: 20px; }
-
 
 .lessonTests h2 {
   text-align: center;
@@ -86,62 +86,6 @@
 .lessonTests #editor {
   height: 40vh;
   width: 90vw; }
-
-.lessons-wrapper {
-  width: 225px;
-  height: 91vh;
-  background: rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  position: relative; }
-
-.lessons {
-  max-height: 100%;
-  font-family: 'Quicksand';
-  margin-left: 10px;
-  overflow: auto;
-  margin-right: -17px;
-  padding-right: 0;
-  padding-bottom: 65px; }
-  .lessons h3 {
-    margin: 5px 0 0 0;
-    cursor: pointer; }
-  .lessons h4 {
-    color: black;
-    font-weight: bolder;
-    margin: 0 auto 0 25%; }
-  .lessons ul {
-    margin: 0 auto 0 auto;
-    padding: 5px;
-    padding-left: 10px;
-    cursor: pointer; }
-  .lessons li {
-    list-style: none;
-    line-height: 35px;
-    cursor: pointer;
-    color: #808080; }
-  .lessons .lesson-title {
-    color: black; }
-    .lessons .lesson-title h3 {
-      font-size: 17px; }
-  .lessons .lesson-sections {
-    display: none; }
-  .lessons .expand {
-    display: block !important; }
-  .lessons .take-assessment {
-    width: 165px;
-    height: 65px;
-    color: white;
-    background: #406BB2;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    font-weight: bold;
-    line-height: 22px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%); }
 
 #login-section body {
   height: 100%;
@@ -269,6 +213,62 @@
 
 #login-section .expand {
   display: block !important; }
+
+.lessons-wrapper {
+  width: 225px;
+  height: 91vh;
+  background: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative; }
+
+.lessons {
+  max-height: 100%;
+  font-family: 'Quicksand';
+  margin-left: 10px;
+  overflow: auto;
+  margin-right: -17px;
+  padding-right: 0;
+  padding-bottom: 65px; }
+  .lessons h3 {
+    margin: 5px 0 0 0;
+    cursor: pointer; }
+  .lessons h4 {
+    color: black;
+    font-weight: bolder;
+    margin: 0 auto 0 25%; }
+  .lessons ul {
+    margin: 0 auto 0 auto;
+    padding: 5px;
+    padding-left: 10px;
+    cursor: pointer; }
+  .lessons li {
+    list-style: none;
+    line-height: 35px;
+    cursor: pointer;
+    color: #808080; }
+  .lessons .lesson-title {
+    color: black; }
+    .lessons .lesson-title h3 {
+      font-size: 17px; }
+  .lessons .lesson-sections {
+    display: none; }
+  .lessons .expand {
+    display: block !important; }
+  .lessons .take-assessment {
+    width: 165px;
+    height: 65px;
+    color: white;
+    background: #406BB2;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    line-height: 22px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%); }
 
 #navigation-bar {
   width: 100vw;
