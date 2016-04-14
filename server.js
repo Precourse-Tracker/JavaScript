@@ -30,7 +30,6 @@ passport.use('local-login', new localStrategy({
     usernameField: 'username'
   },
   (username, password, cb) => {
-    console.log("server", username, password);
     User.findOne({
       'username' : username
     }, function(err, user) {
@@ -41,11 +40,9 @@ passport.use('local-login', new localStrategy({
         return cb(null, false);
       }
       if (!user.validatePassword(password)) {
-        console.log(password);
         return cb(null, false);
       }
-      console.log("user from service", user);
-      return cb(user);
+      return cb(null, user);
     });
   }));
 
