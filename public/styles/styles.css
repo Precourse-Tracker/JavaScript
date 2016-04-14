@@ -131,14 +131,18 @@ a {
     margin: 20px; }
 
 
+#side-bar-placeholder {
+  width: 225px;
+  height: 91vh;
+  position: relative;
+  float: left; }
+
 .lessons-wrapper {
   width: 225px;
   height: 91vh;
   background: rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  position: relative;
-  position: relative;
-  float: left; }
+  position: fixed; }
 
 .lessons {
   max-height: 100%;
@@ -187,7 +191,8 @@ a {
     position: absolute;
     bottom: 0;
     left: 50%;
-    transform: translate(-50%); }
+    transform: translate(-50%);
+    margin-bottom: 25px; }
 
 .lessons-content-wrapper {
   position: relative; }
@@ -202,10 +207,10 @@ a {
   width: 400px;
   height: 150px;
   background: silver;
-  position: absolute;
-  left: 52%;
+  position: relative;
+  left: 55%;
   transform: translate(-50%);
-  margin-top: 15px; }
+  margin-top: 25px; }
   .video-placeholder span {
     color: white;
     font-size: 20px;
@@ -218,10 +223,9 @@ a {
   width: 400px;
   height: 300px;
   background: rgba(0, 0, 0, 0.1);
-  position: absolute;
-  left: 52%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
+  left: 55%;
+  transform: translate(-50%);
   margin-top: 35px; }
   .lessons-practice form {
     width: 80%;
@@ -407,6 +411,11 @@ a {
 #login-section .expand {
   display: block !important; }
 
+#navigation-placeholder {
+  width: 100vw;
+  height: 8.25vh;
+  position: relative; }
+
 #navigation-bar {
   width: 100vw;
   height: 8.25vh;
@@ -417,7 +426,10 @@ a {
   background: #8FB9FF;
   display: flex;
   justify-content: space-between;
-  align-items: center; }
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 1; }
 
 #profile-wrapper {
   cursor: pointer;

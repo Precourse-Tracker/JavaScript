@@ -10,6 +10,12 @@ $navFontColor: #FFF;
 ///////////////////////////////////
 // ----- navigation styles ----- //
 ///////////////////////////////////
+#navigation-placeholder {
+  width: 100vw;
+  height: 8.25vh;
+  position: relative;
+}
+
 #navigation-bar {
   width: 100vw;
   height: 8.25vh;
@@ -21,6 +27,9 @@ $navFontColor: #FFF;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 1;
 }
 
 #home {
