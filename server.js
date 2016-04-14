@@ -104,10 +104,9 @@ app.use(passport.session());
 
 
 ///////////////API AUTH////////////
-app.post('/api/login', passport.authenticate('local-login', {failureRedirect: '/login'}), function(req, res){
-  console.log('res', res);
-  console.log('Logged in', req._id);
-  res.status(200).send({msg: 'okay', user: req.session.passport});
+
+app.post('/api/login', passport.authenticate('local-login', { failureRedirect: '/login'}), function(req, res) {
+  res.status(200).send({msg: 'okay!', user: req.session.passport});
 });
 
 app.post('/api/signup', passport.authenticate('local-signup'), function(req, res){
