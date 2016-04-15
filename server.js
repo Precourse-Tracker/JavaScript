@@ -6,7 +6,9 @@ const cors = require('cors');
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const User = require('./server/models/User.js');
-const secret = require('./server/secret.js');
+// const secret = require('./server/secret.js');
+const secret = process.env.SECRET
+
 
 ///////CONTROLLERS/////////
 const userController = require('./server/controllers/userController.js');
@@ -22,8 +24,9 @@ app.listen(port, () => console.log(`listening on port ${port}`));
 ///////////////////////////////
 //CONNECTING TO THE DATABASE//
 /////////////////////////////
-mongoose.connect('mongodb://localhost/courseTracker');
-mongoose.connection.once('open', () => console.log('connected to MongoDB'));
+
+mongoose.connect(process.env.MONGODB_URI);
+mongoose.connection.once('open', () => console.log('connected to Heroku and mLab'));
 
 //////////LOGIN AUTH///////////
 passport.use('local-login', new localStrategy({
