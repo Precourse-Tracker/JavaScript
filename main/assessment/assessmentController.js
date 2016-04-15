@@ -2,11 +2,9 @@ angular.module('myApp')
 
 .controller('assessmentController', function($scope, assessmentService) {
 
-  $scope.getAssessment = () => {
-    assessmentService.getLesson().then((assessment) => {
-      $scope.assessment = assessment;
-    })
-  }
+  assessmentService.getAssessment().then(function(response) {
+    $scope.question = response;
+  });
 
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/chrome");

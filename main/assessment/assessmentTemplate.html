@@ -5,15 +5,15 @@
     <div class="container">
       <div class="panel panel-default">
         <div class="panel-body">
-          <div id="editor">function foo(items) {
+          <div ng-repeat="q in question" id="editor">function foo(items) {
     var x = "All this is syntax highlighted";
         return x;
-  }        </div>
+  }       </div>
         </div>
       </div>
     </div>
   </div>
-  <a class="assessment-eval" href="#"><span >Submit Answer</span></a>
+  <a ng-click="getAssessment()"class="assessment-eval" href=""><span >Submit Answer</span></a>
 
   <div class="code-input-wrapper">
     <div class="container">
