@@ -25,7 +25,7 @@ app.listen(port, () => console.log(`listening on port ${port}`));
 //CONNECTING TO THE DATABASE//
 /////////////////////////////
 
-mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.once('open', () => console.log('connected to Heroku and mLab'));
 
 //////////LOGIN AUTH///////////
