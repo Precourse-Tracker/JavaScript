@@ -18,7 +18,8 @@ const progressController = require('./server/controllers/progressController.js')
 
 
 const app = express();
-const port = 6969;
+// const port = 6969;
+const port = 80;
 // app.listen(port, () => console.log(`listening on port ${port}`));
 app.listen(process.env.PORT, () => console.log(`listening on port ${port}`));
 
