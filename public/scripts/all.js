@@ -21,7 +21,7 @@ angular.module('myApp', ['ui.router'])
     url: '/lessonTests',
     templateUrl: './html/lessonTests/lessonTestsTemplate.html'
   })
-  .state('/assessment', {
+  .state('assessment', {
     url: '/assessment',
     templateUrl: './html/assessment/assessmentTemplate.html'
   })
@@ -31,22 +31,6 @@ angular.module('myApp', ['ui.router'])
   })
 
 }]) // end config
-
-angular.module('myApp')
-
-.controller('assessmentController', ["$scope", function($scope) {
-
-
-
-
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/chrome");
-editor.getSession().setMode("ace/mode/javascript");
-
-var editor_1 = ace.edit("editor_1");
-editor_1.setTheme("ace/theme/chrome");
-editor_1.getSession().setMode("ace/mode/javascript");
-}])
 
 angular.module('myApp')
 
@@ -108,41 +92,56 @@ angular.module('myApp')
 
 angular.module('myApp')
 
+.controller('assessmentController', ["$scope", "assessmentService", function($scope, assessmentService) {
+
+  $scope.getAssessment = () => {
+    assessmentService.getLesson().then((assessment) => {
+      $scope.assessment = assessment;
+    })
+  }
+
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/chrome");
+editor.getSession().setMode("ace/mode/javascript");
+
+var editor_1 = ace.edit("editor_1");
+editor_1.setTheme("ace/theme/chrome");
+editor_1.getSession().setMode("ace/mode/javascript");
+
+}])
+
+angular.module('myApp').service('assessmentService', ["$q", "$http", function($q, $http) {
+
+
+    this.getAssessment = () => {
+        return $http({
+            method: 'GET',
+            url: '/api/assessment/js'
+        }).then((response) => {
+            return response;
+        })
+    }
+}])
+
+
+angular.module('myApp')
+
 .controller('lessonTestsController', ["$scope", function($scope) {
 
 }])
 
 angular.module('myApp')
-
-.directive('lessonsSideBarDirective', function() {
-
-  return {
-    restrict: 'E',
-    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
-    link: function(scope, ele, attr) {
-      $('.lesson-title').click(function() {
-        // console.log(this.parentNode);
-        $('.lesson-sections', this.parentNode).toggle('expand');
-      })
-
-      // $('.lesson-group').click(function() {
-      //   // console.log(this.parentNode);
-      //   $('.lesson-title', this.parentNode).toggle('expand');
-      // })
-
-    }
-  }
-
-})  // end lessonsSideBarDirective
-
-angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
 
   $scope.createUser = function(newUser) {
-      loginService.newUser(newUser);
+    loginService.newUser(newUser).then(function() {
+      $scope.newUser.username = '';
+      $scope.newUser.email = '';
+      $scope.newUser.password = '';
+      alert('You have successfully signed up. Please log in');
+    })
   };
   $scope.userLogin = function(user) {
-    console.log('userLogin', user);
     loginService.userLogin(user);
   };
 
@@ -211,6 +210,7 @@ angular.module("myApp")
       data: newUser,
       url: '/api/signup'
     }).success(function() {
+      return;
     });
   };
 
@@ -221,6 +221,29 @@ angular.module("myApp")
     });
   };
 }]);
+
+angular.module('myApp')
+
+.directive('lessonsSideBarDirective', function() {
+
+  return {
+    restrict: 'E',
+    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
+    link: function(scope, ele, attr) {
+      $('.lesson-title').click(function() {
+        // console.log(this.parentNode);
+        $('.lesson-sections', this.parentNode).toggle('expand');
+      })
+
+      // $('.lesson-group').click(function() {
+      //   // console.log(this.parentNode);
+      //   $('.lesson-title', this.parentNode).toggle('expand');
+      // })
+
+    }
+  }
+
+})  // end lessonsSideBarDirective
 
 angular.module('myApp')
 

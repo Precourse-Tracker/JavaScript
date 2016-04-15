@@ -16,7 +16,7 @@ const userSchema = new Schema ({
       status: {type: String},
       score: {type: Number},
     }],
-    assessment: {type: Number}
+    assessment: {type: Number} //This assessment represents the assessment score for a particular user
     }]
 })
 
