@@ -6,6 +6,7 @@ angular.module('myApp').service('assessmentService', function($q, $http) {
             method: 'GET',
             url: '/api/assessment/js'
         }).then((response) => {
+          console.log('service', response);
             return response;
         })
     }

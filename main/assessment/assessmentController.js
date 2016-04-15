@@ -2,6 +2,7 @@ angular.module('myApp').controller('assessmentController', function($scope, asse
 
   $scope.getAssessment = () => {
     assessmentService.getLesson().then((assessment) => {
+      console.log(assessment);
       $scope.assessment = assessment;
     })
   }
