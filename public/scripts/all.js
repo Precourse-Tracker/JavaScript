@@ -34,6 +34,59 @@ angular.module('myApp', ['ui.router'])
 
 angular.module('myApp')
 
+.controller('assessmentController', ["$scope", "assessmentService", "jsTesting", function($scope, assessmentService, jsTesting) {
+
+  assessmentService.getAssessment().then(function(response) {
+
+    var list = [];
+    _.each(response, function(item) {
+      for (var i = 0; i < item.questions.length; i++) {
+        list.push(item.questions[i]);
+      }
+    })
+    // console.log(list);
+    $scope.questions = list;
+  });
+
+$scope.eval = function(q, userCode) {
+  // console.log("it's working, it's working!!!", q._id, q.answer, userCode);
+  assessmentService.eval(q._id, q.answer, userCode);
+}
+// var editor = ace.edit("editor");
+// editor.setTheme("ace/theme/chrome");
+// editor.getSession().setMode("ace/mode/javascript");
+//
+// var editor_1 = ace.edit("editor_1");
+// editor_1.setTheme("ace/theme/chrome");
+// editor_1.getSession().setMode("ace/mode/javascript");
+
+}])
+
+angular.module('myApp')
+
+.service('assessmentService', ["$q", "$http", function($q, $http) {
+
+
+    this.getAssessment = () => {
+        return $http({
+            method: 'GET',
+            url: '/api/assessment/js'
+        }).then((response) => {
+            return response.data;
+        })
+    }
+
+    this.eval = () => {
+      if(!worker) {
+        let worker = new Worker ('worker.js');
+      }
+
+    }
+}])
+
+
+angular.module('myApp')
+
 .directive('unitTestMenuDirective', function() {
 
   return {
@@ -90,6 +143,7 @@ angular.module('myApp')
       })
 */
 
+<<<<<<< HEAD
 angular.module('myApp').controller('assessmentController', ["$scope", "assessmentService", function($scope, assessmentService) {
 
   $scope.getAssessment = () => {
@@ -115,13 +169,11 @@ angular.module('myApp').service('assessmentService', ["$q", "$http", function($q
 }])
 
 
+=======
+>>>>>>> b6b38adbea816bbee850567aea7ceafa0e73e37f
 angular.module('myApp')
 
 .controller('lessonTestsController', ["$scope", function($scope) {
-
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/monokai");
-editor.getSession().setMode("ace/mode/javascript");
 
 }])
 

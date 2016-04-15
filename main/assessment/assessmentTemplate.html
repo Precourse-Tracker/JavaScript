@@ -1,1 +1,24 @@
 <navigation-directive></navigation-directive>
+<section ng-controller="assessmentController" id=assessment-view>
+
+  <div ng-repeat="q in questions" class="stuff">
+    {{q}}
+      <a ng-click="eval(q, userCode)" class="assessment-eval" href=""><span >Submit Answer</span></a>
+    <input ng-model="userCode" type="text" placeholder="code me">
+  </div>
+
+
+  <!-- <div class="code-input-wrapper">
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div id="editor_1">function yoda(jedi) {
+    var sith = "Yoda will always win";
+        return x;
+  }        </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+</section>
