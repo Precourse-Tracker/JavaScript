@@ -28,8 +28,22 @@ app.listen(process.env.PORT, () => console.log(`listening on port ${port}`));
 /////////////////////////////
 
 // mongoose.connect(process.env.MONGODB_URI);
-mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.once('open', () => console.log('connected to Heroku and mLab'));
+
+/////////MIDDLEWARE///////////
+app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
+app.use(cors());
+app.use(session({
+// secret: secret.secret,
+secret: secret,
+resave: false,
+saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 //////////LOGIN AUTH///////////
 passport.use('local-login', new localStrategy({
@@ -88,18 +102,6 @@ passport.use('local-login', new localStrategy({
     });
   });
 
-  /////////MIDDLEWARE///////////
-app.use(bodyParser.json());
-app.use(express.static(__dirname + '/public'));
-app.use(cors());
-app.use(session({
-  // secret: secret.secret,
-  secret: secret,
-  resave: false,
-  saveUninitialized: false
-}));
-app.use(passport.initialize());
-app.use(passport.session());
 
 
 ///////////////API AUTH////////////
