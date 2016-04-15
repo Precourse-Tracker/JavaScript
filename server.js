@@ -37,7 +37,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(cors());
 app.use(session({
 // secret: secret.secret,
-secret: secret,
+secret: secret, //Heroku
 resave: false,
 saveUninitialized: false
 }));
