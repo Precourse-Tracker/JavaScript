@@ -13,9 +13,9 @@
             <input ng-model="newUser.email" type="text" placeholder="email" />
             <input ng-model="newUser.password" type="password" placeholder="password" />
           </div>
+          <button ng-click="createUser(newUser)">Sign up</button>
+          <button id="goLeft" class="off">Login</button>
         </form>
-        <button id="goLeft" class="off">Login</button>
-        <button ng-click="createUser(newUser)">Sign up</button>
       </div>
     </div>
     <div class="right">
@@ -26,8 +26,8 @@
             <input ng-model="user.username" type="text" placeholder="username" />
             <input ng-model="user.password" type="password" placeholder="password" />
           </div>
-          <button id="goRight" class="off">Sign Up</button>
           <button ng-click="userLogin(user); currentUser();" id="login" type="submit">Login</button>
+          <button id="goRight" class="off">Sign Up</button>
         </form>
       </div>
     </div>
