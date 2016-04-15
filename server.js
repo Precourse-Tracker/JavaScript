@@ -19,13 +19,15 @@ const progressController = require('./server/controllers/progressController.js')
 
 const app = express();
 const port = 6969;
-app.listen(port, () => console.log(`listening on port ${port}`));
+// app.listen(port, () => console.log(`listening on port ${port}`));
+app.listen(process.env.PORT, () => console.log(`listening on port ${port}`));
 
 ///////////////////////////////
 //CONNECTING TO THE DATABASE//
 /////////////////////////////
 
-mongoose.connect(process.env.MONGODB_URI);
+// mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGOLAB_URI);
 mongoose.connection.once('open', () => console.log('connected to Heroku and mLab'));
 
 //////////LOGIN AUTH///////////
@@ -90,7 +92,8 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 app.use(cors());
 app.use(session({
-  secret: secret.secret,
+  // secret: secret.secret,
+  secret: secret,
   resave: false,
   saveUninitialized: false
 }));
