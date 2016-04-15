@@ -16,14 +16,6 @@ a {
   justify-content: center;
   margin: 10px 0 10px 0; }
 
-#assessment-view #editor {
-  height: 20vh;
-  width: 90vw; }
-
-#assessment-view #editor_1 {
-  height: 20vh;
-  width: 90vw; }
-
 #assessment-view .assessment-eval {
   color: #406BB2;
   display: flex;
@@ -32,6 +24,14 @@ a {
 
 #assessment-view span:hover {
   color: #8FB9FF; }
+
+#assessment-view .stuff {
+  color: #406BB2;
+  width: 100vw; }
+
+#assessment-view input {
+  width: 100vw;
+  height: 20vh; }
 
 #dashboard-wrapper {
   width: 100vw;
@@ -194,6 +194,111 @@ a {
   color: #fff;
   cursor: pointer;
   outline: 0; }
+
+#side-bar-placeholder {
+  width: 225px;
+  height: 91vh;
+  position: relative;
+  float: left; }
+
+.lessons-wrapper {
+  width: 225px;
+  height: 91vh;
+  background: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: fixed; }
+
+.lessons {
+  max-height: 100%;
+  font-family: 'Quicksand';
+  margin-left: 10px;
+  overflow: auto;
+  margin-right: -17px;
+  padding-right: 0;
+  padding-bottom: 100px; }
+  .lessons h3 {
+    margin: 5px 0 0 0;
+    cursor: pointer; }
+  .lessons h4 {
+    color: black;
+    font-weight: bolder;
+    margin: 0 auto 0 25%; }
+  .lessons ul {
+    margin: 0 auto 0 auto;
+    padding: 5px;
+    padding-left: 10px;
+    cursor: pointer; }
+  .lessons li {
+    list-style: none;
+    line-height: 35px;
+    cursor: pointer;
+    color: #3A3A3A; }
+  .lessons .lesson-title {
+    color: black; }
+    .lessons .lesson-title h3 {
+      font-size: 17px; }
+  .lessons .lesson-sections {
+    display: none; }
+  .lessons .expand {
+    display: block !important; }
+  .lessons #take-assessment {
+    width: 165px;
+    height: 65px;
+    color: white;
+    background: #406BB2;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    line-height: 22px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    margin-bottom: 25px; }
+
+.lessons-content-wrapper {
+  position: relative; }
+
+.content-wrapper {
+  width: 64vw;
+  height: 91vh;
+  position: relative;
+  float: left; }
+
+.video-placeholder {
+  width: 400px;
+  height: 150px;
+  background: silver;
+  position: relative;
+  left: 55%;
+  transform: translate(-50%);
+  margin-top: 25px; }
+  .video-placeholder span {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+
+.lessons-practice {
+  width: 400px;
+  height: 300px;
+  background: rgba(0, 0, 0, 0.1);
+  position: relative;
+  left: 55%;
+  transform: translate(-50%);
+  margin-top: 35px; }
+  .lessons-practice form {
+    width: 80%;
+    position: absolute;
+    left: 50%;
+    top: 38%;
+    transform: translate(-50%, -50%); }
+    .lessons-practice form input {
+      margin: 10px 10px 15px auto; }
 
 #login-section body {
   height: 100%;
@@ -369,108 +474,3 @@ a {
     color: #406BB2;
     line-height: 35px;
     list-style: none; }
-
-#side-bar-placeholder {
-  width: 225px;
-  height: 91vh;
-  position: relative;
-  float: left; }
-
-.lessons-wrapper {
-  width: 225px;
-  height: 91vh;
-  background: rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  position: fixed; }
-
-.lessons {
-  max-height: 100%;
-  font-family: 'Quicksand';
-  margin-left: 10px;
-  overflow: auto;
-  margin-right: -17px;
-  padding-right: 0;
-  padding-bottom: 100px; }
-  .lessons h3 {
-    margin: 5px 0 0 0;
-    cursor: pointer; }
-  .lessons h4 {
-    color: black;
-    font-weight: bolder;
-    margin: 0 auto 0 25%; }
-  .lessons ul {
-    margin: 0 auto 0 auto;
-    padding: 5px;
-    padding-left: 10px;
-    cursor: pointer; }
-  .lessons li {
-    list-style: none;
-    line-height: 35px;
-    cursor: pointer;
-    color: #3A3A3A; }
-  .lessons .lesson-title {
-    color: black; }
-    .lessons .lesson-title h3 {
-      font-size: 17px; }
-  .lessons .lesson-sections {
-    display: none; }
-  .lessons .expand {
-    display: block !important; }
-  .lessons #take-assessment {
-    width: 165px;
-    height: 65px;
-    color: white;
-    background: #406BB2;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    font-weight: bold;
-    line-height: 22px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%);
-    margin-bottom: 25px; }
-
-.lessons-content-wrapper {
-  position: relative; }
-
-.content-wrapper {
-  width: 64vw;
-  height: 91vh;
-  position: relative;
-  float: left; }
-
-.video-placeholder {
-  width: 400px;
-  height: 150px;
-  background: silver;
-  position: relative;
-  left: 55%;
-  transform: translate(-50%);
-  margin-top: 25px; }
-  .video-placeholder span {
-    color: white;
-    font-size: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); }
-
-.lessons-practice {
-  width: 400px;
-  height: 300px;
-  background: rgba(0, 0, 0, 0.1);
-  position: relative;
-  left: 55%;
-  transform: translate(-50%);
-  margin-top: 35px; }
-  .lessons-practice form {
-    width: 80%;
-    position: absolute;
-    left: 50%;
-    top: 38%;
-    transform: translate(-50%, -50%); }
-    .lessons-practice form input {
-      margin: 10px 10px 15px auto; }

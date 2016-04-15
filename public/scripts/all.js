@@ -34,28 +34,37 @@ angular.module('myApp', ['ui.router'])
 
 angular.module('myApp')
 
-.controller('assessmentController', ["$scope", "assessmentService", function($scope, assessmentService) {
+.controller('assessmentController', ["$scope", "assessmentService", "jsTesting", function($scope, assessmentService, jsTesting) {
 
-  $scope.getAssessment = () => {
-    assessmentService.getAssessment();
-  }
+  assessmentService.getAssessment().then(function(response) {
 
-  //get assessment on page load
-  assessmentService.getAssessment().then(function(res) {
-    $scope.questions = res;
+    var list = [];
+    _.each(response, function(item) {
+      for (var i = 0; i < item.questions.length; i++) {
+        list.push(item.questions[i]);
+      }
+    })
+    // console.log(list);
+    $scope.questions = list;
   });
 
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/chrome");
-editor.getSession().setMode("ace/mode/javascript");
-
-var editor_1 = ace.edit("editor_1");
-editor_1.setTheme("ace/theme/chrome");
-editor_1.getSession().setMode("ace/mode/javascript");
+$scope.eval = function(q, userCode) {
+  // console.log("it's working, it's working!!!", q._id, q.answer, userCode);
+  assessmentService.eval(q._id, q.answer, userCode);
+}
+// var editor = ace.edit("editor");
+// editor.setTheme("ace/theme/chrome");
+// editor.getSession().setMode("ace/mode/javascript");
+//
+// var editor_1 = ace.edit("editor_1");
+// editor_1.setTheme("ace/theme/chrome");
+// editor_1.getSession().setMode("ace/mode/javascript");
 
 }])
 
-angular.module('myApp').service('assessmentService', ["$q", "$http", function($q, $http) {
+angular.module('myApp')
+
+.service('assessmentService', ["$q", "$http", function($q, $http) {
 
 
     this.getAssessment = () => {
@@ -65,6 +74,13 @@ angular.module('myApp').service('assessmentService', ["$q", "$http", function($q
         }).then((response) => {
             return response.data;
         })
+    }
+
+    this.eval = () => {
+      if(!worker) {
+        let worker = new Worker ('worker.js');
+      }
+
     }
 }])
 
@@ -132,6 +148,29 @@ angular.module('myApp')
 .controller('lessonTestsController', ["$scope", function($scope) {
 
 }])
+
+angular.module('myApp')
+
+.directive('lessonsSideBarDirective', function() {
+
+  return {
+    restrict: 'E',
+    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
+    link: function(scope, ele, attr) {
+      $('.lesson-title').click(function() {
+        // console.log(this.parentNode);
+        $('.lesson-sections', this.parentNode).toggle('expand');
+      })
+
+      // $('.lesson-group').click(function() {
+      //   // console.log(this.parentNode);
+      //   $('.lesson-title', this.parentNode).toggle('expand');
+      // })
+
+    }
+  }
+
+})  // end lessonsSideBarDirective
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
@@ -256,26 +295,3 @@ angular.module('myApp')
   }
 
 }) // end navigationDirective
-
-angular.module('myApp')
-
-.directive('lessonsSideBarDirective', function() {
-
-  return {
-    restrict: 'E',
-    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
-    link: function(scope, ele, attr) {
-      $('.lesson-title').click(function() {
-        // console.log(this.parentNode);
-        $('.lesson-sections', this.parentNode).toggle('expand');
-      })
-
-      // $('.lesson-group').click(function() {
-      //   // console.log(this.parentNode);
-      //   $('.lesson-title', this.parentNode).toggle('expand');
-      // })
-
-    }
-  }
-
-})  // end lessonsSideBarDirective

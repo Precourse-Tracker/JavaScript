@@ -7,8 +7,9 @@ angular.module('myApp')
         return $http({
             method: 'GET',
             url: '/api/assessment/js'
-        }).then(response) => {
+        }).then((response) => {
             return response.data;
         })
     }
+
 })
