@@ -135,6 +135,9 @@ angular.module('myApp')
       $('.lesson-title').click(function() {
         // console.log(this.parentNode);
         $('.lesson-sections', this.parentNode).toggle('expand');
+
+        // let closeOthers = allSiblings(this);
+        // console.log(closeOthers);
       })
 
       // $('.lesson-group').click(function() {
@@ -147,6 +150,20 @@ angular.module('myApp')
       //   console.log(this.parentNode);
       //   console.log(this.parentNode.parentNode.parentNode.parentNode);
       // })
+
+      // let allSiblings = function(elem) {
+      //   let siblings = [];
+      //   let sibling = elem.parentNode.firstChild;
+      //   var skipMe = elem;
+      //   for ( ; sibling; sibling = sibling.nextSibling) {
+      //     if (sibling.nodeType == 1 && sibling != elem) {
+      //       siblings.push(sibling);
+      //     }
+      //   }
+      //   return siblings;
+      // }
+
+
 
     }
   }
@@ -168,18 +185,27 @@ angular.module('myApp')
     controller: 'lessonTestsController',
     link: function(scope, ele, attr) {
 
+      // lesson test page load
       $('.lesson-test').click(function() {
-        let testsParents = this.parentNode.parentNode.parentNode.parentNode;
-        // console.log(testsParents.id); // id of parent lesson name
-        // $('.lesson-tests-wrapper').html('<span>' + testsParents.id + '</span>');
-        $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + testsParents.id + '.html');
-        $('html, body').animate({ scrollTop: 0 }, 300);
-      })
-      if ($state.name !== 'lessonTests') {
-        $state.go('lessonTests');
-      }
+        let selectedParent = this.parentNode.parentNode.parentNode.parentNode;
+        let testNavigation = function() {
+          $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + selectedParent.id + '.html');
+        }
 
-    }
+        $('html, body').animate({ scrollTop: 0 }, 300);
+        if ($state.name !== 'lessonTests') {
+          $state.go('lessonTests');
+          setTimeout(function() {
+            testNavigation();
+            $('.lesson-sections', this).toggle('expand');
+          }, 100)
+        } else {
+          testNavigation();
+        }
+      }) // end lesson-test click
+
+
+    } // end link attr
   }
 
 }])
@@ -301,6 +327,7 @@ angular.module('myApp')
       })
 
       profileMenu.click(function() {
+        $('.lessons-wrapper').load();
         profileMenu.toggle('expand');
       })
     }

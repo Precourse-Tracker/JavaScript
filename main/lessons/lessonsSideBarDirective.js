@@ -9,6 +9,9 @@ angular.module('myApp')
       $('.lesson-title').click(function() {
         // console.log(this.parentNode);
         $('.lesson-sections', this.parentNode).toggle('expand');
+
+        // let closeOthers = allSiblings(this);
+        // console.log(closeOthers);
       })
 
       // $('.lesson-group').click(function() {
@@ -21,6 +24,20 @@ angular.module('myApp')
       //   console.log(this.parentNode);
       //   console.log(this.parentNode.parentNode.parentNode.parentNode);
       // })
+
+      // let allSiblings = function(elem) {
+      //   let siblings = [];
+      //   let sibling = elem.parentNode.firstChild;
+      //   var skipMe = elem;
+      //   for ( ; sibling; sibling = sibling.nextSibling) {
+      //     if (sibling.nodeType == 1 && sibling != elem) {
+      //       siblings.push(sibling);
+      //     }
+      //   }
+      //   return siblings;
+      // }
+
+
 
     }
   }
