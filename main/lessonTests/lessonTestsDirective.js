@@ -1,6 +1,6 @@
 angular.module('myApp')
 
-.directive('lessonTestsDirective', function() {
+.directive('lessonTestsDirective', function($state) {
 
   return {
     restrict: 'A',
@@ -14,6 +14,9 @@ angular.module('myApp')
         $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + testsParents.id + '.html');
         $('html, body').animate({ scrollTop: 0 }, 300);
       })
+      if ($state.name !== 'lessonTests') {
+        $state.go('lessonTests');
+      }
 
     }
   }
