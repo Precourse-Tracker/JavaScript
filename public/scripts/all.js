@@ -142,6 +142,12 @@ angular.module('myApp')
       //   $('.lesson-title', this.parentNode).toggle('expand');
       // })
 
+      // $('.lesson-test').click(function() {
+      //   console.log(this);
+      //   console.log(this.parentNode);
+      //   console.log(this.parentNode.parentNode.parentNode.parentNode);
+      // })
+
     }
   }
 
@@ -152,6 +158,30 @@ angular.module('myApp')
 .controller('lessonTestsController', ["$scope", function($scope) {
 
 }])
+
+angular.module('myApp')
+
+.directive('lessonTestsDirective', function() {
+
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    link: function(scope, ele, attr) {
+
+      let testsParents = parentNode.parentNode.parentNode.parentNode;
+
+      $('.lesson-test').click(function() {
+        // console.log(this);
+        // console.log(this.parentNode);
+        console.log(this.testsParents.id);
+
+        // $('.lesson-tests-wrapper')
+      })
+
+    }
+  }
+
+})
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){

@@ -117,7 +117,6 @@ a {
     left: 50%;
     transform: translate(-50%, -50%); }
 
-
 #home-wrapper {
   font-family: 'Lato';
   position: absolute;
@@ -155,6 +154,7 @@ a {
   align-items: center; }
   .home-bottom span {
     margin: 20px; }
+
 
 #side-bar-placeholder {
   width: 225px;
@@ -223,17 +223,17 @@ a {
   position: relative; }
 
 .content-wrapper {
-  width: 64vw;
+  width: calc(100% - 225px);
   height: 91vh;
   position: relative;
   float: left; }
 
 .video-placeholder {
-  width: 400px;
-  height: 150px;
+  width: 500px;
+  height: 300px;
   background: silver;
   position: relative;
-  left: 55%;
+  left: 50%;
   transform: translate(-50%);
   margin-top: 25px; }
   .video-placeholder span {
@@ -245,11 +245,11 @@ a {
     transform: translate(-50%, -50%); }
 
 .lessons-practice {
-  width: 400px;
+  width: 500px;
   height: 300px;
   background: rgba(0, 0, 0, 0.1);
   position: relative;
-  left: 55%;
+  left: 50%;
   transform: translate(-50%);
   margin-top: 35px; }
   .lessons-practice form {
@@ -260,6 +260,17 @@ a {
     transform: translate(-50%, -50%); }
     .lessons-practice form input {
       margin: 10px 10px 15px auto; }
+
+.lesson-tests-wrapper {
+  width: 500px;
+  height: 500px;
+  background: rgba(0, 0, 0, 0.15);
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  margin-top: 25px;
+  margin-bottom: 25px;
+  display: block; }
 
 .lessonTests h2 {
   text-align: center;

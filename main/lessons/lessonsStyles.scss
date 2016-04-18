@@ -6,7 +6,7 @@
 }
 
 .content-wrapper {
-  width: 64vw;
+  width: calc(100% - 225px);
   height: 91vh;
   position: relative;
   float: left;
@@ -15,12 +15,12 @@
 }
 
 .video-placeholder {
-  width: 400px;
-  height: 150px;
+  width: 500px;
+  height: 300px;
   background: silver;
   // position: absolute;
   position: relative;
-  left: 55%;
+  left: 50%;
   transform: translate(-50%);
   margin-top: 25px;
 
@@ -35,12 +35,12 @@
 }
 
 .lessons-practice {
-  width: 400px;
+  width: 500px;
   height: 300px;
   background: rgba(0,0,0,0.1);
   // position: absolute;
   position: relative;
-  left: 55%;
+  left: 50%;
   transform: translate(-50%);
   // top: 50%;
   // transform: translate(-50%, -50%);
@@ -57,4 +57,19 @@
       margin: 10px 10px 15px auto;
     }
   }
+}
+
+///////////////////////////////////////
+// ----- tests wrapper styling ----- //
+///////////////////////////////////////
+.lesson-tests-wrapper {
+  width: 500px;
+  height: 500px;
+  background: rgba(0,0,0,0.15);
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  margin-top: 25px;
+  margin-bottom: 25px;
+  display: block;
 }
