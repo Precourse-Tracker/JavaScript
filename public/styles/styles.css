@@ -155,6 +155,7 @@ a {
   .home-bottom span {
     margin: 20px; }
 
+
 .lessonTests {
   width: calc(100% - 225px);
   position: relative;
@@ -436,7 +437,6 @@ a {
 
 #login-section .expand {
   display: block !important; }
-
 
 #navigation-placeholder {
   width: 100vw;
