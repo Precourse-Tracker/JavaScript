@@ -147,6 +147,38 @@ angular.module('myApp')
 })  // end lessonsSideBarDirective
 
 angular.module('myApp')
+
+.controller('navigationController', ["$scope", "loginService", function($scope, loginService) {
+
+  $scope.logoutUser = function() {
+    loginService.logoutUser();
+  };
+
+}])
+
+angular.module('myApp')
+
+.directive('navigationDirective', function() {
+
+  return {
+    restrict: 'E',
+    templateUrl: './html/navigation/navigationTemplate.html',
+    link: function(scope, ele, attr) {
+      let profileMenu = $('#menu-navigation');
+
+      $('#profile-wrapper').click(function() {
+        profileMenu.toggle('expand')
+      })
+
+      profileMenu.click(function() {
+        profileMenu.toggle('expand');
+      })
+    }
+  }
+
+}) // end navigationDirective
+
+angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
 
   $scope.createUser = function(newUser) {
@@ -237,35 +269,3 @@ angular.module("myApp")
     });
   };
 }]);
-
-angular.module('myApp')
-
-.controller('navigationController', ["$scope", "loginService", function($scope, loginService) {
-
-  $scope.logoutUser = function() {
-    loginService.logoutUser();
-  };
-
-}])
-
-angular.module('myApp')
-
-.directive('navigationDirective', function() {
-
-  return {
-    restrict: 'E',
-    templateUrl: './html/navigation/navigationTemplate.html',
-    link: function(scope, ele, attr) {
-      let profileMenu = $('#menu-navigation');
-
-      $('#profile-wrapper').click(function() {
-        profileMenu.toggle('expand')
-      })
-
-      profileMenu.click(function() {
-        profileMenu.toggle('expand');
-      })
-    }
-  }
-
-}) // end navigationDirective
