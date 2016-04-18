@@ -5,14 +5,14 @@
     justify-content: center;
     margin: 10px 0 10px 0;
   }
-  #editor {
-    height: 20vh;
-    width: 90vw;
-  }
-  #editor_1 {
-    height: 20vh;
-    width: 90vw;
-  }
+  // #editor {
+  //   height: 20vh;
+  //   width: 90vw;
+  // }
+  // #editor_1 {
+  //   height: 20vh;
+  //   width: 90vw;
+  // }
   .assessment-eval {
     color: #406BB2;
     display: flex;
@@ -21,5 +21,13 @@
   }
   span:hover {
     color: #8FB9FF;
+  }
+  .stuff {
+    color: #406BB2;
+    width: 100vw;
+  }
+  input {
+    width: 100vw;
+    height: 20vh;
   }
 }

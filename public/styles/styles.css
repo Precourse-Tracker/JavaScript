@@ -16,14 +16,6 @@ a {
   justify-content: center;
   margin: 10px 0 10px 0; }
 
-#assessment-view #editor {
-  height: 20vh;
-  width: 90vw; }
-
-#assessment-view #editor_1 {
-  height: 20vh;
-  width: 90vw; }
-
 #assessment-view .assessment-eval {
   color: #406BB2;
   display: flex;
@@ -32,6 +24,14 @@ a {
 
 #assessment-view span:hover {
   color: #8FB9FF; }
+
+#assessment-view .stuff {
+  color: #406BB2;
+  width: 100vw; }
+
+#assessment-view input {
+  width: 100vw;
+  height: 20vh; }
 
 #dashboard-wrapper {
   width: 100vw;
