@@ -5,6 +5,15 @@ $lightBlue: #8FB9FF;
 // ----- lesson test styles ----- //
 ////////////////////////////////////
 .lessonTests {
+  width: calc(100% - 225px);
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+
+  .lessonTests > h2, .lessonTests > div {
+    position: absolute;
+
+  }
 
   h2{
     text-align: center;
@@ -13,7 +22,7 @@ $lightBlue: #8FB9FF;
   .multiple-choice-wrapper {
     display: flex;
     justify-content: center;
-    margin: 8em;
+    // margin: 8em;
   }
   .test-question {
     line-height: 3em;
@@ -47,13 +56,30 @@ $lightBlue: #8FB9FF;
     outline: 0;
   }
 
-  .code-input-wrapper {
-    display: flex;
-    justify-content: center;
-    margin: 10px 0 10px 0;
-  }
-  #editor {
-    height: 40vh;
-    width: 90vw;
-  }
+}
+
+///////////////////////////////////////
+// ----- tests wrapper styling ----- //
+///////////////////////////////////////
+.lesson-tests-wrapper {
+  width: 500px;
+  height: auto;
+  // background: rgba(0,0,0,0.15);
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  margin-top: 25px;
+  margin-bottom: 25px;
+  display: block;
+
+  // .expand {
+  //   display: block !important;
+  // }
+
+  // span {  // testing span for on click change
+  //   position: absolute;
+  //   left: 50%;
+  //   top: 50%;
+  //   transform: translate(-50%, -50%);
+  // }
 }

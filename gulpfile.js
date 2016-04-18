@@ -10,6 +10,7 @@ var gulp = require('gulp'),
 watcher.on('change', function(event) {
   console.log('File ' + event.path + ' was ' + event.type + ' at ' + new Date() + ' , running tasks...');
 });
+//browser sync to get live server like features with gulp
 
 gulp.task('styles', function() { // .scss is newer file version of .sass
   gulp.src('./main/**/*.scss')
