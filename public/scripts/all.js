@@ -32,13 +32,24 @@ angular.module('myApp', ['ui.router'])
 
 }]) // end config
 
-angular.module('myApp').controller('assessmentController', ["$scope", "assessmentService", function($scope, assessmentService) {
+angular.module('myApp')
+
+.controller('assessmentController', ["$scope", "assessmentService", function($scope, assessmentService) {
 
   $scope.getAssessment = () => {
     assessmentService.getLesson().then((assessment) => {
       $scope.assessment = assessment;
     })
   }
+
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/chrome");
+editor.getSession().setMode("ace/mode/javascript");
+
+var editor_1 = ace.edit("editor_1");
+editor_1.setTheme("ace/theme/chrome");
+editor_1.getSession().setMode("ace/mode/javascript");
+
 }])
 
 angular.module('myApp').service('assessmentService', ["$q", "$http", function($q, $http) {
@@ -140,20 +151,20 @@ angular.module('myApp')
 
 .controller('lessonTestsController', ["$scope", function($scope) {
 
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/monokai");
-editor.getSession().setMode("ace/mode/javascript");
-
 }])
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
 
   $scope.createUser = function(newUser) {
-      loginService.newUser(newUser);
+    loginService.newUser(newUser).then(function() {
+      $scope.newUser.username = '';
+      $scope.newUser.email = '';
+      $scope.newUser.password = '';
+      alert('You have successfully signed up. Please log in');
+    })
   };
   $scope.userLogin = function(user) {
-    console.log('userLogin', user);
     loginService.userLogin(user);
   };
 
@@ -222,6 +233,7 @@ angular.module("myApp")
       data: newUser,
       url: '/api/signup'
     }).success(function() {
+      return;
     });
   };
 

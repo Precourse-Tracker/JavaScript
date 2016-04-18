@@ -11,44 +11,27 @@ a {
   text-decoration: none;
   color: white; }
 
-
-#home-wrapper {
-  font-family: 'Lato';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+#assessment-view .code-input-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: -1; }
+  justify-content: center;
+  margin: 10px 0 10px 0; }
 
-.home-top {
-  width: 0;
-  height: 0;
-  border-left: 300px solid transparent;
-  border-right: 300px solid transparent;
-  border-bottom: 350px solid #FFE3A8;
-  margin-bottom: 8vh;
-  margin-top: 8vh; }
-  .home-top div {
-    font-weight: bold;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%); }
+#assessment-view #editor {
+  height: 20vh;
+  width: 90vw; }
 
-.home-bottom {
-  width: 150px;
-  height: 70px;
-  font-weight: bold;
-  text-align: center;
-  color: #FFF;
-  background: #406BB2;
-  border-radius: 5px;
+#assessment-view #editor_1 {
+  height: 20vh;
+  width: 90vw; }
+
+#assessment-view .assessment-eval {
+  color: #406BB2;
   display: flex;
-  align-items: center; }
-  .home-bottom span {
-    margin: 20px; }
+  justify-content: flex-end;
+  margin: 1em; }
+
+#assessment-view span:hover {
+  color: #8FB9FF; }
 
 #dashboard-wrapper {
   width: 100vw;
@@ -134,6 +117,44 @@ a {
     left: 50%;
     transform: translate(-50%, -50%); }
 
+
+#home-wrapper {
+  font-family: 'Lato';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: -1; }
+
+.home-top {
+  width: 0;
+  height: 0;
+  border-left: 300px solid transparent;
+  border-right: 300px solid transparent;
+  border-bottom: 350px solid #FFE3A8;
+  margin-bottom: 8vh;
+  margin-top: 8vh; }
+  .home-top div {
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%); }
+
+.home-bottom {
+  width: 150px;
+  height: 70px;
+  font-weight: bold;
+  text-align: center;
+  color: #FFF;
+  background: #406BB2;
+  border-radius: 5px;
+  display: flex;
+  align-items: center; }
+  .home-bottom span {
+    margin: 20px; }
 
 #side-bar-placeholder {
   width: 225px;
@@ -278,15 +299,6 @@ a {
   color: #fff;
   cursor: pointer;
   outline: 0; }
-
-.lessonTests .code-input-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0 10px 0; }
-
-.lessonTests #editor {
-  height: 40vh;
-  width: 90vw; }
 
 #login-section body {
   height: 100%;
