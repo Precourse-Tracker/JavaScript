@@ -1,4 +1,4 @@
-angular.module('myApp', ['ui.router', 'ui.ace'])
+angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
 
 .config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
 

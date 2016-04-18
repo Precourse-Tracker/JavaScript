@@ -8,6 +8,7 @@ angular.module('myApp')
             method: 'GET',
             url: '/api/assessment/js'
         }).then((response) => {
+
             return response.data;
         })
     }

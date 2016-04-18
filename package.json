@@ -30,6 +30,7 @@
     "gulp-strip-code": "^0.1.4",
     "gulp-uglifycss": "^1.0.6",
     "mongoose": "^4.4.12",
+    "ng-webworker": "github:mattslocum/ng-webworker",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "underscore": "^1.8.3"

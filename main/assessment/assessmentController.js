@@ -1,6 +1,6 @@
 angular.module('myApp')
 
-.controller('assessmentController', function($scope, assessmentService, jsTesting) {
+.controller('assessmentController', function($scope, assessmentService, workerService) {
 
   assessmentService.getAssessment().then(function(response) {
 
@@ -16,14 +16,14 @@ angular.module('myApp')
 
 $scope.eval = function(q, userCode) {
 
+
   let qId = q._id;
   let answer = q.answer;
-  // let userCode = userCode;\
-  console.log('userCode', userCode);
-  jsTesting.workerTest(qId, answer, userCode);
-}
-// var editor = ace.edit("editor");
-// editor.setTheme("ace/theme/chrome");
-// editor.getSession().setMode("ace/mode/javascript");
 
-})
+  console.log(qId, answer, userCode);
+  workerService.worker(qId, answer, userCode);
+
+}
+
+
+});
