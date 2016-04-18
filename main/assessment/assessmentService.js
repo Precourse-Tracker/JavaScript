@@ -1,4 +1,6 @@
-angular.module('myApp').service('assessmentService', function($q, $http) {
+angular.module('myApp')
+
+.service('assessmentService', function($q, $http) {
 
 
     this.getAssessment = () => {
@@ -6,7 +8,9 @@ angular.module('myApp').service('assessmentService', function($q, $http) {
             method: 'GET',
             url: '/api/assessment/js'
         }).then((response) => {
-            return response;
+
+            return response.data;
         })
     }
+
 })
