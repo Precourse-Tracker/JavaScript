@@ -20,7 +20,7 @@ $scope.eval = function(q, userCode) {
   let answer = q.answer;
   // let userCode = userCode;
 
-  worker.jsTesting(qId, answer, userCode);
+  jsTesting.workerTest(qId, answer, userCode);
 }
 // var editor = ace.edit("editor");
 // editor.setTheme("ace/theme/chrome");
