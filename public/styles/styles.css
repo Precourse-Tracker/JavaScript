@@ -11,31 +11,6 @@ a {
   text-decoration: none;
   color: white; }
 
-#assessment-view .code-input-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0 10px 0; }
-
-#assessment-view .ace_editor {
-  height: 200px; }
-
-#assessment-view .assessment-eval {
-  color: #406BB2;
-  display: flex;
-  justify-content: center;
-  margin: 1em; }
-
-#assessment-view span:hover {
-  color: #8FB9FF; }
-
-#assessment-view .stuff {
-  color: #406BB2;
-  width: 100vw; }
-
-#assessment-view input {
-  width: 100vw;
-  height: 20vh; }
-
 #dashboard-wrapper {
   width: 100vw;
   height: 91vh;
@@ -120,76 +95,31 @@ a {
     left: 50%;
     transform: translate(-50%, -50%); }
 
-#home-wrapper {
-  font-family: 'Lato';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: -1; }
 
-.home-top {
-  margin-top: 10vh; }
-  .home-top div {
-    font-weight: bold;
-    top: 50%;
-    transform: translate(-50%); }
-
-.home-bottom {
-  width: 150px;
-  height: 70px;
-  font-weight: bold;
-  text-align: center;
-  color: #FFF;
-  background: #406BB2;
-  border-radius: 5px;
-  display: flex;
-  align-items: center; }
-  .home-bottom span {
-    margin: 20px; }
-
-
-.lessonTests h2 {
-  text-align: center;
-  color: #406BB2; }
-
-.lessonTests .multiple-choice-wrapper {
+#assessment-view .code-input-wrapper {
   display: flex;
   justify-content: center;
-  margin: 8em; }
+  margin: 10px 0 10px 0; }
 
-.lessonTests .test-question {
-  line-height: 3em; }
+#assessment-view .ace_editor {
+  height: 200px; }
 
-.lessonTests .quiz-options {
-  text-align: center; }
-
-.lessonTests button {
-  background-color: #ebebeb;
-  border: #fff 1px solid;
+#assessment-view .assessment-eval {
   color: #406BB2;
-  width: 21.775em;
-  height: 6em;
-  transition: 0.3s;
-  text-align: center;
-  font-size: 1em;
-  font-family: 'lato';
-  border: none;
-  border-radius: 0;
-  line-height: 2rem;
-  padding: 0 1rem;
-  text-align: center;
-  position: relative;
-  margin: 2px auto; }
+  display: flex;
+  justify-content: center;
+  margin: 1em; }
 
-.lessonTests button:hover, .lessonTests button:active, .lessonTests button:focus {
-  background-color: #8FB9FF;
-  color: #fff;
-  cursor: pointer;
-  outline: 0; }
+#assessment-view span:hover {
+  color: #8FB9FF; }
+
+#assessment-view .stuff {
+  color: #406BB2;
+  width: 100vw; }
+
+#assessment-view input {
+  width: 100vw;
+  height: 20vh; }
 
 #side-bar-placeholder {
   width: 225px;
@@ -470,3 +400,73 @@ a {
     color: #406BB2;
     line-height: 35px;
     list-style: none; }
+
+.lessonTests h2 {
+  text-align: center;
+  color: #406BB2; }
+
+.lessonTests .multiple-choice-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 8em; }
+
+.lessonTests .test-question {
+  line-height: 3em; }
+
+.lessonTests .quiz-options {
+  text-align: center; }
+
+.lessonTests button {
+  background-color: #ebebeb;
+  border: #fff 1px solid;
+  color: #406BB2;
+  width: 21.775em;
+  height: 6em;
+  transition: 0.3s;
+  text-align: center;
+  font-size: 1em;
+  font-family: 'lato';
+  border: none;
+  border-radius: 0;
+  line-height: 2rem;
+  padding: 0 1rem;
+  text-align: center;
+  position: relative;
+  margin: 2px auto; }
+
+.lessonTests button:hover, .lessonTests button:active, .lessonTests button:focus {
+  background-color: #8FB9FF;
+  color: #fff;
+  cursor: pointer;
+  outline: 0; }
+
+#home-wrapper {
+  font-family: 'Lato';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: -1; }
+
+.home-top {
+  margin-top: 10vh; }
+  .home-top div {
+    font-weight: bold;
+    top: 50%;
+    transform: translate(-50%); }
+
+.home-bottom {
+  width: 150px;
+  height: 70px;
+  font-weight: bold;
+  text-align: center;
+  color: #FFF;
+  background: #406BB2;
+  border-radius: 5px;
+  display: flex;
+  align-items: center; }
+  .home-bottom span {
+    margin: 20px; }
