@@ -316,6 +316,12 @@ angular.module('myApp')
 })  // end lessonsSideBarDirective
 
 angular.module('myApp')
+
+.controller('lessonTestsController', ["$scope", function($scope) {
+
+}])
+
+angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
 
   $scope.createUser = function(newUser) {
@@ -438,9 +444,3 @@ angular.module('myApp')
   }
 
 }) // end navigationDirective
-
-angular.module('myApp')
-
-.controller('lessonTestsController', ["$scope", function($scope) {
-
-}])
