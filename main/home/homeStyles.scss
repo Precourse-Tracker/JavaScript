@@ -14,22 +14,24 @@ $darkBlue: #406BB2;
   align-items: center;
   z-index: -1;
 }
-
+// svg {
+//   margin-top: 20vh;
+// }
 .home-top {
   // width: 650px;
   // height: 360px;
   // background: #FFE3A8;
-  width: 0;
-  height: 0;
-  border-left: 300px solid transparent;
-  border-right: 300px solid transparent;
-  border-bottom: 350px solid #FFE3A8;
-  margin-bottom: 8vh;
-  margin-top: 8vh;
+  // width: 0;
+  // height: 0;
+  // border-left: 300px solid transparent;
+  // border-right: 300px solid transparent;
+  // border-bottom: 350px solid #FFE3A8;
+  // margin-bottom: 8vh;
+  margin-top: 10vh;
 
   div {
     font-weight: bold;
-    position: absolute;
+    // position: absolute;
     top: 50%;
     transform: translate(-50%);
   }

@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     // uglify = require('gulp-uglify'),
     uglifycss = require('gulp-uglifycss'),
+    stripCode = require('gulp-strip-code'),
     ngAnnotate = require('gulp-ng-annotate'),
     watcher = gulp.watch(['./main/**/*.js', './main/styles/*.scss', './main/**/*.html', './main/jquery.js'], ['default']);
 
@@ -39,6 +40,15 @@ gulp.task('html', function() {
   gulp.src('./main/**/*.html')
     // .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('./public/html/'))
+});
+
+gulp.task('templates', function(){
+  gulp.src(['./main/assessment/worker.js'])
+    .pipe(stripCode({
+      start_comment: "start-test-block",
+      end_comment: "end-test-block"
+    }))
+    .pipe(gulp.dest('public/scripts'));
 });
 
 gulp.task('default', ['styles', 'javascript', 'html', 'jquery']);

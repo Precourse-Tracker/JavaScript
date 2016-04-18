@@ -18,16 +18,12 @@ $scope.eval = function(q, userCode) {
 
   let qId = q._id;
   let answer = q.answer;
-  // let userCode = userCode;
-
-  worker.jsTesting(qId, answer, userCode);
+  // let userCode = userCode;\
+  console.log('userCode', userCode);
+  jsTesting.workerTest(qId, answer, userCode);
 }
 // var editor = ace.edit("editor");
 // editor.setTheme("ace/theme/chrome");
 // editor.getSession().setMode("ace/mode/javascript");
-//
-// var editor_1 = ace.edit("editor_1");
-// editor_1.setTheme("ace/theme/chrome");
-// editor_1.getSession().setMode("ace/mode/javascript");
 
 })

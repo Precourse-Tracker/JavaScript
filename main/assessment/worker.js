@@ -1,15 +1,56 @@
-// (function(){
-
   angular.module("myApp")
 
-  .service("jsTesting", function ($q, jsTesting, assessmentService){
+  .service("jsTesting", function ($q, assessmentService){
 
 
-    this.testJS = testJS;
-      // async was injected
-    function testJS(answer, userCode, deferred, worker){
+    this.workerTest = (qId, answer, userCode) => {
+      // if (!worker) {
+        let worker = new Worker('worker.js');
+      // }
+      // var fnstring = userCode;
+      // var fn = window[fnstring];
+      //   console.log('fn prior', fn);
+      // if (typeof fn === "function") fn();
+      //   console.log('fn invoked', fn());
+      var run = eval(userCode);
+      console.log(run);
+    }
 
-      if(!worker) worker = new Worker('worker.js');
+
+    // var myModule = (function() {
+    //
+    //   function foo() {
+    //     // private function `foo` inside closure
+    //     return "foo"
+    //   }
+    //
+    //   return {
+    //     bar: function() {
+    //       // public function `bar` returned from closure
+    //       return "bar"
+    //     }
+    //   }
+    //
+    //   /* test-code */
+    //   removeMeInProduction();
+    //   /* end-test-code */
+    //
+    //   doNotRemoveMe();
+    //
+    //   return api
+    //
+    // }())
+
+
+
+
+
+
+    // this.testJS = testJS;
+    //   // async was injected
+    // function testJS(answer, userCode, deferred, worker){
+    //
+    //   if(!worker) worker = new Worker('worker.js');
 
 
       // ??
@@ -17,24 +58,24 @@
 
 
 
-      userCode += userCode ? ("\n" + userCode) : "";
+      // userCode += userCode ? ("\n" + userCode) : "";
 
 
 
-      var userCode = {
-        userCode: userCode
-        // async: !!async
-      };
+      // var userCode = {
+      //   userCode: userCode
+      //   async: !!async
+      // };
 
       //pretty sure this is where the testing begins. Their message is our userCode
 
       //testing some stuff. Vars contains the actual answer
-      if (answer) {
-        userCode = answer;
-        return true;
-      } else {
-        return false;
-      }
+      // if (answer) {
+      //   userCode = answer;
+      //   return true;
+      // } else {
+      //   return false;
+      // }
       //testing an alert?? Maybe to in place of returning a function or something. Not too worried about this.
 
       // if (test._alert) {
@@ -75,10 +116,10 @@
       //   deferred.reject(error);
       // }
 
-    );
-
-
-    }
+    // );
+    //
+    //
+    // }
 
 
 
@@ -110,5 +151,5 @@
     // }
 
 
-  }
+
 });
