@@ -34,40 +34,6 @@ angular.module('myApp', ['ui.router'])
 
 angular.module('myApp')
 
-.controller('assessmentController', ["$scope", "assessmentService", function($scope, assessmentService) {
-
-  $scope.getAssessment = () => {
-    assessmentService.getLesson().then((assessment) => {
-      $scope.assessment = assessment;
-    })
-  }
-
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/chrome");
-editor.getSession().setMode("ace/mode/javascript");
-
-var editor_1 = ace.edit("editor_1");
-editor_1.setTheme("ace/theme/chrome");
-editor_1.getSession().setMode("ace/mode/javascript");
-
-}])
-
-angular.module('myApp').service('assessmentService', ["$q", "$http", function($q, $http) {
-
-
-    this.getAssessment = () => {
-        return $http({
-            method: 'GET',
-            url: '/api/assessment/js'
-        }).then((response) => {
-            return response;
-        })
-    }
-}])
-
-
-angular.module('myApp')
-
 .directive('unitTestMenuDirective', function() {
 
   return {
@@ -126,6 +92,40 @@ angular.module('myApp')
 
 angular.module('myApp')
 
+.controller('assessmentController', ["$scope", "assessmentService", function($scope, assessmentService) {
+
+  $scope.getAssessment = () => {
+    assessmentService.getLesson().then((assessment) => {
+      $scope.assessment = assessment;
+    })
+  }
+
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/chrome");
+editor.getSession().setMode("ace/mode/javascript");
+
+var editor_1 = ace.edit("editor_1");
+editor_1.setTheme("ace/theme/chrome");
+editor_1.getSession().setMode("ace/mode/javascript");
+
+}])
+
+angular.module('myApp').service('assessmentService', ["$q", "$http", function($q, $http) {
+
+
+    this.getAssessment = () => {
+        return $http({
+            method: 'GET',
+            url: '/api/assessment/js'
+        }).then((response) => {
+            return response;
+        })
+    }
+}])
+
+
+angular.module('myApp')
+
 .directive('lessonsSideBarDirective', function() {
 
   return {
@@ -135,36 +135,7 @@ angular.module('myApp')
       $('.lesson-title').click(function() {
         // console.log(this.parentNode);
         $('.lesson-sections', this.parentNode).toggle('expand');
-
-        // let closeOthers = allSiblings(this);
-        // console.log(closeOthers);
       })
-
-      // $('.lesson-group').click(function() {
-      //   // console.log(this.parentNode);
-      //   $('.lesson-title', this.parentNode).toggle('expand');
-      // })
-
-      // $('.lesson-test').click(function() {
-      //   console.log(this);
-      //   console.log(this.parentNode);
-      //   console.log(this.parentNode.parentNode.parentNode.parentNode);
-      // })
-
-      // let allSiblings = function(elem) {
-      //   let siblings = [];
-      //   let sibling = elem.parentNode.firstChild;
-      //   var skipMe = elem;
-      //   for ( ; sibling; sibling = sibling.nextSibling) {
-      //     if (sibling.nodeType == 1 && sibling != elem) {
-      //       siblings.push(sibling);
-      //     }
-      //   }
-      //   return siblings;
-      // }
-
-
-
     }
   }
 
@@ -173,6 +144,11 @@ angular.module('myApp')
 angular.module('myApp')
 
 .controller('lessonTestsController', ["$scope", function($scope) {
+
+  var vm = this;
+
+  vm.test = 'hi there';
+  $scope.test = 'scope hi';
 
 }])
 
