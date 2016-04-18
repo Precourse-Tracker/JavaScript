@@ -7,11 +7,12 @@
 
 .content-wrapper {
   width: calc(100% - 225px);
-  height: 91vh;
+  // height: 91vh;
   position: relative;
   float: left;
   // top: 0;
   // right: 0;
+  margin-bottom: 50px;
 }
 
 .video-placeholder {
@@ -57,19 +58,4 @@
       margin: 10px 10px 15px auto;
     }
   }
-}
-
-///////////////////////////////////////
-// ----- tests wrapper styling ----- //
-///////////////////////////////////////
-.lesson-tests-wrapper {
-  width: 500px;
-  height: 500px;
-  background: rgba(0,0,0,0.15);
-  position: relative;
-  left: 50%;
-  transform: translate(-50%);
-  margin-top: 25px;
-  margin-bottom: 25px;
-  display: block;
 }

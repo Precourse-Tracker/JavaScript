@@ -7,14 +7,12 @@ angular.module('myApp')
     controller: 'lessonTestsController',
     link: function(scope, ele, attr) {
 
-      let testsParents = parentNode.parentNode.parentNode.parentNode;
-
       $('.lesson-test').click(function() {
-        // console.log(this);
-        // console.log(this.parentNode);
-        console.log(this.testsParents.id);
-
-        // $('.lesson-tests-wrapper')
+        let testsParents = this.parentNode.parentNode.parentNode.parentNode;
+        // console.log(testsParents.id); // id of parent lesson name
+        // $('.lesson-tests-wrapper').html('<span>' + testsParents.id + '</span>');
+        $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + testsParents.id + '.html');
+        $('html, body').animate({ scrollTop: 0 }, 300);
       })
 
     }
