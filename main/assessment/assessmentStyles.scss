@@ -5,18 +5,13 @@
     justify-content: center;
     margin: 10px 0 10px 0;
   }
-  // #editor {
-  //   height: 20vh;
-  //   width: 90vw;
-  // }
-  // #editor_1 {
-  //   height: 20vh;
-  //   width: 90vw;
-  // }
+  .ace_editor  {
+    height : 200px;
+  }
   .assessment-eval {
     color: #406BB2;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     margin: 1em;
   }
   span:hover {
@@ -24,7 +19,8 @@
   }
   .stuff {
     color: #406BB2;
-    width: 100vw;
+    width: 90vw;
+    margin: 1em;
   }
   input {
     width: 100vw;
