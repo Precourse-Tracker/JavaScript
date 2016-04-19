@@ -1,17 +1,27 @@
 angular.module('myApp')
 
-.directive('lessonTestsDirective', function($state) {
+.directive('lessonTestsDirective', function($state, $compile) {
 
   return {
     restrict: 'A',
-    controller: 'lessonTestsController',
     link: function(scope, ele, attr) {
+
+      // scope.blob = 'hi there';
+      // console.log(scope);
+      // console.log(scope.blob);
 
       // lesson test page load
       $('.lesson-test').click(function() {
         let selectedParent = this.parentNode.parentNode.parentNode.parentNode;
         let testNavigation = function() {
-          $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + selectedParent.id + '.html');
+          let temp = './html/lessonTests/lessonFiles/' + selectedParent.id + '.html';
+
+
+          console.log(temp);
+
+
+
+          $('.lesson-tests-wrapper').load(temp);
         }
 
         $('html, body').animate({ scrollTop: 0 }, 300);

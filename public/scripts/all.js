@@ -20,6 +20,7 @@ angular.module('myApp', ['ui.router'])
   .state('lessonTests', {
     url: '/lessonTests',
     templateUrl: './html/lessonTests/lessonTestsTemplate.html'
+    // controller: 'lessonTestsController'
   })
   .state('assessment', {
     url: '/assessment',
@@ -31,6 +32,40 @@ angular.module('myApp', ['ui.router'])
   })
 
 }]) // end config
+
+angular.module('myApp')
+
+.controller('assessmentController', ["$scope", "assessmentService", function($scope, assessmentService) {
+
+  $scope.getAssessment = () => {
+    assessmentService.getLesson().then((assessment) => {
+      $scope.assessment = assessment;
+    })
+  }
+
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/chrome");
+editor.getSession().setMode("ace/mode/javascript");
+
+var editor_1 = ace.edit("editor_1");
+editor_1.setTheme("ace/theme/chrome");
+editor_1.getSession().setMode("ace/mode/javascript");
+
+}])
+
+angular.module('myApp').service('assessmentService', ["$q", "$http", function($q, $http) {
+
+
+    this.getAssessment = () => {
+        return $http({
+            method: 'GET',
+            url: '/api/assessment/js'
+        }).then((response) => {
+            return response;
+        })
+    }
+}])
+
 
 angular.module('myApp')
 
@@ -92,40 +127,6 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.controller('assessmentController', ["$scope", "assessmentService", function($scope, assessmentService) {
-
-  $scope.getAssessment = () => {
-    assessmentService.getLesson().then((assessment) => {
-      $scope.assessment = assessment;
-    })
-  }
-
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/chrome");
-editor.getSession().setMode("ace/mode/javascript");
-
-var editor_1 = ace.edit("editor_1");
-editor_1.setTheme("ace/theme/chrome");
-editor_1.getSession().setMode("ace/mode/javascript");
-
-}])
-
-angular.module('myApp').service('assessmentService', ["$q", "$http", function($q, $http) {
-
-
-    this.getAssessment = () => {
-        return $http({
-            method: 'GET',
-            url: '/api/assessment/js'
-        }).then((response) => {
-            return response;
-        })
-    }
-}])
-
-
-angular.module('myApp')
-
 .directive('lessonsSideBarDirective', function() {
 
   return {
@@ -145,27 +146,36 @@ angular.module('myApp')
 
 .controller('lessonTestsController', ["$scope", function($scope) {
 
-  var vm = this;
+  $scope.test = 'test on ctrl';
+  $scope.blob = 'blob on ctrl';
 
-  vm.test = 'hi there';
-  $scope.test = 'scope hi';
 
 }])
 
 angular.module('myApp')
 
-.directive('lessonTestsDirective', ["$state", function($state) {
+.directive('lessonTestsDirective', ["$state", "$compile", function($state, $compile) {
 
   return {
     restrict: 'A',
-    controller: 'lessonTestsController',
     link: function(scope, ele, attr) {
+
+      // scope.blob = 'hi there';
+      // console.log(scope);
+      // console.log(scope.blob);
 
       // lesson test page load
       $('.lesson-test').click(function() {
         let selectedParent = this.parentNode.parentNode.parentNode.parentNode;
         let testNavigation = function() {
-          $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + selectedParent.id + '.html');
+          let temp = './html/lessonTests/lessonFiles/' + selectedParent.id + '.html';
+
+
+          console.log(temp);
+
+
+
+          $('.lesson-tests-wrapper').load(temp);
         }
 
         $('html, body').animate({ scrollTop: 0 }, 300);

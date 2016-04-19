@@ -20,6 +20,7 @@ angular.module('myApp', ['ui.router'])
   .state('lessonTests', {
     url: '/lessonTests',
     templateUrl: './html/lessonTests/lessonTestsTemplate.html'
+    // controller: 'lessonTestsController'
   })
   .state('assessment', {
     url: '/assessment',

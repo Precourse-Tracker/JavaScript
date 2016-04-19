@@ -2,9 +2,8 @@ angular.module('myApp')
 
 .controller('lessonTestsController', function($scope) {
 
-  var vm = this;
+  $scope.test = 'test on ctrl';
+  $scope.blob = 'blob on ctrl';
 
-  vm.test = 'hi there';
-  $scope.test = 'scope hi';
 
 })

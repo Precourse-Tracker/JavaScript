@@ -11,6 +11,28 @@ a {
   text-decoration: none;
   color: white; }
 
+#assessment-view .code-input-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 10px 0; }
+
+#assessment-view #editor {
+  height: 20vh;
+  width: 90vw; }
+
+#assessment-view #editor_1 {
+  height: 20vh;
+  width: 90vw; }
+
+#assessment-view .assessment-eval {
+  color: #406BB2;
+  display: flex;
+  justify-content: flex-end;
+  margin: 1em; }
+
+#assessment-view span:hover {
+  color: #8FB9FF; }
+
 #dashboard-wrapper {
   width: 100vw;
   height: 91vh;
@@ -94,28 +116,6 @@ a {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); }
-
-#assessment-view .code-input-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0 10px 0; }
-
-#assessment-view #editor {
-  height: 20vh;
-  width: 90vw; }
-
-#assessment-view #editor_1 {
-  height: 20vh;
-  width: 90vw; }
-
-#assessment-view .assessment-eval {
-  color: #406BB2;
-  display: flex;
-  justify-content: flex-end;
-  margin: 1em; }
-
-#assessment-view span:hover {
-  color: #8FB9FF; }
 
 #home-wrapper {
   font-family: 'Lato';
