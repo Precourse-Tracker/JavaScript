@@ -127,7 +127,7 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.directive('lessonsSideBarDirective', function() {
+.directive('lessonsSideBarDirective', ["$state", function($state) {
 
   return {
     restrict: 'E',
@@ -137,27 +137,87 @@ angular.module('myApp')
         // console.log(this.parentNode);
         $('.lesson-sections', this.parentNode).toggle('expand');
       })
-    }
+
+      // ---- end of previously working stuff ----- //
+
+      $('.lesson-test').click(function() {
+        let selectedParent = this.parentNode.parentNode.parentNode.parentNode;
+        let testNavigation = function() {
+          // console.log(selectedParent.id);
+          let temp = selectedParent.id;
+          console.log(temp);
+          switch (temp) {
+            case 'js-lesson-vars':
+              $('.js-lesson-vars').css('z-index', 2);
+              $('.js-lesson-vars').siblings().css('z-index', 0);
+              break;
+            case 'js-lesson-strings':
+              $('.js-lesson-strings').css('z-index', 2);
+              $('.js-lesson-strings').siblings().css('z-index', 0);
+              break;
+            default:
+              break;
+          }
+
+        }
+
+        // $('html, body').animate({ scrollTop: 0 }, 300);
+
+        if ($state.name !== 'lessonTests') {
+          $state.go('lessonTests');
+          setTimeout(function() {
+            testNavigation();
+          }, 100)
+        } else {
+          testNavigation();
+        }
+      }) // end lesson-test click
+
+    } // end of directive link
   }
 
-})  // end lessonsSideBarDirective
+}])  // end lessonsSideBarDirective
 
 angular.module('myApp')
 
-.controller('lessonTestsController', ["$scope", function($scope) {
+.controller('lessonTestsController', ["$scope", "$state", "lessonTestsService", function($scope, $state, lessonTestsService) {
 
   $scope.test = 'test on ctrl';
   $scope.blob = 'blob on ctrl';
+
+  // $scope.selectLesson = function(lesson) {
+  //   // console.log(lesson);
+  //   lessonTestsService.setLessonTest(lesson);
+  //   // console.log(lessonTestsService.getLessonTest())
+  //
+  //   $scope.test = lessonTestsService.getLessonTest()
+  //   .then(function(response) {
+  //     console.log(response.data);
+  //     // console.log($state.current.name);
+  //     if ($state.current.name !== 'lessonTests') {
+  //       $state.go('lessonTests');
+  //       return response.value;
+  //       // setTimeout(function() {
+  //       //   $scope.test = response.data;
+  //       // }, 100);
+  //     } else {
+  //       return response.value;
+  //     }
+  //   })
+  //
+  // }
 
 
 }])
 
 angular.module('myApp')
 
-.directive('lessonTestsDirective', ["$state", "$compile", function($state, $compile) {
+.directive('lessonTestsDirective', ["$state", "$templateRequest", "$compile", "$http", function($state, $templateRequest, $compile, $http) {
 
   return {
     restrict: 'A',
+    controller: 'lessonTestsController',
+    // templateUrl: './html/lessonTests/lessonFiles/js-lesson-vars.html'
     link: function(scope, ele, attr) {
 
       // scope.blob = 'hi there';
@@ -169,11 +229,16 @@ angular.module('myApp')
         let selectedParent = this.parentNode.parentNode.parentNode.parentNode;
         let testNavigation = function() {
           let temp = './html/lessonTests/lessonFiles/' + selectedParent.id + '.html';
+          // console.log(temp);
 
-
-          console.log(temp);
-
-
+          // temp = $http.get(temp).then(function(r) {
+          //   console.log(r.data);
+          //   // scope.loaded = r.data;
+          //   // return scope.loaded;
+          //   return r.data;
+          // }).then(function(r) {
+          //   $('.lesson-tests-wrapper').html(r);
+          // })
 
           $('.lesson-tests-wrapper').load(temp);
         }
@@ -195,6 +260,29 @@ angular.module('myApp')
   }
 
 }])
+
+angular.module('myApp')
+
+.service('lessonTestsService', ["$http", function($http) {
+
+  this.lessonTest = '';
+
+  this.setLessonTest = function(lesson) {
+    lessonTest = lesson;
+  }
+
+  this.getLessonTest = function() {
+    // return lessonTest;
+    // console.log(lessonTest);
+    return $http({
+      method: 'GET',
+      url: './html/lessonTests/lessonFiles/' + lessonTest + '.html',
+      type: 'html'
+    })
+  }
+
+
+}]) // end lessonTestsService
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
@@ -320,3 +408,23 @@ angular.module('myApp')
   }
 
 }) // end navigationDirective
+
+angular.module('myApp')
+
+.directive('stringsTestDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-strings.html'
+  }
+}) // end varsTestDirective
+
+angular.module('myApp')
+
+.directive('varsTestDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-vars.html'
+  }
+}) // end varsTestDirective

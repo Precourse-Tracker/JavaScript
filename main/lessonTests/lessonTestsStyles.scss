@@ -65,9 +65,9 @@ $lightBlue: #8FB9FF;
   width: 500px;
   height: auto;
   // background: rgba(0,0,0,0.15);
-  position: relative;
-  left: 50%;
-  transform: translate(-50%);
+  // position: relative;
+  // left: 50%;
+  // transform: translate(-50%);
   margin-top: 25px;
   margin-bottom: 25px;
   display: block;
@@ -82,4 +82,14 @@ $lightBlue: #8FB9FF;
   //   top: 50%;
   //   transform: translate(-50%, -50%);
   // }
+
+  div {
+    // display: none;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    background: white;
+    z-index: 0;
+  }
+
 }

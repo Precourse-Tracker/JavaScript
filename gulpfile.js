@@ -22,7 +22,7 @@ gulp.task('styles', function() { // .scss is newer file version of .sass
 });
 
 gulp.task('javascript', function() {
-  gulp.src(['./main/**/*.js', '!./main/jquery.js'])
+  gulp.src(['./main/**/**/*.js', '!./main/jquery.js'])
     .pipe(ngAnnotate())
     // .pipe(uglify())
     .pipe(concat('all.js'))

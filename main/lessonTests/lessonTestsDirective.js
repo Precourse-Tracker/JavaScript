@@ -1,9 +1,11 @@
 angular.module('myApp')
 
-.directive('lessonTestsDirective', function($state, $compile) {
+.directive('lessonTestsDirective', function($state, $templateRequest, $compile, $http) {
 
   return {
     restrict: 'A',
+    controller: 'lessonTestsController',
+    // templateUrl: './html/lessonTests/lessonFiles/js-lesson-vars.html'
     link: function(scope, ele, attr) {
 
       // scope.blob = 'hi there';
@@ -15,11 +17,16 @@ angular.module('myApp')
         let selectedParent = this.parentNode.parentNode.parentNode.parentNode;
         let testNavigation = function() {
           let temp = './html/lessonTests/lessonFiles/' + selectedParent.id + '.html';
+          // console.log(temp);
 
-
-          console.log(temp);
-
-
+          // temp = $http.get(temp).then(function(r) {
+          //   console.log(r.data);
+          //   // scope.loaded = r.data;
+          //   // return scope.loaded;
+          //   return r.data;
+          // }).then(function(r) {
+          //   $('.lesson-tests-wrapper').html(r);
+          // })
 
           $('.lesson-tests-wrapper').load(temp);
         }

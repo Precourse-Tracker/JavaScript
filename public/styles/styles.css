@@ -304,12 +304,15 @@ a {
 .lesson-tests-wrapper {
   width: 500px;
   height: auto;
-  position: relative;
-  left: 50%;
-  transform: translate(-50%);
   margin-top: 25px;
   margin-bottom: 25px;
   display: block; }
+  .lesson-tests-wrapper div {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    background: white;
+    z-index: 0; }
 
 #login-section body {
   height: 100%;
@@ -456,7 +459,7 @@ a {
   align-items: center;
   position: fixed;
   top: 0;
-  z-index: 1; }
+  z-index: 9; }
 
 #profile-wrapper {
   cursor: pointer;
