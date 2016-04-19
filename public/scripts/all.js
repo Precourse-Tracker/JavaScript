@@ -1,4 +1,4 @@
-angular.module('myApp', ['ui.router'])
+angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
 
 .config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
 
@@ -34,25 +34,37 @@ angular.module('myApp', ['ui.router'])
 
 angular.module('myApp')
 
-.controller('assessmentController', ["$scope", "assessmentService", function($scope, assessmentService) {
+.controller('assessmentController', ["$scope", "assessmentService", "workerService", function($scope, assessmentService, workerService) {
 
-  $scope.getAssessment = () => {
-    assessmentService.getLesson().then((assessment) => {
-      $scope.assessment = assessment;
+  assessmentService.getAssessment().then(function(response) {
+
+    var list = [];
+    _.each(response, function(item) {
+      for (var i = 0; i < item.questions.length; i++) {
+        list.push(item.questions[i]);
+      }
     })
-  }
+    // console.log(list);
+    $scope.questions = list;
+  });
 
-var editor = ace.edit("editor");
-editor.setTheme("ace/theme/chrome");
-editor.getSession().setMode("ace/mode/javascript");
+$scope.eval = function(q, userCode) {
 
-var editor_1 = ace.edit("editor_1");
-editor_1.setTheme("ace/theme/chrome");
-editor_1.getSession().setMode("ace/mode/javascript");
 
-}])
+  let qId = q._id;
+  let answer = q.answer;
 
-angular.module('myApp').service('assessmentService', ["$q", "$http", function($q, $http) {
+  console.log(qId, answer, userCode);
+  workerService.worker(qId, answer, userCode);
+
+}
+
+
+}]);
+
+angular.module('myApp')
+
+.service('assessmentService', ["$q", "$http", function($q, $http) {
 
 
     this.getAssessment = () => {
@@ -60,11 +72,32 @@ angular.module('myApp').service('assessmentService', ["$q", "$http", function($q
             method: 'GET',
             url: '/api/assessment/js'
         }).then((response) => {
-            return response;
+
+            return response.data;
         })
     }
+
 }])
 
+angular.module('myApp').service('workerService', ["Webworker", function(Webworker) {
+
+  this.worker = (qId, answer, userCode) => {
+
+    function isSame(userCode, answer) {
+      if (userCode === answer) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    var myWorker = Webworker.create(isSame);
+
+    myWorker.run(userCode, answer).then((result) => {
+      alert(`This is ${result}`);
+    })
+  }
+}])
 
 angular.module('myApp')
 
