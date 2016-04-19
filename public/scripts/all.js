@@ -174,7 +174,7 @@ angular.module('myApp')
         let selectedParent = this.parentNode.parentNode.parentNode.parentNode;
         let testNavigation = function() {
           let temp = selectedParent.id;
-          console.log(temp);
+          // console.log(temp);
           switch (temp) {
             case 'js-lesson-data-types':
               $('.js-lesson-data-types').css('z-index', 2);
@@ -235,7 +235,7 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.controller('lessonTestsController', ["$scope", "$state", "lessonTestsService", function($scope, $state, lessonTestsService) {
+.controller('lessonTestsController', ["$scope", function($scope) {
 
   // $scope.test = 'test on ctrl';
   // $scope.blob = 'blob on ctrl';

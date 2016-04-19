@@ -15,7 +15,7 @@ angular.module('myApp')
         let selectedParent = this.parentNode.parentNode.parentNode.parentNode;
         let testNavigation = function() {
           let temp = selectedParent.id;
-          console.log(temp);
+          // console.log(temp);
           switch (temp) {
             case 'js-lesson-data-types':
               $('.js-lesson-data-types').css('z-index', 2);
