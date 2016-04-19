@@ -5,12 +5,11 @@
     Q: {{q.question}}
 
   <div ng-model="userCode" ui-ace="{
-    userWrapMode : true,
     mode: 'javascript',
     theme: 'crimson_editor'
   }"></div>
   ANSWER: {{q.answer}}
-  <a ng-click="eval(q, userCode)" class="assessment-eval" href=""><span >Submit Answer</span></a>
+    <button ng-click="eval(q, userCode); doSomeStuff(q);" ng-disabled="q.disabled" class="assessment-eval">Submit</button>
 </div>
 
 </section>

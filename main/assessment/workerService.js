@@ -13,7 +13,7 @@ angular.module('myApp').service('workerService', function(Webworker) {
     var myWorker = Webworker.create(isSame);
 
     myWorker.run(userCode, answer).then((result) => {
-      alert(`This is ${result}`);
+      return(`This is ${result}`);
     })
   }
 })

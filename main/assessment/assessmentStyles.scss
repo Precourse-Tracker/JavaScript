@@ -9,17 +9,37 @@
     height : 200px;
   }
   .assessment-eval {
-    color: #406BB2;
-    display: flex;
-    justify-content: center;
+    color: #fff;
     margin: 1em;
   }
-  span:hover {
-    color: #8FB9FF;
+  button {
+    background: #406BB2;
+    padding: 10px 16px;
+    width: auto;
+    font-weight: 600;
+    text-transform:  uppercase;
+    font-size: 14px;
+    color: #fff;
+    line-height: 16px;
+    letter-spacing: 0.5px;
+    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
+    border: 0;
+    outline: 0;
+    transition: all 0.25s;
+  }
+
+  button:hover {
+    background: #8FB9FF;
+    box-shadow: 0 4px 7px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
+  }
+  button:disabled {
+    visibility: hidden;
   }
   .stuff {
     color: #406BB2;
-    width: 100vw;
+    width: 90vw;
+    margin: 1em;
   }
   input {
     width: 100vw;
