@@ -19,6 +19,7 @@ $scope.eval = function(q, userCode) {
 
   let qId = q._id;
   let answer = q.answer;
+
   console.log(qId, answer, userCode);
   workerService.worker(qId, answer, userCode);
 

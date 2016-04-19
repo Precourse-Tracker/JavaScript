@@ -16,10 +16,13 @@ a {
   justify-content: center;
   margin: 10px 0 10px 0; }
 
+#assessment-view .ace_editor {
+  height: 200px; }
+
 #assessment-view .assessment-eval {
   color: #406BB2;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin: 1em; }
 
 #assessment-view span:hover {
@@ -27,7 +30,8 @@ a {
 
 #assessment-view .stuff {
   color: #406BB2;
-  width: 100vw; }
+  width: 90vw;
+  margin: 1em; }
 
 #assessment-view input {
   width: 100vw;
@@ -129,16 +133,9 @@ a {
   z-index: -1; }
 
 .home-top {
-  width: 0;
-  height: 0;
-  border-left: 300px solid transparent;
-  border-right: 300px solid transparent;
-  border-bottom: 350px solid #FFE3A8;
-  margin-bottom: 8vh;
-  margin-top: 8vh; }
+  margin-top: 10vh; }
   .home-top div {
     font-weight: bold;
-    position: absolute;
     top: 50%;
     transform: translate(-50%); }
 
