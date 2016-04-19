@@ -121,6 +121,7 @@ a {
     left: 50%;
     transform: translate(-50%, -50%); }
 
+
 #home-wrapper {
   font-family: 'Lato';
   position: absolute;
@@ -151,7 +152,6 @@ a {
   align-items: center; }
   .home-bottom span {
     margin: 20px; }
-
 
 .lessonTests {
   width: calc(100% - 225px);
