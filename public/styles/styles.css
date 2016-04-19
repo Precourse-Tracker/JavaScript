@@ -11,6 +11,32 @@ a {
   text-decoration: none;
   color: white; }
 
+#assessment-view .code-input-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 10px 0; }
+
+#assessment-view .ace_editor {
+  height: 200px; }
+
+#assessment-view .assessment-eval {
+  color: #406BB2;
+  display: flex;
+  justify-content: center;
+  margin: 1em; }
+
+#assessment-view span:hover {
+  color: #8FB9FF; }
+
+#assessment-view .stuff {
+  color: #406BB2;
+  width: 90vw;
+  margin: 1em; }
+
+#assessment-view input {
+  width: 100vw;
+  height: 20vh; }
+
 #dashboard-wrapper {
   width: 100vw;
   height: 91vh;
@@ -94,32 +120,6 @@ a {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); }
-
-#assessment-view .code-input-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0 10px 0; }
-
-#assessment-view .ace_editor {
-  height: 200px; }
-
-#assessment-view .assessment-eval {
-  color: #406BB2;
-  display: flex;
-  justify-content: center;
-  margin: 1em; }
-
-#assessment-view span:hover {
-  color: #8FB9FF; }
-
-#assessment-view .stuff {
-  color: #406BB2;
-  width: 90vw;
-  margin: 1em; }
-
-#assessment-view input {
-  width: 100vw;
-  height: 20vh; }
 
 #home-wrapper {
   font-family: 'Lato';
