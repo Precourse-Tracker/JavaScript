@@ -56,31 +56,8 @@ $scope.eval = function(q, userCode) {
   console.log(qId, answer, userCode);
   workerService.worker(qId, answer, userCode);
 
-  // let userCode = userCode;
-
-  // jsTesting.workerTest(qId, answer, userCode);
-  // function isSame(userCode, answer) {
-  //   if (userCode === answer) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-  //
-  // var myWorker = Webworker.create(isSame);
-  //
-  // myWorker.run(userCode, answer).then((result) => {
-  //   alert(`This is ${result}`);
-  // })
-
 }
-// var editor = ace.edit("editor");
-// editor.setTheme("ace/theme/chrome");
-// editor.getSession().setMode("ace/mode/javascript");
-//
-// var editor_1 = ace.edit("editor_1");
-// editor_1.setTheme("ace/theme/chrome");
-// editor_1.getSession().setMode("ace/mode/javascript");
+
 
 }]);
 
@@ -399,7 +376,9 @@ angular.module('myApp').service('workerService', ["Webworker", function(Webworke
       }
     }
 
-    var myWorker = Webworker.create(isSame);
+    var myWorker = Webworker.create(isSame, {
+      onReturn: function(data) {alert(`This is ${data}`);}
+    });
 
     myWorker.run(userCode, answer).then((result) => {
       alert(`This is ${result}`);

@@ -10,7 +10,9 @@ angular.module('myApp').service('workerService', function(Webworker) {
       }
     }
 
-    var myWorker = Webworker.create(isSame);
+    var myWorker = Webworker.create(isSame, {
+      onReturn: function(data) {alert(`This is ${data}`);}
+    });
 
     myWorker.run(userCode, answer).then((result) => {
       alert(`This is ${result}`);
