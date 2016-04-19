@@ -59,12 +59,16 @@ $scope.eval = function(q, userCode) {
 
 }
 
+  $scope.doSomeStuff = function(q) {
+    q.disabled = true;
+}
 
 }]);
 
 angular.module('myApp')
 
 .service('assessmentService', ["$q", "$http", function($q, $http) {
+
 
 
     this.getAssessment = () => {
@@ -77,6 +81,20 @@ angular.module('myApp')
         })
     }
 
+    this.ticker = (result) => {
+      let tick = 0;
+        if (result === true) {
+          tick++;
+        }else {
+            return 0;
+        }
+        return tick;
+    }
+
+    // this.finalScore = (numOfQuestions) => {
+    //
+    //
+    // }
 }])
 
 angular.module('myApp').service('workerService', ["Webworker", function(Webworker) {
@@ -94,7 +112,7 @@ angular.module('myApp').service('workerService', ["Webworker", function(Webworke
     var myWorker = Webworker.create(isSame);
 
     myWorker.run(userCode, answer).then((result) => {
-      alert(`This is ${result}`);
+      return(`This is ${result}`);
     })
   }
 }])

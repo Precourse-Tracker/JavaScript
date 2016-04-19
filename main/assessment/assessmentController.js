@@ -25,5 +25,8 @@ $scope.eval = function(q, userCode) {
 
 }
 
+  $scope.doSomeStuff = function(q) {
+    q.disabled = true;
+}
 
 });
