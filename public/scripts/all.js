@@ -20,7 +20,6 @@ angular.module('myApp', ['ui.router'])
   .state('lessonTests', {
     url: '/lessonTests',
     templateUrl: './html/lessonTests/lessonTestsTemplate.html'
-    // controller: 'lessonTestsController'
   })
   .state('assessment', {
     url: '/assessment',
@@ -138,31 +137,54 @@ angular.module('myApp')
         $('.lesson-sections', this.parentNode).toggle('expand');
       })
 
-      // ---- end of previously working stuff ----- //
-
       $('.lesson-test').click(function() {
         let selectedParent = this.parentNode.parentNode.parentNode.parentNode;
         let testNavigation = function() {
-          // console.log(selectedParent.id);
           let temp = selectedParent.id;
           console.log(temp);
           switch (temp) {
-            case 'js-lesson-vars':
-              $('.js-lesson-vars').css('z-index', 2);
-              $('.js-lesson-vars').siblings().css('z-index', 0);
+            case 'js-lesson-data-types':
+              $('.js-lesson-data-types').css('z-index', 2);
+              $('.js-lesson-data-types').siblings().css('z-index', 0);
               break;
-            case 'js-lesson-strings':
-              $('.js-lesson-strings').css('z-index', 2);
-              $('.js-lesson-strings').siblings().css('z-index', 0);
+            case 'js-lesson-variables':
+              $('.js-lesson-variables').css('z-index', 2);
+              $('.js-lesson-variables').siblings().css('z-index', 0);
+              break;
+            case 'js-lesson-strings-cont':
+              $('.js-lesson-strings-cont').css('z-index', 2);
+              $('.js-lesson-strings-cont').siblings().css('z-index', 0);
+              break;
+            case 'js-lesson-conditional':
+              $('.js-lesson-conditional').css('z-index', 2);
+              $('.js-lesson-conditional').siblings().css('z-index', 0);
+              break;
+            case 'js-lesson-arrays':
+              $('.js-lesson-arrays').css('z-index', 2);
+              $('.js-lesson-arrays').siblings().css('z-index', 0);
+              break;
+            case 'js-lesson-objects':
+              $('.js-lesson-objects').css('z-index', 2);
+              $('.js-lesson-objects').siblings().css('z-index', 0);
+              break;
+            case 'js-lesson-iterators':
+              $('.js-lesson-iterators').css('z-index', 2);
+              $('.js-lesson-iterators').siblings().css('z-index', 0);
+              break;
+            case 'js-lesson-logical':
+              $('.js-lesson-logical').css('z-index', 2);
+              $('.js-lesson-logical').siblings().css('z-index', 0);
+              break;
+            case 'js-lesson-functions':
+              $('.js-lesson-functions').css('z-index', 2);
+              $('.js-lesson-functions').siblings().css('z-index', 0);
               break;
             default:
               break;
           }
+        } // end testNavigation
 
-        }
-
-        // $('html, body').animate({ scrollTop: 0 }, 300);
-
+        $('html, body').animate({ scrollTop: 0 }, 300);
         if ($state.name !== 'lessonTests') {
           $state.go('lessonTests');
           setTimeout(function() {
@@ -182,107 +204,42 @@ angular.module('myApp')
 
 .controller('lessonTestsController', ["$scope", "$state", "lessonTestsService", function($scope, $state, lessonTestsService) {
 
-  $scope.test = 'test on ctrl';
-  $scope.blob = 'blob on ctrl';
-
-  // $scope.selectLesson = function(lesson) {
-  //   // console.log(lesson);
-  //   lessonTestsService.setLessonTest(lesson);
-  //   // console.log(lessonTestsService.getLessonTest())
-  //
-  //   $scope.test = lessonTestsService.getLessonTest()
-  //   .then(function(response) {
-  //     console.log(response.data);
-  //     // console.log($state.current.name);
-  //     if ($state.current.name !== 'lessonTests') {
-  //       $state.go('lessonTests');
-  //       return response.value;
-  //       // setTimeout(function() {
-  //       //   $scope.test = response.data;
-  //       // }, 100);
-  //     } else {
-  //       return response.value;
-  //     }
-  //   })
-  //
-  // }
+  // $scope.test = 'test on ctrl';
+  // $scope.blob = 'blob on ctrl';
 
 
-}])
+
+}])  // end lessonTestsController
 
 angular.module('myApp')
 
-.directive('lessonTestsDirective', ["$state", "$templateRequest", "$compile", "$http", function($state, $templateRequest, $compile, $http) {
-
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    // templateUrl: './html/lessonTests/lessonFiles/js-lesson-vars.html'
-    link: function(scope, ele, attr) {
-
-      // scope.blob = 'hi there';
-      // console.log(scope);
-      // console.log(scope.blob);
-
-      // lesson test page load
-      $('.lesson-test').click(function() {
-        let selectedParent = this.parentNode.parentNode.parentNode.parentNode;
-        let testNavigation = function() {
-          let temp = './html/lessonTests/lessonFiles/' + selectedParent.id + '.html';
-          // console.log(temp);
-
-          // temp = $http.get(temp).then(function(r) {
-          //   console.log(r.data);
-          //   // scope.loaded = r.data;
-          //   // return scope.loaded;
-          //   return r.data;
-          // }).then(function(r) {
-          //   $('.lesson-tests-wrapper').html(r);
-          // })
-
-          $('.lesson-tests-wrapper').load(temp);
-        }
-
-        $('html, body').animate({ scrollTop: 0 }, 300);
-        if ($state.name !== 'lessonTests') {
-          $state.go('lessonTests');
-          setTimeout(function() {
-            testNavigation();
-            $('.lesson-sections', this).toggle('expand');
-          }, 100)
-        } else {
-          testNavigation();
-        }
-      }) // end lesson-test click
+.directive('lessonTestsDirective', function() {
 
 
-    } // end link attr
-  }
+})  // end lessonTestsDirective
 
-}])
-
-angular.module('myApp')
-
-.service('lessonTestsService', ["$http", function($http) {
-
-  this.lessonTest = '';
-
-  this.setLessonTest = function(lesson) {
-    lessonTest = lesson;
-  }
-
-  this.getLessonTest = function() {
-    // return lessonTest;
-    // console.log(lessonTest);
-    return $http({
-      method: 'GET',
-      url: './html/lessonTests/lessonFiles/' + lessonTest + '.html',
-      type: 'html'
-    })
-  }
-
-
-}]) // end lessonTestsService
+// angular.module('myApp')
+//
+// .service('lessonTestsService', function($http) {
+//
+//   this.lessonTest = '';
+//
+//   this.setLessonTest = function(lesson) {
+//     lessonTest = lesson;
+//   }
+//
+//   this.getLessonTest = function() {
+//     // return lessonTest;
+//     // console.log(lessonTest);
+//     return $http({
+//       method: 'GET',
+//       url: './html/lessonTests/lessonFiles/' + lessonTest + '.html',
+//       type: 'html'
+//     })
+//   }
+//
+//
+// }) // end lessonTestsService
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
@@ -411,20 +368,90 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.directive('stringsTestDirective', function() {
+.directive('jsArraysDirectives', function() {
   return {
     restrict: 'A',
     controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-strings.html'
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-arrays.html'
+  }
+}) // end jsArraysDirectives
+
+angular.module('myApp')
+
+.directive('jsConditionalDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-conditional.html'
+  }
+}) // end jsConditionalDirective
+
+angular.module('myApp')
+
+.directive('jsDatatypesDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-data-types.html'
+  }
+}) // end dataTypesDirective
+
+angular.module('myApp')
+
+.directive('jsFunctionsDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-functions.html'
   }
 }) // end varsTestDirective
 
 angular.module('myApp')
 
-.directive('varsTestDirective', function() {
+.directive('jsIteratorsDirective', function() {
   return {
     restrict: 'A',
     controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-vars.html'
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-iterators.html'
+  }
+}) // end varsTestDirective
+
+angular.module('myApp')
+
+.directive('jsLogicalDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-logical.html'
+  }
+}) // end varsTestDirective
+
+angular.module('myApp')
+
+.directive('jsObjectsDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-objects.html'
+  }
+}) // end varsTestDirective
+
+angular.module('myApp')
+
+.directive('jsStringsContDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-strings-cont.html'
+  }
+}) // end varsTestDirective
+
+angular.module('myApp')
+
+.directive('jsVariablesDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-variables.html'
   }
 }) // end varsTestDirective

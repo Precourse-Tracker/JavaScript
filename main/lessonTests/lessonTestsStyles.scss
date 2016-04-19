@@ -68,7 +68,7 @@ $lightBlue: #8FB9FF;
   // position: relative;
   // left: 50%;
   // transform: translate(-50%);
-  margin-top: 25px;
+  // margin-top: 25px;
   margin-bottom: 25px;
   display: block;
 
@@ -83,7 +83,14 @@ $lightBlue: #8FB9FF;
   //   transform: translate(-50%, -50%);
   // }
 
-  div {
+  .lesson-tests-placeholder {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 2;
+  }
+
+  section {
     // display: none;
     position: absolute;
     left: 50%;
@@ -91,5 +98,7 @@ $lightBlue: #8FB9FF;
     background: white;
     z-index: 0;
   }
+
+
 
 }

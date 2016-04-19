@@ -1,9 +1,9 @@
 angular.module('myApp')
 
-.directive('stringsTestDirective', function() {
+.directive('jsObjectsDirective', function() {
   return {
     restrict: 'A',
     controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-strings.html'
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-objects.html'
   }
 }) // end varsTestDirective
