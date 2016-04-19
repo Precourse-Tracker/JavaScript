@@ -34,6 +34,187 @@ angular.module('myApp', ['ui.router', 'ngWebworker'])
 
 angular.module('myApp')
 
+.controller('lessonTestsController', ["$scope", function($scope) {
+
+}])
+
+angular.module('myApp')
+
+.directive('lessonTestsDirective', function() {
+
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    link: function(scope, ele, attr) {
+
+      $('.lesson-test').click(function() {
+        let testsParents = this.parentNode.parentNode.parentNode.parentNode;
+        // console.log(testsParents.id); // id of parent lesson name
+        // $('.lesson-tests-wrapper').html('<span>' + testsParents.id + '</span>');
+        $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + testsParents.id + '.html');
+        $('html, body').animate({ scrollTop: 0 }, 300);
+      })
+
+    }
+  }
+
+})
+
+angular.module('myApp')
+
+.directive('lessonsSideBarDirective', function() {
+
+  return {
+    restrict: 'E',
+    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
+    link: function(scope, ele, attr) {
+      $('.lesson-title').click(function() {
+        // console.log(this.parentNode);
+        $('.lesson-sections', this.parentNode).toggle('expand');
+      })
+
+      // $('.lesson-group').click(function() {
+      //   // console.log(this.parentNode);
+      //   $('.lesson-title', this.parentNode).toggle('expand');
+      // })
+
+      // $('.lesson-test').click(function() {
+      //   console.log(this);
+      //   console.log(this.parentNode);
+      //   console.log(this.parentNode.parentNode.parentNode.parentNode);
+      // })
+
+    }
+  }
+
+})  // end lessonsSideBarDirective
+
+angular.module('myApp')
+.controller('loginController', ["$scope", "loginService", function($scope, loginService){
+
+  $scope.createUser = function(newUser) {
+    loginService.newUser(newUser).then(function() {
+      $scope.newUser.username = '';
+      $scope.newUser.email = '';
+      $scope.newUser.password = '';
+      alert('You have successfully signed up. Please log in');
+    })
+  };
+  $scope.userLogin = function(user) {
+    loginService.userLogin(user);
+  };
+
+// jquery animations
+  $(document).ready(function(){
+  $('#goRight').on('click', function(){
+    $('#slideBox').animate({
+      'marginLeft' : '0'
+    })
+    $('.topLayer').animate({
+      'marginLeft' : '100%'
+    })
+  })
+  $('#goLeft').on('click', function(){
+    $('#slideBox').animate({
+      'marginLeft' : '50%'
+    })
+    $('.topLayer').animate({
+      'marginLeft': '0'
+    })
+  })
+})
+}])
+
+angular.module('myApp')
+
+.directive('loginDirective', function() {
+
+  return {
+    restrict: 'E',
+    templateUrl: './html/login/loginTemplate.html',
+    link: function(scope, ele, attr) {
+
+  
+
+    }
+  }
+
+}) // end loginDirective
+
+angular.module("myApp")
+.service('loginService', ["$q", "$http", "$state", function($q, $http, $state) {
+
+  this.userLogin = function(user) {
+    return $http({
+      method: 'POST',
+      data: user,
+      url: '/api/login'
+    }).success(function() {
+      $state.go('home');
+    });
+  };
+
+  this.logoutUser = function() {
+    return $http({
+      method: 'GET',
+      url: '/logout'
+    }).success(function() {
+       $state.go('login');
+    });
+  };
+
+  this.newUser = function(newUser) {
+    return $http({
+      method: 'POST',
+      data: newUser,
+      url: '/api/signup'
+    }).success(function() {
+      return;
+    });
+  };
+
+  this.getProfile = function() {
+    return $http({
+      method: 'GET',
+      url: '/user/current'
+    });
+  };
+}]);
+
+angular.module('myApp')
+
+.controller('navigationController', ["$scope", "loginService", function($scope, loginService) {
+
+  $scope.logoutUser = function() {
+    loginService.logoutUser();
+  };
+
+}])
+
+angular.module('myApp')
+
+.directive('navigationDirective', function() {
+
+  return {
+    restrict: 'E',
+    templateUrl: './html/navigation/navigationTemplate.html',
+    link: function(scope, ele, attr) {
+      let profileMenu = $('#menu-navigation');
+
+      $('#profile-wrapper').click(function() {
+        profileMenu.toggle('expand')
+      })
+
+      profileMenu.click(function() {
+        profileMenu.toggle('expand');
+      })
+    }
+  }
+
+}) // end navigationDirective
+
+angular.module('myApp')
+
 .controller('assessmentController', ["$scope", "assessmentService", "workerService", function($scope, assessmentService, workerService) {
 
   assessmentService.getAssessment().then(function(response) {
@@ -497,184 +678,3 @@ angular.module('myApp')
         profileMenu.toggle('expand')
       })
 */
-
-angular.module('myApp')
-
-.controller('lessonTestsController', ["$scope", function($scope) {
-
-}])
-
-angular.module('myApp')
-
-.directive('lessonTestsDirective', function() {
-
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    link: function(scope, ele, attr) {
-
-      $('.lesson-test').click(function() {
-        let testsParents = this.parentNode.parentNode.parentNode.parentNode;
-        // console.log(testsParents.id); // id of parent lesson name
-        // $('.lesson-tests-wrapper').html('<span>' + testsParents.id + '</span>');
-        $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + testsParents.id + '.html');
-        $('html, body').animate({ scrollTop: 0 }, 300);
-      })
-
-    }
-  }
-
-})
-
-angular.module('myApp')
-
-.directive('lessonsSideBarDirective', function() {
-
-  return {
-    restrict: 'E',
-    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
-    link: function(scope, ele, attr) {
-      $('.lesson-title').click(function() {
-        // console.log(this.parentNode);
-        $('.lesson-sections', this.parentNode).toggle('expand');
-      })
-
-      // $('.lesson-group').click(function() {
-      //   // console.log(this.parentNode);
-      //   $('.lesson-title', this.parentNode).toggle('expand');
-      // })
-
-      // $('.lesson-test').click(function() {
-      //   console.log(this);
-      //   console.log(this.parentNode);
-      //   console.log(this.parentNode.parentNode.parentNode.parentNode);
-      // })
-
-    }
-  }
-
-})  // end lessonsSideBarDirective
-
-angular.module('myApp')
-.controller('loginController', ["$scope", "loginService", function($scope, loginService){
-
-  $scope.createUser = function(newUser) {
-    loginService.newUser(newUser).then(function() {
-      $scope.newUser.username = '';
-      $scope.newUser.email = '';
-      $scope.newUser.password = '';
-      alert('You have successfully signed up. Please log in');
-    })
-  };
-  $scope.userLogin = function(user) {
-    loginService.userLogin(user);
-  };
-
-// jquery animations
-  $(document).ready(function(){
-  $('#goRight').on('click', function(){
-    $('#slideBox').animate({
-      'marginLeft' : '0'
-    })
-    $('.topLayer').animate({
-      'marginLeft' : '100%'
-    })
-  })
-  $('#goLeft').on('click', function(){
-    $('#slideBox').animate({
-      'marginLeft' : '50%'
-    })
-    $('.topLayer').animate({
-      'marginLeft': '0'
-    })
-  })
-})
-}])
-
-angular.module('myApp')
-
-.directive('loginDirective', function() {
-
-  return {
-    restrict: 'E',
-    templateUrl: './html/login/loginTemplate.html',
-    link: function(scope, ele, attr) {
-
-  
-
-    }
-  }
-
-}) // end loginDirective
-
-angular.module("myApp")
-.service('loginService', ["$q", "$http", "$state", function($q, $http, $state) {
-
-  this.userLogin = function(user) {
-    return $http({
-      method: 'POST',
-      data: user,
-      url: '/api/login'
-    }).success(function() {
-      $state.go('home');
-    });
-  };
-
-  this.logoutUser = function() {
-    return $http({
-      method: 'GET',
-      url: '/logout'
-    }).success(function() {
-       $state.go('login');
-    });
-  };
-
-  this.newUser = function(newUser) {
-    return $http({
-      method: 'POST',
-      data: newUser,
-      url: '/api/signup'
-    }).success(function() {
-      return;
-    });
-  };
-
-  this.getProfile = function() {
-    return $http({
-      method: 'GET',
-      url: '/user/current'
-    });
-  };
-}]);
-
-angular.module('myApp')
-
-.controller('navigationController', ["$scope", "loginService", function($scope, loginService) {
-
-  $scope.logoutUser = function() {
-    loginService.logoutUser();
-  };
-
-}])
-
-angular.module('myApp')
-
-.directive('navigationDirective', function() {
-
-  return {
-    restrict: 'E',
-    templateUrl: './html/navigation/navigationTemplate.html',
-    link: function(scope, ele, attr) {
-      let profileMenu = $('#menu-navigation');
-
-      $('#profile-wrapper').click(function() {
-        profileMenu.toggle('expand')
-      })
-
-      profileMenu.click(function() {
-        profileMenu.toggle('expand');
-      })
-    }
-  }
-
-}) // end navigationDirective
