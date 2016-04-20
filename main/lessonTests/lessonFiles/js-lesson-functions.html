@@ -1,39 +1,48 @@
 <div class="lesson-tests-wrapper">
 
-  <section class="lessonTests" ng-controller="lessonTestsController">
-    <h2>JavaScript<br>Functions<br>Test</h2>
-    <div class="multiple-choice-wrapper">
-      <div class="quiz-options"><span class="test-question">1. Here's where we will put a question:</span><br>
-        <button>one</button>
-        <button>two</button>
-        <button>three</button>
-        <button>four</button>
+  <section class="lessonTests" lesson-tests-directive>
+    <form method="POST" name="functionsTest">
+      <h2>JavaScript<br>Functions<br>Test</h2>
+      <div class="multiple-choice-wrapper">
+        <div class="quiz-options"><span class="test-question">1. Here's where we will put a question:</span><br>
+          <button value="a" name="question1" ng-click="q1('a')">one</button>
+          <button value="b" name="question2" ng-click="q1('b')">two</button>
+          <button value="c" name="question3" ng-click="q1('c')">three</button>
+          <button value="d" name="question4" ng-click="q1('d')">four</button>
+        </div>
       </div>
-    </div>
-    <div class="multiple-choice-wrapper">
-      <div class="quiz-options"><span class="test-question">2. Here's where we will put a question:</span><br>
-        <button>one</button>
-        <button>two</button>
-        <button>three</button>
-        <button>four</button>
+      <div class="multiple-choice-wrapper">
+        <div class="quiz-options"><span class="test-question">2. Here's where we will put a question:</span><br>
+          <button value="a" name="question1" ng-click="q2('a')">one</button>
+          <button value="b" name="question2" ng-click="q2('b')">two</button>
+          <button value="c" name="question3" ng-click="q2('c')">three</button>
+          <button value="d" name="question4" ng-click="q2('d')">four</button>
+        </div>
       </div>
-    </div>
-    <div class="multiple-choice-wrapper">
-      <div class="quiz-options"><span class="test-question">3. Here's where we will put a question:</span><br>
-        <button>one</button>
-        <button>two</button>
-        <button>three</button>
-        <button>four</button>
+      <div class="multiple-choice-wrapper">
+        <div class="quiz-options"><span class="test-question">3. Here's where we will put a question:</span><br>
+          <button value="a" name="question1" ng-click="q3('a')">one</button>
+          <button value="b" name="question2" ng-click="q3('b')">two</button>
+          <button value="c" name="question3" ng-click="q3('c')">three</button>
+          <button value="d" name="question4" ng-click="q3('d')">four</button>
+        </div>
       </div>
-    </div>
-    <div class="multiple-choice-wrapper">
-      <div class="quiz-options"><span class="test-question">4. Here's where we will put a question:</span><br>
-        <button>one</button>
-        <button>two</button>
-        <button>three</button>
-        <button>four</button>
+      <div class="multiple-choice-wrapper">
+        <div class="quiz-options"><span class="test-question">4. Here's where we will put a question:</span><br>
+          <button value="a" name="question1" ng-click="q4('a')">one</button>
+          <button value="b" name="question2" ng-click="q4('b')">two</button>
+          <button value="c" name="question3" ng-click="q4('c')">three</button>
+          <button value="d" name="question4" ng-click="q4('d')">four</button>
+        </div>
       </div>
-    </div>
+    </form>
+
+    <form>
+      <div>
+        <input type="button" value="Check Answers" ng-click="gradeTest()" />
+        <input type="button" value="Start Over" ng-click="document.functionsTest.reset()" />
+      </div>
+    </form>
   </section>
 
 </div>

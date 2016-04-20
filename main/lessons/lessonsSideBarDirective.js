@@ -18,40 +18,40 @@ angular.module('myApp')
           // console.log(temp);
           switch (temp) {
             case 'js-lesson-data-types':
-              $('.js-lesson-data-types').css('z-index', 2);
-              $('.js-lesson-data-types').siblings().css('z-index', 0);
+              $('.js-lesson-data-types').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-data-types').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             case 'js-lesson-variables':
-              $('.js-lesson-variables').css('z-index', 2);
-              $('.js-lesson-variables').siblings().css('z-index', 0);
+              $('.js-lesson-variables').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-variables').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             case 'js-lesson-strings-cont':
-              $('.js-lesson-strings-cont').css('z-index', 2);
-              $('.js-lesson-strings-cont').siblings().css('z-index', 0);
+              $('.js-lesson-strings-cont').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-strings-cont').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             case 'js-lesson-conditional':
-              $('.js-lesson-conditional').css('z-index', 2);
-              $('.js-lesson-conditional').siblings().css('z-index', 0);
+              $('.js-lesson-conditional').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-conditional').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             case 'js-lesson-arrays':
-              $('.js-lesson-arrays').css('z-index', 2);
-              $('.js-lesson-arrays').siblings().css('z-index', 0);
+              $('.js-lesson-arrays').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-arrays').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             case 'js-lesson-objects':
-              $('.js-lesson-objects').css('z-index', 2);
-              $('.js-lesson-objects').siblings().css('z-index', 0);
+              $('.js-lesson-objects').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-objects').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             case 'js-lesson-iterators':
-              $('.js-lesson-iterators').css('z-index', 2);
-              $('.js-lesson-iterators').siblings().css('z-index', 0);
+              $('.js-lesson-iterators').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-iterators').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             case 'js-lesson-logical':
-              $('.js-lesson-logical').css('z-index', 2);
-              $('.js-lesson-logical').siblings().css('z-index', 0);
+              $('.js-lesson-logical').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-logical').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             case 'js-lesson-functions':
-              $('.js-lesson-functions').css('z-index', 2);
-              $('.js-lesson-functions').siblings().css('z-index', 0);
+              $('.js-lesson-functions').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-functions').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             default:
               break;

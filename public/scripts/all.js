@@ -34,6 +34,64 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
 
 angular.module('myApp')
 
+.directive('unitTestMenuDirective', function() {
+
+  return {
+    restrict: 'AE',
+    // templateUrl: './html/dashboard/dashboardTopTemplate.html',
+    link: function(scope, ele, attr) {
+
+      $('#dashboard-unit-tests').click(function() {
+        // console.log(this);
+        $('#unit-test-menu').toggle('expand');
+      })
+
+      $('#unit-test-menu').click(function() {
+        $('#unit-test-menu').toggle('expand');
+      })
+
+      // unit test graph changes for unit views and cohort compare
+      $('#js-graph').click(function() {
+        $('#js-graph-div').css('z-index', 2);
+        $('#js-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#html-graph').click(function() {
+        $('#html-graph-div').css('z-index', 2);
+        $('#html-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#css-graph').click(function() {
+        $('#css-graph-div').css('z-index', 2);
+        $('#css-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#git-graph').click(function() {
+        $('#git-graph-div').css('z-index', 2);
+        $('#git-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#cohort-compare').click(function() {
+        // console.log(this);
+        $('#cohort-graph-div').css('z-index', 2);
+        $('#cohort-graph-div').siblings().css('z-index', 0);
+      })
+
+    }
+  }
+
+})  // end unitTestMenuDirective
+
+
+/*
+
+      $('#profile-wrapper').click(function() {
+        profileMenu.toggle('expand')
+      })
+*/
+
+angular.module('myApp')
+
 .controller('assessmentController', ["$scope", "assessmentService", "workerService", function($scope, assessmentService, workerService) {
 
   assessmentService.getAssessment().then(function(response) {
@@ -138,64 +196,6 @@ angular.module('myApp').service('workerService', ["Webworker", function(Webworke
 
 angular.module('myApp')
 
-.directive('unitTestMenuDirective', function() {
-
-  return {
-    restrict: 'AE',
-    // templateUrl: './html/dashboard/dashboardTopTemplate.html',
-    link: function(scope, ele, attr) {
-
-      $('#dashboard-unit-tests').click(function() {
-        // console.log(this);
-        $('#unit-test-menu').toggle('expand');
-      })
-
-      $('#unit-test-menu').click(function() {
-        $('#unit-test-menu').toggle('expand');
-      })
-
-      // unit test graph changes for unit views and cohort compare
-      $('#js-graph').click(function() {
-        $('#js-graph-div').css('z-index', 2);
-        $('#js-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#html-graph').click(function() {
-        $('#html-graph-div').css('z-index', 2);
-        $('#html-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#css-graph').click(function() {
-        $('#css-graph-div').css('z-index', 2);
-        $('#css-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#git-graph').click(function() {
-        $('#git-graph-div').css('z-index', 2);
-        $('#git-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#cohort-compare').click(function() {
-        // console.log(this);
-        $('#cohort-graph-div').css('z-index', 2);
-        $('#cohort-graph-div').siblings().css('z-index', 0);
-      })
-
-    }
-  }
-
-})  // end unitTestMenuDirective
-
-
-/*
-
-      $('#profile-wrapper').click(function() {
-        profileMenu.toggle('expand')
-      })
-*/
-
-angular.module('myApp')
-
 .directive('lessonsSideBarDirective', ["$state", function($state) {
 
   return {
@@ -214,40 +214,40 @@ angular.module('myApp')
           // console.log(temp);
           switch (temp) {
             case 'js-lesson-data-types':
-              $('.js-lesson-data-types').css('z-index', 2);
-              $('.js-lesson-data-types').siblings().css('z-index', 0);
+              $('.js-lesson-data-types').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-data-types').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             case 'js-lesson-variables':
-              $('.js-lesson-variables').css('z-index', 2);
-              $('.js-lesson-variables').siblings().css('z-index', 0);
+              $('.js-lesson-variables').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-variables').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             case 'js-lesson-strings-cont':
-              $('.js-lesson-strings-cont').css('z-index', 2);
-              $('.js-lesson-strings-cont').siblings().css('z-index', 0);
+              $('.js-lesson-strings-cont').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-strings-cont').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             case 'js-lesson-conditional':
-              $('.js-lesson-conditional').css('z-index', 2);
-              $('.js-lesson-conditional').siblings().css('z-index', 0);
+              $('.js-lesson-conditional').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-conditional').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             case 'js-lesson-arrays':
-              $('.js-lesson-arrays').css('z-index', 2);
-              $('.js-lesson-arrays').siblings().css('z-index', 0);
+              $('.js-lesson-arrays').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-arrays').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             case 'js-lesson-objects':
-              $('.js-lesson-objects').css('z-index', 2);
-              $('.js-lesson-objects').siblings().css('z-index', 0);
+              $('.js-lesson-objects').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-objects').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             case 'js-lesson-iterators':
-              $('.js-lesson-iterators').css('z-index', 2);
-              $('.js-lesson-iterators').siblings().css('z-index', 0);
+              $('.js-lesson-iterators').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-iterators').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             case 'js-lesson-logical':
-              $('.js-lesson-logical').css('z-index', 2);
-              $('.js-lesson-logical').siblings().css('z-index', 0);
+              $('.js-lesson-logical').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-logical').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             case 'js-lesson-functions':
-              $('.js-lesson-functions').css('z-index', 2);
-              $('.js-lesson-functions').siblings().css('z-index', 0);
+              $('.js-lesson-functions').css({ 'display': 'block', 'z-index': 2 });
+              $('.js-lesson-functions').siblings().css({ 'display': 'none', 'z-index': 0 });
               break;
             default:
               break;
@@ -277,6 +277,49 @@ angular.module('myApp')
   // $scope.test = 'test on ctrl';
   // $scope.blob = 'blob on ctrl';
 
+  $scope.functionsChoices = [null];
+  $scope.functionsCorrect = [
+    null, // initial null val
+    'a',  // q1
+    'b',  // q2
+    'a',  // q3
+    'c'   //q4
+  ]
+
+  $scope.q1 = (input) => {
+    $scope.functionsChoices[1] = input;
+    // console.log('q1 choice is ' + input);
+    console.log($scope.functionsChoices);
+  }
+
+  $scope.q2 = (input) => {
+    $scope.functionsChoices[2] = input;
+    // console.log('q2 choice is ' + input);
+    console.log($scope.functionsChoices);
+  }
+
+  $scope.q3 = (input) => {
+    $scope.functionsChoices[3] = input;
+    console.log($scope.functionsChoices);
+  }
+
+  $scope.q4 = (input) => {
+    $scope.functionsChoices[4] = input;
+    console.log($scope.functionsChoices);
+  }
+
+
+
+  $scope.gradeTest = function() {
+    let incorrect = null;
+    let counter = -1;
+    $scope.functionsChoices.forEach(function(answer) {
+      if (answer == $scope.functionsCorrect[counter + 1]) {
+        counter++;
+      }
+    })
+    console.log(counter);
+  }
 
 
 }])  // end lessonTestsController
@@ -285,6 +328,12 @@ angular.module('myApp')
 
 .directive('lessonTestsDirective', function() {
 
+  return {
+    restrict: 'A',
+    link: function(scope, ele, attr) {
+
+    }
+  }
 
 })  // end lessonTestsDirective
 
