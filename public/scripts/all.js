@@ -34,64 +34,6 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
 
 angular.module('myApp')
 
-.directive('unitTestMenuDirective', function() {
-
-  return {
-    restrict: 'AE',
-    // templateUrl: './html/dashboard/dashboardTopTemplate.html',
-    link: function(scope, ele, attr) {
-
-      $('#dashboard-unit-tests').click(function() {
-        // console.log(this);
-        $('#unit-test-menu').toggle('expand');
-      })
-
-      $('#unit-test-menu').click(function() {
-        $('#unit-test-menu').toggle('expand');
-      })
-
-      // unit test graph changes for unit views and cohort compare
-      $('#js-graph').click(function() {
-        $('#js-graph-div').css('z-index', 2);
-        $('#js-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#html-graph').click(function() {
-        $('#html-graph-div').css('z-index', 2);
-        $('#html-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#css-graph').click(function() {
-        $('#css-graph-div').css('z-index', 2);
-        $('#css-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#git-graph').click(function() {
-        $('#git-graph-div').css('z-index', 2);
-        $('#git-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#cohort-compare').click(function() {
-        // console.log(this);
-        $('#cohort-graph-div').css('z-index', 2);
-        $('#cohort-graph-div').siblings().css('z-index', 0);
-      })
-
-    }
-  }
-
-})  // end unitTestMenuDirective
-
-
-/*
-
-      $('#profile-wrapper').click(function() {
-        profileMenu.toggle('expand')
-      })
-*/
-
-angular.module('myApp')
-
 .controller('assessmentController', ["$scope", "assessmentService", "workerService", function($scope, assessmentService, workerService) {
 
   assessmentService.getAssessment().then(function(response) {
@@ -193,6 +135,64 @@ angular.module('myApp').service('workerService', ["Webworker", function(Webworke
     return result;
   }
 }])
+
+angular.module('myApp')
+
+.directive('unitTestMenuDirective', function() {
+
+  return {
+    restrict: 'AE',
+    // templateUrl: './html/dashboard/dashboardTopTemplate.html',
+    link: function(scope, ele, attr) {
+
+      $('#dashboard-unit-tests').click(function() {
+        // console.log(this);
+        $('#unit-test-menu').toggle('expand');
+      })
+
+      $('#unit-test-menu').click(function() {
+        $('#unit-test-menu').toggle('expand');
+      })
+
+      // unit test graph changes for unit views and cohort compare
+      $('#js-graph').click(function() {
+        $('#js-graph-div').css('z-index', 2);
+        $('#js-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#html-graph').click(function() {
+        $('#html-graph-div').css('z-index', 2);
+        $('#html-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#css-graph').click(function() {
+        $('#css-graph-div').css('z-index', 2);
+        $('#css-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#git-graph').click(function() {
+        $('#git-graph-div').css('z-index', 2);
+        $('#git-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#cohort-compare').click(function() {
+        // console.log(this);
+        $('#cohort-graph-div').css('z-index', 2);
+        $('#cohort-graph-div').siblings().css('z-index', 0);
+      })
+
+    }
+  }
+
+})  // end unitTestMenuDirective
+
+
+/*
+
+      $('#profile-wrapper').click(function() {
+        profileMenu.toggle('expand')
+      })
+*/
 
 angular.module('myApp')
 
@@ -308,17 +308,26 @@ angular.module('myApp')
     console.log($scope.functionsChoices);
   }
 
-
-
   $scope.gradeTest = function() {
     let incorrect = null;
-    let counter = -1;
-    $scope.functionsChoices.forEach(function(answer) {
-      if (answer == $scope.functionsCorrect[counter + 1]) {
-        counter++;
+    let correct = -1;
+    let finalScore = '';
+    let numQuestions = $scope.functionsCorrect.length - 1;
+    for (var i = 0; i < numQuestions + 1; i++) {
+      if ($scope.functionsChoices[i] == $scope.functionsCorrect[i]) {
+        correct++;
       }
-    })
-    console.log(counter);
+    }
+    finalScore = correct / numQuestions * 100;
+    $scope.testScore = finalScore + '%';
+    if (finalScore <= 50) {
+      $scope.message = 'Nice try! Please review the content and try again.';
+    } else if (finalScore <= 75) {
+      $scope.message = 'Great job! You\'re close to 100%!  Feel free try again.';
+    } else if (finalScore == 100) {
+      $scope.message = 'Awesome!!  You got a perfect score!!';
+    }
+    $('html, body').animate({ scrollTop: 0 }, 300);
   }
 
 
@@ -331,6 +340,16 @@ angular.module('myApp')
   return {
     restrict: 'A',
     link: function(scope, ele, attr) {
+
+      $('.grade-test').click(function() {
+        $('.final-score').css({
+          'display': 'flex',
+          'flex-direction': 'column'
+        });
+      })
+      $('.reset-test').click(function() {
+        $('.final-score').css('display', 'none');
+      })
 
     }
   }

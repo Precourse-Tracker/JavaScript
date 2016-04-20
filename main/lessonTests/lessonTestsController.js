@@ -36,17 +36,26 @@ angular.module('myApp')
     console.log($scope.functionsChoices);
   }
 
-
-
   $scope.gradeTest = function() {
     let incorrect = null;
-    let counter = -1;
-    $scope.functionsChoices.forEach(function(answer) {
-      if (answer == $scope.functionsCorrect[counter + 1]) {
-        counter++;
+    let correct = -1;
+    let finalScore = '';
+    let numQuestions = $scope.functionsCorrect.length - 1;
+    for (var i = 0; i < numQuestions + 1; i++) {
+      if ($scope.functionsChoices[i] == $scope.functionsCorrect[i]) {
+        correct++;
       }
-    })
-    console.log(counter);
+    }
+    finalScore = correct / numQuestions * 100;
+    $scope.testScore = finalScore + '%';
+    if (finalScore <= 50) {
+      $scope.message = 'Nice try! Please review the content and try again.';
+    } else if (finalScore <= 75) {
+      $scope.message = 'Great job! You\'re close to 100%!  Feel free try again.';
+    } else if (finalScore == 100) {
+      $scope.message = 'Awesome!!  You got a perfect score!!';
+    }
+    $('html, body').animate({ scrollTop: 0 }, 300);
   }
 
 

@@ -3,6 +3,7 @@
   <section class="lessonTests" lesson-tests-directive>
     <form method="POST" name="functionsTest">
       <h2>JavaScript<br>Functions<br>Test</h2>
+      <div class="final-score"><span>{{testScore}}</span><span>{{message}}</span></div>
       <div class="multiple-choice-wrapper">
         <div class="quiz-options"><span class="test-question">1. Here's where we will put a question:</span><br>
           <button value="a" name="question1" ng-click="q1('a')">one</button>
@@ -39,8 +40,8 @@
 
     <form>
       <div>
-        <input type="button" value="Check Answers" ng-click="gradeTest()" />
-        <input type="button" value="Start Over" ng-click="document.functionsTest.reset()" />
+        <input class="grade-test" type="button" value="Check Answers" ng-click="gradeTest()" />
+        <input class="reset-test" type="button" value="Start Over" ng-click="document.functionsTest.reset()" />
       </div>
     </form>
   </section>
