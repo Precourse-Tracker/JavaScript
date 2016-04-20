@@ -33,8 +33,5 @@ $scope.doSomeStuff = function(q) {
     q.disabled = true;
 }
 
-  $scope.doSomeStuff = function(q) {
-    q.disabled = true;
-}
 
 });

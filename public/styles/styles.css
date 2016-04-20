@@ -55,37 +55,6 @@ a {
   width: 100vw;
   height: 20vh; }
 
-#home-wrapper {
-  font-family: 'Lato';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: -1; }
-
-.home-top {
-  margin-top: 10vh; }
-  .home-top div {
-    font-weight: bold;
-    top: 50%;
-    transform: translate(-50%); }
-
-.home-bottom {
-  width: 150px;
-  height: 70px;
-  font-weight: bold;
-  text-align: center;
-  color: #FFF;
-  background: #406BB2;
-  border-radius: 5px;
-  display: flex;
-  align-items: center; }
-  .home-bottom span {
-    margin: 20px; }
-
 #dashboard-wrapper {
   width: 100vw;
   height: 91vh;
@@ -169,6 +138,53 @@ a {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); }
+
+#unit-subview #js-graph-div div {
+  font-family: 'Lato';
+  font-size: 11px;
+  font-weight: 300;
+  fill: #242424;
+  text-align: center;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+  cursor: default; }
+
+#unit-subview #js-graph-div .legend {
+  font-family: 'Lato';
+  fill: #333333; }
+
+#unit-subview #js-graph-div .tooltip {
+  fill: #333333; }
+
+#home-wrapper {
+  font-family: 'Lato';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: -1; }
+
+.home-top {
+  margin-top: 10vh; }
+  .home-top div {
+    font-weight: bold;
+    top: 50%;
+    transform: translate(-50%); }
+
+.home-bottom {
+  width: 150px;
+  height: 70px;
+  font-weight: bold;
+  text-align: center;
+  color: #FFF;
+  background: #406BB2;
+  border-radius: 5px;
+  display: flex;
+  align-items: center; }
+  .home-bottom span {
+    margin: 20px; }
 
 
 .lessonTests {
