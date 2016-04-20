@@ -211,6 +211,47 @@ angular.module('myApp')
 
 angular.module('myApp')
 
+.controller('lessonTestsController', ["$scope", function($scope) {
+
+  // $scope.test = 'test on ctrl';
+  // $scope.blob = 'blob on ctrl';
+
+
+
+}])  // end lessonTestsController
+
+angular.module('myApp')
+
+.directive('lessonTestsDirective', function() {
+
+
+})  // end lessonTestsDirective
+
+// angular.module('myApp')
+//
+// .service('lessonTestsService', function($http) {
+//
+//   this.lessonTest = '';
+//
+//   this.setLessonTest = function(lesson) {
+//     lessonTest = lesson;
+//   }
+//
+//   this.getLessonTest = function() {
+//     // return lessonTest;
+//     // console.log(lessonTest);
+//     return $http({
+//       method: 'GET',
+//       url: './html/lessonTests/lessonFiles/' + lessonTest + '.html',
+//       type: 'html'
+//     })
+//   }
+//
+//
+// }) // end lessonTestsService
+
+angular.module('myApp')
+
 .directive('lessonsSideBarDirective', ["$state", function($state) {
 
   return {
@@ -284,47 +325,6 @@ angular.module('myApp')
   }
 
 }])  // end lessonsSideBarDirective
-
-angular.module('myApp')
-
-.controller('lessonTestsController', ["$scope", function($scope) {
-
-  // $scope.test = 'test on ctrl';
-  // $scope.blob = 'blob on ctrl';
-
-
-
-}])  // end lessonTestsController
-
-angular.module('myApp')
-
-.directive('lessonTestsDirective', function() {
-
-
-})  // end lessonTestsDirective
-
-// angular.module('myApp')
-//
-// .service('lessonTestsService', function($http) {
-//
-//   this.lessonTest = '';
-//
-//   this.setLessonTest = function(lesson) {
-//     lessonTest = lesson;
-//   }
-//
-//   this.getLessonTest = function() {
-//     // return lessonTest;
-//     // console.log(lessonTest);
-//     return $http({
-//       method: 'GET',
-//       url: './html/lessonTests/lessonFiles/' + lessonTest + '.html',
-//       type: 'html'
-//     })
-//   }
-//
-//
-// }) // end lessonTestsService
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){

@@ -55,37 +55,6 @@ a {
   width: 100vw;
   height: 20vh; }
 
-#home-wrapper {
-  font-family: 'Lato';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: -1; }
-
-.home-top {
-  margin-top: 10vh; }
-  .home-top div {
-    font-weight: bold;
-    top: 50%;
-    transform: translate(-50%); }
-
-.home-bottom {
-  width: 150px;
-  height: 70px;
-  font-weight: bold;
-  text-align: center;
-  color: #FFF;
-  background: #406BB2;
-  border-radius: 5px;
-  display: flex;
-  align-items: center; }
-  .home-bottom span {
-    margin: 20px; }
-
 #dashboard-wrapper {
   width: 100vw;
   height: 91vh;
@@ -186,6 +155,94 @@ a {
 #unit-subview #js-graph-div .tooltip {
   fill: #333333; }
 
+#home-wrapper {
+  font-family: 'Lato';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: -1; }
+
+.home-top {
+  margin-top: 10vh; }
+  .home-top div {
+    font-weight: bold;
+    top: 50%;
+    transform: translate(-50%); }
+
+.home-bottom {
+  width: 150px;
+  height: 70px;
+  font-weight: bold;
+  text-align: center;
+  color: #FFF;
+  background: #406BB2;
+  border-radius: 5px;
+  display: flex;
+  align-items: center; }
+  .home-bottom span {
+    margin: 20px; }
+
+
+.lessonTests {
+  width: calc(100% - 225px);
+  position: relative;
+  left: 50%;
+  transform: translate(-50%); }
+  .lessonTests .lessonTests > h2, .lessonTests .lessonTests > div {
+    position: absolute; }
+  .lessonTests h2 {
+    text-align: center;
+    color: #406BB2; }
+  .lessonTests .multiple-choice-wrapper {
+    display: flex;
+    justify-content: center; }
+  .lessonTests .test-question {
+    line-height: 3em; }
+  .lessonTests .quiz-options {
+    text-align: center; }
+  .lessonTests button {
+    background-color: #ebebeb;
+    border: #fff 1px solid;
+    color: #406BB2;
+    width: 21.775em;
+    height: 6em;
+    transition: 0.3s;
+    text-align: center;
+    font-size: 1em;
+    font-family: 'lato';
+    border: none;
+    border-radius: 0;
+    line-height: 2rem;
+    padding: 0 1rem;
+    text-align: center;
+    position: relative;
+    margin: 2px auto; }
+  .lessonTests button:hover, .lessonTests button:active, .lessonTests button:focus {
+    background-color: #8FB9FF;
+    color: #fff;
+    cursor: pointer;
+    outline: 0; }
+
+.lesson-tests-wrapper {
+  width: 500px;
+  height: auto;
+  margin-bottom: 25px;
+  display: block; }
+  .lesson-tests-wrapper .lesson-tests-placeholder {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 2; }
+  .lesson-tests-wrapper section {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    background: white;
+    z-index: 0; }
 
 #side-bar-placeholder {
   width: 225px;
@@ -290,63 +347,6 @@ a {
     transform: translate(-50%, -50%); }
     .lessons-practice form input {
       margin: 10px 10px 15px auto; }
-
-.lessonTests {
-  width: calc(100% - 225px);
-  position: relative;
-  left: 50%;
-  transform: translate(-50%); }
-  .lessonTests .lessonTests > h2, .lessonTests .lessonTests > div {
-    position: absolute; }
-  .lessonTests h2 {
-    text-align: center;
-    color: #406BB2; }
-  .lessonTests .multiple-choice-wrapper {
-    display: flex;
-    justify-content: center; }
-  .lessonTests .test-question {
-    line-height: 3em; }
-  .lessonTests .quiz-options {
-    text-align: center; }
-  .lessonTests button {
-    background-color: #ebebeb;
-    border: #fff 1px solid;
-    color: #406BB2;
-    width: 21.775em;
-    height: 6em;
-    transition: 0.3s;
-    text-align: center;
-    font-size: 1em;
-    font-family: 'lato';
-    border: none;
-    border-radius: 0;
-    line-height: 2rem;
-    padding: 0 1rem;
-    text-align: center;
-    position: relative;
-    margin: 2px auto; }
-  .lessonTests button:hover, .lessonTests button:active, .lessonTests button:focus {
-    background-color: #8FB9FF;
-    color: #fff;
-    cursor: pointer;
-    outline: 0; }
-
-.lesson-tests-wrapper {
-  width: 500px;
-  height: auto;
-  margin-bottom: 25px;
-  display: block; }
-  .lesson-tests-wrapper .lesson-tests-placeholder {
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    z-index: 2; }
-  .lesson-tests-wrapper section {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    background: white;
-    z-index: 0; }
 
 #login-section body {
   height: 100%;
