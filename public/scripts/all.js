@@ -37,7 +37,6 @@ angular.module('myApp')
 .controller('assessmentController', ["$scope", "assessmentService", "workerService", function($scope, assessmentService, workerService) {
 
   assessmentService.getAssessment().then(function(response) {
-
     var list = [];
     _.each(response, function(item) {
       for (var i = 0; i < item.questions.length; i++) {
@@ -54,9 +53,18 @@ $scope.eval = function(q, userCode) {
   let qId = q._id;
   let answer = q.answer;
 
-  console.log(qId, answer, userCode);
-  workerService.worker(qId, answer, userCode);
+  workerService.worker(qId, answer, userCode).then(function(result) {
+    assessmentService.ticker(result);
+  })
 
+}
+
+$scope.submitAssessment = (length) => {
+  assessmentService.submitAssessment(length);
+}
+
+$scope.doSomeStuff = function(q) {
+    q.disabled = true;
 }
 
 
@@ -77,6 +85,33 @@ angular.module('myApp')
         })
     }
 
+    var tick = 0;
+    this.ticker = (result) => {
+        if (result === true) {
+          tick += 1;
+        }else {
+            return 0;
+        }
+        console.log("tick count", tick);
+    }
+
+
+    this.submitAssessment = (length) => {
+      var totalScore = (tick / length) * 100;
+      totalScore = totalScore.toString();
+      console.log(totalScore);
+      return $http({
+        method: 'PUT',
+        url: '/api/users',
+        data: {
+          progress: {
+            jsAssessment: totalScore
+          }
+        }
+      }).success(function(resp) {
+        console.log(resp);
+      })
+    }
 }])
 
 angular.module('myApp').service('workerService', ["Webworker", function(Webworker) {
@@ -91,11 +126,13 @@ angular.module('myApp').service('workerService', ["Webworker", function(Webworke
       }
     }
 
-    var myWorker = Webworker.create(isSame);
+    var myWorker = Webworker.create(isSame, {
+      isSame: true,
+      onReturn: function(data) {return data;}
+    });
 
-    myWorker.run(userCode, answer).then((result) => {
-      alert(`This is ${result}`);
-    })
+    var result = myWorker.run(userCode, answer);
+    return result;
   }
 }])
 
