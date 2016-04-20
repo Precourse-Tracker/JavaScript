@@ -14,18 +14,31 @@ angular.module('myApp')
         })
     }
 
+    var tick = 0;
     this.ticker = (result) => {
-      let tick = 0;
         if (result === true) {
-          tick++;
+          tick += 1;
         }else {
             return 0;
         }
-        return tick;
+        console.log("tick count", tick);
     }
 
-    // this.finalScore = (numOfQuestions) => {
-    //
-    //
-    // }
+    this.submitAssessment = (length) => {
+      var totalScore = (tick / length) * 100;
+      totalScore = totalScore.toString();
+      console.log(totalScore);
+      return $http({
+        method: 'PUT',
+        url: '/api/users',
+        data: {
+          progress: {
+            jsAssessment: totalScore
+          }
+        }
+      }).success(function(resp) {
+        console.log(resp);
+      })
+    }
+
 })

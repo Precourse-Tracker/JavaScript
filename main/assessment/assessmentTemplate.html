@@ -1,9 +1,7 @@
 <navigation-directive></navigation-directive>
 <section ng-controller="assessmentController" id=assessment-view>
-
   <div ng-repeat="q in questions" class="stuff">
     Q: {{q.question}}
-
   <div ng-model="userCode" ui-ace="{
     mode: 'javascript',
     theme: 'crimson_editor'
@@ -12,7 +10,6 @@
     <button ng-click="eval(q, userCode); doSomeStuff(q);" ng-disabled="q.disabled" class="assessment-eval">eval</button>
 </div>
 
-<button type="button">Submit Assessment</button>
-
+<button type="button" ng-click="submitAssessment(questions.length)">Submit Assessment</button>
 
 </section>
