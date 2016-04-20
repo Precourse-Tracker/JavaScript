@@ -37,7 +37,6 @@ angular.module('myApp')
 .controller('assessmentController', ["$scope", "assessmentService", "workerService", function($scope, assessmentService, workerService) {
 
   assessmentService.getAssessment().then(function(response) {
-
     var list = [];
     _.each(response, function(item) {
       for (var i = 0; i < item.questions.length; i++) {
@@ -54,9 +53,18 @@ $scope.eval = function(q, userCode) {
   let qId = q._id;
   let answer = q.answer;
 
-  console.log(qId, answer, userCode);
-  workerService.worker(qId, answer, userCode);
+  workerService.worker(qId, answer, userCode).then(function(result) {
+    assessmentService.ticker(result);
+  })
 
+}
+
+$scope.submitAssessment = (length) => {
+  assessmentService.submitAssessment(length);
+}
+
+$scope.doSomeStuff = function(q) {
+    q.disabled = true;
 }
 
   $scope.doSomeStuff = function(q) {
@@ -81,20 +89,33 @@ angular.module('myApp')
         })
     }
 
+    var tick = 0;
     this.ticker = (result) => {
-      let tick = 0;
         if (result === true) {
-          tick++;
+          tick += 1;
         }else {
             return 0;
         }
-        return tick;
+        console.log("tick count", tick);
     }
 
-    // this.finalScore = (numOfQuestions) => {
-    //
-    //
-    // }
+    this.submitAssessment = (length) => {
+      var totalScore = (tick / length) * 100;
+      totalScore = totalScore.toString();
+      console.log(totalScore);
+      return $http({
+        method: 'PUT',
+        url: '/api/users',
+        data: {
+          progress: {
+            jsAssessment: totalScore
+          }
+        }
+      }).success(function(resp) {
+        console.log(resp);
+      })
+    }
+
 }])
 
 angular.module('myApp').service('workerService', ["Webworker", function(Webworker) {
@@ -109,70 +130,15 @@ angular.module('myApp').service('workerService', ["Webworker", function(Webworke
       }
     }
 
-    var myWorker = Webworker.create(isSame);
+    var myWorker = Webworker.create(isSame, {
+      isSame: true,
+      onReturn: function(data) {return data;}
+    });
 
-    myWorker.run(userCode, answer).then((result) => {
-      return(`This is ${result}`);
-    })
+    var result = myWorker.run(userCode, answer);
+    return result;
   }
 }])
-
-angular.module('myApp')
-
-.controller('lessonTestsController', ["$scope", function($scope) {
-
-}])
-
-angular.module('myApp')
-
-.directive('lessonTestsDirective', function() {
-
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    link: function(scope, ele, attr) {
-
-      $('.lesson-test').click(function() {
-        let testsParents = this.parentNode.parentNode.parentNode.parentNode;
-        // console.log(testsParents.id); // id of parent lesson name
-        // $('.lesson-tests-wrapper').html('<span>' + testsParents.id + '</span>');
-        $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + testsParents.id + '.html');
-        $('html, body').animate({ scrollTop: 0 }, 300);
-      })
-
-    }
-  }
-
-})
-
-angular.module('myApp')
-
-.directive('lessonsSideBarDirective', function() {
-
-  return {
-    restrict: 'E',
-    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
-    link: function(scope, ele, attr) {
-      $('.lesson-title').click(function() {
-        // console.log(this.parentNode);
-        $('.lesson-sections', this.parentNode).toggle('expand');
-      })
-
-      // $('.lesson-group').click(function() {
-      //   // console.log(this.parentNode);
-      //   $('.lesson-title', this.parentNode).toggle('expand');
-      // })
-
-      // $('.lesson-test').click(function() {
-      //   console.log(this);
-      //   console.log(this.parentNode);
-      //   console.log(this.parentNode.parentNode.parentNode.parentNode);
-      // })
-
-    }
-  }
-
-})  // end lessonsSideBarDirective
 
 angular.module('myApp')
 
@@ -231,6 +197,63 @@ angular.module('myApp')
         profileMenu.toggle('expand')
       })
 */
+
+angular.module('myApp')
+
+.controller('lessonTestsController', ["$scope", function($scope) {
+
+}])
+
+angular.module('myApp')
+
+.directive('lessonTestsDirective', function() {
+
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    link: function(scope, ele, attr) {
+
+      $('.lesson-test').click(function() {
+        let testsParents = this.parentNode.parentNode.parentNode.parentNode;
+        // console.log(testsParents.id); // id of parent lesson name
+        // $('.lesson-tests-wrapper').html('<span>' + testsParents.id + '</span>');
+        $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + testsParents.id + '.html');
+        $('html, body').animate({ scrollTop: 0 }, 300);
+      })
+
+    }
+  }
+
+})
+
+angular.module('myApp')
+
+.directive('lessonsSideBarDirective', function() {
+
+  return {
+    restrict: 'E',
+    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
+    link: function(scope, ele, attr) {
+      $('.lesson-title').click(function() {
+        // console.log(this.parentNode);
+        $('.lesson-sections', this.parentNode).toggle('expand');
+      })
+
+      // $('.lesson-group').click(function() {
+      //   // console.log(this.parentNode);
+      //   $('.lesson-title', this.parentNode).toggle('expand');
+      // })
+
+      // $('.lesson-test').click(function() {
+      //   console.log(this);
+      //   console.log(this.parentNode);
+      //   console.log(this.parentNode.parentNode.parentNode.parentNode);
+      // })
+
+    }
+  }
+
+})  // end lessonsSideBarDirective
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
