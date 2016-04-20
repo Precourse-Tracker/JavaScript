@@ -75,7 +75,8 @@ $lightBlue: #8FB9FF;
   // transform: translate(-50%);
   // margin-top: 25px;
   margin-bottom: 25px;
-  display: block;
+  // display: block;
+  display: none;
 
   // .expand {
   //   display: block !important;
@@ -112,7 +113,7 @@ $lightBlue: #8FB9FF;
   height: 100px;
   color: white;
   background: $darkBlue;
-  padding: 10px;
+  padding: 20px;
   position: relative;
   // display: flex;
   display: none;
@@ -120,4 +121,28 @@ $lightBlue: #8FB9FF;
   align-items: center;
   left: 50%;
   transform: translate(-50%);
+}
+
+.submit-functions-test {
+  display: flex;
+  justify-content: center;
+
+  div {
+    width: 200px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+
+    input {
+      height: 32px;
+      color: $darkBlue;
+      margin: 5px;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: 0 0 10px $darkBlue;
+      }
+    }
+  }
 }

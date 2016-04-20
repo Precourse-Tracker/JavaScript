@@ -36,7 +36,7 @@ angular.module('myApp')
     console.log($scope.functionsChoices);
   }
 
-  $scope.gradeTest = function() {
+  $scope.gradeTest = () => {
     let incorrect = null;
     let correct = -1;
     let finalScore = '';
@@ -48,13 +48,20 @@ angular.module('myApp')
     }
     finalScore = correct / numQuestions * 100;
     $scope.testScore = finalScore + '%';
-    if (finalScore <= 50) {
-      $scope.message = 'Nice try! Please review the content and try again.';
-    } else if (finalScore <= 75) {
-      $scope.message = 'Great job! You\'re close to 100%!  Feel free try again.';
+    if (finalScore <= 60) {
+      $scope.message = 'Good attempt! Please review the content and try again.';
+    } else if (finalScore <= 85) {
+      $scope.message = 'Nice job!  You\'re getter there!'
+    } else if (finalScore <= 99) {
+      $scope.message = 'Great job! You\'re close to 100%!';
     } else if (finalScore == 100) {
       $scope.message = 'Awesome!!  You got a perfect score!!';
     }
+    $('html, body').animate({ scrollTop: 0 }, 300);
+  }
+
+  $scope.resetTest = () => {
+    $scope.functionsChoices = [];
     $('html, body').animate({ scrollTop: 0 }, 300);
   }
 

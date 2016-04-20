@@ -212,6 +212,8 @@ angular.module('myApp')
         let testNavigation = function() {
           let temp = selectedParent.id;
           // console.log(temp);
+          $('.lesson-tests-wrapper').css('display', 'block');
+
           switch (temp) {
             case 'js-lesson-data-types':
               $('.js-lesson-data-types').css({ 'display': 'block', 'z-index': 2 });
@@ -255,14 +257,16 @@ angular.module('myApp')
         } // end testNavigation
 
         $('html, body').animate({ scrollTop: 0 }, 300);
-        if ($state.name !== 'lessonTests') {
-          $state.go('lessonTests');
-          setTimeout(function() {
-            testNavigation();
-          }, 100)
-        } else {
-          testNavigation();
-        }
+        // if ($state.name !== 'lessonTests') {
+        //   $state.go('lessonTests');
+        //   setTimeout(function() {
+        //     testNavigation();
+        //   }, 100)
+        // } else {
+        //   testNavigation();
+        // }
+
+        testNavigation();
       }) // end lesson-test click
 
     } // end of directive link
@@ -308,7 +312,7 @@ angular.module('myApp')
     console.log($scope.functionsChoices);
   }
 
-  $scope.gradeTest = function() {
+  $scope.gradeTest = () => {
     let incorrect = null;
     let correct = -1;
     let finalScore = '';
@@ -320,13 +324,20 @@ angular.module('myApp')
     }
     finalScore = correct / numQuestions * 100;
     $scope.testScore = finalScore + '%';
-    if (finalScore <= 50) {
-      $scope.message = 'Nice try! Please review the content and try again.';
-    } else if (finalScore <= 75) {
-      $scope.message = 'Great job! You\'re close to 100%!  Feel free try again.';
+    if (finalScore <= 60) {
+      $scope.message = 'Good attempt! Please review the content and try again.';
+    } else if (finalScore <= 85) {
+      $scope.message = 'Nice job!  You\'re getter there!'
+    } else if (finalScore <= 99) {
+      $scope.message = 'Great job! You\'re close to 100%!';
     } else if (finalScore == 100) {
       $scope.message = 'Awesome!!  You got a perfect score!!';
     }
+    $('html, body').animate({ scrollTop: 0 }, 300);
+  }
+
+  $scope.resetTest = () => {
+    $scope.functionsChoices = [];
     $('html, body').animate({ scrollTop: 0 }, 300);
   }
 

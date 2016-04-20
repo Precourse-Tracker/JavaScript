@@ -16,6 +16,8 @@ angular.module('myApp')
         let testNavigation = function() {
           let temp = selectedParent.id;
           // console.log(temp);
+          $('.lesson-tests-wrapper').css('display', 'block');
+
           switch (temp) {
             case 'js-lesson-data-types':
               $('.js-lesson-data-types').css({ 'display': 'block', 'z-index': 2 });
@@ -59,14 +61,16 @@ angular.module('myApp')
         } // end testNavigation
 
         $('html, body').animate({ scrollTop: 0 }, 300);
-        if ($state.name !== 'lessonTests') {
-          $state.go('lessonTests');
-          setTimeout(function() {
-            testNavigation();
-          }, 100)
-        } else {
-          testNavigation();
-        }
+        // if ($state.name !== 'lessonTests') {
+        //   $state.go('lessonTests');
+        //   setTimeout(function() {
+        //     testNavigation();
+        //   }, 100)
+        // } else {
+        //   testNavigation();
+        // }
+
+        testNavigation();
       }) // end lesson-test click
 
     } // end of directive link
