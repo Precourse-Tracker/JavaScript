@@ -10,14 +10,14 @@ const userSchema = new Schema ({
   email: {type: String, required: true},
   password: {type: String, required: true, unique: true},
   cohort: {type: String, required: false},
-  progress: [{
+  progress: {
     lessons: [{
       name: {type: String},
       status: {type: String},
       score: {type: Number},
     }],
-    assessment: {type: Number} //This assessment represents the assessment score for a particular user
-    }]
+    jsAssessment: {type: String} //This assessment represents the assessment score for a particular user
+    }
 })
 
 userSchema.methods.generateHash = function(password){
