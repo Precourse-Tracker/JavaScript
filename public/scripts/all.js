@@ -211,35 +211,7 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.controller('lessonTestsController', ["$scope", function($scope) {
-
-}])
-
-angular.module('myApp')
-
-.directive('lessonTestsDirective', function() {
-
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    link: function(scope, ele, attr) {
-
-      $('.lesson-test').click(function() {
-        let testsParents = this.parentNode.parentNode.parentNode.parentNode;
-        // console.log(testsParents.id); // id of parent lesson name
-        // $('.lesson-tests-wrapper').html('<span>' + testsParents.id + '</span>');
-        $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + testsParents.id + '.html');
-        $('html, body').animate({ scrollTop: 0 }, 300);
-      })
-
-    }
-  }
-
-})
-
-angular.module('myApp')
-
-.directive('lessonsSideBarDirective', function() {
+.directive('lessonsSideBarDirective', ["$state", function($state) {
 
   return {
     restrict: 'E',
@@ -250,21 +222,109 @@ angular.module('myApp')
         $('.lesson-sections', this.parentNode).toggle('expand');
       })
 
-      // $('.lesson-group').click(function() {
-      //   // console.log(this.parentNode);
-      //   $('.lesson-title', this.parentNode).toggle('expand');
-      // })
+      $('.lesson-test').click(function() {
+        let selectedParent = this.parentNode.parentNode.parentNode.parentNode;
+        let testNavigation = function() {
+          let temp = selectedParent.id;
+          // console.log(temp);
+          switch (temp) {
+            case 'js-lesson-data-types':
+              $('.js-lesson-data-types').css('z-index', 2);
+              $('.js-lesson-data-types').siblings().css('z-index', 0);
+              break;
+            case 'js-lesson-variables':
+              $('.js-lesson-variables').css('z-index', 2);
+              $('.js-lesson-variables').siblings().css('z-index', 0);
+              break;
+            case 'js-lesson-strings-cont':
+              $('.js-lesson-strings-cont').css('z-index', 2);
+              $('.js-lesson-strings-cont').siblings().css('z-index', 0);
+              break;
+            case 'js-lesson-conditional':
+              $('.js-lesson-conditional').css('z-index', 2);
+              $('.js-lesson-conditional').siblings().css('z-index', 0);
+              break;
+            case 'js-lesson-arrays':
+              $('.js-lesson-arrays').css('z-index', 2);
+              $('.js-lesson-arrays').siblings().css('z-index', 0);
+              break;
+            case 'js-lesson-objects':
+              $('.js-lesson-objects').css('z-index', 2);
+              $('.js-lesson-objects').siblings().css('z-index', 0);
+              break;
+            case 'js-lesson-iterators':
+              $('.js-lesson-iterators').css('z-index', 2);
+              $('.js-lesson-iterators').siblings().css('z-index', 0);
+              break;
+            case 'js-lesson-logical':
+              $('.js-lesson-logical').css('z-index', 2);
+              $('.js-lesson-logical').siblings().css('z-index', 0);
+              break;
+            case 'js-lesson-functions':
+              $('.js-lesson-functions').css('z-index', 2);
+              $('.js-lesson-functions').siblings().css('z-index', 0);
+              break;
+            default:
+              break;
+          }
+        } // end testNavigation
 
-      // $('.lesson-test').click(function() {
-      //   console.log(this);
-      //   console.log(this.parentNode);
-      //   console.log(this.parentNode.parentNode.parentNode.parentNode);
-      // })
+        $('html, body').animate({ scrollTop: 0 }, 300);
+        if ($state.name !== 'lessonTests') {
+          $state.go('lessonTests');
+          setTimeout(function() {
+            testNavigation();
+          }, 100)
+        } else {
+          testNavigation();
+        }
+      }) // end lesson-test click
 
-    }
+    } // end of directive link
   }
 
-})  // end lessonsSideBarDirective
+}])  // end lessonsSideBarDirective
+
+angular.module('myApp')
+
+.controller('lessonTestsController', ["$scope", function($scope) {
+
+  // $scope.test = 'test on ctrl';
+  // $scope.blob = 'blob on ctrl';
+
+
+
+}])  // end lessonTestsController
+
+angular.module('myApp')
+
+.directive('lessonTestsDirective', function() {
+
+
+})  // end lessonTestsDirective
+
+// angular.module('myApp')
+//
+// .service('lessonTestsService', function($http) {
+//
+//   this.lessonTest = '';
+//
+//   this.setLessonTest = function(lesson) {
+//     lessonTest = lesson;
+//   }
+//
+//   this.getLessonTest = function() {
+//     // return lessonTest;
+//     // console.log(lessonTest);
+//     return $http({
+//       method: 'GET',
+//       url: './html/lessonTests/lessonFiles/' + lessonTest + '.html',
+//       type: 'html'
+//     })
+//   }
+//
+//
+// }) // end lessonTestsService
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
@@ -383,9 +443,100 @@ angular.module('myApp')
       })
 
       profileMenu.click(function() {
+        $('.lessons-wrapper').load();
         profileMenu.toggle('expand');
       })
     }
   }
 
 }) // end navigationDirective
+
+angular.module('myApp')
+
+.directive('jsArraysDirectives', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-arrays.html'
+  }
+}) // end jsArraysDirectives
+
+angular.module('myApp')
+
+.directive('jsConditionalDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-conditional.html'
+  }
+}) // end jsConditionalDirective
+
+angular.module('myApp')
+
+.directive('jsDatatypesDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-data-types.html'
+  }
+}) // end dataTypesDirective
+
+angular.module('myApp')
+
+.directive('jsFunctionsDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-functions.html'
+  }
+}) // end varsTestDirective
+
+angular.module('myApp')
+
+.directive('jsIteratorsDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-iterators.html'
+  }
+}) // end varsTestDirective
+
+angular.module('myApp')
+
+.directive('jsLogicalDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-logical.html'
+  }
+}) // end varsTestDirective
+
+angular.module('myApp')
+
+.directive('jsObjectsDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-objects.html'
+  }
+}) // end varsTestDirective
+
+angular.module('myApp')
+
+.directive('jsStringsContDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-strings-cont.html'
+  }
+}) // end varsTestDirective
+
+angular.module('myApp')
+
+.directive('jsVariablesDirective', function() {
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    templateUrl: './html/lessonTests/lessonFiles/js-lesson-variables.html'
+  }
+}) // end varsTestDirective

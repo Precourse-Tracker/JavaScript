@@ -1,28 +1,47 @@
 <div id="side-bar-placeholder"></div>
 
-<section lesson-tests-directive class="lessons-wrapper">
+<!-- <section lesson-tests-directive class="lessons-wrapper"> -->
+<section class="lessons-wrapper">
   <div class="lessons">
 
-    <div id="js-lesson-vars">
+    <div id="js-lesson-data-types">
       <!-- <h3 class="lesson-group">Lesson 1</h3> -->
-      <h3 class="lesson-title">Vars & Strings</h3>
+      <h3 class="lesson-title">Data Types</h3>
       <!-- <ul class="lesson-title"><h3></h3> -->
       <ul>
         <li>
           <ul class="lesson-sections">
-            <li>Names</li>
-            <li>Assignment</li>
-            <li>Declaration</li>
-            <li>Valid Characters</li>
-            <li>Reserved Keywords</li>
+            <li>Numbers</li>
+            <li>Strings</li>
             <li>Booleans</li>
-            <a ui-sref="lessonTests" class="lesson-test"><h4>Test</h4></a>
+            <li>Arrays</li>
+            <li>Objects</li>
+            <!-- <h4 class="lesson-test" ng-click="selectLesson('js-lesson-vars')">Test</h4> -->
+            <h4 class="lesson-test">Test</h4>
           </ul>
         </li>
       </ul>
     </div>
 
-    <div id="js-lesson-strings">
+    <div id="js-lesson-variables">
+      <!-- <h3 class="lesson-group">Lesson 3</h3> -->
+      <h3 class="lesson-title">Variables</h3>
+      <!-- <ul class="lesson-title"><h3>Numbers</h3> -->
+      <ul>
+        <li>
+          <ul class="lesson-sections">
+            <li>Assignment</li>
+            <li>Declaration</li>
+            <li>Valid Characters</li>
+            <li>Reserved Keywords</li>
+            <li>Operators</li>
+            <h4 class="lesson-test">Test</h4>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div id="js-lesson-strings-cont">
       <!-- <h3 class="lesson-group">Lesson 2</h3> -->
       <h3 class="lesson-title">Strings Continued</h3>
       <!-- <ul class="lesson-title"><h3>Strings</h3> -->
@@ -39,23 +58,7 @@
             <li>Upper & Lower</li>
             <li>Square Bracket</li>
             <li>Split</li>
-            <a ui-sref="lessonTests" class="lesson-test"><h4>Test</h4></a>
-          </ul>
-        </li>
-      </ul>
-    </div>
-
-    <div id="js-lesson-numbers">
-      <!-- <h3 class="lesson-group">Lesson 3</h3> -->
-      <h3 class="lesson-title">Numbers</h3>
-      <!-- <ul class="lesson-title"><h3>Numbers</h3> -->
-      <ul>
-        <li>
-          <ul class="lesson-sections">
-            <li>Int & parseInt</li>
-            <li>Floase & parseFloat</li>
-            <li>Operators</li>
-            <a ui-sref="lessonTests" class="lesson-test"><h4>Test</h4></a>
+            <h4 class="lesson-test">Test</h4>
           </ul>
         </li>
       </ul>
@@ -74,32 +77,7 @@
             <li>Nesting</li>
             <li>Ternary</li>
             <li>Switch</li>
-            <a ui-sref="lessonTests" class="lesson-test"><h4>Test</h4></a>
-          </ul>
-        </li>
-      </ul>
-    </div>
-
-    <div id="js-lesson-objects">
-      <!-- <h3 class="lesson-group">Lesson 5</h3> -->
-      <h3 class="lesson-title">Objects</h3>
-      <!-- <ul class="lesson-title"><h3>Objects</h3> -->
-      <ul>
-        <li>
-          <ul class="lesson-sections">
-            <li>Literals</li>
-            <li>Comparison</li>
-            <li>hasOwnProperty</li>
-            <li>Dot Notation</li>
-            <li>Square Bracket Notation</li>
-            <li>Properties (Keys)</li>
-            <li>Keys</li>
-            <li>Getters & Setters</li>
-            <li>Dynamically Typed</li>
-            <li>Delete</li>
-            <li>Change</li>
-            <li>Add</li>
-            <a ui-sref="lessonTests" class="lesson-test"><h4>Test</h4></a>
+            <h4 class="lesson-test">Test</h4>
           </ul>
         </li>
       </ul>
@@ -125,7 +103,30 @@
             <li>forEach</li>
             <li>Map</li>
             <li>Multi-Dimensional</li>
-            <a ui-sref="lessonTests" class="lesson-test"><h4>Test</h4></a>
+            <h4 class="lesson-test">Test</h4>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div id="js-lesson-objects">
+      <!-- <h3 class="lesson-group">Lesson 5</h3> -->
+      <h3 class="lesson-title">Objects</h3>
+      <!-- <ul class="lesson-title"><h3>Objects</h3> -->
+      <ul>
+        <li>
+          <ul class="lesson-sections">
+            <li>Literals</li>
+            <li>Comparison</li>
+            <li>hasOwnProperty</li>
+            <li>Dot Notation</li>
+            <li>Square Bracket Notation</li>
+            <li>Properties (Keys)</li>
+            <li>Keys</li>
+            <li>Getters & Setters</li>
+            <li>Dynamically Typed</li>
+            <li>Delete, Change, Add</li>
+            <h4 class="lesson-test">Test</h4>
           </ul>
         </li>
       </ul>
@@ -144,7 +145,7 @@
             <li>Do While</li>
             <li>Break</li>
             <li>Nested</li>
-            <a ui-sref="lessonTests" class="lesson-test"><h4>Test</h4></a>
+            <h4 class="lesson-test">Test</h4>
           </ul>
         </li>
       </ul>
@@ -162,7 +163,7 @@
             <li>!= and !===</li>
             <li>> and <</li>
             <li>>= and <=</li>
-            <a ui-sref="lessonTests" class="lesson-test"><h4>Test</h4></a>
+            <h4 class="lesson-test">Test</h4>
           </ul>
         </li>
       </ul>
@@ -182,7 +183,7 @@
             <li>Return</li>
             <li>Parameters</li>
             <li>Arguments</li>
-            <a ui-sref="lessonTests" class="lesson-test"><h4>Test</h4></a>
+            <h4 class="lesson-test">Test</h4>
           </ul>
         </li>
       </ul>

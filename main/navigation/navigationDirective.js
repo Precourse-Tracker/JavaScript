@@ -13,6 +13,7 @@ angular.module('myApp')
       })
 
       profileMenu.click(function() {
+        $('.lessons-wrapper').load();
         profileMenu.toggle('expand');
       })
     }
