@@ -232,6 +232,8 @@ a {
     left: 50%;
     transform: translate(-50%);
     margin-bottom: 25px; }
+    .lessons #take-assessment:hover {
+      box-shadow: 0 0 10px #8FB9FF; }
 
 .lessons-content-wrapper {
   position: relative; }
@@ -276,10 +278,10 @@ a {
       margin: 10px 10px 15px auto; }
 
 .lessonTests {
-  width: calc(100% - 225px);
   position: relative;
   left: 50%;
-  transform: translate(-50%); }
+  transform: translate(-50%);
+  width: 100%; }
   .lessonTests .lessonTests > h2, .lessonTests .lessonTests > div {
     position: absolute; }
   .lessonTests h2 {
@@ -314,23 +316,56 @@ a {
     color: #fff;
     cursor: pointer;
     outline: 0; }
+  .lessonTests form:nth-child(1) {
+    margin-bottom: 25px; }
 
 .lesson-tests-wrapper {
   width: 500px;
-  height: auto;
+  height: 100vh;
   margin-bottom: 25px;
-  display: block; }
+  display: none; }
   .lesson-tests-wrapper .lesson-tests-placeholder {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    position: absolute;
-    z-index: 2; }
+    position: fixed;
+    z-index: 1; }
   .lesson-tests-wrapper section {
+    width: calc(100% - 5vw);
     position: absolute;
     left: 50%;
     transform: translate(-50%);
     background: white;
     z-index: 0; }
+
+.final-score {
+  width: 300px;
+  height: 100px;
+  color: white;
+  background: #406BB2;
+  padding: 20px;
+  position: relative;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  transform: translate(-50%); }
+
+.submit-functions-test {
+  display: flex;
+  justify-content: center; }
+  .submit-functions-test div {
+    width: 200px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column; }
+    .submit-functions-test div input {
+      height: 32px;
+      color: #406BB2;
+      margin: 5px;
+      border: none;
+      cursor: pointer; }
+      .submit-functions-test div input:hover {
+        box-shadow: 0 0 10px #406BB2; }
 
 #login-section body {
   height: 100%;
