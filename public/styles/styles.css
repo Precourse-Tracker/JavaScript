@@ -117,7 +117,6 @@ a {
     left: 50%;
     transform: translate(-50%, -50%); }
 
-
 #home-wrapper {
   font-family: 'Lato';
   position: absolute;
@@ -155,6 +154,7 @@ a {
   align-items: center; }
   .home-bottom span {
     margin: 20px; }
+
 
 #side-bar-placeholder {
   width: 225px;
@@ -260,56 +260,6 @@ a {
     transform: translate(-50%, -50%); }
     .lessons-practice form input {
       margin: 10px 10px 15px auto; }
-
-.lessonTests {
-  width: calc(100% - 225px);
-  position: relative;
-  left: 50%;
-  transform: translate(-50%); }
-  .lessonTests .lessonTests > h2, .lessonTests .lessonTests > div {
-    position: absolute; }
-  .lessonTests h2 {
-    text-align: center;
-    color: #406BB2; }
-  .lessonTests .multiple-choice-wrapper {
-    display: flex;
-    justify-content: center; }
-  .lessonTests .test-question {
-    line-height: 3em; }
-  .lessonTests .quiz-options {
-    text-align: center; }
-  .lessonTests button {
-    background-color: #ebebeb;
-    border: #fff 1px solid;
-    color: #406BB2;
-    width: 21.775em;
-    height: 6em;
-    transition: 0.3s;
-    text-align: center;
-    font-size: 1em;
-    font-family: 'lato';
-    border: none;
-    border-radius: 0;
-    line-height: 2rem;
-    padding: 0 1rem;
-    text-align: center;
-    position: relative;
-    margin: 2px auto; }
-  .lessonTests button:hover, .lessonTests button:active, .lessonTests button:focus {
-    background-color: #8FB9FF;
-    color: #fff;
-    cursor: pointer;
-    outline: 0; }
-
-.lesson-tests-wrapper {
-  width: 500px;
-  height: auto;
-  position: relative;
-  left: 50%;
-  transform: translate(-50%);
-  margin-top: 25px;
-  margin-bottom: 25px;
-  display: block; }
 
 #login-section body {
   height: 100%;
@@ -438,6 +388,56 @@ a {
 #login-section .expand {
   display: block !important; }
 
+.lessonTests {
+  width: calc(100% - 225px);
+  position: relative;
+  left: 50%;
+  transform: translate(-50%); }
+  .lessonTests .lessonTests > h2, .lessonTests .lessonTests > div {
+    position: absolute; }
+  .lessonTests h2 {
+    text-align: center;
+    color: #406BB2; }
+  .lessonTests .multiple-choice-wrapper {
+    display: flex;
+    justify-content: center; }
+  .lessonTests .test-question {
+    line-height: 3em; }
+  .lessonTests .quiz-options {
+    text-align: center; }
+  .lessonTests button {
+    background-color: #ebebeb;
+    border: #fff 1px solid;
+    color: #406BB2;
+    width: 21.775em;
+    height: 6em;
+    transition: 0.3s;
+    text-align: center;
+    font-size: 1em;
+    font-family: 'lato';
+    border: none;
+    border-radius: 0;
+    line-height: 2rem;
+    padding: 0 1rem;
+    text-align: center;
+    position: relative;
+    margin: 2px auto; }
+  .lessonTests button:hover, .lessonTests button:active, .lessonTests button:focus {
+    background-color: #8FB9FF;
+    color: #fff;
+    cursor: pointer;
+    outline: 0; }
+
+.lesson-tests-wrapper {
+  width: 500px;
+  height: auto;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  margin-top: 25px;
+  margin-bottom: 25px;
+  display: block; }
+
 .climber {
   position: relative; }
 
@@ -550,6 +550,24 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center; }
+
+#home-top {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: calc(50vw - 20em);
+  top: calc(50vw - 20em);
+  border-left: 20em solid transparent;
+  border-right: 20em solid transparent;
+  border-bottom: 21em solid #FFE3A8;
+  margin-bottom: 8vh;
+  margin-top: 8vh;
+  z-index: -3; }
+  #home-top div {
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%); }
 
 #trees {
   width: 2.4em;
