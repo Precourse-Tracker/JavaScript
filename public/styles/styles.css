@@ -277,6 +277,19 @@ a {
     .lessons-practice form input {
       margin: 10px 10px 15px auto; }
 
+#welcome-page {
+  width: 500px;
+  height: 300px;
+  color: white;
+  background: #406BB2;
+  margin-top: 25px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
 .lessonTests {
   position: relative;
   left: 50%;
@@ -288,8 +301,10 @@ a {
     text-align: center;
     color: #406BB2; }
   .lessonTests .multiple-choice-wrapper {
+    max-width: 700px;
     display: flex;
-    justify-content: center; }
+    justify-content: center;
+    margin: auto; }
   .lessonTests .test-question {
     line-height: 3em; }
   .lessonTests .quiz-options {
