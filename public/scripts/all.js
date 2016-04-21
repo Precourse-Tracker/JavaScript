@@ -196,6 +196,34 @@ angular.module('myApp')
 
 angular.module('myApp')
 
+.controller('lessonTestsController', ["$scope", function($scope) {
+
+}])
+
+angular.module('myApp')
+
+.directive('lessonTestsDirective', function() {
+
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    link: function(scope, ele, attr) {
+
+      $('.lesson-test').click(function() {
+        let testsParents = this.parentNode.parentNode.parentNode.parentNode;
+        // console.log(testsParents.id); // id of parent lesson name
+        // $('.lesson-tests-wrapper').html('<span>' + testsParents.id + '</span>');
+        $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + testsParents.id + '.html');
+        $('html, body').animate({ scrollTop: 0 }, 300);
+      })
+
+    }
+  }
+
+})
+
+angular.module('myApp')
+
 .directive('lessonsSideBarDirective', function() {
 
   return {
@@ -222,34 +250,6 @@ angular.module('myApp')
   }
 
 })  // end lessonsSideBarDirective
-
-angular.module('myApp')
-
-.controller('lessonTestsController', ["$scope", function($scope) {
-
-}])
-
-angular.module('myApp')
-
-.directive('lessonTestsDirective', function() {
-
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    link: function(scope, ele, attr) {
-
-      $('.lesson-test').click(function() {
-        let testsParents = this.parentNode.parentNode.parentNode.parentNode;
-        // console.log(testsParents.id); // id of parent lesson name
-        // $('.lesson-tests-wrapper').html('<span>' + testsParents.id + '</span>');
-        $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + testsParents.id + '.html');
-        $('html, body').animate({ scrollTop: 0 }, 300);
-      })
-
-    }
-  }
-
-})
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
