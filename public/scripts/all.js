@@ -273,6 +273,38 @@ angular.module("myApp")
   };
 }]);
 
+angular.module('myApp')
+
+.controller('navigationController', ["$scope", "loginService", function($scope, loginService) {
+
+  $scope.logoutUser = function() {
+    loginService.logoutUser();
+  };
+
+}])
+
+angular.module('myApp')
+
+.directive('navigationDirective', function() {
+
+  return {
+    restrict: 'E',
+    templateUrl: './html/navigation/navigationTemplate.html',
+    link: function(scope, ele, attr) {
+      let profileMenu = $('#menu-navigation');
+
+      $('#profile-wrapper').click(function() {
+        profileMenu.toggle('expand')
+      })
+
+      profileMenu.click(function() {
+        profileMenu.toggle('expand');
+      })
+    }
+  }
+
+}) // end navigationDirective
+
 angular.module( 'myApp' )
   .controller( 'mountainController', [ '$scope', 'loginService', function ( $scope, loginService ) {
 
@@ -293,64 +325,84 @@ angular.module( 'myApp' )
         const xMin = -3;
         const xMax = 33;
 
-        const randomLocation = function ( xMin, xMax /*, yMin, yMax*/ ) {
-          console.log( 'randomLocation is logging' );
-          var posX = Math.floor( Math.random() * ( xMax - xMin + 1 ) ) + xMin;
-          return {
-            x: posX,
-          }
+        const randomMinMax = function ( xMin, xMax ) {
+          var posX = Math.random() * ( xMax - xMin + 1 ) + xMin;
+          return posX
         }
+
         const findY = function ( x ) {
           console.log( 'x from inside findY', x );
           var yMax
           if ( x < ( xMax / 2 ) ) {
             yMax = ( x + 7 );
           } else {
-            yMax = ( xMax - x ) + 4;
+            yMax = ( xMax - x ) + 5;
           }
           return yMax;
+        }
+        const randomGrn = function () {
+          let rd = Math.floor( randomMinMax( 60, 90 ) );
+          let grn = Math.floor( randomMinMax( 70, 180 ) );
+          let bl = Math.floor( randomMinMax( 60, 90 ) );
+          return ( 'rgb(' + rd + ', ' + grn + ', ' + bl + ')' );
         }
 
         scope.spawnTrees = function ( number ) {
           console.log( 'spawnTrees was called' );
           for ( var i = 0; i < number; i++ ) {
             console.log( 'spawnTrees was looped: ' + [ i + 1 ] + ' times' );
-            var aCoords = randomLocation( -3, 33 /*, 5, 22*/ );
-            var bCoords = randomLocation( -3, 33 /*, 5, 22*/ );
-            var x = aCoords.x;
-            var y = randomLocation( 5, findY( aCoords.x ) ).x;
+            var aCoords = randomMinMax( -3, 33 );
+            var bCoords = randomMinMax( -3, 33 );
+            var x = aCoords;
+            var y = randomMinMax( 5, findY( aCoords ) );
 
             var node = document.getElementById( 'mtn-wrapper' );
             var myTrees = document.getElementById( 'my-icon' );
+
             var i1 = document.createElement( 'i' );
             var i2 = document.createElement( 'i' );
             var i3 = document.createElement( 'i' );
             var i4 = document.createElement( 'i' );
 
-            i1.style.border = '0.55em solid transparent';
-            i1.style.margin = '-0.55em 0 0 0';
-            i1.style.borderBottom = '0.55em solid green';
-            i1.style.left = (x + 1.1) + 'em';
-            i1.style.top = (y + 0.78) + 'em';
+            var newGrn = randomGrn();
+            console.log( 'newGrn: ', newGrn );
+            var newZ = Math.floor(Math.floor(10 - (100*y))/10);
+            var trunkZ = newZ - 1;
 
+
+            console.log(newZ);
+            console.log(trunkZ);
+            // little guy top \\
+            i1.style.zIndex = (newZ);
+            i1.style.border = '0.39em solid transparent';
+            i1.style.borderBottom = '0.39em solid ' + newGrn;
+            console.log( 'borderBottom: ', i1.style.borderBottom );
+            i1.style.left = ( x - 0.2 ) + 'em';
+            i1.style.bottom = ( y + 1.1 ) + 'em';
+
+            // mid branches \\
+            i2.style.zIndex = (newZ);
             i2.style.border = '0.55em solid transparent';
-            i2.style.marginTop = '-0.55em';
-            i2.style.borderBottom = '0.55em solid green';
-            i2.style.left = (x - 0.2) + 'em';
-            i2.style.top = (y - 0.47) + 'em';
+            i2.style.borderBottom = '0.55em solid ' + newGrn;
+            i2.style.left = ( x - 0.4 ) + 'em';
+            i2.style.bottom = ( y + 0.75 ) + 'em';
 
-            i3.style.border = '0.39em solid transparent';
-            i3.style.margin = '-0.39em 0 0 0';
-            i3.style.borderBottom = '0.39em solid green';
-            i3.style.left = (x + 1.185),'em';
-            i3.style.top = (y - 1.1),'em';
+            // base branches \\
+            i3.style.zIndex = (newZ);
+            i3.style.border = '0.55em solid transparent';
+            i3.style.borderBottom = '0.75em solid ' + newGrn;
+            i3.style.left = ( x - 0.4 ) + 'em';
+            i3.style.bottom = ( y + 0.3 ) + 'em';
 
+            // trunk bottom \\
+            i4.style.zIndex = (trunkZ);
             i4.style.border = 'none';
             i4.style.width = '.15em';
             i4.style.height = '0.31em';
+            i4.style.marginBottom = '0em';
             i4.style.backgroundColor = '#522200';
-            i4.style.left = '0.53em';
-            i4.style.top = '-0.2em';
+            i4.style.left = ( x ) + 'em';
+            i4.style.bottom = ( y ) + 'em';
 
             // node.appendChild( newDiv );
             node.appendChild( i1 );
@@ -408,35 +460,3 @@ angular.module( 'myApp' )
 // newDiv.style.bottom = y + 'em';
 // newDiv.style.background = 'red';
 // i1.style.width = '2em';
-
-angular.module('myApp')
-
-.controller('navigationController', ["$scope", "loginService", function($scope, loginService) {
-
-  $scope.logoutUser = function() {
-    loginService.logoutUser();
-  };
-
-}])
-
-angular.module('myApp')
-
-.directive('navigationDirective', function() {
-
-  return {
-    restrict: 'E',
-    templateUrl: './html/navigation/navigationTemplate.html',
-    link: function(scope, ele, attr) {
-      let profileMenu = $('#menu-navigation');
-
-      $('#profile-wrapper').click(function() {
-        profileMenu.toggle('expand')
-      })
-
-      profileMenu.click(function() {
-        profileMenu.toggle('expand');
-      })
-    }
-  }
-
-}) // end navigationDirective

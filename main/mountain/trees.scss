@@ -6,15 +6,15 @@
   top: 1em;
 }
 .spawnTreesBtn{
-  padding-top: 100px;
-  position: relative;
-  top: 30px;
+  padding-top: 0px;
+  position: absolute;
+  top: 350px;
 }
 .my-trees {
     position: relative;
 }
 i {
-  position: relative;
+  position: absolute;;
   display: inline-block;
   width: 0;
   height: 0;
@@ -22,9 +22,9 @@ i {
 
 }
 .my-trees > i {
-    border: 0.5526315789473684em solid transparent;
-    margin-top: -0.5526315789473684em;
-    border-bottom: 0.5526315789473684em solid green;
+    border: 0.55em solid transparent;
+    margin-top: -0.55em;
+    border-bottom: 0.55em solid green;
     left: 1.045em;
     top: 0.78em;
 }
