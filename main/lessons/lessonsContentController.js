@@ -4,7 +4,9 @@ angular.module('myApp')
 
   $scope.lessonInfo = (input) => {
     // lessonConten to return object?
-    let lessonContent = lessonsContentService.getLessonInfo(input);
+    let lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
+      console.log(lesson.data[0]);
+    })
     $scope.theTitle = lessonContent;
   }
 
