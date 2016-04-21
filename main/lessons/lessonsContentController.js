@@ -5,11 +5,8 @@ angular.module('myApp')
   $scope.lessonInfo = (input) => {
     // lessonConten to return object?
     let lessonContent = lessonsContentService.getLessonInfo(input);
-    console.log(lessonContent.questions);
+    // console.log(lessonContent.questions);
     $scope.testObject = lessonContent;
-    // $scope.theTitle = lessonContent.name;
-    // $scope.questions = lessonContent.questions;
-    // $scope.score = lessonContent.score;
 
     let testLength = lessonContent.questions.length,
         correctAnswers = [],
