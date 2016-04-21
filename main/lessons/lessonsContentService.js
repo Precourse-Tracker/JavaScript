@@ -2,7 +2,6 @@ angular.module('myApp')
 
 .service('lessonsContentService', function($http) {
 
-
   this.getLessonInfo = (input) => {
     return $http ({
       method: 'GET',

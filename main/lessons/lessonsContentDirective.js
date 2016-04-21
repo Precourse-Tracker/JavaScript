@@ -6,7 +6,8 @@ angular.module('myApp')
     controller: 'lessonsContentController',
     templateUrl: './html/lessons/lessonsContentTemplate.html',
     scope: {
-      title: '='
+      title: '=',
+      testObject: '='
     }
   }
 }) // end lessonsContentDirective
