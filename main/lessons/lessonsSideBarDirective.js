@@ -4,6 +4,7 @@ angular.module('myApp')
 
   return {
     restrict: 'E',
+    controller: 'lessonsContentController',
     templateUrl: './html/lessons/lessonsSideBarTemplate.html',
     link: function(scope, ele, attr) {
       $('.lesson-title').click(function() {
