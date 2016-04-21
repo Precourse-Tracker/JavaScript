@@ -16,6 +16,12 @@ angular.module('myApp')
       //   $('.lesson-title', this.parentNode).toggle('expand');
       // })
 
+      // $('.lesson-test').click(function() {
+      //   console.log(this);
+      //   console.log(this.parentNode);
+      //   console.log(this.parentNode.parentNode.parentNode.parentNode);
+      // })
+
     }
   }
 

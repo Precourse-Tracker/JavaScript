@@ -3,226 +3,212 @@ $darkBlue: #406BB2;
 /////////////////////////////
 // --- mountain styles --- //
 /////////////////////////////
+* {
+  outline: 1px solid red;
+}
 #mtn-wrapper {
   font-family: 'Lato';
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 80vw;
+  height: 80vh;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.my-icon {
+.my-little-man {
     position: relative;
+    left: -20em;
+    top: 1em;
+
 }
-.my-icon > i {
+.my-little-man:first-child {
     position: absolute;
     display: inline-block;
     width: 0;
     height: 0;
     line-height: 0;
-    border-top: 0.9230769230769231em solid #1142AA;
-    border-bottom: 0.9230769230769231em solid #1142AA;
-    border-left: 0.6923076923076923em solid #1142AA;
-    border-right: 0.6923076923076923em solid #1142AA;
-    border-radius: 0.6923076923076923em / 0.9230769230769231em;
-    left: 7.846153846153847em;
-    top: 3.230769230769231em;
+    border-top: 0.92em solid #e6d7aa;
+    border-bottom: 0.92em solid #e6d7aa;
+    border-left: 0.69em solid #e6d7aa;
+    border-right: 0.69em solid #e6d7aa;
+    border-radius: 0.69em / 0.92em;
 }
-.my-icon > i+i {
+// left shoulder
+.my-little-man i:nth-child(2) {
     position: absolute;
     display: inline-block;
     width: 0;
     height: 0;
     line-height: 0;
-    border: 0.9230769230769231em solid #1142AA;
+    border: 0.92em solid #1142AA;
     border-bottom: none;
     border-right: none;
-    border-top-left-radius: 0.9230769230769231em;
-    left: 7.153846153846154em;
-    top: 5.307692307692308em;
+    border-top-left-radius: 0.92em;
+    left: -1.26em;
+    top: 1.04em;
 }
-.my-icon > i+i+i {
+// right shoulder
+.my-little-man i:nth-child(3) {
     position: absolute;
     display: inline-block;
     width: 0;
     height: 0;
     line-height: 0;
-    border: 0.9230769230769231em solid #1142AA;
+    border: 0.92em solid #1142AA;
     border-bottom: none;
     border-left: none;
-    border-top-right-radius: 0.9230769230769231em;
-    left: 9em;
-    top: 5.307692307692308em;
+    border-top-right-radius: 0.92em;
+    left: .56em;
+    top: 1.04em;
 }
-.my-icon > i+i+i+i {
+.my-little-man i:nth-child(4) {
     position: absolute;
     display: inline-block;
     width: 0;
     height: 0;
     line-height: 0;
-    border: 0.8076923076923077em solid transparent;
-    border-right: 0.8076923076923077em solid #1142AA;
-    border-top: 0.8076923076923077em solid #1142AA;
-    left: 7.384615384615385em;
-    top: 6.230769230769231em;
+    border: 0.80em solid transparent;
+    border-right: 0.80em solid #1142AA;
+    border-top: 0.80em solid #1142AA;
+    left: -1.1em;
+    top: 1.9em;
 }
-.my-icon > i+i+i+i+i {
+.my-little-man i:nth-child(5) {
     position: absolute;
     display: inline-block;
     width: 0;
     height: 0;
     line-height: 0;
-    border: 0.8076923076923077em solid transparent;
-    border-left: 0.8076923076923077em solid #1142AA;
-    border-top: 0.8076923076923077em solid #1142AA;
-    left: 8.076923076923077em;
-    top: 6.230769230769231em;
+    border: 0.80em solid transparent;
+    border-left: 0.80em solid #1142AA;
+    border-top: 0.80em solid #1142AA;
+    left: -0.3em;
+    top: 1.9em;
 }
-.my-icon > i+i+i+i+i+i {
+.my-little-man i:nth-child(6) {
     position: absolute;
     display: inline-block;
-    width: 1.3846153846153846em;
-    height: 1.3846153846153846em;
+    width: 1.38em;
+    height: 1.38em;
     background-color: #1142AA;
-    left: 7.846153846153847em;
-    top: 6.6923076923076925em;
+    left: -0.6em;
+    top: 2em;
 }
-.my-icon > i+i+i+i+i+i+i {
+// chest
+.my-little-man i:nth-child(7) {
     position: absolute;
     display: inline-block;
-    width: 0.9230769230769231em;
-    height: 0.9230769230769231em;
+    width: 0.98em;
+    height: 0.98em;
     background-color: #1142AA;
-    left: 8.076923076923077em;
-    top: 5.307692307692308em;
+    left: -0.37em;
+    top: 1em;
 }
-.my-icon > i+i+i+i+i+i+i+i {
+.my-little-man i:nth-child(8) {
     position: absolute;
     display: inline-block;
-    width: 0.46153846153846156em;
-    height: 1.8461538461538463em;
-    background-color: #1142AA;
-    left: 7.153846153846154em;
-    top: 6.230769230769231em;
+    width: 0.46em;
+    height: 1.83em;
+    background-color: #e6d7aa;
+    left: -1.24em;
+    top: 1.9em;
 }
-.my-icon > i+i+i+i+i+i+i+i+i {
+.my-little-man i:nth-child(9) {
     position: absolute;
     display: inline-block;
-    width: 0.46153846153846156em;
-    height: 1.8461538461538463em;
-    background-color: #1142AA;
-    left: 9.461538461538462em;
-    top: 6.230769230769231em;
+    width: 0.46em;
+    height: 1.83em;
+    background-color: #e6d7aa;
+    left: 0.999em;
+    top: 1.8em;
 }
-.my-icon > i+i+i+i+i+i+i+i+i+i {
+.my-little-man i:nth-child(10) {
     position: absolute;
     display: inline-block;
-    width: 0.46153846153846156em;
-    height: 2.307692307692308em;
+    width: 0.46em;
+    height: 2.30em;
     background-color: #1142AA;
-    left: 7.846153846153847em;
-    top: 8.076923076923077em;
+    left: 0.33em;
+    top: 3em;
 }
-.my-icon > i+i+i+i+i+i+i+i+i+i+i {
+.my-little-man i:nth-child(11) {
     position: absolute;
     display: inline-block;
-    width: 0.46153846153846156em;
-    height: 2.307692307692308em;
+    width: 0.46em;
+    height: 2.30em;
     background-color: #1142AA;
-    left: 8.76923076923077em;
-    top: 8.076923076923077em;
+    left: -0.6em;
+    top: 3em;
 }
-.my-icon > i+i+i+i+i+i+i+i+i+i+i+i {
+.my-little-man i:nth-child(12) {
     position: absolute;
     display: inline-block;
     width: 0;
     height: 0;
     line-height: 0;
-    border: 0.23076923076923078em solid transparent;
-    border-top: 0.23076923076923078em solid #1142AA;
-    left: 8.307692307692308em;
-    top: 5.0769230769230775em;
+    border: 0.46em solid transparent;
+    border-top: 0.46em solid #e6d7aa;
+    left: -.4em;
+    top: .65em;
 }
-.my-icon > i+i+i+i+i+i+i+i+i+i+i+i+i {
+.my-little-man i:nth-child(13) {
     position: absolute;
     display: inline-block;
     width: 0;
     height: 0;
     line-height: 0;
-    border: 0.23076923076923078em solid transparent;
-    margin-top: -0.23076923076923078em;
-    border-bottom: 0.23076923076923078em solid #1142AA;
-    left: 8.307692307692308em;
-    top: 5.0769230769230775em;
+    border: 0.46em solid transparent;
+    margin-top: -0.46em;
+    border-bottom: 0.46em solid #e6d7aa;
+    left: -.4em;
+    top: .65em;
 }
-.my-icon > i+i+i+i+i+i+i+i+i+i+i+i+i+i {
+.my-little-man i:nth-child(14) {
     position: absolute;
     display: inline-block;
     width: 0;
     height: 0;
     line-height: 0;
-    border: 0.46153846153846156em solid transparent;
-    border-top: 0.46153846153846156em solid #1142AA;
-    left: 8.076923076923077em;
-    top: 4.846153846153847em;
-}
-.my-icon > i+i+i+i+i+i+i+i+i+i+i+i+i+i+i {
-    position: absolute;
-    display: inline-block;
-    width: 0;
-    height: 0;
-    line-height: 0;
-    border: 0.46153846153846156em solid transparent;
-    margin-top: -0.46153846153846156em;
-    border-bottom: 0.46153846153846156em solid #1142AA;
-    left: 8.076923076923077em;
-    top: 4.846153846153847em;
-}
-.my-icon > i+i+i+i+i+i+i+i+i+i+i+i+i+i+i+i {
-    position: absolute;
-    display: inline-block;
-    width: 0;
-    height: 0;
-    line-height: 0;
-    border: 0.8076923076923077em solid #1142AA;
+    border: 0.80em solid #335eb8;
     border-bottom: none;
-    border-top-right-radius: 0.8076923076923077em;
-    border-top-left-radius: 0.8076923076923077em;
-    left: 7.846153846153847em;
-    top: 3.230769230769231em;
+    border-top-right-radius: 0.80em;
+    border-top-left-radius: 0.80em;
+    left: -0.7em;
+    top: -1em;
 }
-.my-icon > i+i+i+i+i+i+i+i+i+i+i+i+i+i+i+i+i {
+.my-little-man i:nth-child(15) {
     position: absolute;
     display: inline-block;
-    width: 0.9230769230769231em;
-    height: 0.23076923076923078em;
-    background-color: #1142AA;
-    left: 9.230769230769232em;
-    top: 3.6923076923076925em;
+    width: 0.92em;
+    height: 0.23em;
+    background-color: #335eb8;
+    left: .7em;
+    top: -.4em;
 }
-.my-icon > i+i+i+i+i+i+i+i+i+i+i+i+i+i+i+i+i+i {
+.my-little-man i:nth-child(16) {
     position: absolute;
     display: inline-block;
     width: 0;
     height: 0;
     line-height: 0;
-    border: 1.0384615384615385em solid #1142AA;
-    border-bottom: 1.0384615384615385em solid #1142AA;
-    left: 0.6923076923076923em;
+    border: 1.04em solid #1142AA;
+    border-bottom: 1.04em solid #1142AA;
+    left: 0.69em;
     top: 0em;
 }
-.my-icon > i+i+i+i+i+i+i+i+i+i+i+i+i+i+i+i+i+i+i {
+.my-little-man i:nth-child(17) {
     position: absolute;
     display: inline-block;
     width: 0;
     height: 0;
     line-height: 0;
-    border: 0.9230769230769231em solid #1142AA;
+    border: 0.92em solid #1142AA;
     border-bottom: none;
     border-right: none;
-    border-top-left-radius: 0.9230769230769231em;
+    border-top-left-radius: 0.92em;
     left: 0em;
-    top: 3.6923076923076925em;
+    top: 3.69em;
 }

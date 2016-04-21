@@ -5,4 +5,5 @@ angular.module( 'myApp' )
       loginService.logoutUser();
     };
 
+
 } ] );
