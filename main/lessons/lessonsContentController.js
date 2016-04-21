@@ -33,13 +33,5 @@ angular.module('myApp')
     })
   }
 
-/*
-q in questions
-  q.correctAnswer
-  q.multipleChoice
-    q in q.multipleChoice
-  q.question
-lessoncontent.score
-*/
 
 }) // end lessonsContentController
