@@ -4,20 +4,21 @@ angular.module('myApp')
 
   $scope.lessonInfo = (input) => {
     let lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
-      console.log(lesson.data[0]);
+        $scope.testObject = lesson.data[0];
+        $scope.theTitle = $scope.testObject.name;
     })
-    // $scope.theTitle = lessonContent;
-    $scope.testObject = lessonContent;
 
-    let testLength = lessonContent.questions.length,
-        correctAnswers = [],
-        userAnswers = [];
 
-    {
-      lessonContent.questions.forEach(function(entry) {
-        correctAnswers.push(entry.correctAnswer);
-      })
-    }
+
+    // let testLength = lessonContent.questions.length,
+    //     correctAnswers = [],
+    //     userAnswers = [];
+    //
+    // {
+    //   lessonContent.questions.forEach(function(entry) {
+    //     correctAnswers.push(entry.correctAnswer);
+    //   })
+    // }
     // console.log(correctAnswers);
 
     // testing button thingy
