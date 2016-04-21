@@ -1,3 +1,10 @@
+$darkBlue: #406BB2;
+
+@mixin centerLF {
+  left: 50%;
+  transform: translate(-50%);
+}
+
 ////////////////////////////////
 // ----- lessons styles ----- //
 ////////////////////////////////
@@ -58,4 +65,17 @@
       margin: 10px 10px 15px auto;
     }
   }
+}
+
+#welcome-page {
+  width: 500px;
+  height: 300px;
+  color: white;
+  background: $darkBlue;
+  margin-top: 25px;
+  position: relative;
+  @include centerLF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
