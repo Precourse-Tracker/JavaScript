@@ -34,6 +34,64 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
 
 angular.module('myApp')
 
+.directive('unitTestMenuDirective', function() {
+
+  return {
+    restrict: 'AE',
+    // templateUrl: './html/dashboard/dashboardTopTemplate.html',
+    link: function(scope, ele, attr) {
+
+      $('#dashboard-unit-tests').click(function() {
+        // console.log(this);
+        $('#unit-test-menu').toggle('expand');
+      })
+
+      $('#unit-test-menu').click(function() {
+        $('#unit-test-menu').toggle('expand');
+      })
+
+      // unit test graph changes for unit views and cohort compare
+      $('#js-graph').click(function() {
+        $('#js-graph-div').css('z-index', 2);
+        $('#js-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#html-graph').click(function() {
+        $('#html-graph-div').css('z-index', 2);
+        $('#html-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#css-graph').click(function() {
+        $('#css-graph-div').css('z-index', 2);
+        $('#css-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#git-graph').click(function() {
+        $('#git-graph-div').css('z-index', 2);
+        $('#git-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#cohort-compare').click(function() {
+        // console.log(this);
+        $('#cohort-graph-div').css('z-index', 2);
+        $('#cohort-graph-div').siblings().css('z-index', 0);
+      })
+
+    }
+  }
+
+})  // end unitTestMenuDirective
+
+
+/*
+
+      $('#profile-wrapper').click(function() {
+        profileMenu.toggle('expand')
+      })
+*/
+
+angular.module('myApp')
+
 .controller('assessmentController', ["$scope", "assessmentService", "workerService", function($scope, assessmentService, workerService) {
 
   assessmentService.getAssessment().then(function(response) {
@@ -135,285 +193,6 @@ angular.module('myApp').service('workerService', ["Webworker", function(Webworke
     return result;
   }
 }])
-
-angular.module('myApp')
-
-.directive('unitTestMenuDirective', function() {
-
-  return {
-    restrict: 'AE',
-    // templateUrl: './html/dashboard/dashboardTopTemplate.html',
-    link: function(scope, ele, attr) {
-
-      $('#dashboard-unit-tests').click(function() {
-        // console.log(this);
-        $('#unit-test-menu').toggle('expand');
-      })
-
-      $('#unit-test-menu').click(function() {
-        $('#unit-test-menu').toggle('expand');
-      })
-
-      // unit test graph changes for unit views and cohort compare
-      $('#js-graph').click(function() {
-        $('#js-graph-div').css('z-index', 2);
-        $('#js-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#html-graph').click(function() {
-        $('#html-graph-div').css('z-index', 2);
-        $('#html-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#css-graph').click(function() {
-        $('#css-graph-div').css('z-index', 2);
-        $('#css-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#git-graph').click(function() {
-        $('#git-graph-div').css('z-index', 2);
-        $('#git-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#cohort-compare').click(function() {
-        // console.log(this);
-        $('#cohort-graph-div').css('z-index', 2);
-        $('#cohort-graph-div').siblings().css('z-index', 0);
-      })
-
-    }
-  }
-
-})  // end unitTestMenuDirective
-
-
-/*
-
-      $('#profile-wrapper').click(function() {
-        profileMenu.toggle('expand')
-      })
-*/
-
-angular.module('myApp')
-
-.controller('lessonsContentController', ["$scope", "lessonsContentService", function($scope, lessonsContentService) {
-
-  $scope.lessonInfo = (input) => {
-    // lessonConten to return object?
-<<<<<<< HEAD
-    let lessonContent = lessonsContentService.getLessonInfo(input);
-    // console.log(lessonContent.questions);
-    $scope.testObject = lessonContent;
-
-    let testLength = lessonContent.questions.length,
-        correctAnswers = [],
-        userAnswers = [];
-
-    {
-      lessonContent.questions.forEach(function(entry) {
-        correctAnswers.push(entry.correctAnswer);
-      })
-    }
-    // console.log(correctAnswers);
-
-    // testing button thingy
-    $('button').click(function() {
-      let selected = this;
-      $(selected).addClass('.selected');
-      $(selected).siblings().removeClass('.selected');
-
-      // console.log(selected);
-      // console.log($(selected).siblings('button'));
-      // console.log(selected.value);
-      // console.log(selected.name);
-
-
-    })
-=======
-    let lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
-      console.log(lesson.data[0]);
-    })
-    $scope.theTitle = lessonContent;
->>>>>>> master
-  }
-
-/*
-q in questions
-  q.correctAnswer
-  q.multipleChoice
-    q in q.multipleChoice
-  q.question
-lessoncontent.score
-*/
-
-}]) // end lessonsContentController
-
-angular.module('myApp')
-
-.directive('lessonsContentDirective', function() {
-  return {
-    restrict: 'E',
-    controller: 'lessonsContentController',
-    templateUrl: './html/lessons/lessonsContentTemplate.html',
-    scope: {
-      title: '=',
-      testObject: '='
-    }
-  }
-}) // end lessonsContentDirective
-
-angular.module('myApp')
-
-.service('lessonsContentService', ["$http", function($http) {
-
-
-  let dummyData = {
-    "name": "Data Types",
-    "questions": [
-      {
-        "question": "Which of the following is an acceptable number in JavaScript",
-        "multipleChoice": ["17", "1,055.28", "Neither A or B", "Both A and B"],
-        "correctAnswer": "Both A and B"
-      },
-      {
-        "question": "JavaScript will accept a negative number as a number",
-        "multipleChoice": ["True", "False"],
-        "correctAnswer": "True"
-      },
-      {
-        "question": "You can only use double quotes for Strings, single quotes are not accepted.",
-        "multipleChoice": ["True", "False"],
-        "correctAnswer": "False"
-      }
-    ],
-    "score": 0
-  };
-
-  this.getLessonInfo = (input) => {
-<<<<<<< HEAD
-    switch (input) {
-      case 'js-lesson-data-types':
-        return dummyData;
-        // break;
-      case 'js-lesson-variables':
-        return jsVariables;
-        // break;
-      case 'js-lesson-strings-cont':
-        return jsStrings;
-        // break;
-      case 'js-lesson-conditional':
-        return jsConditional;
-        // break;
-      case 'js-lesson-arrays':
-        return jsArrays;
-        // break;
-      case 'js-lesson-objects':
-        return jsObjects;
-        // break;
-      case 'js-lesson-iterators':
-        return jsIterators;
-        // break;
-      case 'js-lesson-logical':
-        return jsLogical;
-        // break;
-      case 'js-lesson-functions':
-        return jsFunctions;
-        // break;
-      default:
-        break;
-    }
-=======
-    return $http ({
-      method: 'GET',
-      url: '/api/lessons/js/' + input
-    })
->>>>>>> master
-  }
-
-
-}])  // end lessonsContentService
-
-angular.module('myApp')
-
-.directive('lessonsSideBarDirective', ["$state", function($state) {
-
-  return {
-    restrict: 'E',
-    controller: 'lessonsContentController',
-    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
-    link: function(scope, ele, attr) {
-      $('.lesson-title').click(function() {
-        // console.log(this.parentNode);
-        $('.lesson-sections', this.parentNode).toggle('expand');
-        $('.lesson-tests-wrapper').css('display', 'none');
-      })
-
-      $('.lesson-test').click(function() {
-        // let selectedParent = this.parentNode.parentNode.parentNode.parentNode;
-        // let testNavigation = function() {
-        //   let temp = selectedParent.id;
-          // console.log(temp);
-          $('.lesson-tests-wrapper').css('display', 'block');
-
-          // switch (temp) {
-          //   case 'js-lesson-data-types':
-          //     $('.js-lesson-data-types').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-data-types').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   case 'js-lesson-variables':
-          //     $('.js-lesson-variables').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-variables').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   case 'js-lesson-strings-cont':
-          //     $('.js-lesson-strings-cont').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-strings-cont').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   case 'js-lesson-conditional':
-          //     $('.js-lesson-conditional').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-conditional').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   case 'js-lesson-arrays':
-          //     $('.js-lesson-arrays').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-arrays').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   case 'js-lesson-objects':
-          //     $('.js-lesson-objects').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-objects').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   case 'js-lesson-iterators':
-          //     $('.js-lesson-iterators').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-iterators').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   case 'js-lesson-logical':
-          //     $('.js-lesson-logical').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-logical').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   case 'js-lesson-functions':
-          //     $('.js-lesson-functions').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-functions').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   default:
-          //     break;
-          // }
-        // } // end testNavigation
-
-        $('html, body').animate({ scrollTop: 0 }, 300);
-        // if ($state.name !== 'lessonTests') {
-        //   $state.go('lessonTests');
-        //   setTimeout(function() {
-        //     testNavigation();
-        //   }, 100)
-        // } else {
-        //   testNavigation();
-        // }
-
-        // testNavigation();
-      }) // end lesson-test click
-
-    } // end of directive link
-  }
-
-}])  // end lessonsSideBarDirective
 
 angular.module('myApp')
 
@@ -530,6 +309,98 @@ angular.module('myApp')
 //
 //
 // }) // end lessonTestsService
+
+angular.module('myApp')
+
+.controller('lessonsContentController', ["$scope", "lessonsContentService", function($scope, lessonsContentService) {
+
+  $scope.lessonInfo = (input) => {
+    let lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
+        $scope.testObject = lesson.data[0];
+        $scope.theTitle = $scope.testObject.name;
+    })
+
+
+
+    // let testLength = lessonContent.questions.length,
+    //     correctAnswers = [],
+    //     userAnswers = [];
+    //
+    // {
+    //   lessonContent.questions.forEach(function(entry) {
+    //     correctAnswers.push(entry.correctAnswer);
+    //   })
+    // }
+    // console.log(correctAnswers);
+
+    // testing button thingy
+    $('button').click(function() {
+      let selected = this;
+      $(selected).addClass('.selected');
+      $(selected).siblings().removeClass('.selected');
+
+      // console.log(selected);
+      // console.log($(selected).siblings('button'));
+      // console.log(selected.value);
+      // console.log(selected.name);
+    })
+  }
+
+
+}]) // end lessonsContentController
+
+angular.module('myApp')
+
+.directive('lessonsContentDirective', function() {
+  return {
+    restrict: 'E',
+    controller: 'lessonsContentController',
+    templateUrl: './html/lessons/lessonsContentTemplate.html',
+    scope: {
+      title: '=',
+      testObject: '='
+    }
+  }
+}) // end lessonsContentDirective
+
+angular.module('myApp')
+
+.service('lessonsContentService', ["$http", function($http) {
+
+  this.getLessonInfo = (input) => {
+    return $http ({
+      method: 'GET',
+      url: '/api/lessons/js/' + input
+    })
+  }
+
+
+}])  // end lessonsContentService
+
+angular.module('myApp')
+
+.directive('lessonsSideBarDirective', ["$state", function($state) {
+
+  return {
+    restrict: 'E',
+    controller: 'lessonsContentController',
+    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
+    link: function(scope, ele, attr) {
+      $('.lesson-title').click(function() {
+        // console.log(this.parentNode);
+        $('.lesson-sections', this.parentNode).toggle('expand');
+        $('.lesson-tests-wrapper').css('display', 'none');
+      })
+
+      $('.lesson-test').click(function() {
+        $('.lesson-tests-wrapper').css('display', 'block');
+        $('html, body').animate({ scrollTop: 0 }, 300);
+      }) // end lesson-test click
+
+    } // end of directive link
+  }
+
+}])  // end lessonsSideBarDirective
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
