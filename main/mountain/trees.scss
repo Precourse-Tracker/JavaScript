@@ -10,10 +10,10 @@
   position: relative;
   top: 30px;
 }
-.my-icon {
+.my-trees {
     position: relative;
 }
-.my-icon i{
+i {
   position: relative;
   display: inline-block;
   width: 0;
@@ -21,7 +21,7 @@
   line-height: 0;
 
 }
-.my-icon > i {
+.my-trees > i {
     border: 0.5526315789473684em solid transparent;
     margin-top: -0.5526315789473684em;
     border-bottom: 0.5526315789473684em solid green;
@@ -29,7 +29,7 @@
     top: 0.78em;
 }
 
-.my-icon > i+i {
+.my-trees > i+i {
     border: 0.5526315789473684em solid transparent;
     margin-top: -0.5526315789473684em;
     border-bottom: 0.5526315789473684em solid green;
@@ -37,7 +37,7 @@
     top: 0.47em;
 }
 
-.my-icon > i+i+i {
+.my-trees > i+i+i {
     border: 0.39473684210526316em solid transparent;
     margin-top: -0.39473684210526316em;
     border-bottom: 0.39473684210526316em solid green;
@@ -45,7 +45,7 @@
     top: -1.1em;
 }
 
-.my-icon > i+i+i+i {
+.my-trees > i+i+i+i {
     border-style: none;
     width: 0.15em;
     height: 0.31em;
@@ -54,7 +54,7 @@
     top: -0.2em;
 }
 
-.my-icon > i+i+i+i+i {
+.my-trees > i+i+i+i+i {
     border: 0.23684210526315788em solid transparent;
     margin-top: -0.23684210526315788em;
     border-bottom: 0.23684210526315788em solid green;
@@ -62,7 +62,7 @@
     top: 0.9473684210526315em;
 }
 
-.my-icon > i+i+i+i+i+i {
+.my-trees > i+i+i+i+i+i {
     border: 0.15789473684210525em solid transparent;
     margin-top: -0.15789473684210525em;
     border-bottom: 0.15789473684210525em solid green;
@@ -70,7 +70,7 @@
     top: 0em;
 }
 
-.my-icon > i+i+i+i+i+i+i {
+.my-trees > i+i+i+i+i+i+i {
     border: 0.39473684210526316em solid transparent;
     margin-top: -0.39473684210526316em;
     border-bottom: 0.39473684210526316em solid green;
@@ -78,14 +78,14 @@
     top: 1.1052631578947367em;
 }
 
-.my-icon > i+i+i+i+i+i+i+i {
+.my-trees > i+i+i+i+i+i+i+i {
     border: 0.39473684210526316em solid transparent;
     margin-top: -0.39473684210526316em;
     border-bottom: 0.39473684210526316em solid green;
     left: 2.2105263157894735em;
     top: 1.4210526315789473em;
 }
-.my-icon > i+i+i+i+i+i+i+i+i {
+.my-trees > i+i+i+i+i+i+i+i+i {
     position: relative;
     display: inline-block;
     width: 0.15789473684210525em;
