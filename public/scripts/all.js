@@ -34,64 +34,6 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
 
 angular.module('myApp')
 
-.directive('unitTestMenuDirective', function() {
-
-  return {
-    restrict: 'AE',
-    // templateUrl: './html/dashboard/dashboardTopTemplate.html',
-    link: function(scope, ele, attr) {
-
-      $('#dashboard-unit-tests').click(function() {
-        // console.log(this);
-        $('#unit-test-menu').toggle('expand');
-      })
-
-      $('#unit-test-menu').click(function() {
-        $('#unit-test-menu').toggle('expand');
-      })
-
-      // unit test graph changes for unit views and cohort compare
-      $('#js-graph').click(function() {
-        $('#js-graph-div').css('z-index', 2);
-        $('#js-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#html-graph').click(function() {
-        $('#html-graph-div').css('z-index', 2);
-        $('#html-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#css-graph').click(function() {
-        $('#css-graph-div').css('z-index', 2);
-        $('#css-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#git-graph').click(function() {
-        $('#git-graph-div').css('z-index', 2);
-        $('#git-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#cohort-compare').click(function() {
-        // console.log(this);
-        $('#cohort-graph-div').css('z-index', 2);
-        $('#cohort-graph-div').siblings().css('z-index', 0);
-      })
-
-    }
-  }
-
-})  // end unitTestMenuDirective
-
-
-/*
-
-      $('#profile-wrapper').click(function() {
-        profileMenu.toggle('expand')
-      })
-*/
-
-angular.module('myApp')
-
 .controller('assessmentController', ["$scope", "assessmentService", "workerService", function($scope, assessmentService, workerService) {
 
   assessmentService.getAssessment().then(function(response) {
@@ -196,119 +138,61 @@ angular.module('myApp').service('workerService', ["Webworker", function(Webworke
 
 angular.module('myApp')
 
-.controller('lessonTestsController', ["$scope", function($scope) {
-
-  // $scope.test = 'test on ctrl';
-  // $scope.blob = 'blob on ctrl';
-
-  $scope.functionsChoices = [null];
-  $scope.functionsCorrect = [
-    null, // initial null val
-    'a',  // q1
-    'b',  // q2
-    'a',  // q3
-    'c'   //q4
-  ]
-
-  $scope.q1 = (input) => {
-    $scope.functionsChoices[1] = input;
-    // console.log('q1 choice is ' + input);
-    console.log($scope.functionsChoices);
-  }
-
-  $scope.q2 = (input) => {
-    $scope.functionsChoices[2] = input;
-    // console.log('q2 choice is ' + input);
-    console.log($scope.functionsChoices);
-  }
-
-  $scope.q3 = (input) => {
-    $scope.functionsChoices[3] = input;
-    console.log($scope.functionsChoices);
-  }
-
-  $scope.q4 = (input) => {
-    $scope.functionsChoices[4] = input;
-    console.log($scope.functionsChoices);
-  }
-
-  $scope.gradeTest = () => {
-    let incorrect = null;
-    let correct = -1;
-    let finalScore = '';
-    let numQuestions = $scope.functionsCorrect.length - 1;
-    for (var i = 0; i < numQuestions + 1; i++) {
-      if ($scope.functionsChoices[i] == $scope.functionsCorrect[i]) {
-        correct++;
-      }
-    }
-    finalScore = correct / numQuestions * 100;
-    $scope.testScore = finalScore + '%';
-    if (finalScore <= 60) {
-      $scope.message = 'Good attempt! Please review the content and try again.';
-    } else if (finalScore <= 85) {
-      $scope.message = 'Nice job!  You\'re getter there!'
-    } else if (finalScore <= 99) {
-      $scope.message = 'Great job! You\'re close to 100%!';
-    } else if (finalScore == 100) {
-      $scope.message = 'Awesome!!  You got a perfect score!!';
-    }
-    $('html, body').animate({ scrollTop: 0 }, 300);
-  }
-
-  $scope.resetTest = () => {
-    $scope.functionsChoices = [];
-    $('html, body').animate({ scrollTop: 0 }, 300);
-  }
-
-
-}])  // end lessonTestsController
-
-angular.module('myApp')
-
-.directive('lessonTestsDirective', function() {
+.directive('unitTestMenuDirective', function() {
 
   return {
-    restrict: 'A',
+    restrict: 'AE',
+    // templateUrl: './html/dashboard/dashboardTopTemplate.html',
     link: function(scope, ele, attr) {
 
-      $('.grade-test').click(function() {
-        $('.final-score').css({
-          'display': 'flex',
-          'flex-direction': 'column'
-        });
+      $('#dashboard-unit-tests').click(function() {
+        // console.log(this);
+        $('#unit-test-menu').toggle('expand');
       })
-      $('.reset-test').click(function() {
-        $('.final-score').css('display', 'none');
+
+      $('#unit-test-menu').click(function() {
+        $('#unit-test-menu').toggle('expand');
+      })
+
+      // unit test graph changes for unit views and cohort compare
+      $('#js-graph').click(function() {
+        $('#js-graph-div').css('z-index', 2);
+        $('#js-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#html-graph').click(function() {
+        $('#html-graph-div').css('z-index', 2);
+        $('#html-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#css-graph').click(function() {
+        $('#css-graph-div').css('z-index', 2);
+        $('#css-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#git-graph').click(function() {
+        $('#git-graph-div').css('z-index', 2);
+        $('#git-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#cohort-compare').click(function() {
+        // console.log(this);
+        $('#cohort-graph-div').css('z-index', 2);
+        $('#cohort-graph-div').siblings().css('z-index', 0);
       })
 
     }
   }
 
-})  // end lessonTestsDirective
+})  // end unitTestMenuDirective
 
-// angular.module('myApp')
-//
-// .service('lessonTestsService', function($http) {
-//
-//   this.lessonTest = '';
-//
-//   this.setLessonTest = function(lesson) {
-//     lessonTest = lesson;
-//   }
-//
-//   this.getLessonTest = function() {
-//     // return lessonTest;
-//     // console.log(lessonTest);
-//     return $http({
-//       method: 'GET',
-//       url: './html/lessonTests/lessonFiles/' + lessonTest + '.html',
-//       type: 'html'
-//     })
-//   }
-//
-//
-// }) // end lessonTestsService
+
+/*
+
+      $('#profile-wrapper').click(function() {
+        profileMenu.toggle('expand')
+      })
+*/
 
 angular.module('myApp')
 
@@ -433,6 +317,122 @@ angular.module('myApp')
   }
 
 }])  // end lessonsSideBarDirective
+
+angular.module('myApp')
+
+.controller('lessonTestsController', ["$scope", function($scope) {
+
+  // $scope.test = 'test on ctrl';
+  // $scope.blob = 'blob on ctrl';
+
+  $scope.functionsChoices = [null];
+  $scope.functionsCorrect = [
+    null, // initial null val
+    'a',  // q1
+    'b',  // q2
+    'a',  // q3
+    'c'   //q4
+  ]
+
+  $scope.q1 = (input) => {
+    $scope.functionsChoices[1] = input;
+    // console.log('q1 choice is ' + input);
+    console.log($scope.functionsChoices);
+  }
+
+  $scope.q2 = (input) => {
+    $scope.functionsChoices[2] = input;
+    // console.log('q2 choice is ' + input);
+    console.log($scope.functionsChoices);
+  }
+
+  $scope.q3 = (input) => {
+    $scope.functionsChoices[3] = input;
+    console.log($scope.functionsChoices);
+  }
+
+  $scope.q4 = (input) => {
+    $scope.functionsChoices[4] = input;
+    console.log($scope.functionsChoices);
+  }
+
+  $scope.gradeTest = () => {
+    let incorrect = null;
+    let correct = -1;
+    let finalScore = '';
+    let numQuestions = $scope.functionsCorrect.length - 1;
+    for (var i = 0; i < numQuestions + 1; i++) {
+      if ($scope.functionsChoices[i] == $scope.functionsCorrect[i]) {
+        correct++;
+      }
+    }
+    finalScore = correct / numQuestions * 100;
+    $scope.testScore = finalScore + '%';
+    if (finalScore <= 60) {
+      $scope.message = 'Good attempt! Please review the content and try again.';
+    } else if (finalScore <= 85) {
+      $scope.message = 'Nice job!  You\'re getter there!'
+    } else if (finalScore <= 99) {
+      $scope.message = 'Great job! You\'re close to 100%!';
+    } else if (finalScore == 100) {
+      $scope.message = 'Awesome!!  You got a perfect score!!';
+    }
+    $('html, body').animate({ scrollTop: 0 }, 300);
+  }
+
+  $scope.resetTest = () => {
+    $scope.functionsChoices = [];
+    $('html, body').animate({ scrollTop: 0 }, 300);
+  }
+
+
+}])  // end lessonTestsController
+
+angular.module('myApp')
+
+.directive('lessonTestsDirective', function() {
+
+  return {
+    restrict: 'A',
+    link: function(scope, ele, attr) {
+
+      $('.grade-test').click(function() {
+        $('.final-score').css({
+          'display': 'flex',
+          'flex-direction': 'column'
+        });
+      })
+      $('.reset-test').click(function() {
+        $('.final-score').css('display', 'none');
+      })
+
+    }
+  }
+
+})  // end lessonTestsDirective
+
+// angular.module('myApp')
+//
+// .service('lessonTestsService', function($http) {
+//
+//   this.lessonTest = '';
+//
+//   this.setLessonTest = function(lesson) {
+//     lessonTest = lesson;
+//   }
+//
+//   this.getLessonTest = function() {
+//     // return lessonTest;
+//     // console.log(lessonTest);
+//     return $http({
+//       method: 'GET',
+//       url: './html/lessonTests/lessonFiles/' + lessonTest + '.html',
+//       type: 'html'
+//     })
+//   }
+//
+//
+// }) // end lessonTestsService
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
