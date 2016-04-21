@@ -117,6 +117,7 @@ a {
     left: 50%;
     transform: translate(-50%, -50%); }
 
+
 #home-wrapper {
   font-family: 'Lato';
   position: absolute;
@@ -141,20 +142,6 @@ a {
     position: absolute;
     top: 50%;
     transform: translate(-50%); }
-
-.home-bottom {
-  width: 150px;
-  height: 70px;
-  font-weight: bold;
-  text-align: center;
-  color: #FFF;
-  background: #406BB2;
-  border-radius: 5px;
-  display: flex;
-  align-items: center; }
-  .home-bottom span {
-    margin: 20px; }
-
 
 #side-bar-placeholder {
   width: 225px;
@@ -260,6 +247,56 @@ a {
     transform: translate(-50%, -50%); }
     .lessons-practice form input {
       margin: 10px 10px 15px auto; }
+
+.lessonTests {
+  width: calc(100% - 225px);
+  position: relative;
+  left: 50%;
+  transform: translate(-50%); }
+  .lessonTests .lessonTests > h2, .lessonTests .lessonTests > div {
+    position: absolute; }
+  .lessonTests h2 {
+    text-align: center;
+    color: #406BB2; }
+  .lessonTests .multiple-choice-wrapper {
+    display: flex;
+    justify-content: center; }
+  .lessonTests .test-question {
+    line-height: 3em; }
+  .lessonTests .quiz-options {
+    text-align: center; }
+  .lessonTests button {
+    background-color: #ebebeb;
+    border: #fff 1px solid;
+    color: #406BB2;
+    width: 21.775em;
+    height: 6em;
+    transition: 0.3s;
+    text-align: center;
+    font-size: 1em;
+    font-family: 'lato';
+    border: none;
+    border-radius: 0;
+    line-height: 2rem;
+    padding: 0 1rem;
+    text-align: center;
+    position: relative;
+    margin: 2px auto; }
+  .lessonTests button:hover, .lessonTests button:active, .lessonTests button:focus {
+    background-color: #8FB9FF;
+    color: #fff;
+    cursor: pointer;
+    outline: 0; }
+
+.lesson-tests-wrapper {
+  width: 500px;
+  height: auto;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  margin-top: 25px;
+  margin-bottom: 25px;
+  display: block; }
 
 #login-section body {
   height: 100%;
@@ -388,55 +425,53 @@ a {
 #login-section .expand {
   display: block !important; }
 
-.lessonTests {
-  width: calc(100% - 225px);
-  position: relative;
-  left: 50%;
-  transform: translate(-50%); }
-  .lessonTests .lessonTests > h2, .lessonTests .lessonTests > div {
-    position: absolute; }
-  .lessonTests h2 {
-    text-align: center;
-    color: #406BB2; }
-  .lessonTests .multiple-choice-wrapper {
-    display: flex;
-    justify-content: center; }
-  .lessonTests .test-question {
-    line-height: 3em; }
-  .lessonTests .quiz-options {
-    text-align: center; }
-  .lessonTests button {
-    background-color: #ebebeb;
-    border: #fff 1px solid;
-    color: #406BB2;
-    width: 21.775em;
-    height: 6em;
-    transition: 0.3s;
-    text-align: center;
-    font-size: 1em;
-    font-family: 'lato';
-    border: none;
-    border-radius: 0;
-    line-height: 2rem;
-    padding: 0 1rem;
-    text-align: center;
-    position: relative;
-    margin: 2px auto; }
-  .lessonTests button:hover, .lessonTests button:active, .lessonTests button:focus {
-    background-color: #8FB9FF;
-    color: #fff;
-    cursor: pointer;
-    outline: 0; }
+#navigation-placeholder {
+  width: 100vw;
+  height: 8.25vh;
+  position: relative; }
 
-.lesson-tests-wrapper {
-  width: 500px;
+#navigation-bar {
+  width: 100vw;
+  height: 8.25vh;
+  padding: 15px;
+  font-family: 'Lato';
+  font-weight: bold;
+  color: #FFF;
+  background: #8FB9FF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 1; }
+
+#profile-wrapper {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+#menu-navigation {
   height: auto;
-  position: relative;
-  left: 50%;
-  transform: translate(-50%);
-  margin-top: 25px;
-  margin-bottom: 25px;
-  display: block; }
+  font-family: 'Quicksand';
+  background: white;
+  border-left: 1px solid grey;
+  border-bottom: 1px solid grey;
+  display: none;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  z-index: 9; }
+  #menu-navigation ul {
+    padding-right: 25px; }
+  #menu-navigation li {
+    color: #406BB2;
+    line-height: 35px;
+    list-style: none; }
 
 .climber {
   position: relative; }
@@ -555,8 +590,7 @@ a {
   position: absolute;
   width: 0;
   height: 0;
-  left: calc(50vw - 20em);
-  top: calc(50vw - 20em);
+  left: calc(40vw - 20em);
   border-left: 20em solid transparent;
   border-right: 20em solid transparent;
   border-bottom: 21em solid #FFE3A8;
@@ -569,17 +603,33 @@ a {
     top: 50%;
     transform: translate(-50%); }
 
+.home-bottom {
+  width: 150px;
+  height: 70px;
+  position: relative;
+  top: 385px;
+  left: 0;
+  font-weight: bold;
+  text-align: center;
+  color: #FFF;
+  background: #406BB2;
+  border-radius: 5px;
+  display: flex;
+  align-items: center; }
+  .home-bottom span {
+    margin: 20px; }
+
+.spawnTreesBtn {
+  padding-top: 0px;
+  position: absolute;
+  top: 40px; }
+
 #trees {
   width: 2.4em;
   height: 0px;
   position: relative;
   left: 0em;
   top: 1em; }
-
-.spawnTreesBtn {
-  padding-top: 0px;
-  position: absolute;
-  top: 350px; }
 
 .my-trees {
   position: relative; }
@@ -656,51 +706,3 @@ i {
   background-color: green;
   left: 2.526315789473684em;
   top: 1.894736842105263em; }
-
-#navigation-placeholder {
-  width: 100vw;
-  height: 8.25vh;
-  position: relative; }
-
-#navigation-bar {
-  width: 100vw;
-  height: 8.25vh;
-  padding: 15px;
-  font-family: 'Lato';
-  font-weight: bold;
-  color: #FFF;
-  background: #8FB9FF;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  z-index: 1; }
-
-#profile-wrapper {
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
-#menu-navigation {
-  height: auto;
-  font-family: 'Quicksand';
-  background: white;
-  border-left: 1px solid grey;
-  border-bottom: 1px solid grey;
-  display: none;
-  position: absolute;
-  right: 0;
-  cursor: pointer;
-  z-index: 9; }
-  #menu-navigation ul {
-    padding-right: 25px; }
-  #menu-navigation li {
-    color: #406BB2;
-    line-height: 35px;
-    list-style: none; }

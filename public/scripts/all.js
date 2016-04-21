@@ -154,6 +154,34 @@ angular.module('myApp')
 })  // end lessonsSideBarDirective
 
 angular.module('myApp')
+
+.controller('lessonTestsController', ["$scope", function($scope) {
+
+}])
+
+angular.module('myApp')
+
+.directive('lessonTestsDirective', function() {
+
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    link: function(scope, ele, attr) {
+
+      $('.lesson-test').click(function() {
+        let testsParents = this.parentNode.parentNode.parentNode.parentNode;
+        // console.log(testsParents.id); // id of parent lesson name
+        // $('.lesson-tests-wrapper').html('<span>' + testsParents.id + '</span>');
+        $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + testsParents.id + '.html');
+        $('html, body').animate({ scrollTop: 0 }, 300);
+      })
+
+    }
+  }
+
+})
+
+angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
 
   $scope.createUser = function(newUser) {
@@ -247,31 +275,35 @@ angular.module("myApp")
 
 angular.module('myApp')
 
-.controller('lessonTestsController', ["$scope", function($scope) {
+.controller('navigationController', ["$scope", "loginService", function($scope, loginService) {
+
+  $scope.logoutUser = function() {
+    loginService.logoutUser();
+  };
 
 }])
 
 angular.module('myApp')
 
-.directive('lessonTestsDirective', function() {
+.directive('navigationDirective', function() {
 
   return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
+    restrict: 'E',
+    templateUrl: './html/navigation/navigationTemplate.html',
     link: function(scope, ele, attr) {
+      let profileMenu = $('#menu-navigation');
 
-      $('.lesson-test').click(function() {
-        let testsParents = this.parentNode.parentNode.parentNode.parentNode;
-        // console.log(testsParents.id); // id of parent lesson name
-        // $('.lesson-tests-wrapper').html('<span>' + testsParents.id + '</span>');
-        $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + testsParents.id + '.html');
-        $('html, body').animate({ scrollTop: 0 }, 300);
+      $('#profile-wrapper').click(function() {
+        profileMenu.toggle('expand')
       })
 
+      profileMenu.click(function() {
+        profileMenu.toggle('expand');
+      })
     }
   }
 
-})
+}) // end navigationDirective
 
 angular.module( 'myApp' )
   .controller( 'mountainController', [ '$scope', 'loginService', function ( $scope, loginService ) {
@@ -379,35 +411,3 @@ angular.module( 'myApp' )
     return dirDefinition;
 
   } ) // end mountainDirective
-
-angular.module('myApp')
-
-.controller('navigationController', ["$scope", "loginService", function($scope, loginService) {
-
-  $scope.logoutUser = function() {
-    loginService.logoutUser();
-  };
-
-}])
-
-angular.module('myApp')
-
-.directive('navigationDirective', function() {
-
-  return {
-    restrict: 'E',
-    templateUrl: './html/navigation/navigationTemplate.html',
-    link: function(scope, ele, attr) {
-      let profileMenu = $('#menu-navigation');
-
-      $('#profile-wrapper').click(function() {
-        profileMenu.toggle('expand')
-      })
-
-      profileMenu.click(function() {
-        profileMenu.toggle('expand');
-      })
-    }
-  }
-
-}) // end navigationDirective

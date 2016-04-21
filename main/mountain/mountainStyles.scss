@@ -1,37 +1,55 @@
-$darkBlue: #406BB2;
-
-/////////////////////////////
+$darkBlue: #406BB2; /////////////////////////////
 // --- mountain styles --- //
 /////////////////////////////
-
 #mtn-wrapper {
-  font-family: 'Lato';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 80vw;
-  height: 80vh;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#home-top {
-  position: absolute;
-  width: 0;
-  height: 0;
-  left: calc(50vw - 20em);
-  top: calc(50vw - 20em);
-  border-left: 20em solid transparent;
-  border-right: 20em solid transparent;
-  border-bottom: 21em solid #FFE3A8;
-  margin-bottom: 8vh;
-  margin-top: 8vh;
-  z-index: -3;
-  div {
-    font-weight: bold;
+    font-family: 'Lato';
     position: absolute;
     top: 50%;
-    transform: translate(-50%);
-  }
+    left: 50%;
+    width: 80vw;
+    height: 80vh;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#home-top {
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: calc(40vw - 20em);
+    border-left: 20em solid transparent;
+    border-right: 20em solid transparent;
+    border-bottom: 21em solid #FFE3A8;
+    margin-bottom: 8vh;
+    margin-top: 8vh;
+    z-index: -3;
+    div {
+        font-weight: bold;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%);
+    }
+}
+.home-bottom {
+    width: 150px;
+    height: 70px;
+    position: relative;
+    top: 385px;
+    left: 0;
+    font-weight: bold;
+    text-align: center;
+    color: #FFF;
+    background: $darkBlue;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    span {
+        margin: 20px;
+    }
+}
+.spawnTreesBtn{
+  padding-top: 0px;
+  position: absolute;
+  top: 40px;
 }
