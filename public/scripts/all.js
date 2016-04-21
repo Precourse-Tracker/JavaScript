@@ -200,6 +200,7 @@ angular.module('myApp')
 
   $scope.lessonInfo = (input) => {
     // lessonConten to return object?
+<<<<<<< HEAD
     let lessonContent = lessonsContentService.getLessonInfo(input);
     // console.log(lessonContent.questions);
     $scope.testObject = lessonContent;
@@ -228,6 +229,12 @@ angular.module('myApp')
 
 
     })
+=======
+    let lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
+      console.log(lesson.data[0]);
+    })
+    $scope.theTitle = lessonContent;
+>>>>>>> master
   }
 
 /*
@@ -257,17 +264,8 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.service('lessonsContentService', function() {
+.service('lessonsContentService', ["$http", function($http) {
 
-  let jsDataTypes = 'Data Types',
-      jsVariables = 'Variables',
-      jsStrings = 'Strings',
-      jsConditional = 'Conditional Operators',
-      jsArrays = "Arrays",
-      jsObjects = 'Objects',
-      jsIterators = 'Iterators',
-      jsLogical = 'Logical Operators',
-      jsFunctions = 'Functions';
 
   let dummyData = {
     "name": "Data Types",
@@ -292,6 +290,7 @@ angular.module('myApp')
   };
 
   this.getLessonInfo = (input) => {
+<<<<<<< HEAD
     switch (input) {
       case 'js-lesson-data-types':
         return dummyData;
@@ -323,10 +322,16 @@ angular.module('myApp')
       default:
         break;
     }
+=======
+    return $http ({
+      method: 'GET',
+      url: '/api/lessons/js/' + input
+    })
+>>>>>>> master
   }
 
 
-})  // end lessonsContentService
+}])  // end lessonsContentService
 
 angular.module('myApp')
 

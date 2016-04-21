@@ -3,9 +3,10 @@ angular.module('myApp')
 .controller('lessonsContentController', function($scope, lessonsContentService) {
 
   $scope.lessonInfo = (input) => {
-    // lessonConten to return object?
-    let lessonContent = lessonsContentService.getLessonInfo(input);
-    // console.log(lessonContent.questions);
+    let lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
+      console.log(lesson.data[0]);
+    })
+    // $scope.theTitle = lessonContent;
     $scope.testObject = lessonContent;
 
     let testLength = lessonContent.questions.length,
@@ -29,8 +30,6 @@ angular.module('myApp')
       // console.log($(selected).siblings('button'));
       // console.log(selected.value);
       // console.log(selected.name);
-
-
     })
   }
 
