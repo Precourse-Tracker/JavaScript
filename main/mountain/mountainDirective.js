@@ -45,8 +45,11 @@ angular.module( 'myApp' )
             var i4 = document.createElement( 'i' );
 
             var newGrn = randomGrn();
-            var newZ = Math.floor(Math.floor(10 - (100*y))/10);
+            var newZ = (220 + (Math.floor(Math.floor(10 - (100*y))/10)));
+            console.log(newZ);
             var trunkZ = newZ - 1;
+            // -50 through -220
+            // 220 + n
 
             // little guy top \\
             i1.style.zIndex = (newZ);
@@ -86,9 +89,13 @@ angular.module( 'myApp' )
             node.appendChild( i4 );
             // console.log( newDiv.style );
 
-            var currentDiv = document.getElementsByClassName( 'trees' )[ 0 ];
+            // var currentDiv = document.getElementsByClassName( 'trees' )[ 0 ];
             // trees.insertBefore( newDiv, currentDiv );
           }
+        }
+
+        scope.spawnClimber = function(){
+          
         }
       }
     }

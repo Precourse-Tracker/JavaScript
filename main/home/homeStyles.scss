@@ -14,13 +14,7 @@ $darkBlue: #406BB2;
   align-items: center;
   z-index: -1;
 }
-
-
-
 .home-top {
-  // width: 650px;
-  // height: 360px;
-  // background: #FFE3A8;
   width: 0;
   height: 0;
   border-left: 19em solid transparent;
@@ -28,7 +22,6 @@ $darkBlue: #406BB2;
   border-bottom: 21em solid #FFE3A8;
   margin-bottom: 8vh;
   margin-top: 8vh;
-
   div {
     font-weight: bold;
     position: absolute;
@@ -36,7 +29,6 @@ $darkBlue: #406BB2;
     transform: translate(-50%);
   }
 }
-
 .home-bottom {
   width: 150px;
   height: 70px;
@@ -47,7 +39,6 @@ $darkBlue: #406BB2;
   border-radius: 5px;
   display: flex;
   align-items: center;
-
   span {
     margin: 20px;
   }

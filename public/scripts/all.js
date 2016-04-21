@@ -126,6 +126,34 @@ angular.module('myApp')
 
 angular.module('myApp')
 
+.controller('lessonTestsController', ["$scope", function($scope) {
+
+}])
+
+angular.module('myApp')
+
+.directive('lessonTestsDirective', function() {
+
+  return {
+    restrict: 'A',
+    controller: 'lessonTestsController',
+    link: function(scope, ele, attr) {
+
+      $('.lesson-test').click(function() {
+        let testsParents = this.parentNode.parentNode.parentNode.parentNode;
+        // console.log(testsParents.id); // id of parent lesson name
+        // $('.lesson-tests-wrapper').html('<span>' + testsParents.id + '</span>');
+        $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + testsParents.id + '.html');
+        $('html, body').animate({ scrollTop: 0 }, 300);
+      })
+
+    }
+  }
+
+})
+
+angular.module('myApp')
+
 .directive('lessonsSideBarDirective', function() {
 
   return {
@@ -152,34 +180,6 @@ angular.module('myApp')
   }
 
 })  // end lessonsSideBarDirective
-
-angular.module('myApp')
-
-.controller('lessonTestsController', ["$scope", function($scope) {
-
-}])
-
-angular.module('myApp')
-
-.directive('lessonTestsDirective', function() {
-
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    link: function(scope, ele, attr) {
-
-      $('.lesson-test').click(function() {
-        let testsParents = this.parentNode.parentNode.parentNode.parentNode;
-        // console.log(testsParents.id); // id of parent lesson name
-        // $('.lesson-tests-wrapper').html('<span>' + testsParents.id + '</span>');
-        $('.lesson-tests-wrapper').load('./html/lessonTests/lessonFiles/' + testsParents.id + '.html');
-        $('html, body').animate({ scrollTop: 0 }, 300);
-      })
-
-    }
-  }
-
-})
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
@@ -273,38 +273,6 @@ angular.module("myApp")
   };
 }]);
 
-angular.module('myApp')
-
-.controller('navigationController', ["$scope", "loginService", function($scope, loginService) {
-
-  $scope.logoutUser = function() {
-    loginService.logoutUser();
-  };
-
-}])
-
-angular.module('myApp')
-
-.directive('navigationDirective', function() {
-
-  return {
-    restrict: 'E',
-    templateUrl: './html/navigation/navigationTemplate.html',
-    link: function(scope, ele, attr) {
-      let profileMenu = $('#menu-navigation');
-
-      $('#profile-wrapper').click(function() {
-        profileMenu.toggle('expand')
-      })
-
-      profileMenu.click(function() {
-        profileMenu.toggle('expand');
-      })
-    }
-  }
-
-}) // end navigationDirective
-
 angular.module( 'myApp' )
   .controller( 'mountainController', [ '$scope', 'loginService', function ( $scope, loginService ) {
 
@@ -331,7 +299,6 @@ angular.module( 'myApp' )
         }
 
         const findY = function ( x ) {
-          console.log( 'x from inside findY', x );
           var yMax
           if ( x < ( xMax / 2 ) ) {
             yMax = ( x + 7 );
@@ -348,9 +315,7 @@ angular.module( 'myApp' )
         }
 
         scope.spawnTrees = function ( number ) {
-          console.log( 'spawnTrees was called' );
           for ( var i = 0; i < number; i++ ) {
-            console.log( 'spawnTrees was looped: ' + [ i + 1 ] + ' times' );
             var aCoords = randomMinMax( -3, 33 );
             var bCoords = randomMinMax( -3, 33 );
             var x = aCoords;
@@ -365,18 +330,16 @@ angular.module( 'myApp' )
             var i4 = document.createElement( 'i' );
 
             var newGrn = randomGrn();
-            console.log( 'newGrn: ', newGrn );
-            var newZ = Math.floor(Math.floor(10 - (100*y))/10);
-            var trunkZ = newZ - 1;
-
-
+            var newZ = (220 + (Math.floor(Math.floor(10 - (100*y))/10)));
             console.log(newZ);
-            console.log(trunkZ);
+            var trunkZ = newZ - 1;
+            // -50 through -220
+            // 220 + n
+
             // little guy top \\
             i1.style.zIndex = (newZ);
             i1.style.border = '0.39em solid transparent';
             i1.style.borderBottom = '0.39em solid ' + newGrn;
-            console.log( 'borderBottom: ', i1.style.borderBottom );
             i1.style.left = ( x - 0.2 ) + 'em';
             i1.style.bottom = ( y + 1.1 ) + 'em';
 
@@ -409,12 +372,15 @@ angular.module( 'myApp' )
             node.appendChild( i2 );
             node.appendChild( i3 );
             node.appendChild( i4 );
-            console.log( 'x: ' + x, 'y: ', y );
             // console.log( newDiv.style );
 
-            var currentDiv = document.getElementsByClassName( 'trees' )[ 0 ];
+            // var currentDiv = document.getElementsByClassName( 'trees' )[ 0 ];
             // trees.insertBefore( newDiv, currentDiv );
           }
+        }
+
+        scope.spawnClimber = function(){
+          
         }
       }
     }
@@ -460,3 +426,35 @@ angular.module( 'myApp' )
 // newDiv.style.bottom = y + 'em';
 // newDiv.style.background = 'red';
 // i1.style.width = '2em';
+
+angular.module('myApp')
+
+.controller('navigationController', ["$scope", "loginService", function($scope, loginService) {
+
+  $scope.logoutUser = function() {
+    loginService.logoutUser();
+  };
+
+}])
+
+angular.module('myApp')
+
+.directive('navigationDirective', function() {
+
+  return {
+    restrict: 'E',
+    templateUrl: './html/navigation/navigationTemplate.html',
+    link: function(scope, ele, attr) {
+      let profileMenu = $('#menu-navigation');
+
+      $('#profile-wrapper').click(function() {
+        profileMenu.toggle('expand')
+      })
+
+      profileMenu.click(function() {
+        profileMenu.toggle('expand');
+      })
+    }
+  }
+
+}) // end navigationDirective
