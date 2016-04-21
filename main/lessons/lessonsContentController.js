@@ -3,11 +3,36 @@ angular.module('myApp')
 .controller('lessonsContentController', function($scope, lessonsContentService) {
 
   $scope.lessonInfo = (input) => {
-    // lessonConten to return object?
     let lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
-      console.log(lesson.data[0]);
+        $scope.testObject = lesson.data[0];
+        $scope.theTitle = $scope.testObject.name;
     })
-    $scope.theTitle = lessonContent;
+
+
+
+    // let testLength = lessonContent.questions.length,
+    //     correctAnswers = [],
+    //     userAnswers = [];
+    //
+    // {
+    //   lessonContent.questions.forEach(function(entry) {
+    //     correctAnswers.push(entry.correctAnswer);
+    //   })
+    // }
+    // console.log(correctAnswers);
+
+    // testing button thingy
+    $('button').click(function() {
+      let selected = this;
+      $(selected).addClass('.selected');
+      $(selected).siblings().removeClass('.selected');
+
+      // console.log(selected);
+      // console.log($(selected).siblings('button'));
+      // console.log(selected.value);
+      // console.log(selected.name);
+    })
   }
+
 
 }) // end lessonsContentController

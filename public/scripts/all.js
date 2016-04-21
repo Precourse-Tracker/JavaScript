@@ -34,6 +34,64 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
 
 angular.module('myApp')
 
+.directive('unitTestMenuDirective', function() {
+
+  return {
+    restrict: 'AE',
+    // templateUrl: './html/dashboard/dashboardTopTemplate.html',
+    link: function(scope, ele, attr) {
+
+      $('#dashboard-unit-tests').click(function() {
+        // console.log(this);
+        $('#unit-test-menu').toggle('expand');
+      })
+
+      $('#unit-test-menu').click(function() {
+        $('#unit-test-menu').toggle('expand');
+      })
+
+      // unit test graph changes for unit views and cohort compare
+      $('#js-graph').click(function() {
+        $('#js-graph-div').css('z-index', 2);
+        $('#js-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#html-graph').click(function() {
+        $('#html-graph-div').css('z-index', 2);
+        $('#html-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#css-graph').click(function() {
+        $('#css-graph-div').css('z-index', 2);
+        $('#css-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#git-graph').click(function() {
+        $('#git-graph-div').css('z-index', 2);
+        $('#git-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#cohort-compare').click(function() {
+        // console.log(this);
+        $('#cohort-graph-div').css('z-index', 2);
+        $('#cohort-graph-div').siblings().css('z-index', 0);
+      })
+
+    }
+  }
+
+})  // end unitTestMenuDirective
+
+
+/*
+
+      $('#profile-wrapper').click(function() {
+        profileMenu.toggle('expand')
+      })
+*/
+
+angular.module('myApp')
+
 .controller('assessmentController', ["$scope", "assessmentService", "workerService", function($scope, assessmentService, workerService) {
 
   assessmentService.getAssessment().then(function(response) {
@@ -135,64 +193,6 @@ angular.module('myApp').service('workerService', ["Webworker", function(Webworke
     return result;
   }
 }])
-
-angular.module('myApp')
-
-.directive('unitTestMenuDirective', function() {
-
-  return {
-    restrict: 'AE',
-    // templateUrl: './html/dashboard/dashboardTopTemplate.html',
-    link: function(scope, ele, attr) {
-
-      $('#dashboard-unit-tests').click(function() {
-        // console.log(this);
-        $('#unit-test-menu').toggle('expand');
-      })
-
-      $('#unit-test-menu').click(function() {
-        $('#unit-test-menu').toggle('expand');
-      })
-
-      // unit test graph changes for unit views and cohort compare
-      $('#js-graph').click(function() {
-        $('#js-graph-div').css('z-index', 2);
-        $('#js-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#html-graph').click(function() {
-        $('#html-graph-div').css('z-index', 2);
-        $('#html-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#css-graph').click(function() {
-        $('#css-graph-div').css('z-index', 2);
-        $('#css-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#git-graph').click(function() {
-        $('#git-graph-div').css('z-index', 2);
-        $('#git-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#cohort-compare').click(function() {
-        // console.log(this);
-        $('#cohort-graph-div').css('z-index', 2);
-        $('#cohort-graph-div').siblings().css('z-index', 0);
-      })
-
-    }
-  }
-
-})  // end unitTestMenuDirective
-
-
-/*
-
-      $('#profile-wrapper').click(function() {
-        profileMenu.toggle('expand')
-      })
-*/
 
 angular.module('myApp')
 
@@ -315,12 +315,37 @@ angular.module('myApp')
 .controller('lessonsContentController', ["$scope", "lessonsContentService", function($scope, lessonsContentService) {
 
   $scope.lessonInfo = (input) => {
-    // lessonConten to return object?
     let lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
-      console.log(lesson.data[0]);
+        $scope.testObject = lesson.data[0];
+        $scope.theTitle = $scope.testObject.name;
     })
-    $scope.theTitle = lessonContent;
+
+
+
+    // let testLength = lessonContent.questions.length,
+    //     correctAnswers = [],
+    //     userAnswers = [];
+    //
+    // {
+    //   lessonContent.questions.forEach(function(entry) {
+    //     correctAnswers.push(entry.correctAnswer);
+    //   })
+    // }
+    // console.log(correctAnswers);
+
+    // testing button thingy
+    $('button').click(function() {
+      let selected = this;
+      $(selected).addClass('.selected');
+      $(selected).siblings().removeClass('.selected');
+
+      // console.log(selected);
+      // console.log($(selected).siblings('button'));
+      // console.log(selected.value);
+      // console.log(selected.name);
+    })
   }
+
 
 }]) // end lessonsContentController
 
@@ -332,7 +357,8 @@ angular.module('myApp')
     controller: 'lessonsContentController',
     templateUrl: './html/lessons/lessonsContentTemplate.html',
     scope: {
-      title: '='
+      title: '=',
+      testObject: '='
     }
   }
 }) // end lessonsContentDirective
@@ -340,7 +366,6 @@ angular.module('myApp')
 angular.module('myApp')
 
 .service('lessonsContentService', ["$http", function($http) {
-
 
   this.getLessonInfo = (input) => {
     return $http ({
@@ -368,65 +393,8 @@ angular.module('myApp')
       })
 
       $('.lesson-test').click(function() {
-        // let selectedParent = this.parentNode.parentNode.parentNode.parentNode;
-        // let testNavigation = function() {
-        //   let temp = selectedParent.id;
-          // console.log(temp);
-          $('.lesson-tests-wrapper').css('display', 'block');
-
-          // switch (temp) {
-          //   case 'js-lesson-data-types':
-          //     $('.js-lesson-data-types').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-data-types').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   case 'js-lesson-variables':
-          //     $('.js-lesson-variables').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-variables').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   case 'js-lesson-strings-cont':
-          //     $('.js-lesson-strings-cont').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-strings-cont').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   case 'js-lesson-conditional':
-          //     $('.js-lesson-conditional').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-conditional').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   case 'js-lesson-arrays':
-          //     $('.js-lesson-arrays').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-arrays').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   case 'js-lesson-objects':
-          //     $('.js-lesson-objects').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-objects').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   case 'js-lesson-iterators':
-          //     $('.js-lesson-iterators').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-iterators').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   case 'js-lesson-logical':
-          //     $('.js-lesson-logical').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-logical').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   case 'js-lesson-functions':
-          //     $('.js-lesson-functions').css({ 'display': 'block', 'z-index': 2 });
-          //     $('.js-lesson-functions').siblings().css({ 'display': 'none', 'z-index': 0 });
-          //     break;
-          //   default:
-          //     break;
-          // }
-        // } // end testNavigation
-
+        $('.lesson-tests-wrapper').css('display', 'block');
         $('html, body').animate({ scrollTop: 0 }, 300);
-        // if ($state.name !== 'lessonTests') {
-        //   $state.go('lessonTests');
-        //   setTimeout(function() {
-        //     testNavigation();
-        //   }, 100)
-        // } else {
-        //   testNavigation();
-        // }
-
-        // testNavigation();
       }) // end lesson-test click
 
     } // end of directive link
