@@ -14,7 +14,6 @@ angular.module( 'myApp' )
         }
 
         const findY = function ( x ) {
-          console.log( 'x from inside findY', x );
           var yMax
           if ( x < ( xMax / 2 ) ) {
             yMax = ( x + 7 );
@@ -31,9 +30,7 @@ angular.module( 'myApp' )
         }
 
         scope.spawnTrees = function ( number ) {
-          console.log( 'spawnTrees was called' );
           for ( var i = 0; i < number; i++ ) {
-            console.log( 'spawnTrees was looped: ' + [ i + 1 ] + ' times' );
             var aCoords = randomMinMax( -3, 33 );
             var bCoords = randomMinMax( -3, 33 );
             var x = aCoords;
@@ -48,18 +45,13 @@ angular.module( 'myApp' )
             var i4 = document.createElement( 'i' );
 
             var newGrn = randomGrn();
-            console.log( 'newGrn: ', newGrn );
             var newZ = Math.floor(Math.floor(10 - (100*y))/10);
             var trunkZ = newZ - 1;
 
-
-            console.log(newZ);
-            console.log(trunkZ);
             // little guy top \\
             i1.style.zIndex = (newZ);
             i1.style.border = '0.39em solid transparent';
             i1.style.borderBottom = '0.39em solid ' + newGrn;
-            console.log( 'borderBottom: ', i1.style.borderBottom );
             i1.style.left = ( x - 0.2 ) + 'em';
             i1.style.bottom = ( y + 1.1 ) + 'em';
 
@@ -92,7 +84,6 @@ angular.module( 'myApp' )
             node.appendChild( i2 );
             node.appendChild( i3 );
             node.appendChild( i4 );
-            console.log( 'x: ' + x, 'y: ', y );
             // console.log( newDiv.style );
 
             var currentDiv = document.getElementsByClassName( 'trees' )[ 0 ];
