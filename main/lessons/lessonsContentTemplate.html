@@ -1,21 +1,6 @@
-<div class="video-placeholder">
+<!-- <div class="video-placeholder">
   <span>{{title}} Video</span>
-</div>
-
-
-<!-- <div class="lesson-tests-wrapper">
-  <section js-datatypes-directive class="js-lesson-data-types"></section>
-  <section js-variables-directive class="js-lesson-variables"></section>
-  <section js-strings-cont-directive class="js-lesson-strings-cont"></section>
-  <section js-conditional-directive class="js-lesson-conditional"></section>
-  <section js-arrays-directives class="js-lesson-arrays"></section>
-  <section js-objects-directive class="js-lesson-objects"></section>
-  <section js-iterators-directive class="js-lesson-iterators"></section>
-  <section js-logical-directive class="js-lesson-logical"></section>
-  <section js-functions-directive class="js-lesson-functions"></section>
-  <div class="lesson-tests-placeholder"></div>
 </div> -->
-
 
 <div class="lesson-tests-wrapper">
 
@@ -23,36 +8,9 @@
     <form method="POST">
       <h2>JavaScript<br>{{title}}<br>Test</h2>
       <div class="final-score"><span>{{testScore}}</span><span>{{message}}</span></div>
-      <div class="multiple-choice-wrapper">
-        <div class="quiz-options"><span class="test-question">1. Here's where we will put a question:</span><br>
-          <button value="a" name="question1" ng-click="q1('a')">one</button>
-          <button value="b" name="question2" ng-click="q1('b')">two</button>
-          <button value="c" name="question3" ng-click="q1('c')">three</button>
-          <button value="d" name="question4" ng-click="q1('d')">four</button>
-        </div>
-      </div>
-      <div class="multiple-choice-wrapper">
-        <div class="quiz-options"><span class="test-question">2. Here's where we will put a question:</span><br>
-          <button value="a" name="question1" ng-click="q2('a')">one</button>
-          <button value="b" name="question2" ng-click="q2('b')">two</button>
-          <button value="c" name="question3" ng-click="q2('c')">three</button>
-          <button value="d" name="question4" ng-click="q2('d')">four</button>
-        </div>
-      </div>
-      <div class="multiple-choice-wrapper">
-        <div class="quiz-options"><span class="test-question">3. Here's where we will put a question:</span><br>
-          <button value="a" name="question1" ng-click="q3('a')">one</button>
-          <button value="b" name="question2" ng-click="q3('b')">two</button>
-          <button value="c" name="question3" ng-click="q3('c')">three</button>
-          <button value="d" name="question4" ng-click="q3('d')">four</button>
-        </div>
-      </div>
-      <div class="multiple-choice-wrapper">
-        <div class="quiz-options"><span class="test-question">4. Here's where we will put a question:</span><br>
-          <button value="a" name="question1" ng-click="q4('a')">one</button>
-          <button value="b" name="question2" ng-click="q4('b')">two</button>
-          <button value="c" name="question3" ng-click="q4('c')">three</button>
-          <button value="d" name="question4" ng-click="q4('d')">four</button>
+      <div class="multiple-choice-wrapper" ng-model="testObject" ng-repeat="question in testObject.questions">
+        <div class="quiz-options"><span class="test-question">{{$id - 10 + 1}}. {{question.question}}:</span><br>
+          <button value="" name="" ng-repeat="choice in question.multipleChoice" ng-click="q1('a')">{{choice}}</button>
         </div>
       </div>
     </form>

@@ -201,8 +201,46 @@ angular.module('myApp')
   $scope.lessonInfo = (input) => {
     // lessonConten to return object?
     let lessonContent = lessonsContentService.getLessonInfo(input);
-    $scope.theTitle = lessonContent;
+    console.log(lessonContent.questions);
+    $scope.testObject = lessonContent;
+    // $scope.theTitle = lessonContent.name;
+    // $scope.questions = lessonContent.questions;
+    // $scope.score = lessonContent.score;
+
+    let testLength = lessonContent.questions.length,
+        correctAnswers = [],
+        userAnswers = [];
+
+    {
+      lessonContent.questions.forEach(function(entry) {
+        correctAnswers.push(entry.correctAnswer);
+      })
+    }
+    // console.log(correctAnswers);
+
+    // testing button thingy
+    $('button').click(function() {
+      let selected = this;
+      $(selected).addClass('.selected');
+      $(selected).siblings().removeClass('.selected');
+
+      // console.log(selected);
+      // console.log($(selected).siblings('button'));
+      // console.log(selected.value);
+      // console.log(selected.name);
+
+
+    })
   }
+
+/*
+q in questions
+  q.correctAnswer
+  q.multipleChoice
+    q in q.multipleChoice
+  q.question
+lessoncontent.score
+*/
 
 }]) // end lessonsContentController
 
@@ -214,7 +252,8 @@ angular.module('myApp')
     controller: 'lessonsContentController',
     templateUrl: './html/lessons/lessonsContentTemplate.html',
     scope: {
-      title: '='
+      title: '=',
+      testObject: '='
     }
   }
 }) // end lessonsContentDirective
@@ -233,10 +272,32 @@ angular.module('myApp')
       jsLogical = 'Logical Operators',
       jsFunctions = 'Functions';
 
+  let dummyData = {
+    "name": "Data Types",
+    "questions": [
+      {
+        "question": "Which of the following is an acceptable number in JavaScript",
+        "multipleChoice": ["17", "1,055.28", "Neither A or B", "Both A and B"],
+        "correctAnswer": "Both A and B"
+      },
+      {
+        "question": "JavaScript will accept a negative number as a number",
+        "multipleChoice": ["True", "False"],
+        "correctAnswer": "True"
+      },
+      {
+        "question": "You can only use double quotes for Strings, single quotes are not accepted.",
+        "multipleChoice": ["True", "False"],
+        "correctAnswer": "False"
+      }
+    ],
+    "score": 0
+  };
+
   this.getLessonInfo = (input) => {
     switch (input) {
       case 'js-lesson-data-types':
-        return jsDataTypes;
+        return dummyData;
         // break;
       case 'js-lesson-variables':
         return jsVariables;

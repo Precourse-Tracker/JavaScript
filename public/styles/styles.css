@@ -326,7 +326,7 @@ a {
     text-align: center;
     position: relative;
     margin: 2px auto; }
-  .lessonTests button:hover, .lessonTests button:active, .lessonTests button:focus {
+  .lessonTests button:hover, .lessonTests button:active, .lessonTests button:focus, .lessonTests button.selected {
     background-color: #8FB9FF;
     color: #fff;
     cursor: pointer;
