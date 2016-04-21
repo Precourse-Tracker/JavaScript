@@ -48,8 +48,6 @@ angular.module( 'myApp' )
             var newZ = (220 + (Math.floor(Math.floor(10 - (100*y))/10)));
             console.log(newZ);
             var trunkZ = newZ - 1;
-            // -50 through -220
-            // 220 + n
 
             // little guy top \\
             i1.style.zIndex = (newZ);
@@ -82,62 +80,17 @@ angular.module( 'myApp' )
             i4.style.left = ( x ) + 'em';
             i4.style.bottom = ( y ) + 'em';
 
-            // node.appendChild( newDiv );
             node.appendChild( i1 );
             node.appendChild( i2 );
             node.appendChild( i3 );
             node.appendChild( i4 );
-            // console.log( newDiv.style );
-
-            // var currentDiv = document.getElementsByClassName( 'trees' )[ 0 ];
-            // trees.insertBefore( newDiv, currentDiv );
           }
         }
-
-        scope.spawnClimber = function(){
-          
-        }
+        // scope.spawnClimber = function(){
+        //
+        // }
       }
     }
     return dirDefinition;
 
   } ) // end mountainDirective
-
-// various attempts at constraining trees \\
-// var base = Math.abs( aCoords.x - bCoords.x );
-// var height = Math.abs( aCoords.y - bCoords.y );
-//
-// console.log( 'base: ', base, 'height: ', height );
-// var aLength = 3;
-// var bLength = 4;
-// var hypLength = Math.sqrt( aLength * aLength + bLength * bLength );
-// // console.log('aCoordsX ', aCoords.x, 'aCoordsY: ', aCoords.y);
-
-
-
-// better randomization \\
-// var v1 = Math.floor( Math.random() * 10 );
-// var v2 = Math.floor( Math.random() * 10 );
-// var a1 = Math.floor( Math.random() * 10 );
-// var a2 = Math.floor( Math.random() * 10 );
-// var vy1 = Math.floor( Math.random() * 10 );
-// var vy2 = Math.floor( Math.random() * 10 );
-// var ay1 = Math.floor( Math.random() * 10 );
-// var ay2 = Math.floor( Math.random() * 10 );
-// var Qx = Math.floor( ( ( a1 * v1 ) + ( a2 * v2 ) ) / 10 );
-// var Qy = Math.floor( ( ( ay1 * vy1 ) + ( ay2 * vy2 ) ) / 10 );
-// console.log( 'Qx: ', Qx );
-// console.log( 'Qy: ', Qy );
-
-
-
-// div  \\
-// var newDiv = document.createElement( 'div' );
-// newDiv.style.width = '2.4em';
-// newDiv.style.height = '2em';
-// newDiv.innerHTML = 'Hello';
-// newDiv.style.position = 'absolute';
-// newDiv.style.left = x + 'em';
-// newDiv.style.bottom = y + 'em';
-// newDiv.style.background = 'red';
-// i1.style.width = '2em';
