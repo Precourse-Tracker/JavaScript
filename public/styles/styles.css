@@ -139,7 +139,6 @@ a {
   width: 100vw;
   height: 20vh; }
 
-
 #home-wrapper {
   font-family: 'Lato';
   position: absolute;
@@ -170,6 +169,7 @@ a {
   align-items: center; }
   .home-bottom span {
     margin: 20px; }
+
 
 .lessonTests {
   position: relative;
