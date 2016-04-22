@@ -34,64 +34,6 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
 
 angular.module('myApp')
 
-.directive('unitTestMenuDirective', function() {
-
-  return {
-    restrict: 'AE',
-    // templateUrl: './html/dashboard/dashboardTopTemplate.html',
-    link: function(scope, ele, attr) {
-
-      $('#dashboard-unit-tests').click(function() {
-        // console.log(this);
-        $('#unit-test-menu').toggle('expand');
-      })
-
-      $('#unit-test-menu').click(function() {
-        $('#unit-test-menu').toggle('expand');
-      })
-
-      // unit test graph changes for unit views and cohort compare
-      $('#js-graph').click(function() {
-        $('#js-graph-div').css('z-index', 2);
-        $('#js-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#html-graph').click(function() {
-        $('#html-graph-div').css('z-index', 2);
-        $('#html-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#css-graph').click(function() {
-        $('#css-graph-div').css('z-index', 2);
-        $('#css-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#git-graph').click(function() {
-        $('#git-graph-div').css('z-index', 2);
-        $('#git-graph-div').siblings().css('z-index', 0);
-      })
-
-      $('#cohort-compare').click(function() {
-        // console.log(this);
-        $('#cohort-graph-div').css('z-index', 2);
-        $('#cohort-graph-div').siblings().css('z-index', 0);
-      })
-
-    }
-  }
-
-})  // end unitTestMenuDirective
-
-
-/*
-
-      $('#profile-wrapper').click(function() {
-        profileMenu.toggle('expand')
-      })
-*/
-
-angular.module('myApp')
-
 .controller('assessmentController', ["$scope", "assessmentService", "workerService", function($scope, assessmentService, workerService) {
 
   assessmentService.getAssessment().then(function(response) {
@@ -193,6 +135,64 @@ angular.module('myApp').service('workerService', ["Webworker", function(Webworke
     return result;
   }
 }])
+
+angular.module('myApp')
+
+.directive('unitTestMenuDirective', function() {
+
+  return {
+    restrict: 'AE',
+    // templateUrl: './html/dashboard/dashboardTopTemplate.html',
+    link: function(scope, ele, attr) {
+
+      $('#dashboard-unit-tests').click(function() {
+        // console.log(this);
+        $('#unit-test-menu').toggle('expand');
+      })
+
+      $('#unit-test-menu').click(function() {
+        $('#unit-test-menu').toggle('expand');
+      })
+
+      // unit test graph changes for unit views and cohort compare
+      $('#js-graph').click(function() {
+        $('#js-graph-div').css('z-index', 2);
+        $('#js-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#html-graph').click(function() {
+        $('#html-graph-div').css('z-index', 2);
+        $('#html-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#css-graph').click(function() {
+        $('#css-graph-div').css('z-index', 2);
+        $('#css-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#git-graph').click(function() {
+        $('#git-graph-div').css('z-index', 2);
+        $('#git-graph-div').siblings().css('z-index', 0);
+      })
+
+      $('#cohort-compare').click(function() {
+        // console.log(this);
+        $('#cohort-graph-div').css('z-index', 2);
+        $('#cohort-graph-div').siblings().css('z-index', 0);
+      })
+
+    }
+  }
+
+})  // end unitTestMenuDirective
+
+
+/*
+
+      $('#profile-wrapper').click(function() {
+        profileMenu.toggle('expand')
+      })
+*/
 
 angular.module('myApp')
 
@@ -313,39 +313,54 @@ angular.module('myApp')
 angular.module('myApp')
 
 .controller('lessonsContentController', ["$scope", "lessonsContentService", function($scope, lessonsContentService) {
-
+  $scope.userAnswerArray = [];
   $scope.lessonInfo = (input) => {
-    let lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
+      lessonsContentService.resetArray();
+      $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
         $scope.testObject = lesson.data[0];
         $scope.theTitle = $scope.testObject.name;
-    })
-
-
-
-    // let testLength = lessonContent.questions.length,
-    //     correctAnswers = [],
-    //     userAnswers = [];
-    //
-    // {
-    //   lessonContent.questions.forEach(function(entry) {
-    //     correctAnswers.push(entry.correctAnswer);
-    //   })
-    // }
-    // console.log(correctAnswers);
-
-    // testing button thingy
-    $('button').click(function() {
-      let selected = this;
-      $(selected).addClass('.selected');
-      $(selected).siblings().removeClass('.selected');
-
-      // console.log(selected);
-      // console.log($(selected).siblings('button'));
-      // console.log(selected.value);
-      // console.log(selected.name);
+        $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
+            entry.index = index;
+            lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
+        })
     })
   }
-
+  $scope.addAnswer = (userAnswer) => {
+    $scope.userAnswerArray[userAnswer[1]]=userAnswer[0];
+  }
+  $scope.gradeTest = () => {
+    let rightAnswer = 0;
+    let user = $scope.userAnswerArray;
+    let correct = lessonsContentService.getCorrectAnswerArray();
+    if (user.length === correct.length) {
+      user.forEach(function(entry, index){
+        if (entry === correct[index]) {
+          rightAnswer++;
+        }
+      })
+      let score = (rightAnswer / correct.length) * 100;
+      if (score === 100) {
+        $scope.testScore = score.toFixed(0);
+      }
+      else {
+        $scope.testScore = score.toFixed(2);
+      }
+      if (score <= 60) {
+        $scope.message = 'Good attempt! Please review the content and try again.';
+      } else if (score <= 80) {
+        $scope.message = 'Nice job!  You\'re getting there!'
+      } else if (score <= 90) {
+        $scope.message = 'Great work All-Star! ';
+      } else if (score < 100) {
+        $scope.message = 'Great job! Almost perfect!';
+      } else if (score == 100) {
+        $scope.message = 'Awesome!!  You got a perfect score!!';
+      }
+    }
+    else {
+      alert('Please answer all questions before submitting');
+    }
+  }
 
 }]) // end lessonsContentController
 
@@ -358,7 +373,8 @@ angular.module('myApp')
     templateUrl: './html/lessons/lessonsContentTemplate.html',
     scope: {
       title: '=',
-      testObject: '='
+      testObject: '=',
+      testScore: '='
     }
   }
 }) // end lessonsContentDirective
@@ -366,15 +382,22 @@ angular.module('myApp')
 angular.module('myApp')
 
 .service('lessonsContentService', ["$http", function($http) {
-
+  let correctAnswerArray = [];
+  this.setCorrectAnswer = (input, index) => {
+    correctAnswerArray[index] = input;
+  }
+  this.getCorrectAnswerArray = () => {
+    return correctAnswerArray;
+  }
+  this.resetArray = () => {
+    correctAnswerArray = [];
+  }
   this.getLessonInfo = (input) => {
     return $http ({
       method: 'GET',
       url: '/api/lessons/js/' + input
     })
   }
-
-
 }])  // end lessonsContentService
 
 angular.module('myApp')
