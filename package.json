@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/Precourse-Tracker/precourse-tracker#readme",
   "dependencies": {
+    "angular": "^1.5.5",
+    "angular-mocks": "^1.5.5",
+    "angular-ui-router": "^0.2.18",
     "bcrypt": "^0.8.5",
     "body-parser": "^1.15.0",
     "cors": "^2.7.1",
@@ -29,6 +32,8 @@
     "gulp-sass": "^2.2.0",
     "gulp-strip-code": "^0.1.4",
     "gulp-uglifycss": "^1.0.6",
+    "jasmine": "^2.4.1",
+    "jquery": "^2.2.3",
     "mongoose": "^4.4.12",
     "ng-webworker": "github:mattslocum/ng-webworker",
     "passport": "^0.3.2",
@@ -36,6 +41,9 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-jasmine": "^0.3.8"
   }
 }

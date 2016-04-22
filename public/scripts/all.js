@@ -109,6 +109,7 @@ angular.module('myApp')
           }
         }
       }).success(function(resp) {
+        tick = 0;
         console.log(resp);
       })
     }
@@ -119,7 +120,13 @@ angular.module('myApp').service('workerService', ["Webworker", function(Webworke
   this.worker = (qId, answer, userCode) => {
 
     function isSame(userCode, answer) {
-      if (userCode === answer) {
+      // var evaluatedCode = eval(userCode);
+      console.log("userCode", userCode, answer);
+      var userInput = userCode;
+      eval(userCode);
+      var results = timesTwo(num1, num2);
+      console.log(results);
+      if (results.toString() === answer) {
         return true;
       } else {
         return false;
@@ -682,3 +689,26 @@ angular.module('myApp')
     templateUrl: './html/lessonTests/lessonFiles/js-lesson-variables.html'
   }
 }) // end varsTestDirective
+
+describe("true", function() {
+  beforeEach(module('myApp'));
+
+  var $controller, assessmentController;
+  var $service, assessmentService, workerService;
+  var $scope;
+  beforeEach(inject(function(_$controller_, _assessmentService_, _workerService_, $rootScope){
+    $controller = _$controller_;
+    $scope = $rootScope.$new();
+    assessmentController = $controller('assessmentController', {$scope: $scope});
+    assessmentService = _assessmentService_;
+    workerService = _workerService_;
+  }))
+
+
+
+
+
+  it("should contain users code and question object properties", function() {
+    
+  });
+});
