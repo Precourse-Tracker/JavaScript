@@ -11,53 +11,6 @@ a {
   text-decoration: none;
   color: white; }
 
-#assessment-view .code-input-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0 10px 0; }
-
-#assessment-view #editor {
-  height: 20vh;
-  width: 90vw; }
-
-#assessment-view #editor_1 {
-  height: 20vh;
-  width: 90vw; }
-
-#assessment-view .assessment-eval {
-  color: #406BB2;
-  display: flex;
-  justify-content: flex-end;
-  margin: 1em; }
-
-#assessment-view span:hover {
-  color: #8FB9FF; }
-
-#home-wrapper {
-  font-family: 'Lato';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: -1; }
-
-.home-top {
-  width: 0;
-  height: 0;
-  border-left: 19em solid transparent;
-  border-right: 19em solid transparent;
-  border-bottom: 21em solid #FFE3A8;
-  margin-bottom: 8vh;
-  margin-top: 8vh; }
-  .home-top div {
-    font-weight: bold;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%); }
-
 #dashboard-wrapper {
   width: 100vw;
   height: 91vh;
@@ -142,111 +95,53 @@ a {
     left: 50%;
     transform: translate(-50%, -50%); }
 
-
-#side-bar-placeholder {
-  width: 225px;
-  height: 91vh;
-  position: relative;
-  float: left; }
-
-.lessons-wrapper {
-  width: 225px;
-  height: 91vh;
-  background: rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  position: fixed; }
-
-.lessons {
-  max-height: 100%;
-  font-family: 'Quicksand';
-  margin-left: 10px;
-  overflow: auto;
-  margin-right: -17px;
-  padding-right: 0;
-  padding-bottom: 100px; }
-  .lessons h3 {
-    margin: 5px 0 0 0;
-    cursor: pointer; }
-  .lessons h4 {
-    color: black;
-    font-weight: bolder;
-    margin: 0 auto 0 25%; }
-  .lessons ul {
-    margin: 0 auto 0 auto;
-    padding: 5px;
-    padding-left: 10px;
-    cursor: pointer; }
-  .lessons li {
-    list-style: none;
-    line-height: 35px;
-    cursor: pointer;
-    color: #3A3A3A; }
-  .lessons .lesson-title {
-    color: black; }
-    .lessons .lesson-title h3 {
-      font-size: 17px; }
-  .lessons .lesson-sections {
-    display: none; }
-  .lessons .expand {
-    display: block !important; }
-  .lessons #take-assessment {
-    width: 165px;
-    height: 65px;
-    color: white;
-    background: #406BB2;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    font-weight: bold;
-    line-height: 22px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%);
-    margin-bottom: 25px; }
-
-.lessons-content-wrapper {
-  position: relative; }
-
-.content-wrapper {
-  width: calc(100% - 225px);
-  position: relative;
-  float: left;
-  margin-bottom: 50px; }
-
-.video-placeholder {
-  width: 500px;
-  height: 300px;
-  background: silver;
-  position: relative;
+#home-wrapper {
+  font-family: 'Lato';
+  position: absolute;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%);
-  margin-top: 25px; }
-  .video-placeholder span {
-    color: white;
-    font-size: 20px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: -1; }
+
+.home-top {
+  width: 0;
+  height: 0;
+  border-left: 19em solid transparent;
+  border-right: 19em solid transparent;
+  border-bottom: 21em solid #FFE3A8;
+  margin-bottom: 8vh;
+  margin-top: 8vh; }
+  .home-top div {
+    font-weight: bold;
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); }
+    transform: translate(-50%); }
 
-.lessons-practice {
-  width: 500px;
-  height: 300px;
-  background: rgba(0, 0, 0, 0.1);
-  position: relative;
-  left: 50%;
-  transform: translate(-50%);
-  margin-top: 35px; }
-  .lessons-practice form {
-    width: 80%;
-    position: absolute;
-    left: 50%;
-    top: 38%;
-    transform: translate(-50%, -50%); }
-    .lessons-practice form input {
-      margin: 10px 10px 15px auto; }
+
+#assessment-view .code-input-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 10px 0; }
+
+#assessment-view #editor {
+  height: 20vh;
+  width: 90vw; }
+
+#assessment-view #editor_1 {
+  height: 20vh;
+  width: 90vw; }
+
+#assessment-view .assessment-eval {
+  color: #406BB2;
+  display: flex;
+  justify-content: flex-end;
+  margin: 1em; }
+
+#assessment-view span:hover {
+  color: #8FB9FF; }
 
 .lessonTests {
   width: calc(100% - 225px);
@@ -531,29 +426,68 @@ a {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 80vw;
+  width: 100vw;
   height: 80vh;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center; }
 
-#home-top {
+#mountainScene-left {
   position: absolute;
   width: 0;
   height: 0;
-  left: calc(40vw - 20em);
+  left: calc(50vw - 19.95em);
   border-left: 20em solid transparent;
-  border-right: 20em solid transparent;
-  border-bottom: 21em solid #FFE3A8;
+  border-bottom: 21em solid #77573b;
   margin-bottom: 8vh;
   margin-top: 8vh;
   z-index: -3; }
-  #home-top div {
+  #mountainScene-left div {
     font-weight: bold;
     position: absolute;
     top: 50%;
     transform: translate(-50%); }
+
+#mountainScene-right {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: calc(50vw - 0em);
+  border-right: 20em solid transparent;
+  border-bottom: 21em solid #95895c;
+  margin-bottom: 8vh;
+  margin-top: 8vh;
+  z-index: -3; }
+  #mountainScene-right div {
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%); }
+
+#bgMountain-Left {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: calc(80vw - 17.94em);
+  bottom: calc(70vh - 20em);
+  border-left: 13em solid transparent;
+  border-bottom: 13em solid #523b28;
+  margin-bottom: 4vh;
+  margin-top: 4vh;
+  z-index: -4; }
+
+#bgMountain-right {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: calc(80vw - 5em);
+  bottom: calc(70vh - 20em);
+  border-right: 13em solid transparent;
+  border-bottom: 13em solid #675f3f;
+  margin-bottom: 4vh;
+  margin-top: 4vh;
+  z-index: -4; }
 
 .home-bottom {
   width: 150px;
@@ -572,19 +506,24 @@ a {
     margin: 20px; }
 
 .spawnTreesBtn {
-  padding-top: 0px;
+  padding-top: 0;
   position: absolute;
-  top: 66px; }
+  top: 69px; }
 
 .spawnRocksBtn {
-  padding-top: 0px;
+  padding-top: 0;
   position: absolute;
-  top: 43px; }
+  top: 46px; }
 
 .spawnSnowPeakBtn {
-  padding-top: 0px;
+  padding-top: 0;
   position: absolute;
-  top: 20px; }
+  top: 23px; }
+
+.spawnBackgroundBtn {
+  padding-top: 0;
+  position: absolute;
+  top: 0px; }
 
 #trees {
   width: 2.4em;
@@ -716,3 +655,108 @@ i {
     color: #406BB2;
     line-height: 35px;
     list-style: none; }
+
+#side-bar-placeholder {
+  width: 225px;
+  height: 91vh;
+  position: relative;
+  float: left; }
+
+.lessons-wrapper {
+  width: 225px;
+  height: 91vh;
+  background: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: fixed; }
+
+.lessons {
+  max-height: 100%;
+  font-family: 'Quicksand';
+  margin-left: 10px;
+  overflow: auto;
+  margin-right: -17px;
+  padding-right: 0;
+  padding-bottom: 100px; }
+  .lessons h3 {
+    margin: 5px 0 0 0;
+    cursor: pointer; }
+  .lessons h4 {
+    color: black;
+    font-weight: bolder;
+    margin: 0 auto 0 25%; }
+  .lessons ul {
+    margin: 0 auto 0 auto;
+    padding: 5px;
+    padding-left: 10px;
+    cursor: pointer; }
+  .lessons li {
+    list-style: none;
+    line-height: 35px;
+    cursor: pointer;
+    color: #3A3A3A; }
+  .lessons .lesson-title {
+    color: black; }
+    .lessons .lesson-title h3 {
+      font-size: 17px; }
+  .lessons .lesson-sections {
+    display: none; }
+  .lessons .expand {
+    display: block !important; }
+  .lessons #take-assessment {
+    width: 165px;
+    height: 65px;
+    color: white;
+    background: #406BB2;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    line-height: 22px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    margin-bottom: 25px; }
+
+.lessons-content-wrapper {
+  position: relative; }
+
+.content-wrapper {
+  width: calc(100% - 225px);
+  position: relative;
+  float: left;
+  margin-bottom: 50px; }
+
+.video-placeholder {
+  width: 500px;
+  height: 300px;
+  background: silver;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  margin-top: 25px; }
+  .video-placeholder span {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+
+.lessons-practice {
+  width: 500px;
+  height: 300px;
+  background: rgba(0, 0, 0, 0.1);
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  margin-top: 35px; }
+  .lessons-practice form {
+    width: 80%;
+    position: absolute;
+    left: 50%;
+    top: 38%;
+    transform: translate(-50%, -50%); }
+    .lessons-practice form input {
+      margin: 10px 10px 15px auto; }

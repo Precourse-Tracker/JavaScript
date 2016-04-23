@@ -6,21 +6,20 @@ $darkBlue: #406BB2; /////////////////////////////
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 80vw;
+    width: 100vw;
     height: 80vh;
     transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-#home-top {
+#mountainScene-left {
     position: absolute;
     width: 0;
     height: 0;
-    left: calc(40vw - 20em);
+    left: calc(50vw - 19.95em);
     border-left: 20em solid transparent;
-    border-right: 20em solid transparent;
-    border-bottom: 21em solid #FFE3A8;
+    border-bottom: 21em solid rgb(119, 87, 59);
     margin-bottom: 8vh;
     margin-top: 8vh;
     z-index: -3;
@@ -30,6 +29,47 @@ $darkBlue: #406BB2; /////////////////////////////
         top: 50%;
         transform: translate(-50%);
     }
+}
+#mountainScene-right {
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: calc(50vw - 0em);
+    border-right: 20em solid transparent;
+    border-bottom: 21em solid rgb(149, 137, 92);
+    margin-bottom: 8vh;
+    margin-top: 8vh;
+    z-index: -3;
+    div {
+        font-weight: bold;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%);
+    }
+}
+#bgMountain-Left {
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: calc(80vw - 17.94em);
+    bottom: calc(70vh - 20em);
+    border-left: 13em solid transparent;
+    border-bottom: 13em solid rgb(82, 59, 40);
+    margin-bottom: 4vh;
+    margin-top: 4vh;
+    z-index: -4;
+}
+#bgMountain-right {
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: calc(80vw - 5em);
+    bottom: calc(70vh - 20em);
+    border-right: 13em solid transparent;
+    border-bottom: 13em solid rgb(103, 95, 63);
+    margin-bottom: 4vh;
+    margin-top: 4vh;
+    z-index: -4;
 }
 .home-bottom {
     width: 150px;
@@ -48,18 +88,29 @@ $darkBlue: #406BB2; /////////////////////////////
         margin: 20px;
     }
 }
-.spawnTreesBtn{
-  padding-top: 0px;
-  position: absolute;
-  top: 66px;
+
+
+
+
+// Buttons
+
+.spawnTreesBtn {
+    padding-top: 0;
+    position: absolute;
+    top: 69px;
 }
-.spawnRocksBtn{
-  padding-top: 0px;
-  position: absolute;
-  top: 43px;
+.spawnRocksBtn {
+    padding-top: 0;
+    position: absolute;
+    top: 46px;
 }
-.spawnSnowPeakBtn{
-  padding-top: 0px;
-  position: absolute;
-  top: 20px;
+.spawnSnowPeakBtn {
+    padding-top: 0;
+    position: absolute;
+    top: 23px;
+}
+.spawnBackgroundBtn {
+    padding-top: 0;
+    position: absolute;
+    top: 0px;
 }
