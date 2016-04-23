@@ -122,9 +122,8 @@ a {
   height: 100%; }
 
 #unit-subview div {
-  width: 500px;
-  height: 400px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 90%;
+  height: 90%;
   background: white;
   position: absolute;
   top: 54%;
@@ -139,21 +138,22 @@ a {
     left: 50%;
     transform: translate(-50%, -50%); }
 
-#unit-subview #js-graph-div div {
-  font-family: 'Lato';
-  font-size: 11px;
-  font-weight: 300;
-  fill: #242424;
-  text-align: center;
-  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
-  cursor: default; }
+#unit-subview #js-graph-div #main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 432px; }
 
-#unit-subview #js-graph-div .legend {
-  font-family: 'Lato';
-  fill: #333333; }
+#unit-subview #js-graph-div svg text {
+  pointer-events: none; }
 
-#unit-subview #js-graph-div .tooltip {
-  fill: #333333; }
+#unit-subview #js-graph-div rect {
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+
+#unit-subview #js-graph-div rect:hover {
+  fill: #8FB9FF; }
 
 #home-wrapper {
   font-family: 'Lato';
@@ -203,7 +203,6 @@ a {
   .home-bottom button:hover {
     background: #8FB9FF;
     box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
-
 
 .lessonTests {
   width: calc(100% - 225px);
@@ -261,6 +260,7 @@ a {
     transform: translate(-50%);
     background: white;
     z-index: 0; }
+
 
 #side-bar-placeholder {
   width: 225px;

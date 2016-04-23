@@ -1,4 +1,5 @@
 $darkBlue: #406BB2;
+$lightBlue: #8FB9FF;
 
 @mixin colorSchemeSquares {
   width: 20px;
@@ -6,9 +7,8 @@ $darkBlue: #406BB2;
 }
 
 @mixin graphSizing {
-  width: 500px;
-  height: 400px;
-  border: 1px solid rgba(0,0,0,0.1);
+  width: 90%;
+  height: 90%;
   background: white;
 }
 
@@ -138,24 +138,25 @@ $darkBlue: #406BB2;
   }
 
   #js-graph-div {
-      div {
-				font-family: 'Lato';
-				font-size: 11px;
-				font-weight: 300;
-				fill: #242424;
-				text-align: center;
-				text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
-				cursor: default;
-			}
 
-			.legend {
-				font-family: 'Lato';
-				fill: #333333;
-			}
+    #main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 432px;
+    }
 
-			.tooltip {
-				fill: #333333;
-			}
+    svg text {
+      pointer-events: none;
+    }
+    rect {
+      -moz-transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+    rect:hover {
+      fill: $lightBlue;
+    }
   }
 
 }
