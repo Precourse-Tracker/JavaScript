@@ -11,50 +11,6 @@ a {
   text-decoration: none;
   color: white; }
 
-#assessment-view .code-input-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0 10px 0; }
-
-#assessment-view .ace_editor {
-  height: 200px; }
-
-#assessment-view .assessment-eval {
-  color: #fff;
-  margin: 1em; }
-
-#assessment-view button {
-  background: #406BB2;
-  padding: 10px 16px;
-  width: auto;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 14px;
-  color: #fff;
-  line-height: 16px;
-  letter-spacing: 0.5px;
-  border-radius: 2px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
-  border: 0;
-  outline: 0;
-  transition: all 0.25s; }
-
-#assessment-view button:hover {
-  background: #8FB9FF;
-  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
-
-#assessment-view button:disabled {
-  visibility: hidden; }
-
-#assessment-view .stuff {
-  color: #406BB2;
-  width: 90vw;
-  margin: 1em; }
-
-#assessment-view input {
-  width: 100vw;
-  height: 20vh; }
-
 #dashboard-wrapper {
   width: 100vw;
   height: 91vh;
@@ -122,9 +78,8 @@ a {
   height: 100%; }
 
 #unit-subview div {
-  width: 500px;
-  height: 400px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 90%;
+  height: 90%;
   background: white;
   position: absolute;
   top: 54%;
@@ -139,6 +94,70 @@ a {
     left: 50%;
     transform: translate(-50%, -50%); }
 
+#unit-subview #js-graph-div #main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 432px; }
+
+#unit-subview #js-graph-div svg text {
+  pointer-events: none; }
+
+#unit-subview #js-graph-div rect {
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+
+#unit-subview #js-graph-div rect:hover {
+  fill: #8FB9FF; }
+
+#assessment-view .code-input-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 10px 0; }
+
+#assessment-view .ace_editor {
+  height: 200px; }
+
+#assessment-view .assessment-eval {
+  color: #fff;
+  margin: 1em; }
+
+#assessment-view button {
+  background: #406BB2;
+  padding: 10px 16px;
+  width: auto;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #fff;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+  border: 0;
+  outline: 0;
+  transition: all 0.25s; }
+
+#assessment-view button:hover {
+  background: #8FB9FF;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
+
+#assessment-view button:disabled {
+  visibility: hidden; }
+
+#assessment-view #submit-assessment {
+  float: right;
+  margin: 4em; }
+
+#assessment-view .stuff {
+  color: #406BB2;
+  width: 90vw;
+  margin: 1em; }
+
+#assessment-view input {
+  width: 100vw;
+  height: 20vh; }
 
 #home-wrapper {
   font-family: 'Lato';
@@ -158,124 +177,27 @@ a {
     top: 50%;
     transform: translate(-50%); }
 
-#side-bar-placeholder {
-  width: 225px;
-  height: 91vh;
-  position: relative;
-  float: left; }
-
-.lessons-wrapper {
-  width: 225px;
-  height: 91vh;
-  background: rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  position: fixed; }
-
-.lessons {
-  max-height: 100%;
-  font-family: 'Quicksand';
-  margin-left: 10px;
-  overflow: auto;
-  margin-right: -17px;
-  padding-right: 0;
-  padding-bottom: 100px; }
-  .lessons h3 {
-    margin: 5px 0 0 0;
-    cursor: pointer; }
-  .lessons h4 {
-    color: black;
-    font-weight: bolder;
-    margin: 0 auto 0 25%;
-    cursor: pointer; }
-  .lessons ul {
-    margin: 0 auto 0 auto;
-    padding: 5px;
-    padding-left: 10px; }
-  .lessons li {
-    list-style: none;
-    line-height: 35px;
-    color: #3A3A3A; }
-  .lessons .lesson-title {
-    color: black; }
-    .lessons .lesson-title h3 {
-      font-size: 17px; }
-  .lessons .lesson-sections {
-    display: none; }
-  .lessons .expand {
-    display: block !important; }
-  .lessons #take-assessment {
-    width: 165px;
-    height: 65px;
-    color: white;
-    background: #406BB2;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    font-weight: bold;
-    line-height: 22px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%);
-    margin-bottom: 25px; }
-    .lessons #take-assessment:hover {
-      box-shadow: 0 0 10px #8FB9FF; }
-
-.lessons-content-wrapper {
-  position: relative; }
-
-.content-wrapper {
-  width: calc(100% - 225px);
-  position: relative;
-  float: left;
-  margin-bottom: 50px; }
-
-.video-placeholder {
-  width: 500px;
-  height: 300px;
-  background: silver;
-  position: relative;
-  left: 50%;
-  transform: translate(-50%);
-  margin-top: 25px; }
-  .video-placeholder span {
-    color: white;
-    font-size: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); }
-
-.lessons-practice {
-  width: 500px;
-  height: 300px;
-  background: rgba(0, 0, 0, 0.1);
-  position: relative;
-  left: 50%;
-  transform: translate(-50%);
-  margin-top: 35px; }
-  .lessons-practice form {
-    width: 80%;
-    position: absolute;
-    left: 50%;
-    top: 38%;
-    transform: translate(-50%, -50%); }
-    .lessons-practice form input {
-      margin: 10px 10px 15px auto; }
-
-#welcome-page {
-  width: 500px;
-  height: 300px;
-  color: white;
+button {
+  margin: 4em;
   background: #406BB2;
-  margin-top: 25px;
-  position: relative;
-  left: 50%;
-  transform: translate(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center; }
+  padding: 10px 16px;
+  width: auto;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #fff;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+  border: 0;
+  outline: 0;
+  transition: all 0.25s; }
+
+button:hover {
+  background: #8FB9FF;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
+
 
 .lessonTests {
   position: relative;
@@ -368,6 +290,133 @@ a {
       cursor: pointer; }
       .submit-functions-test div input:hover {
         box-shadow: 0 0 10px #406BB2; }
+
+#side-bar-placeholder {
+  width: 225px;
+  height: 91vh;
+  position: relative;
+  float: left; }
+
+.lessons-wrapper {
+  width: 225px;
+  height: 91vh;
+  background: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: fixed; }
+
+.lessons {
+  max-height: 100%;
+  font-family: 'Quicksand';
+  margin-left: 10px;
+  overflow: auto;
+  margin-right: -17px;
+  padding-right: 0;
+  padding-bottom: 100px; }
+  .lessons h3 {
+    margin: 5px 0 0 0;
+    cursor: pointer; }
+  .lessons h4 {
+    color: black;
+    font-weight: bolder;
+    margin: 0 auto 0 25%;
+    cursor: pointer; }
+  .lessons ul {
+    margin: 0 auto 0 auto;
+    padding: 5px;
+    padding-left: 10px; }
+  .lessons li {
+    list-style: none;
+    line-height: 35px;
+    color: #3A3A3A; }
+  .lessons .lesson-title {
+    color: black; }
+    .lessons .lesson-title h3 {
+      font-size: 17px; }
+  .lessons .lesson-sections {
+    display: none; }
+  .lessons .expand {
+    display: block !important; }
+  .lessons a {
+    display: flex;
+    justify-content: flex-start;
+    text-decoration: none;
+    color: white; }
+  .lessons button {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background: #406BB2;
+    padding: 10px 16px;
+    width: auto;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #fff;
+    line-height: 16px;
+    letter-spacing: 0.5px;
+    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+    border: 0;
+    outline: 0;
+    transition: all 0.25s; }
+  .lessons button:hover {
+    background: #8FB9FF;
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
+
+.lessons-content-wrapper {
+  position: relative; }
+
+.content-wrapper {
+  width: calc(100% - 225px);
+  position: relative;
+  float: left;
+  margin-bottom: 50px; }
+
+.video-placeholder {
+  width: 500px;
+  height: 300px;
+  background: silver;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  margin-top: 25px; }
+  .video-placeholder span {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+
+.lessons-practice {
+  width: 500px;
+  height: 300px;
+  background: rgba(0, 0, 0, 0.1);
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  margin-top: 35px; }
+  .lessons-practice form {
+    width: 80%;
+    position: absolute;
+    left: 50%;
+    top: 38%;
+    transform: translate(-50%, -50%); }
+    .lessons-practice form input {
+      margin: 10px 10px 15px auto; }
+
+#welcome-page {
+  width: 500px;
+  height: 300px;
+  color: white;
+  background: #406BB2;
+  margin-top: 25px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center; }
 
 #login-section body {
   height: 100%;
@@ -796,7 +845,7 @@ i {
   font-family: 'Lato';
   font-weight: bold;
   color: #FFF;
-  background: #8FB9FF;
+  background: #406BB2;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -806,8 +855,8 @@ i {
 
 #profile-wrapper {
   cursor: pointer;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 100%;
   display: flex;
@@ -818,8 +867,6 @@ i {
   height: auto;
   font-family: 'Quicksand';
   background: white;
-  border-left: 1px solid grey;
-  border-bottom: 1px solid grey;
   display: none;
   position: absolute;
   right: 0;
@@ -831,3 +878,6 @@ i {
     color: #406BB2;
     line-height: 35px;
     list-style: none; }
+  #menu-navigation li:hover {
+    background-color: #8FB9FF;
+    opacity: 0.3; }
