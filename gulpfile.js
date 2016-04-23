@@ -8,6 +8,7 @@ var gulp = require('gulp'),
     ngAnnotate = require('gulp-ng-annotate'),
     watcher = gulp.watch(['./main/**/*.js', './main/styles/*.scss', './main/**/*.html', './main/jquery.js', './main/ng-webworker.js', './main/worker_wrapper.js', './main/ui-ace.js'], ['default']);
 
+gulp.watch(['./main/**/*.js', './main/styles/*.scss', './main/**/*.html', './main/jquery.js'], ['default']);
 watcher.on('change', function(event) {
   console.log('File ' + event.path + ' was ' + event.type + ' at ' + new Date() + ' , running tasks...');
 });
