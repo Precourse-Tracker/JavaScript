@@ -115,9 +115,10 @@ app.get('/logout', userController.logoutUser);
 
 //////////GET DATA////////////
 app.get('/api/assessment/js', unitController.getJSAssessment);
+app.get('/api/lessons/js/:lessonName', unitController.getJSLesson);
 
-
-
+/////////UPDATING USER////////
+app.put('/api/users', userController.updateUser);
 
 /////////////Creating Data///////
 app.post('/api/lessons', unitController.createLesson);

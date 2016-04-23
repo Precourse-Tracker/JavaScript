@@ -1,28 +1,24 @@
 angular.module('myApp')
 
-.directive('lessonsSideBarDirective', function() {
+.directive('lessonsSideBarDirective', function($state) {
 
   return {
     restrict: 'E',
+    controller: 'lessonsContentController',
     templateUrl: './html/lessons/lessonsSideBarTemplate.html',
     link: function(scope, ele, attr) {
       $('.lesson-title').click(function() {
         // console.log(this.parentNode);
         $('.lesson-sections', this.parentNode).toggle('expand');
+        $('.lesson-tests-wrapper').css('display', 'none');
       })
 
-      // $('.lesson-group').click(function() {
-      //   // console.log(this.parentNode);
-      //   $('.lesson-title', this.parentNode).toggle('expand');
-      // })
+      $('.lesson-test').click(function() {
+        $('.lesson-tests-wrapper').css('display', 'block');
+        $('html, body').animate({ scrollTop: 0 }, 300);
+      }) // end lesson-test click
 
-      // $('.lesson-test').click(function() {
-      //   console.log(this);
-      //   console.log(this.parentNode);
-      //   console.log(this.parentNode.parentNode.parentNode.parentNode);
-      // })
-
-    }
+    } // end of directive link
   }
 
 })  // end lessonsSideBarDirective

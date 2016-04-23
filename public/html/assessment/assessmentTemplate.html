@@ -1,32 +1,13 @@
 <navigation-directive></navigation-directive>
 <section ng-controller="assessmentController" id=assessment-view>
-
-  <div class="code-input-wrapper">
-    <div class="container">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div id="editor">function foo(items) {
-    var x = "All this is syntax highlighted";
-        return x;
-  }        </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <a class="assessment-eval" href="#"><span >Submit Answer</span></a>
-
-  <div class="code-input-wrapper">
-    <div class="container">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div id="editor_1">function yoda(jedi) {
-    var sith = "Yoda will always win";
-        return x;
-  }        </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <a class="assessment-eval" href="#"><span >Submit Answer</span></a>
-
+  <div ng-repeat="q in questions" class="stuff">
+    Q: {{q.question}}
+  <div ng-model="userCode" ui-ace="{
+    mode: 'javascript',
+    theme: 'crimson_editor'
+  }"></div>
+  ANSWER: {{q.answer}}
+    <button ng-click="eval(q, userCode); doSomeStuff(q);" ng-disabled="q.disabled" class="assessment-eval">eval</button>
+</div>
+<button type="button" ng-click="submitAssessment(questions.length)">Submit Assessment</button>
 </section>
