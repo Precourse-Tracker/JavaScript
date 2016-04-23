@@ -33,6 +33,31 @@ a {
 #assessment-view span:hover {
   color: #8FB9FF; }
 
+#home-wrapper {
+  font-family: 'Lato';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: -1; }
+
+.home-top {
+  width: 0;
+  height: 0;
+  border-left: 19em solid transparent;
+  border-right: 19em solid transparent;
+  border-bottom: 21em solid #FFE3A8;
+  margin-bottom: 8vh;
+  margin-top: 8vh; }
+  .home-top div {
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%); }
+
 #dashboard-wrapper {
   width: 100vw;
   height: 91vh;
@@ -117,31 +142,6 @@ a {
     left: 50%;
     transform: translate(-50%, -50%); }
 
-
-#home-wrapper {
-  font-family: 'Lato';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: -1; }
-
-.home-top {
-  width: 0;
-  height: 0;
-  border-left: 19em solid transparent;
-  border-right: 19em solid transparent;
-  border-bottom: 21em solid #FFE3A8;
-  margin-bottom: 8vh;
-  margin-top: 8vh; }
-  .home-top div {
-    font-weight: bold;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%); }
 
 #side-bar-placeholder {
   width: 225px;
@@ -425,54 +425,6 @@ a {
 #login-section .expand {
   display: block !important; }
 
-#navigation-placeholder {
-  width: 100vw;
-  height: 8.25vh;
-  position: relative; }
-
-#navigation-bar {
-  width: 100vw;
-  height: 8.25vh;
-  padding: 15px;
-  font-family: 'Lato';
-  font-weight: bold;
-  color: #FFF;
-  background: #8FB9FF;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  z-index: 1; }
-
-#profile-wrapper {
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
-#menu-navigation {
-  height: auto;
-  font-family: 'Quicksand';
-  background: white;
-  border-left: 1px solid grey;
-  border-bottom: 1px solid grey;
-  display: none;
-  position: absolute;
-  right: 0;
-  cursor: pointer;
-  z-index: 9; }
-  #menu-navigation ul {
-    padding-right: 25px; }
-  #menu-navigation li {
-    color: #406BB2;
-    line-height: 35px;
-    list-style: none; }
-
 .climber {
   position: relative; }
 
@@ -622,7 +574,17 @@ a {
 .spawnTreesBtn {
   padding-top: 0px;
   position: absolute;
-  top: 40px; }
+  top: 66px; }
+
+.spawnRocksBtn {
+  padding-top: 0px;
+  position: absolute;
+  top: 43px; }
+
+.spawnSnowPeakBtn {
+  padding-top: 0px;
+  position: absolute;
+  top: 20px; }
 
 #trees {
   width: 2.4em;
@@ -706,3 +668,51 @@ i {
   background-color: green;
   left: 2.526315789473684em;
   top: 1.894736842105263em; }
+
+#navigation-placeholder {
+  width: 100vw;
+  height: 8.25vh;
+  position: relative; }
+
+#navigation-bar {
+  width: 100vw;
+  height: 8.25vh;
+  padding: 15px;
+  font-family: 'Lato';
+  font-weight: bold;
+  color: #FFF;
+  background: #8FB9FF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 1; }
+
+#profile-wrapper {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+#menu-navigation {
+  height: auto;
+  font-family: 'Quicksand';
+  background: white;
+  border-left: 1px solid grey;
+  border-bottom: 1px solid grey;
+  display: none;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  z-index: 9; }
+  #menu-navigation ul {
+    padding-right: 25px; }
+  #menu-navigation li {
+    color: #406BB2;
+    line-height: 35px;
+    list-style: none; }
