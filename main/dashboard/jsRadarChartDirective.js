@@ -6,7 +6,7 @@ angular.module('myApp')
          replace: true,
          template: '<div id="main"></div>',
          link: function (scope, element, attrs) {
-           /////////////////////////////////////////////////////////
+     /////////////////////////////////////////////////////////
      /////////////// The Radar Chart Function ////////////////
      /////////////////////////////////////////////////////////
      var color = d3.scale.ordinal()
@@ -311,7 +311,7 @@ angular.module('myApp')
      }//RadarChart
      RadarChart(".radarChart", data, radarChartOptions);
 
-// dont touch
+      // dont touch
          }
       };
    });
