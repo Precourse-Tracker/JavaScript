@@ -37,22 +37,9 @@ $darkBlue: #406BB2;
   }
 }
 
-.home-bottom {
-  width: 150px;
-  height: 70px;
-  font-weight: bold;
-  text-align: center;
-  color: #FFF;
-  background: $darkBlue;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-
-  span {
-    margin: 20px;
-  }
   button {
-    background: #406BB2;
+    margin: 4em;
+    background: $darkBlue;
     padding: 10px 16px;
     width: auto;
     font-weight: 600;
@@ -72,4 +59,3 @@ $darkBlue: #406BB2;
     background: #8FB9FF;
     box-shadow: 0 4px 7px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
   }
-}
