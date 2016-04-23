@@ -157,18 +157,20 @@ a {
 
 
 .lessonTests {
-  width: calc(100% - 225px);
   position: relative;
   left: 50%;
-  transform: translate(-50%); }
+  transform: translate(-50%);
+  width: 100%; }
   .lessonTests .lessonTests > h2, .lessonTests .lessonTests > div {
     position: absolute; }
   .lessonTests h2 {
     text-align: center;
     color: #406BB2; }
   .lessonTests .multiple-choice-wrapper {
+    max-width: 700px;
     display: flex;
-    justify-content: center; }
+    justify-content: center;
+    margin: auto; }
   .lessonTests .test-question {
     line-height: 3em; }
   .lessonTests .quiz-options {
@@ -190,28 +192,61 @@ a {
     text-align: center;
     position: relative;
     margin: 2px auto; }
-  .lessonTests button:hover, .lessonTests button:active, .lessonTests button:focus {
+  .lessonTests button:hover, .lessonTests button:active, .lessonTests button:focus, .lessonTests button.selected {
     background-color: #8FB9FF;
     color: #fff;
     cursor: pointer;
     outline: 0; }
+  .lessonTests form:nth-child(1) {
+    margin-bottom: 25px; }
 
 .lesson-tests-wrapper {
   width: 500px;
-  height: auto;
+  height: 100vh;
   margin-bottom: 25px;
-  display: block; }
+  display: none; }
   .lesson-tests-wrapper .lesson-tests-placeholder {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    position: absolute;
-    z-index: 2; }
+    position: fixed;
+    z-index: 1; }
   .lesson-tests-wrapper section {
+    width: calc(100% - 5vw);
     position: absolute;
     left: 50%;
     transform: translate(-50%);
     background: white;
     z-index: 0; }
+
+.final-score {
+  width: 300px;
+  height: 100px;
+  color: white;
+  background: #406BB2;
+  padding: 20px;
+  position: relative;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  transform: translate(-50%); }
+
+.submit-functions-test {
+  display: flex;
+  justify-content: center; }
+  .submit-functions-test div {
+    width: 200px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column; }
+    .submit-functions-test div input {
+      height: 32px;
+      color: #406BB2;
+      margin: 5px;
+      border: none;
+      cursor: pointer; }
+      .submit-functions-test div input:hover {
+        box-shadow: 0 0 10px #406BB2; }
 
 #side-bar-placeholder {
   width: 225px;
@@ -274,6 +309,8 @@ a {
     left: 50%;
     transform: translate(-50%);
     margin-bottom: 25px; }
+    .lessons #take-assessment:hover {
+      box-shadow: 0 0 10px #8FB9FF; }
 
 .lessons-content-wrapper {
   position: relative; }
@@ -316,6 +353,19 @@ a {
     transform: translate(-50%, -50%); }
     .lessons-practice form input {
       margin: 10px 10px 15px auto; }
+
+#welcome-page {
+  width: 500px;
+  height: 300px;
+  color: white;
+  background: #406BB2;
+  margin-top: 25px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center; }
 
 #login-section body {
   height: 100%;
