@@ -3,6 +3,7 @@ angular.module('myApp')
 .service('assessmentService', function($q, $http) {
 
 
+
     this.getAssessment = () => {
         return $http({
             method: 'GET',
@@ -23,7 +24,6 @@ angular.module('myApp')
         console.log("tick count", tick);
     }
 
-
     this.submitAssessment = (length) => {
       var totalScore = (tick / length) * 100;
       totalScore = totalScore.toString();
@@ -41,4 +41,5 @@ angular.module('myApp')
         console.log(resp);
       })
     }
+
 })
