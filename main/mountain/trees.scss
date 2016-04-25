@@ -104,22 +104,22 @@ i {
 // }
 
 // tree styles are defined dynamically within mountain-Directive
-// .treeParts {
-//   margin: 0px;
-//   padding: 0px;
-// }
-// .treeTop {
-//   border: 0.39 solid transparent;
-// }
-// .treeMid {
-//   border: 0.55em solid transparent;
-// }
-// .treeBase {
-//   border: 0.55em solid transparent;
-// }
-// .treeTrunk {
-//   border: none;
-//   width: 0.31em;
-//   height: 0.31em;
-//   background-color: #522200;
-// }
+.treeParts {
+  margin: 0px;
+  padding: 0px;
+}
+.treeTop {
+  border: 0.39 solid transparent;
+}
+.treeMid {
+  border: 0.55em solid transparent;
+}
+.treeBase {
+  border: 0.55em solid transparent;
+}
+.treeTrunk {
+  border: none;
+  width: 0.31em;
+  height: 0.31em;
+  background-color: #522200;
+}

@@ -5,15 +5,16 @@
 /////////////////////////////
 #mtn-wrapper {
     font-family: 'Lato';
-    position: absolute;
-    top: 50%;
+    position: relative;
+    top: 50vh;
     left: 50%;
     width: 100vw;
-    height: 80vh;
+    height: 91.75vh;
     transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
 }
 #mountainScene-left {
     position: absolute;
@@ -63,7 +64,7 @@
     border-bottom: 13em solid rgb(82, 59, 40);
     margin-bottom: 4vh;
     margin-top: 4vh;
-    z-index: -4;
+    z-index: -5;
 }
 #bgMountain-right {
     position: absolute;
@@ -75,7 +76,7 @@
     border-bottom: 13em solid rgb(103, 95, 63);
     margin-bottom: 4vh;
     margin-top: 4vh;
-    z-index: -4;
+    z-index: -5;
 }
 .home-bottom {
     height: 70px;
@@ -115,4 +116,9 @@
     padding-top: 0;
     position: absolute;
     top: 0;
+}
+.spawnCloudsBtn {
+  padding-top: 0;
+  position: absolute;
+  top: 92px;
 }

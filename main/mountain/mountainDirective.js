@@ -1,5 +1,4 @@
-angular.module( 'myApp' )
-  .directive( 'mountainDirective', function () {
+angular.module( 'myApp' ).directive( 'mountainDirective', function () {
     var dirDefinition = {
       restrict: 'E',
       templateUrl: './html/mountain/mountainTemplate.html',
@@ -88,47 +87,38 @@ angular.module( 'myApp' )
 
         // creates a random color given a specific range
         const randomClr = function ( rdL, rdH, grL, grH, buL, buH ) {
-            let rd = Math.floor( randomMinMax( rdL, rdH ) );
-            let grn = Math.floor( randomMinMax( grL, grH ) );
-            let bl = Math.floor( randomMinMax( buL, buH ) );
-            return ( 'rgb(' + rd + ', ' + grn + ', ' + bl + ')' );
-          }
-          /*
-            var myNodeList = document.querySelectorAll( 'li' );
-            mountainSvc.myForEach( myNodeList, function ( index, value ) {
-              console.log( index, value );
-            } );
-          */
-
-        /*
-
-        function lighten( color, amount ) {
-          amount = ( amount === 0 ) ? 0 : ( amount || 10 );
-          var hsl = tinycolor( color ).toHsl();
-          hsl.l += amount / 100;
-          hsl.l = clamp01( hsl.l );
-          return tinycolor( hsl );
+          let rd = Math.floor( randomMinMax( rdL, rdH ) );
+          let grn = Math.floor( randomMinMax( grL, grH ) );
+          let bl = Math.floor( randomMinMax( buL, buH ) );
+          return ( 'rgb(' + rd + ', ' + grn + ', ' + bl + ')' );
         }
 
-        function brighten( color, amount ) {
+        const lighten = function ( colorStr, amount ) {
+          color = colorStr.match( /\d+/g ).map( v => parseInt( v ) );
           amount = ( amount === 0 ) ? 0 : ( amount || 10 );
-          var rgb = tinycolor( color ).toRgb();
-          rgb.r = mathMax( 0, mathMin( 255, rgb.r - mathRound( 255 * -( amount / 100 ) ) ) );
-          rgb.g = mathMax( 0, mathMin( 255, rgb.g - mathRound( 255 * -( amount / 100 ) ) ) );
-          rgb.b = mathMax( 0, mathMin( 255, rgb.b - mathRound( 255 * -( amount / 100 ) ) ) );
-          return tinycolor( rgb );
+          let hsl = rgb2hsl( color );
+          hsl[ 2 ] += ( amount );
+          return hsl;
         }
 
-        function darken( color, amount ) {
-          amount = ( amount === 0 ) ? 0 : ( amount || 10 );
-          var hsl = tinycolor( color ).toHsl();
-          hsl.l -= amount / 100;
-          hsl.l = clamp01( hsl.l );
-          return tinycolor( hsl );
-        }
+        // var myNodeList = document.querySelectorAll( 'li' );
+        // mountainSvc.myForEach( myNodeList, function ( index, value ) {
+        //   console.log( index, value );
+        // } );
 
 
-        */
+
+
+        // function darken( color, amount ) {
+        //     amount = ( amount === 0 ) ? 0 : ( amount || 10 );
+        //     var hsl = tinycolor( color ).toHsl();
+        //     hsl.l -= amount / 100;
+        //     hsl.l = clamp01( hsl.l );
+        //     return tinycolor( hsl );
+        //   }
+
+
+
 
         //////////////////////////////
         // <------ The DOM -------> //
@@ -144,6 +134,8 @@ angular.module( 'myApp' )
         var sk1 = document.createElement( 'i' );
         var gr1 = document.createElement( 'i' );
 
+
+        // console.log( lighten( 'rgb(1, 70, 49)', 50 ) );
         //////////////////////////////
         // <----- Time of Day ----> //
         ////////////////////////// ////
@@ -154,12 +146,12 @@ angular.module( 'myApp' )
         let tz = dt.getTimezoneOffset();
         // let localHours = dt.getHours();
         let localHours = 8;
-        console.log( 'localHours from above: ' + localHours );
 
         // TODO:
         var slidePos = document.getElementById( 'sliderSun' ).value;
 
-        showValue = function ( newValue ) {
+        // simulates the passage of time.
+        timePassing = function ( newValue ) {
           document.getElementById( "range" ).innerHTML = newValue;
           slidePos = newValue;
           console.log( parseInt( slidePos ) );
@@ -171,14 +163,13 @@ angular.module( 'myApp' )
           sk1.style.backgroundColor = 'rgb(28, 24, 94)';
           gr1.style.backgroundColor = 'rgb(35, 48, 20)';
 
-
           // grabs the element, retrieves it's color, parses it to an array of int values, logs it to the console.
-          mSLeft.rgbColor = mSLeft.style.borderBottomColor.match( /\d+/g ).map( v => parseInt( v ) );
-          mSRight.rgbColor = mSRight.style.borderBottomColor.match( /\d+/g ).map( v => parseInt( v ) );
-          bgmLeft.rgbColor = bgmLeft.style.borderBottomColor.match( /\d+/g ).map( v => parseInt( v ) );
-          bgmRight.rgbColor = bgmRight.style.borderBottomColor.match( /\d+/g ).map( v => parseInt( v ) );
-          sk1.rgbColor = sk1.style.backgroundColor.match( /\d+/g ).map( v => parseInt( v ) );
-          gr1.rgbColor = gr1.style.backgroundColor.match( /\d+/g ).map( v => parseInt( v ) );
+          mSLeft.rgbColor = mSLeft.style.borderBottomColor;
+          mSRight.rgbColor = mSRight.style.borderBottomColor;
+          bgmLeft.rgbColor = bgmLeft.style.borderBottomColor;
+          bgmRight.rgbColor = bgmRight.style.borderBottomColor;
+          sk1.rgbColor = sk1.style.backgroundColor;
+          gr1.rgbColor = gr1.style.backgroundColor;
 
           // take that array, run it through the rgb to hsl function, then increase the lightness depending on time of day.
           mSLeft.style.borderBottomColor = daylight( slidePos, mSLeft.rgbColor );
@@ -187,48 +178,21 @@ angular.module( 'myApp' )
           bgmRight.style.borderBottomColor = daylight( slidePos, bgmRight.rgbColor );
           sk1.style.backgroundColor = daylight( slidePos, sk1.rgbColor );
           gr1.style.backgroundColor = daylight( slidePos, gr1.rgbColor );
-
         }
+
 
         // controls day and night phasing in and out.
         const daylight = function ( slPos, rgbArr ) {
-            let slInv = slPos;
-            let mult = Math.round( slPos * 1.5 );
-            let R = rgbArr[ 0 ];
-            let G = rgbArr[ 1 ];
-            let B = rgbArr[ 2 ];
-            let hsl2 = rgb2hsl( [ R, G, B ] );
-            let lightness = ( hsl2[ 2 ] + mult );
-            let hslFormatted = 'hsl(' + hsl2[ 0 ] + ',' + hsl2[ 1 ] + '%,' + lightness + '%)';
-            if ( slPos >= 12 ) {
-              mult = ( ( Math.abs( Math.round( slPos ) - 24 ) ) / 0.8 );
-              console.log( 'mult: ' + mult );
-              lightness = ( hsl2[ 2 ] + mult );
-              hslFormatted = 'hsl(' + hsl2[ 0 ] + ',' + hsl2[ 1 ] + '%,' + lightness + '%)';
-            }
-            return hslFormatted;
+          var mult = Math.round( slPos * 2 );
+          let newRgbArr = lighten( rgbArr, mult );
+          var hslFormatted = ( 'hsl(' + Math.round( newRgbArr[ 0 ] ) + ', ' + Math.round( newRgbArr[ 1 ] ) + '%, ' + Math.round( newRgbArr[ 2 ] ) + '%)' );
+          if ( slPos >= 12 ) {
+            mult = ( ( Math.abs( Math.round( slPos ) - 24 ) ) / 0.8 );
+            rgbArr = lighten( rgbArr, mult );
+            hslFormatted = ( 'hsl(' + Math.round( rgbArr[ 0 ] ) + ', ' + Math.round( rgbArr[ 1 ] ) + '%, ' + Math.round( rgbArr[ 2 ] ) + '%)' );
           }
-
-
-        // mornings
-        // left side brighter
-        // right side darker
-
-        // mid-day
-        // both sides brighter
-        //left side slightly darker than right
-
-        // afternoon
-        // left side darker
-        // right side brighter
-
-        // evenings
-        // left side darkest
-        // right side darkening
-
-        // night
-        // left side darkest
-        // right side dark
+          return hslFormatted;
+        }
 
 
         //////////////////////////////
@@ -236,63 +200,88 @@ angular.module( 'myApp' )
         //////////////////////////////
 
         scope.spawnBackground = function ( date, trouble ) {
-          var node = document.getElementById( 'mtn-wrapper' );
+            const node = document.getElementById( 'mtn-wrapper' );
 
-          // sky
-          sk1.style.backgroundColor = 'rgb(28, 24, 94)';
-          sk1.style.zIndex = ( -50 );
-          sk1.style.width = '100vw';
-          sk1.style.height = '45vh';
-          sk1.style.left = ( 0 ) + 'em';
-          sk1.style.top = ( -2 ) + 'vh';
-          sk1.style.margin = '0px';
+            // sky
+            sk1.style.backgroundColor = 'rgb(28, 24, 94)';
+            sk1.style.zIndex = ( -50 );
+            sk1.style.width = '100vw';
+            sk1.style.height = '50vh';
+            sk1.style.left = ( 0 ) + 'vw';
+            sk1.style.top = ( 0 ) + 'vh';
+            sk1.style.margin = '0px';
 
-          // ground
-          gr1.style.backgroundColor = 'rgb(70, 97, 41)';
-          gr1.style.zIndex = ( -50 );
-          gr1.style.width = '100%';
-          gr1.style.height = '55vh';
-          gr1.style.left = ( 0 ) + 'em';
-          gr1.style.top = ( 35 ) + 'vh';
-          gr1.style.margin = '0px';
+            // ground
+            gr1.style.backgroundColor = 'rgb(35, 48, 20)';
+            gr1.style.zIndex = ( -50 );
+            gr1.style.width = '100%';
+            gr1.style.height = '50vh';
+            gr1.style.left = ( 0 ) + 'vw';
+            gr1.style.top = ( 50 ) + 'vh';
+            gr1.style.margin = '0px';
 
-          // distant horizon
+            // distant horizon
 
-          // sun
-          // moon
-          // stars
+            // sun
+            // moon
+            // stars
 
-          node.appendChild( sk1 );
-          node.appendChild( gr1 );
+            node.appendChild( sk1 );
+            node.appendChild( gr1 );
+
+            scope.add = ( function () {
+              var counter = 0;
+              return function () {
+                console.log( counter );
+                return counter += 1;
+
+              }
+            } )();
+          } // end background
 
 
+        //////////////////////////////////
+        //  <--------- clouds --------> //
+        //////////////////////////////////
+        let cloudCount = 1;
+        // I had a heck of a time with getting a closure to work here. It only worked, when I decided to give up on it... I think it's because the entire directive is a closure. I spent hours and hours, unable to figure out why I couldn't save cloudCount...
+        scope.spawnClouds = function ( number ) {
+          const node = document.getElementById( 'mtn-wrapper' );
 
-          //////////////////////////////////
-          //  <--------- clouds --------> //
-          //////////////////////////////////
-          scope.spawnClouds = function ( number ) {
             for ( var i = 0; i < number; i++ ) {
-              var aCoords = randomMinMax( -3, 33 );
+              var aCoords = randomMinMax( -1, 11 );
               var x = aCoords;
               var y = randomMinMax( 5, findY( aCoords ) );
-
               const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
+              var cloudZ = ( Math.round( ( newZ / 10 ) - 16 ) );
+              console.log( 'cloudZ: ', cloudZ );
 
-              var snowZ = ( newZ + 4 );
+              var cl1 = document.createElement( 'i' );
+              let cl1rId = ( 'newCloud' + cloudCount );
+              // let tmpLeft = 'calc(', (- 142), 'px', (- 50), 'vw)';
+              // let tmpLeft = 'calc( - 142px - 50vw );';
 
-              var s1 = document.createElement( 'i' );
+              let cl1r = function (id) {
+                var tmp = ( 'newCloud' + id );
+                document.getElementById( tmp );
+              }
 
-              s1.style.zIndex = ( snowZ );
-              s1.style.border = '1.08em solid transparent';
-              s1.style.borderBottom = '0.39em solid ' + '#FFF';
-              s1.style.left = ( x - 16.2 ) + 'em';
-              s1.style.bottom = ( y - 23.9 ) + 'em';
 
-              node.appendChild( s1 );
-
+              console.log( 'cloudCount: ' + cloudCount );
+              cl1.className = 'cloud';
+              cl1.id = ( cl1rId );
+              console.log( 'cl1rId: ', cl1rId );
+              console.log( cl1r(cloudCount ) );
+              // cl1r.style.zIndex = ( cloudZ );
+              cl1.style.zIndex = ( cloudZ );
+              cl1.style.left = ( -42 ) + 'em';
+              cl1.style.top = ( aCoords ) + 'em';
+              console.log(y);
+              node.appendChild( cl1 );
+              cloudCount++;
             }
-          }
-        }
+          } // end spawnClouds
+
 
         //////////////////////////////
         // <------- Trees --------> //
@@ -325,9 +314,9 @@ angular.module( 'myApp' )
               gMax = 120;
               bMin = 50;
               bMax = 80;
-              console.log( 'localHours: ' + localHours );
-              console.log( 'x: ' + x );
-              console.log( 'y: ' + y );
+              // console.log( 'localHours: ' + localHours );
+              // console.log( 'x: ' + x );
+              // console.log( 'y: ' + y );
             }
 
             const newGrn = randomClr( 60, 90, gMin, gMax, 60, 90 );
@@ -409,14 +398,14 @@ angular.module( 'myApp' )
             const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
             var rockZ = ( newZ - 10 );
             const newGryConst = function () {
-              console.log( 'inside newGryConst: ' + ( Math.floor( Math.random() * 100 ) + 75 ) );
+              // console.log( 'inside newGryConst: ' + ( Math.floor( Math.random() * 100 ) + 75 ) );
               return ( Math.floor( Math.random() * 100 ) + 75 );
             }
 
             // randomize rock color, within a specified color range.
             let newGrlet = newGryConst();
             var newGrey = randomClr( newGrlet, ( newGrlet + randomMinMax( 1, 20 ) ), newGrlet, ( newGrlet + randomMinMax( 1, 20 ) ), newGrlet, ( newGrlet + randomMinMax( 1, 20 ) ) );
-            console.log( 'newGrey: ' + newGrey );
+            // console.log( 'newGrey: ' + newGrey );
 
             // create DOM element for portions of a rock
             var r1 = document.createElement( 'i' );
@@ -450,7 +439,6 @@ angular.module( 'myApp' )
             var x = aCoords;
             var y = randomMinMax( 5, findY( aCoords ) );
 
-            /* store low points in an array, new location is based on previous coords, so snow creeps down mountain. I can use the clusters on the ground as an interval to call this function, maybe every 8 clusters or something, the snow creeps further down. */
 
             // determines z-index of DOM elements to be created later.
             const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
