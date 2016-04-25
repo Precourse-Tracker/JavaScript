@@ -25,25 +25,210 @@ angular.module( 'myApp' )
           return yMax;
         }
 
+        // converts hsl color values to rgb
+        function hslToRgb( h, s, l ) {
+          var r, g, b;
+          if ( s == 0 ) {
+            r = g = b = l; // achromatic
+          } else {
+            var hue2rgb = function hue2rgb( p, q, t ) {
+              if ( t < 0 ) t += 1;
+              if ( t > 1 ) t -= 1;
+              if ( t < 1 / 6 ) return p + ( q - p ) * 6 * t;
+              if ( t < 1 / 2 ) return q;
+              if ( t < 2 / 3 ) return p + ( q - p ) * ( 2 / 3 - t ) * 6;
+              return p;
+            }
+            var q = l < 0.5 ? l * ( 1 + s ) : l + s - l * s;
+            var p = 2 * l - q;
+            r = hue2rgb( p, q, h + 1 / 3 );
+            g = hue2rgb( p, q, h );
+            b = hue2rgb( p, q, h - 1 / 3 );
+          }
+          return [ Math.round( r * 255 ), Math.round( g * 255 ), Math.round( b * 255 ) ];
+        }
+
+        // converts rgb color value ot hsl
+        function rgb2hsl( rgbArr ) {
+          var r1 = rgbArr[ 0 ] / 255;
+          var g1 = rgbArr[ 1 ] / 255;
+          var b1 = rgbArr[ 2 ] / 255;
+
+          var maxColor = Math.max( r1, g1, b1 );
+          var minColor = Math.min( r1, g1, b1 );
+          //Calculate Lightness:
+          var L = ( maxColor + minColor ) / 2;
+          var S = 0;
+          var H = 0;
+          if ( maxColor != minColor ) {
+            //Calculate Saturation:
+            if ( L < 0.5 ) {
+              S = ( maxColor - minColor ) / ( maxColor + minColor );
+            } else {
+              S = ( maxColor - minColor ) / ( 2.0 - maxColor - minColor );
+            }
+            //Calculate Hue:
+            if ( r1 == maxColor ) {
+              H = ( g1 - b1 ) / ( maxColor - minColor );
+            } else if ( g1 == maxColor ) {
+              H = 2.0 + ( b1 - r1 ) / ( maxColor - minColor );
+            } else {
+              H = 4.0 + ( r1 - g1 ) / ( maxColor - minColor );
+            }
+          }
+          L = L * 100;
+          S = S * 100;
+          H = H * 60;
+          if ( H < 0 ) {
+            H += 360;
+          }
+          var result = [ H, S, L ];
+          return result;
+        }
+
         // creates a random color given a specific range
         const randomClr = function ( rdL, rdH, grL, grH, buL, buH ) {
-          let rd = Math.floor( randomMinMax( rdL, rdH ) );
-          let grn = Math.floor( randomMinMax( grL, grH ) );
-          let bl = Math.floor( randomMinMax( buL, buH ) );
-          return ( 'rgb(' + rd + ', ' + grn + ', ' + bl + ')' );
+            let rd = Math.floor( randomMinMax( rdL, rdH ) );
+            let grn = Math.floor( randomMinMax( grL, grH ) );
+            let bl = Math.floor( randomMinMax( buL, buH ) );
+            return ( 'rgb(' + rd + ', ' + grn + ', ' + bl + ')' );
+          }
+          /*
+            var myNodeList = document.querySelectorAll( 'li' );
+            mountainSvc.myForEach( myNodeList, function ( index, value ) {
+              console.log( index, value );
+            } );
+          */
+
+        /*
+
+        function lighten( color, amount ) {
+          amount = ( amount === 0 ) ? 0 : ( amount || 10 );
+          var hsl = tinycolor( color ).toHsl();
+          hsl.l += amount / 100;
+          hsl.l = clamp01( hsl.l );
+          return tinycolor( hsl );
         }
+
+        function brighten( color, amount ) {
+          amount = ( amount === 0 ) ? 0 : ( amount || 10 );
+          var rgb = tinycolor( color ).toRgb();
+          rgb.r = mathMax( 0, mathMin( 255, rgb.r - mathRound( 255 * -( amount / 100 ) ) ) );
+          rgb.g = mathMax( 0, mathMin( 255, rgb.g - mathRound( 255 * -( amount / 100 ) ) ) );
+          rgb.b = mathMax( 0, mathMin( 255, rgb.b - mathRound( 255 * -( amount / 100 ) ) ) );
+          return tinycolor( rgb );
+        }
+
+        function darken( color, amount ) {
+          amount = ( amount === 0 ) ? 0 : ( amount || 10 );
+          var hsl = tinycolor( color ).toHsl();
+          hsl.l -= amount / 100;
+          hsl.l = clamp01( hsl.l );
+          return tinycolor( hsl );
+        }
+
+
+        */
+
+        //////////////////////////////
+        // <------ The DOM -------> //
+        //////////////////////////////
+
 
         // determines which DOM element to append created elements.
         var node = document.getElementById( 'mountainScene-right' );
+        let mSLeft = document.getElementById( 'mountainScene-left' );
+        let mSRight = document.getElementById( 'mountainScene-right' );
+        let bgmLeft = document.getElementById( 'bgMountain-Left' );
+        let bgmRight = document.getElementById( 'bgMountain-right' );
+        var sk1 = document.createElement( 'i' );
+        var gr1 = document.createElement( 'i' );
 
+        //////////////////////////////
+        // <----- Time of Day ----> //
+        ////////////////////////// ////
+        // handles all time related styling changes
 
         // retrieves users time
         let dt = new Date();
         let tz = dt.getTimezoneOffset();
-        let localHours = dt.getHours();
+        // let localHours = dt.getHours();
+        let localHours = 8;
+        console.log( 'localHours from above: ' + localHours );
+
+        // TODO:
+        var slidePos = document.getElementById( 'sliderSun' ).value;
+
+        showValue = function ( newValue ) {
+          document.getElementById( "range" ).innerHTML = newValue;
+          slidePos = newValue;
+          console.log( parseInt( slidePos ) );
+          // instantiating properties
+          mSLeft.style.borderBottomColor = 'hsl(30, 23%, 29%)';
+          mSRight.style.borderBottomColor = 'hsl(48, 15%, 40%)';
+          bgmLeft.style.borderBottomColor = 'rgb( 82, 59, 40 )';
+          bgmRight.style.borderBottomColor = 'rgb( 103, 95, 63 )';
+          sk1.style.backgroundColor = 'rgb(28, 24, 94)';
+          gr1.style.backgroundColor = 'rgb(35, 48, 20)';
 
 
+          // grabs the element, retrieves it's color, parses it to an array of int values, logs it to the console.
+          mSLeft.rgbColor = mSLeft.style.borderBottomColor.match( /\d+/g ).map( v => parseInt( v ) );
+          mSRight.rgbColor = mSRight.style.borderBottomColor.match( /\d+/g ).map( v => parseInt( v ) );
+          bgmLeft.rgbColor = bgmLeft.style.borderBottomColor.match( /\d+/g ).map( v => parseInt( v ) );
+          bgmRight.rgbColor = bgmRight.style.borderBottomColor.match( /\d+/g ).map( v => parseInt( v ) );
+          sk1.rgbColor = sk1.style.backgroundColor.match( /\d+/g ).map( v => parseInt( v ) );
+          gr1.rgbColor = gr1.style.backgroundColor.match( /\d+/g ).map( v => parseInt( v ) );
 
+          // take that array, run it through the rgb to hsl function, then increase the lightness depending on time of day.
+          mSLeft.style.borderBottomColor = daylight( slidePos, mSLeft.rgbColor );
+          mSRight.style.borderBottomColor = daylight( slidePos, mSRight.rgbColor );
+          bgmLeft.style.borderBottomColor = daylight( slidePos, bgmLeft.rgbColor );
+          bgmRight.style.borderBottomColor = daylight( slidePos, bgmRight.rgbColor );
+          sk1.style.backgroundColor = daylight( slidePos, sk1.rgbColor );
+          gr1.style.backgroundColor = daylight( slidePos, gr1.rgbColor );
+
+        }
+
+        // controls day and night phasing in and out.
+        const daylight = function ( slPos, rgbArr ) {
+            let slInv = slPos;
+            let mult = Math.round( slPos * 1.5 );
+            let R = rgbArr[ 0 ];
+            let G = rgbArr[ 1 ];
+            let B = rgbArr[ 2 ];
+            let hsl2 = rgb2hsl( [ R, G, B ] );
+            let lightness = ( hsl2[ 2 ] + mult );
+            let hslFormatted = 'hsl(' + hsl2[ 0 ] + ',' + hsl2[ 1 ] + '%,' + lightness + '%)';
+            if ( slPos >= 12 ) {
+              mult = ( ( Math.abs( Math.round( slPos ) - 24 ) ) / 0.8 );
+              console.log( 'mult: ' + mult );
+              lightness = ( hsl2[ 2 ] + mult );
+              hslFormatted = 'hsl(' + hsl2[ 0 ] + ',' + hsl2[ 1 ] + '%,' + lightness + '%)';
+            }
+            return hslFormatted;
+          }
+
+
+        // mornings
+        // left side brighter
+        // right side darker
+
+        // mid-day
+        // both sides brighter
+        //left side slightly darker than right
+
+        // afternoon
+        // left side darker
+        // right side brighter
+
+        // evenings
+        // left side darkest
+        // right side darkening
+
+        // night
+        // left side darkest
+        // right side dark
 
 
         //////////////////////////////
@@ -51,13 +236,7 @@ angular.module( 'myApp' )
         //////////////////////////////
 
         scope.spawnBackground = function ( date, trouble ) {
-
           var node = document.getElementById( 'mtn-wrapper' );
-
-          console.log( 'hey: ' + localHours );
-
-          var sk1 = document.createElement( 'i' );
-          var gr1 = document.createElement( 'i' );
 
           // sky
           sk1.style.backgroundColor = 'rgb(28, 24, 94)';
@@ -77,65 +256,14 @@ angular.module( 'myApp' )
           gr1.style.top = ( 35 ) + 'vh';
           gr1.style.margin = '0px';
 
-          // It's a giant switch for prototyping, later it will be much cleaner, generated by js dynamically based on minutes given, smooth transitions between sky colors.
-          switch ( localHours ) {
-          case 5:
-            sk1.style.backgroundColor = 'rgb(28, 24, 94)';
-            gr1.style.backgroundColor = 'rgb(35, 48, 20)';
-            break;
-
-          case 6:
-            sk1.style.backgroundColor = 'rgb(32, 25, 145)';
-            gr1.style.backgroundColor = 'rgb(41, 57, 23)';
-            break;
-
-          case 7:
-            sk1.style.backgroundColor = 'rgb(27, 16, 208)';
-            gr1.style.backgroundColor = 'rgb(54, 75, 31)';
-            break;
-
-          case 8:
-            sk1.style.backgroundColor = 'rgb(16, 58, 208)';
-            gr1.style.backgroundColor = 'rgb(70, 97, 41)';
-            break;
-
-          case 9:
-            sk1.style.backgroundColor = 'rgb(16, 104, 208)';
-            gr1.style.backgroundColor = 'rgb(85, 117, 50)';
-            break;
-
-          default:
-            sk1.style.backgroundColor = 'rgb(16, 144, 208)';
-            gr1.style.backgroundColor = 'rgb(92, 140, 40)';
-            break;
-
-          case 19:
-            sk1.style.backgroundColor = 'rgb(16, 104, 208)';
-            gr1.style.backgroundColor = 'rgb(85, 117, 50)';
-            break;
-
-          case 20:
-            sk1.style.backgroundColor = 'rgb(16, 58, 208)';
-            gr1.style.backgroundColor = 'rgb(41, 57, 23)';
-            break;
-
-          case 21:
-            sk1.style.backgroundColor = 'rgb(32, 25, 145)';
-            gr1.style.backgroundColor = 'rgb(35, 48, 20)';
-            break;
-          }
+          // distant horizon
 
           // sun
           // moon
           // stars
 
-
-
           node.appendChild( sk1 );
           node.appendChild( gr1 );
-
-
-
 
 
 
@@ -175,13 +303,13 @@ angular.module( 'myApp' )
           for ( var i = 0; i < number; i++ ) {
 
             // determines where on the screen a tree will spawn
-            var aCoords = randomMinMax( -3, 33 );
-            var x = aCoords;
-            var y = ( randomMinMax( 5, findY( aCoords ) ) - 0.1 );
+            const aCoords = randomMinMax( -3, 33 );
+            const x = aCoords;
+            const y = ( randomMinMax( 5, findY( aCoords ) ) - 0.1 );
 
             // z-index of each tree and tree portion based on verticle location on screen.
             const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
-            var trunkZ = newZ - 1;
+            const trunkZ = newZ - 1;
 
             // randomizes tree color within a specific range. depending on the time of day and side of mountain...
             let gMin = 70;
@@ -190,7 +318,7 @@ angular.module( 'myApp' )
             // left side spawns lighter trees in the morning, until afternoon.
             // right side spawns lighter trees in the afternoon until dusk.
             // only darker trees spawn after nightfall.
-            if ( ( localHours > 6 && localHours < 17 && x > 15 ) || ( localHours > 9 && localHours < 17 && x < 15 ) || ( localHours > 21 || localHours < 6 ) ) {
+            if ( ( localHours > 6 && localHours < 17 && x > 15 ) || ( localHours > 9 && localHours < 17 && x < 15 ) || ( localHours > 20 || localHours < 6 ) ) {
               rMin = 50;
               rMax = 75;
               gMin = 85;
@@ -202,13 +330,6 @@ angular.module( 'myApp' )
               console.log( 'y: ' + y );
             }
 
-
-            // both sides dark
-            // 21 until 6
-            // right side dark
-            // 21 until 10
-
-
             const newGrn = randomClr( 60, 90, gMin, gMax, 60, 90 );
 
             // create DOM elements for portions of one tree
@@ -218,7 +339,8 @@ angular.module( 'myApp' )
             var i4 = document.createElement( 'i' );
 
             // style the tree elements that make up one tree
-            // little guy top \\
+            // tree top \\
+            i1.className = 'treeParts';
             i1.style.zIndex = ( newZ );
             i1.style.border = '0.39em solid transparent';
             i1.style.borderBottom = '0.39em solid ' + newGrn;
@@ -226,6 +348,7 @@ angular.module( 'myApp' )
             i1.style.bottom = ( y - 23.9 ) + 'em';
 
             // mid branches \\
+            i2.className = 'treeParts';
             i2.style.zIndex = ( newZ );
             i2.style.border = '0.55em solid transparent';
             i2.style.borderBottom = '0.55em solid ' + newGrn;
@@ -233,6 +356,7 @@ angular.module( 'myApp' )
             i2.style.bottom = ( y - 24.25 ) + 'em';
 
             // base branches \\
+            i3.className = 'treeParts';
             i3.style.zIndex = ( newZ );
             i3.style.border = '0.55em solid transparent';
             i3.style.borderBottom = '0.75em solid ' + newGrn;
@@ -240,6 +364,7 @@ angular.module( 'myApp' )
             i3.style.bottom = ( y - 24.7 ) + 'em';
 
             // trunk bottom \\
+            i4.className = 'treeParts';
             i4.style.zIndex = ( trunkZ );
             i4.style.border = 'none';
             i4.style.width = '.15em';
@@ -258,18 +383,12 @@ angular.module( 'myApp' )
         }
 
 
-
-
         //////////////////////////////////
         //  <-------- Climber --------> //
         //////////////////////////////////
         // scope.spawnClimber = function(){
         //
         // }
-
-
-
-
 
 
 
@@ -310,15 +429,12 @@ angular.module( 'myApp' )
             r1.style.left = ( x - 16 ) + 'em';
             r1.style.bottom = ( y - 23.9 ) + 'em';
 
-
             // spawn the actual rock pieces that make up one rock
             node.appendChild( r1 );
 
 
           }
         }
-
-
 
 
 

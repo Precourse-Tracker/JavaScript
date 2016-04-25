@@ -1,4 +1,6 @@
-$darkBlue: #406BB2; /////////////////////////////
+@import "./../variables";
+@import "./../inputSlider";
+/////////////////////////////
 // --- mountain styles --- //
 /////////////////////////////
 #mtn-wrapper {
@@ -19,7 +21,9 @@ $darkBlue: #406BB2; /////////////////////////////
     height: 0;
     left: calc(50vw - 19.95em);
     border-left: 20em solid transparent;
-    border-bottom: 21em solid rgb(119, 87, 59);
+    border-bottom: 21em;
+    border-bottom-style: solid;
+    border-bottom-color: hsl(30, 23%, 29%);
     margin-bottom: 8vh;
     margin-top: 8vh;
     z-index: -3;
@@ -36,7 +40,9 @@ $darkBlue: #406BB2; /////////////////////////////
     height: 0;
     left: calc(50vw - 0em);
     border-right: 20em solid transparent;
-    border-bottom: 21em solid rgb(149, 137, 92);
+    border-bottom: 21em;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(117, 111, 86);
     margin-bottom: 8vh;
     margin-top: 8vh;
     z-index: -3;
@@ -72,28 +78,24 @@ $darkBlue: #406BB2; /////////////////////////////
     z-index: -4;
 }
 .home-bottom {
-    width: 150px;
     height: 70px;
     position: relative;
-    top: 385px;
+    justify-content: space-around;
+    top: 47vh;
     left: 0;
     font-weight: bold;
     text-align: center;
-    color: #FFF;
+    color: $navFontColor;
     background: $darkBlue;
     border-radius: 5px;
     display: flex;
     align-items: center;
+    padding: 2px 2px 5px;
     span {
         margin: 20px;
     }
 }
-
-
-
-
 // Buttons
-
 .spawnTreesBtn {
     padding-top: 0;
     position: absolute;
@@ -112,5 +114,5 @@ $darkBlue: #406BB2; /////////////////////////////
 .spawnBackgroundBtn {
     padding-top: 0;
     position: absolute;
-    top: 0px;
+    top: 0;
 }

@@ -1,0 +1,89 @@
+@import "variables";
+////////////////////////////
+// <----- Trackbar -----> //
+////////////////////////////
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 70%;
+    margin: 2.05px 0;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 70%;
+    height: 10.9px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0), 0 0 0 rgba(13, 13, 13, 0);
+    background: $darkGrey;
+    border: 2.6px solid rgba(152, 152, 152, 0.3);
+}
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0 0 0.1px $navFontColor, 0 0 0 $navFontColor;
+    border: 0 solid rgba(0, 0, 0, 0);
+    height: 15px;
+    width: 32px;
+    border-radius: 5px;
+    background: $darkBlue;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -4.65px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: rgba(126, 126, 126, 0.9);
+}
+input[type=range]::-moz-range-track {
+    width: 70%;
+    height: 10.9px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0), 0 0 0 rgba(13, 13, 13, 0);
+    background: $darkGrey;
+    border: 2.6px solid rgba(152, 152, 152, 0.3) rgba(152, 152, 152, 0.3);
+}
+input[type=range]::-moz-range-thumb {
+    box-shadow: 0 0 0.1px $navFontColor, 0 0 0 $navFontColor;
+    border: 0 solid rgba(0, 0, 0, 0);
+    height: 15px;
+    width: 32px;
+    border-radius: 5px;
+    background: $darkBlue;
+    cursor: pointer;
+}
+input[type=range]::-ms-track {
+    width: 70%;
+    height: 10.9px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: #000000;
+    border: 2.6px solid  rgba(152, 152, 152, 0.3);
+    border-radius: 13px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0), 0 0 0 rgba(13, 13, 13, 0);
+}
+input[type=range]::-ms-fill-upper {
+    background: $darkGrey;
+    border: 2.6px solid  rgba(152, 152, 152, 0.3);
+    border-radius: 13px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0), 0 0 0 rgba(13, 13, 13, 0);
+}
+input[type=range]::-ms-thumb {
+    box-shadow: 0 0 0.1px $navFontColor, 0 0 0 $navFontColor;
+    border: 0 solid rgba(0, 0, 0, 0);
+    height: 15px;
+    width: 32px;
+    border-radius: 5px;
+    background: $darkBlue;
+    cursor: pointer;
+    height: 10.9px;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: $darkGrey;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: rgba(126, 126, 126, 0.9);
+}
+// end of trackbar...
