@@ -10,6 +10,7 @@
     background: rgb(177, 190, 191);
     -webkit-border-radius: 100px / 50px;
     border-radius: 100px / 50px;
+    pointer-events: none;
 }
 .cloud {
     top: 185px;

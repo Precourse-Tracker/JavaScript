@@ -292,9 +292,9 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
           for ( var i = 0; i < number; i++ ) {
 
             // determines where on the screen a tree will spawn
-            const aCoords = randomMinMax( -3, 33 );
-            const x = aCoords;
-            const y = ( randomMinMax( 5, findY( aCoords ) ) - 0.1 );
+            const aCoords = randomMinMax( -5, 35 );
+            const x = aCoords + 0.25;
+            const y = ( randomMinMax( 2, findY( aCoords ) ) + 0.2 );
 
             // z-index of each tree and tree portion based on verticle location on screen.
             const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );

@@ -1,5 +1,5 @@
 @import "./../variables";
-@import "./../inputSlider";
+@import "./inputSlider";
 /////////////////////////////
 // --- mountain styles --- //
 /////////////////////////////
@@ -20,12 +20,12 @@
     position: absolute;
     width: 0;
     height: 0;
-    left: calc(50vw - 19.95em);
-    border-left: 20em solid transparent;
-    border-bottom: 21em;
+    left: calc(50vw - 22em + 1px);
+    top: calc(50vh - 22em);
+    border-left: 22em solid transparent;
+    border-bottom: 22em;
     border-bottom-style: solid;
     border-bottom-color: hsl(30, 23%, 29%);
-    margin-bottom: 8vh;
     margin-top: 8vh;
     z-index: -3;
     div {
@@ -39,12 +39,12 @@
     position: absolute;
     width: 0;
     height: 0;
-    left: calc(50vw - 0em);
-    border-right: 20em solid transparent;
-    border-bottom: 21em;
+    right: calc(50vw - 22em + 1px);
+    top: calc(50vh - 22em);
+    border-right: 22em solid transparent;
+    border-bottom: 22em;
     border-bottom-style: solid;
     border-bottom-color: rgb(117, 111, 86);
-    margin-bottom: 8vh;
     margin-top: 8vh;
     z-index: -3;
     div {
@@ -58,32 +58,33 @@
     position: absolute;
     width: 0;
     height: 0;
-    left: calc(80vw - 17.94em);
-    bottom: calc(70vh - 20em);
+    left: calc(75vw - 13em + 1px);
+    top: calc(53vh - 13em);
     border-left: 13em solid transparent;
     border-bottom: 13em solid rgb(82, 59, 40);
-    margin-bottom: 4vh;
-    margin-top: 4vh;
+    // margin-bottom: 4vh;
+    // margin-top: 4vh;
     z-index: -5;
 }
 #bgMountain-right {
     position: absolute;
     width: 0;
     height: 0;
-    left: calc(80vw - 5em);
-    bottom: calc(70vh - 20em);
+    right: calc(25vw - 13em + 1px);
+    top: calc(53vh - 13em);
     border-right: 13em solid transparent;
     border-bottom: 13em solid rgb(103, 95, 63);
-    margin-bottom: 4vh;
-    margin-top: 4vh;
+    // margin-bottom: 4vh;
+    // margin-top: 4vh;
     z-index: -5;
 }
 .home-bottom {
     height: 70px;
-    position: relative;
+    position: absolute;
     justify-content: space-around;
-    top: 47vh;
-    left: 0;
+    top: 60vh;
+    left: calc(50vw - 90px);
+    font-size: 1.1em;
     font-weight: bold;
     text-align: center;
     color: $navFontColor;
