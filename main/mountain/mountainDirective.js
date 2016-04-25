@@ -107,19 +107,6 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
         // } );
 
 
-
-
-        // function darken( color, amount ) {
-        //     amount = ( amount === 0 ) ? 0 : ( amount || 10 );
-        //     var hsl = tinycolor( color ).toHsl();
-        //     hsl.l -= amount / 100;
-        //     hsl.l = clamp01( hsl.l );
-        //     return tinycolor( hsl );
-        //   }
-
-
-
-
         //////////////////////////////
         // <------ The DOM -------> //
         //////////////////////////////
@@ -136,7 +123,6 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
         var gr1 = document.createElement( 'i' );
 
 
-        // console.log( lighten( 'rgb(1, 70, 49)', 50 ) );
         //////////////////////////////
         // <----- Time of Day ----> //
         ////////////////////////// ////
@@ -145,8 +131,8 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
         // retrieves users time
         let dt = new Date();
         let tz = dt.getTimezoneOffset();
-        // let localHours = dt.getHours();
-        let localHours = 8;
+        let localHours = dt.getHours();
+        // let localHours = 8;
 
         // TODO:
         var slidePos = document.getElementById( 'sliderSun' ).value;
@@ -228,9 +214,9 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
             gr1.style.top = ( 50 ) + 'vh';
             gr1.style.margin = '0px';
 
-            // distant horizon
-            // moon
-            // stars
+            // TODO: distant horizon
+            // TODO: moon
+            // TODO: stars
 
             node.appendChild( sk1 );
             node.appendChild( gr1 );
@@ -250,7 +236,6 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
         //  <--------- clouds --------> //
         //////////////////////////////////
         let cloudCount = 1;
-        // I had a heck of a time with getting a closure to work here. It only worked, when I decided to give up on it... I think it's because the entire directive is a closure. I spent hours and hours, unable to figure out why I couldn't save cloudCount...
         scope.spawnClouds = function ( number ) {
           const node = document.getElementById( 'mtn-wrapper' );
 
@@ -260,7 +245,6 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
               var y = randomMinMax( 5, findY( aCoords ) );
               const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
               var cloudZ = ( Math.round( ( newZ / 10 ) - 16 ) );
-              console.log( 'cloudZ: ', cloudZ );
 
               var cl1 = document.createElement( 'i' );
               let cl1rId = ( 'newCloud' + cloudCount );
@@ -272,17 +256,12 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
                 document.getElementById( tmp );
               }
 
-
-              console.log( 'cloudCount: ' + cloudCount );
               cl1.className = 'cloud';
               cl1.id = ( cl1rId );
-              console.log( 'cl1rId: ', cl1rId );
-              console.log( cl1r(cloudCount ) );
               // cl1r.style.zIndex = ( cloudZ );
               cl1.style.zIndex = ( cloudZ );
               cl1.style.left = ( -42 ) + 'em';
               cl1.style.top = ( aCoords ) + 'em';
-              console.log(y);
               node.appendChild( cl1 );
               cloudCount++;
             }
@@ -320,9 +299,6 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
               gMax = 120;
               bMin = 50;
               bMax = 80;
-              // console.log( 'localHours: ' + localHours );
-              // console.log( 'x: ' + x );
-              // console.log( 'y: ' + y );
             }
 
             const newGrn = randomClr( 60, 90, gMin, gMax, 60, 90 );
