@@ -101,12 +101,6 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
           return hsl;
         }
 
-        // var myNodeList = document.querySelectorAll( 'li' );
-        // mountainSvc.myForEach( myNodeList, function ( index, value ) {
-        //   console.log( index, value );
-        // } );
-
-
         //////////////////////////////
         // <------ The DOM -------> //
         //////////////////////////////
@@ -126,8 +120,7 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
         //////////////////////////////
         // <----- Time of Day ----> //
         ////////////////////////// ////
-        // handles all time related styling changes
-
+        // handles most time related styling changes
         // retrieves users time
         let dt = new Date();
         let tz = dt.getTimezoneOffset();
@@ -357,10 +350,6 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
         //////////////////////////////////
         //  <-------- Climber --------> //
         //////////////////////////////////
-        // scope.spawnClimber = function(){
-        //
-        // }
-
 
 
         //////////////////////////////////

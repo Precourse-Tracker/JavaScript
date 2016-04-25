@@ -1,31 +1,12 @@
-@import "./../variables";
 ////////////////////////////
 // <----- Trackbar -----> //
 ////////////////////////////
-// .sliderWrapper {
-//     width: 500px;
-//     margin: 300px 0 0;
-//     transition: all 1s;
-//     transform-origin: 50% 50%;
-// }
-// #sliderSun {
-//     transition: transform 1s;
-// }
-// html:active .sliderWrapper {
-//   transform: rotate(180deg);
-// }
-// html:active #sliderSun {
-//   transform: rotate(-180deg);
-// }
-// input[type=range]:focus::-webkit-slider-thumb {
-//   background: $moonGrey;
-// }
+@import "./../variables";
 input[type=range] {
     -webkit-appearance: none;
     width: 75%;
     margin: 2.05px 0;
     background: transparent;
-
 }
 input[type=range]:focus {
     outline: none;
@@ -59,9 +40,7 @@ input[type=range]::-ms-thumb {
     margin-top: 1.5em;
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
-    // background: rgba(126, 126, 126, 0.9);
     background: transparent;
-
     -webkit-transition-timing-function: cubic-bezier(0,0,1,1);
 }
 input[type=range]::-webkit-slider-runnable-track {
@@ -69,8 +48,6 @@ input[type=range]::-webkit-slider-runnable-track {
     height: 10.9px;
     cursor: pointer;
     background: transparent;
-
-    // background: $darkGrey;
     -webkit-transition-timing-function: cubic-bezier(0,0,1,1);
 }
 input[type=range]::-moz-range-track {
@@ -78,10 +55,6 @@ input[type=range]::-moz-range-track {
     height: 10.9px;
     cursor: pointer;
     background: transparent;
-
-    // box-shadow: 0 0 15px rgba(0, 0, 0, 0), 0 0 0 rgba(13, 13, 13, 0);
-    // background: $darkGrey;
-    // border: 2.6px solid rgba(152, 152, 152, 0.3) rgba(152, 152, 152, 0.3);
 }
 input[type=range]::-ms-track {
     width: 70%;
@@ -92,29 +65,17 @@ input[type=range]::-ms-track {
     color: transparent;
 }
 input[type=range]::-ms-fill-lower {
-    // background: #000000;
-    // border: 2.6px solid rgba(152, 152, 152, 0.3);
     border-radius: 13px;
     background: transparent;
-
-    // box-shadow: 0 0 15px rgba(0, 0, 0, 0), 0 0 0 rgba(13, 13, 13, 0);
 }
 input[type=range]::-ms-fill-upper {
-    // background: $darkGrey;
-    // border: 2.6px solid rgba(152, 152, 152, 0.3);
     border-radius: 13px;
     background: transparent;
-
-    // box-shadow: 0 0 15px rgba(0, 0, 0, 0), 0 0 0 rgba(13, 13, 13, 0);
 }
 input[type=range]:focus::-ms-fill-lower {
-    // background: $darkGrey;
     background: transparent;
-
 }
 input[type=range]:focus::-ms-fill-upper {
-    // background: rgba(126, 126, 126, 0.9);
     background: transparent;
-
 }
 // end of trackbar...

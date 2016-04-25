@@ -1,5 +1,6 @@
 @import "./../variables";
-@import "./inputSlider"; /////////////////////////////
+@import "./inputSlider";
+/////////////////////////////
 // --- mountain styles --- //
 /////////////////////////////
 #mtn-wrapper {
@@ -61,8 +62,6 @@
     top: calc(53vh - 13em);
     border-left: 13em solid transparent;
     border-bottom: 13em solid rgb(82, 59, 40);
-    // margin-bottom: 4vh;
-    // margin-top: 4vh;
     z-index: -5;
 }
 #bgMountain-right {
@@ -73,8 +72,6 @@
     top: calc(53vh - 13em);
     border-right: 13em solid transparent;
     border-bottom: 13em solid rgb(103, 95, 63);
-    // margin-bottom: 4vh;
-    // margin-top: 4vh;
     z-index: -5;
 }
 #bigDirt,
@@ -90,25 +87,13 @@
     z-index: -7;
 }
 #bigDirt {
-  -webkit-box-shadow: 13em -3.4em 1px -2.75em #423b2d;
-  -moz-box-shadow: 13em -3.4em 1px -2.75em #423b2d;
-  box-shadow: 13em -3.4em 1px -2.75em #423b2d;
-
+    -webkit-box-shadow: 13em -3.4em 1px -2.75em #423b2d;
+    -moz-box-shadow: 13em -3.4em 1px -2.75em #423b2d;
+    box-shadow: 13em -3.4em 1px -2.75em #423b2d;
 }
 #bigDirt:before {}
 #bigDirt:after {}
-// #smallDirt{
-//   position: absolute;
-//   width: calc(20vw + 4em);
-//   height: 0;
-//   right: calc(25vw - 13em + 1px);
-//   top: calc(53vh - 2em);
-//   border: 70px solid rgb(103, 95, 63)
-//   border-radius: 60%;
-//   // margin-bottom: 4vh;
-//   // margin-top: 4vh;
-//   z-index: -7;
-// }
+
 .home-bottom {
     height: 70px;
     position: absolute;

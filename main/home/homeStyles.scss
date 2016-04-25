@@ -1,38 +1,34 @@
-@import "./../variables";
-// @import "./../inputSlider";
-
+@import "./variables";
 /////////////////////////////
 // ----- home styles ----- //
 /////////////////////////////
 #home-wrapper {
-  font-family: 'Lato';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: -1;
-}
-
-.home-top {
-  margin-top: 10vh;
-  div {
-    font-weight: bold;
-    // position: absolute;
+    font-family: 'Lato';
+    position: absolute;
     top: 50%;
-    transform: translate(-50%);
-  }
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: -1;
 }
-
-  button {
+.home-top {
+    margin-top: 10vh;
+    div {
+        font-weight: bold;
+        // position: absolute;
+        top: 50%;
+        transform: translate(-50%);
+    }
+}
+button {
     margin: 4em;
     background: $darkBlue;
     padding: 10px 16px;
     width: auto;
     font-weight: 600;
-    text-transform:  uppercase;
+    text-transform: uppercase;
     font-size: 14px;
     color: #fff;
     line-height: 16px;
@@ -42,9 +38,8 @@
     border: 0;
     outline: 0;
     transition: all 0.25s;
-  }
-
-  button:hover {
+}
+button:hover {
     background: #8FB9FF;
     box-shadow: 0 4px 7px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
-  }
+}
