@@ -131,6 +131,7 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
         let mSRight = document.getElementById( 'mountainScene-right' );
         let bgmLeft = document.getElementById( 'bgMountain-Left' );
         let bgmRight = document.getElementById( 'bgMountain-right' );
+        let bgDirt = document.getElementById('bigDirt');
         var sk1 = document.createElement( 'i' );
         var gr1 = document.createElement( 'i' );
 
@@ -160,6 +161,8 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
           mSRight.style.borderBottomColor = 'hsl(48, 15%, 40%)';
           bgmLeft.style.borderBottomColor = 'rgb( 82, 59, 40 )';
           bgmRight.style.borderBottomColor = 'rgb( 103, 95, 63 )';
+          bgDirt.style.borderColor = 'rgb(66, 59, 45)';
+          bgDirt.style.boxShadow = '13em -3.4em 1px -2.75em rgb(66, 59, 45)';
           sk1.style.backgroundColor = 'rgb(28, 24, 94)';
           gr1.style.backgroundColor = 'rgb(35, 48, 20)';
 
@@ -168,6 +171,7 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
           mSRight.rgbColor = mSRight.style.borderBottomColor;
           bgmLeft.rgbColor = bgmLeft.style.borderBottomColor;
           bgmRight.rgbColor = bgmRight.style.borderBottomColor;
+          bgDirt.rgbColor = bgDirt.style.borderColor;
           sk1.rgbColor = sk1.style.backgroundColor;
           gr1.rgbColor = gr1.style.backgroundColor;
 
@@ -176,6 +180,10 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
           mSRight.style.borderBottomColor = daylight( slidePos, mSRight.rgbColor );
           bgmLeft.style.borderBottomColor = daylight( slidePos, bgmLeft.rgbColor );
           bgmRight.style.borderBottomColor = daylight( slidePos, bgmRight.rgbColor );
+          bgDirt.style.borderColor = daylight( slidePos, bgDirt.rgbColor );
+          bgDirt.style.boxShadow = (bgDirt.style.borderColor + '13em -3.4em 1px -2.75em' );
+          console.log(bgDirt.style);
+          console.log('what the fuck', bgDirt.style.borderColor);
           sk1.style.backgroundColor = daylight( slidePos, sk1.rgbColor );
           gr1.style.backgroundColor = daylight( slidePos, gr1.rgbColor );
         }
@@ -221,8 +229,6 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
             gr1.style.margin = '0px';
 
             // distant horizon
-
-            // sun
             // moon
             // stars
 

@@ -1,6 +1,8 @@
 <div id="mtn-wrapper">
 
-    <input id="sliderSun" type="range" min="0" max="24" value="0" step="1" onchange="timePassing(this.value)">
+    <!-- <div class="sliderWrapper"> -->
+        <input id="sliderSun" type="range" min="0" max="24" value="0" step="1" onchange="timePassing(this.value)">
+    <!-- </div> -->
     <span id="range">0</span>
     <!-- clouds -->
     <button type="button" name="spawnClouds" class="spawnCloudsBtn" ng-click="spawnClouds(1)">Spawn Cloud</button>
@@ -17,13 +19,14 @@
     <!-- background -->
     <button type="button" name="spawnBackground" class="spawnBackgroundBtn" ng-click="spawnBackground(1)">Spawn Background</button>
 
-
     <!-- Scene at which the entire mountain is generated within -->
     <div id="mountainScene-left"></div>
     <div id="mountainScene-right"></div>
     <div id="bgMountain-Left"></div>
     <div id="bgMountain-right"></div>
     <div id="mountain-base"></div>
+    <div id="bigDirt"></div>
+    <div id="smallDirt"></div>
     <div class="cloud"></div>
 
     <a ui-sref="lessons" class="home-bottom">
