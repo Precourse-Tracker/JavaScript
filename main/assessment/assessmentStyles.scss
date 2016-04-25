@@ -27,12 +27,17 @@
     outline: 0;
     transition: all 0.25s;
   }
+
   button:hover {
     background: #8FB9FF;
     box-shadow: 0 4px 7px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
   }
   button:disabled {
     visibility: hidden;
+  }
+  #submit-assessment {
+    float: right;
+    margin: 4em;
   }
   .stuff {
     color: #406BB2;
