@@ -16,17 +16,6 @@ i {
 .my-trees {
     position: relative;
 }
-@import "./../variables";
-#trees {
-    width: 2.4em;
-    height: 0;
-    position: relative;
-    left: 0;
-    top: 1em;
-}
-.my-trees {
-    position: relative;
-}
 // tree styles are defined dynamically within mountain-Directive
 .treeParts {
     margin: 0;
