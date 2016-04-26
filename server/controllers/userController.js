@@ -35,7 +35,6 @@ module.exports = {
 
     updateUser(req, res) {
       var assessment = req.body.progress.jsAssessment;
-      console.log('backend ctrl',assessment);
       console.log(req.user);
         User.findByIdAndUpdate( req.user, {
           progress: {
