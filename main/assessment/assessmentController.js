@@ -15,11 +15,13 @@ angular.module('myApp')
 
 $scope.eval = function(q, userCode) {
 
-
+  console.log('q', q);
   let qId = q._id;
   let answer = q.answer;
+  let setup = q.setup;
+  console.log("setup", setup);
 
-  workerService.worker(qId, answer, userCode).then(function(result) {
+  workerService.worker(qId, answer, userCode, setup).then(function(result) {
     assessmentService.ticker(result);
   })
 
