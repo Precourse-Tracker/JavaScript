@@ -973,6 +973,8 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
         let dt = new Date();
         let tz = dt.getTimezoneOffset();
         let localHours = dt.getHours();
+        let sliderVal = localHours;
+
 
         // TODO:
         var slidePos = document.getElementById( 'sliderSun' ).value;
@@ -982,6 +984,8 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
           document.getElementById( "range" ).innerHTML = newValue;
           slidePos = newValue;
           localHours = newValue;
+          sliderVal = newValue;
+
           // instantiating properties
           mSLeft.style.borderBottomColor = 'hsl(30, 23%, 29%)';
           mSRight.style.borderBottomColor = 'hsl(48, 15%, 40%)';
@@ -1010,6 +1014,7 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
           bgDirt.style.boxShadow = ( bgDirt.style.borderColor + '13em -3.4em 1px -2.75em' );
           sk1.style.backgroundColor = daylight( slidePos, sk1.rgbColor );
           gr1.style.backgroundColor = daylight( slidePos, gr1.rgbColor );
+          return sliderVal;
         }
 
 
@@ -1099,6 +1104,7 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
               cl1.style.zIndex = ( cloudZ );
               cl1.style.left = ( -42 ) + 'em';
               cl1.style.top = ( aCoords ) + 'em';
+              cl1.style.animationDuration = ((randomMinMax(30, 60))+ 's');
 
               node.appendChild( cl1 );
               cloudCount++;
@@ -1132,6 +1138,7 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
             // only darker trees spawn after nightfall.
 
             // left dark, right dark,
+            localHours = sliderVal;
             if ( ( ( localHours < 6 || localHours >= 15 ) && x < 15 ) || ( ( localHours < 9 || localHours >= 20 ) && x > 15 ) ) {
               rMin = 50;
               rMax = 75;
