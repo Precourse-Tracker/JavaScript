@@ -140,237 +140,6 @@ angular.module('myApp').service('workerService', ["Webworker", function(Webworke
 
 angular.module('myApp')
 
-.controller('lessonTestsController', ["$scope", function($scope) {
-
-  // $scope.test = 'test on ctrl';
-  // $scope.blob = 'blob on ctrl';
-
-  $scope.functionsChoices = [null];
-  $scope.functionsCorrect = [
-    null, // initial null val
-    'a',  // q1
-    'b',  // q2
-    'a',  // q3
-    'c'   //q4
-  ]
-
-  $scope.q1 = (input) => {
-    $scope.functionsChoices[1] = input;
-    // console.log('q1 choice is ' + input);
-    console.log($scope.functionsChoices);
-  }
-
-  $scope.q2 = (input) => {
-    $scope.functionsChoices[2] = input;
-    // console.log('q2 choice is ' + input);
-    console.log($scope.functionsChoices);
-  }
-
-  $scope.q3 = (input) => {
-    $scope.functionsChoices[3] = input;
-    console.log($scope.functionsChoices);
-  }
-
-  $scope.q4 = (input) => {
-    $scope.functionsChoices[4] = input;
-    console.log($scope.functionsChoices);
-  }
-
-  $scope.gradeTest = () => {
-    let incorrect = null;
-    let correct = -1;
-    let finalScore = '';
-    let numQuestions = $scope.functionsCorrect.length - 1;
-    for (var i = 0; i < numQuestions + 1; i++) {
-      if ($scope.functionsChoices[i] == $scope.functionsCorrect[i]) {
-        correct++;
-      }
-    }
-    finalScore = correct / numQuestions * 100;
-    $scope.testScore = finalScore + '%';
-    if (finalScore <= 60) {
-      $scope.message = 'Good attempt! Please review the content and try again.';
-    } else if (finalScore <= 85) {
-      $scope.message = 'Nice job!  You\'re getter there!'
-    } else if (finalScore <= 99) {
-      $scope.message = 'Great job! You\'re close to 100%!';
-    } else if (finalScore == 100) {
-      $scope.message = 'Awesome!!  You got a perfect score!!';
-    }
-    $('html, body').animate({ scrollTop: 0 }, 300);
-  }
-
-  $scope.resetTest = () => {
-    $scope.functionsChoices = [];
-    $('html, body').animate({ scrollTop: 0 }, 300);
-  }
-
-
-}])  // end lessonTestsController
-
-angular.module('myApp')
-
-.directive('lessonTestsDirective', function() {
-
-  return {
-    restrict: 'A',
-    link: function(scope, ele, attr) {
-
-      $('.grade-test').click(function() {
-        $('.final-score').css({
-          'display': 'flex',
-          'flex-direction': 'column'
-        });
-      })
-      $('.reset-test').click(function() {
-        $('.final-score').css('display', 'none');
-      })
-
-    }
-  }
-
-})  // end lessonTestsDirective
-
-// angular.module('myApp')
-//
-// .service('lessonTestsService', function($http) {
-//
-//   this.lessonTest = '';
-//
-//   this.setLessonTest = function(lesson) {
-//     lessonTest = lesson;
-//   }
-//
-//   this.getLessonTest = function() {
-//     // return lessonTest;
-//     // console.log(lessonTest);
-//     return $http({
-//       method: 'GET',
-//       url: './html/lessonTests/lessonFiles/' + lessonTest + '.html',
-//       type: 'html'
-//     })
-//   }
-//
-//
-// }) // end lessonTestsService
-
-angular.module('myApp')
-
-.controller('lessonsContentController', ["$scope", "lessonsContentService", function($scope, lessonsContentService) {
-  $scope.userAnswerArray = [];
-  $scope.lessonInfo = (input) => {
-      lessonsContentService.resetArray();
-      $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
-        $scope.testObject = lesson.data[0];
-        $scope.theTitle = $scope.testObject.name;
-        $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
-            entry.index = index;
-            lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
-        })
-    })
-  }
-  $scope.addAnswer = (userAnswer) => {
-    $scope.userAnswerArray[userAnswer[1]]=userAnswer[0];
-  }
-  $scope.gradeTest = () => {
-    let rightAnswer = 0;
-    let user = $scope.userAnswerArray;
-    let correct = lessonsContentService.getCorrectAnswerArray();
-    if (user.length === correct.length) {
-      user.forEach(function(entry, index){
-        if (entry === correct[index]) {
-          rightAnswer++;
-        }
-      })
-      let score = (rightAnswer / correct.length) * 100;
-      if (score === 100) {
-        $scope.testScore = score.toFixed(0);
-      }
-      else {
-        $scope.testScore = score.toFixed(2);
-      }
-      if (score <= 60) {
-        $scope.message = 'Good attempt! Please review the content and try again.';
-      } else if (score <= 80) {
-        $scope.message = 'Nice job!  You\'re getting there!'
-      } else if (score <= 90) {
-        $scope.message = 'Great work All-Star! ';
-      } else if (score < 100) {
-        $scope.message = 'Great job! Almost perfect!';
-      } else if (score == 100) {
-        $scope.message = 'Awesome!!  You got a perfect score!!';
-      }
-    }
-    else {
-      alert('Please answer all questions before submitting');
-    }
-  }
-
-}]) // end lessonsContentController
-
-angular.module('myApp')
-
-.directive('lessonsContentDirective', function() {
-  return {
-    restrict: 'E',
-    controller: 'lessonsContentController',
-    templateUrl: './html/lessons/lessonsContentTemplate.html',
-    scope: {
-      title: '=',
-      testObject: '=',
-      testScore: '='
-    }
-  }
-}) // end lessonsContentDirective
-
-angular.module('myApp')
-
-.service('lessonsContentService', ["$http", function($http) {
-  let correctAnswerArray = [];
-  this.setCorrectAnswer = (input, index) => {
-    correctAnswerArray[index] = input;
-  }
-  this.getCorrectAnswerArray = () => {
-    return correctAnswerArray;
-  }
-  this.resetArray = () => {
-    correctAnswerArray = [];
-  }
-  this.getLessonInfo = (input) => {
-    return $http ({
-      method: 'GET',
-      url: '/api/lessons/js/' + input
-    })
-  }
-}])  // end lessonsContentService
-
-angular.module('myApp')
-
-.directive('lessonsSideBarDirective', ["$state", function($state) {
-
-  return {
-    restrict: 'E',
-    controller: 'lessonsContentController',
-    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
-    link: function(scope, ele, attr) {
-      $('.lesson-title').click(function() {
-        // console.log(this.parentNode);
-        $('.lesson-sections', this.parentNode).toggle('expand');
-        $('.lesson-tests-wrapper').css('display', 'none');
-      })
-
-      $('.lesson-test').click(function() {
-        $('.lesson-tests-wrapper').css('display', 'block');
-        $('html, body').animate({ scrollTop: 0 }, 300);
-      }) // end lesson-test click
-
-    } // end of directive link
-  }
-
-}])  // end lessonsSideBarDirective
-
-angular.module('myApp')
-
    .directive('bars', function () {
       return {
          restrict: 'EA',
@@ -744,6 +513,237 @@ angular.module('myApp')
         profileMenu.toggle('expand')
       })
 */
+
+angular.module('myApp')
+
+.controller('lessonTestsController', ["$scope", function($scope) {
+
+  // $scope.test = 'test on ctrl';
+  // $scope.blob = 'blob on ctrl';
+
+  $scope.functionsChoices = [null];
+  $scope.functionsCorrect = [
+    null, // initial null val
+    'a',  // q1
+    'b',  // q2
+    'a',  // q3
+    'c'   //q4
+  ]
+
+  $scope.q1 = (input) => {
+    $scope.functionsChoices[1] = input;
+    // console.log('q1 choice is ' + input);
+    console.log($scope.functionsChoices);
+  }
+
+  $scope.q2 = (input) => {
+    $scope.functionsChoices[2] = input;
+    // console.log('q2 choice is ' + input);
+    console.log($scope.functionsChoices);
+  }
+
+  $scope.q3 = (input) => {
+    $scope.functionsChoices[3] = input;
+    console.log($scope.functionsChoices);
+  }
+
+  $scope.q4 = (input) => {
+    $scope.functionsChoices[4] = input;
+    console.log($scope.functionsChoices);
+  }
+
+  $scope.gradeTest = () => {
+    let incorrect = null;
+    let correct = -1;
+    let finalScore = '';
+    let numQuestions = $scope.functionsCorrect.length - 1;
+    for (var i = 0; i < numQuestions + 1; i++) {
+      if ($scope.functionsChoices[i] == $scope.functionsCorrect[i]) {
+        correct++;
+      }
+    }
+    finalScore = correct / numQuestions * 100;
+    $scope.testScore = finalScore + '%';
+    if (finalScore <= 60) {
+      $scope.message = 'Good attempt! Please review the content and try again.';
+    } else if (finalScore <= 85) {
+      $scope.message = 'Nice job!  You\'re getter there!'
+    } else if (finalScore <= 99) {
+      $scope.message = 'Great job! You\'re close to 100%!';
+    } else if (finalScore == 100) {
+      $scope.message = 'Awesome!!  You got a perfect score!!';
+    }
+    $('html, body').animate({ scrollTop: 0 }, 300);
+  }
+
+  $scope.resetTest = () => {
+    $scope.functionsChoices = [];
+    $('html, body').animate({ scrollTop: 0 }, 300);
+  }
+
+
+}])  // end lessonTestsController
+
+angular.module('myApp')
+
+.directive('lessonTestsDirective', function() {
+
+  return {
+    restrict: 'A',
+    link: function(scope, ele, attr) {
+
+      $('.grade-test').click(function() {
+        $('.final-score').css({
+          'display': 'flex',
+          'flex-direction': 'column'
+        });
+      })
+      $('.reset-test').click(function() {
+        $('.final-score').css('display', 'none');
+      })
+
+    }
+  }
+
+})  // end lessonTestsDirective
+
+// angular.module('myApp')
+//
+// .service('lessonTestsService', function($http) {
+//
+//   this.lessonTest = '';
+//
+//   this.setLessonTest = function(lesson) {
+//     lessonTest = lesson;
+//   }
+//
+//   this.getLessonTest = function() {
+//     // return lessonTest;
+//     // console.log(lessonTest);
+//     return $http({
+//       method: 'GET',
+//       url: './html/lessonTests/lessonFiles/' + lessonTest + '.html',
+//       type: 'html'
+//     })
+//   }
+//
+//
+// }) // end lessonTestsService
+
+angular.module('myApp')
+
+.controller('lessonsContentController', ["$scope", "lessonsContentService", function($scope, lessonsContentService) {
+  $scope.userAnswerArray = [];
+  $scope.lessonInfo = (input) => {
+      lessonsContentService.resetArray();
+      $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
+        $scope.testObject = lesson.data[0];
+        $scope.theTitle = $scope.testObject.name;
+        $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
+            entry.index = index;
+            lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
+        })
+    })
+  }
+  $scope.addAnswer = (userAnswer) => {
+    $scope.userAnswerArray[userAnswer[1]]=userAnswer[0];
+  }
+  $scope.gradeTest = () => {
+    let rightAnswer = 0;
+    let user = $scope.userAnswerArray;
+    let correct = lessonsContentService.getCorrectAnswerArray();
+    if (user.length === correct.length) {
+      user.forEach(function(entry, index){
+        if (entry === correct[index]) {
+          rightAnswer++;
+        }
+      })
+      let score = (rightAnswer / correct.length) * 100;
+      if (score === 100) {
+        $scope.testScore = score.toFixed(0);
+      }
+      else {
+        $scope.testScore = score.toFixed(2);
+      }
+      if (score <= 60) {
+        $scope.message = 'Good attempt! Please review the content and try again.';
+      } else if (score <= 80) {
+        $scope.message = 'Nice job!  You\'re getting there!'
+      } else if (score <= 90) {
+        $scope.message = 'Great work All-Star! ';
+      } else if (score < 100) {
+        $scope.message = 'Great job! Almost perfect!';
+      } else if (score == 100) {
+        $scope.message = 'Awesome!!  You got a perfect score!!';
+      }
+    }
+    else {
+      alert('Please answer all questions before submitting');
+    }
+  }
+
+}]) // end lessonsContentController
+
+angular.module('myApp')
+
+.directive('lessonsContentDirective', function() {
+  return {
+    restrict: 'E',
+    controller: 'lessonsContentController',
+    templateUrl: './html/lessons/lessonsContentTemplate.html',
+    scope: {
+      title: '=',
+      testObject: '=',
+      testScore: '='
+    }
+  }
+}) // end lessonsContentDirective
+
+angular.module('myApp')
+
+.service('lessonsContentService', ["$http", function($http) {
+  let correctAnswerArray = [];
+  this.setCorrectAnswer = (input, index) => {
+    correctAnswerArray[index] = input;
+  }
+  this.getCorrectAnswerArray = () => {
+    return correctAnswerArray;
+  }
+  this.resetArray = () => {
+    correctAnswerArray = [];
+  }
+  this.getLessonInfo = (input) => {
+    return $http ({
+      method: 'GET',
+      url: '/api/lessons/js/' + input
+    })
+  }
+}])  // end lessonsContentService
+
+angular.module('myApp')
+
+.directive('lessonsSideBarDirective', ["$state", function($state) {
+
+  return {
+    restrict: 'E',
+    controller: 'lessonsContentController',
+    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
+    link: function(scope, ele, attr) {
+      $('.lesson-title').click(function() {
+        // console.log(this.parentNode);
+        $('.lesson-sections', this.parentNode).toggle('expand');
+        $('.lesson-tests-wrapper').css('display', 'none');
+      })
+
+      $('.lesson-test').click(function() {
+        $('.lesson-tests-wrapper').css('display', 'block');
+        $('html, body').animate({ scrollTop: 0 }, 300);
+      }) // end lesson-test click
+
+    } // end of directive link
+  }
+
+}])  // end lessonsSideBarDirective
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
