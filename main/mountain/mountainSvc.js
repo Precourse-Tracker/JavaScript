@@ -1,3 +1,3 @@
-angular.module("app").service("mountainSvc", function() {
+angular.module("myApp").service("mountainSvc", function() {
 
 });

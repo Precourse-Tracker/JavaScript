@@ -112,7 +112,7 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
         let mSRight = document.getElementById( 'mountainScene-right' );
         let bgmLeft = document.getElementById( 'bgMountain-Left' );
         let bgmRight = document.getElementById( 'bgMountain-right' );
-        let bgDirt = document.getElementById('bigDirt');
+        let bgDirt = document.getElementById( 'bigDirt' );
         var sk1 = document.createElement( 'i' );
         var gr1 = document.createElement( 'i' );
 
@@ -125,7 +125,6 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
         let dt = new Date();
         let tz = dt.getTimezoneOffset();
         let localHours = dt.getHours();
-        // let localHours = 8;
 
         // TODO:
         var slidePos = document.getElementById( 'sliderSun' ).value;
@@ -134,7 +133,7 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
         timePassing = function ( newValue ) {
           document.getElementById( "range" ).innerHTML = newValue;
           slidePos = newValue;
-          console.log( parseInt( slidePos ) );
+          localHours = newValue;
           // instantiating properties
           mSLeft.style.borderBottomColor = 'hsl(30, 23%, 29%)';
           mSRight.style.borderBottomColor = 'hsl(48, 15%, 40%)';
@@ -160,9 +159,7 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
           bgmLeft.style.borderBottomColor = daylight( slidePos, bgmLeft.rgbColor );
           bgmRight.style.borderBottomColor = daylight( slidePos, bgmRight.rgbColor );
           bgDirt.style.borderColor = daylight( slidePos, bgDirt.rgbColor );
-          bgDirt.style.boxShadow = (bgDirt.style.borderColor + '13em -3.4em 1px -2.75em' );
-          console.log(bgDirt.style);
-          console.log('what the fuck', bgDirt.style.borderColor);
+          bgDirt.style.boxShadow = ( bgDirt.style.borderColor + '13em -3.4em 1px -2.75em' );
           sk1.style.backgroundColor = daylight( slidePos, sk1.rgbColor );
           gr1.style.backgroundColor = daylight( slidePos, gr1.rgbColor );
         }
@@ -217,7 +214,6 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
             scope.add = ( function () {
               var counter = 0;
               return function () {
-                console.log( counter );
                 return counter += 1;
 
               }
@@ -230,7 +226,7 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
         //////////////////////////////////
         let cloudCount = 1;
         scope.spawnClouds = function ( number ) {
-          const node = document.getElementById( 'mtn-wrapper' );
+            const node = document.getElementById( 'mtn-wrapper' );
 
             for ( var i = 0; i < number; i++ ) {
               var aCoords = randomMinMax( -1, 11 );
@@ -244,7 +240,7 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
               // let tmpLeft = 'calc(', (- 142), 'px', (- 50), 'vw)';
               // let tmpLeft = 'calc( - 142px - 50vw );';
 
-              let cl1r = function (id) {
+              let cl1r = function ( id ) {
                 var tmp = ( 'newCloud' + id );
                 document.getElementById( tmp );
               }
@@ -255,6 +251,7 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
               cl1.style.zIndex = ( cloudZ );
               cl1.style.left = ( -42 ) + 'em';
               cl1.style.top = ( aCoords ) + 'em';
+
               node.appendChild( cl1 );
               cloudCount++;
             }
@@ -282,10 +279,12 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
             let gMin = 70;
             let gMax = 180;
 
-            // left side spawns lighter trees in the morning, until afternoon.
-            // right side spawns lighter trees in the afternoon until dusk.
+            // left/North side spawns darker trees in the afternoon, until sunrise.
+            // right/South side spawns darker trees in the evening until mid-day.
             // only darker trees spawn after nightfall.
-            if ( ( localHours > 6 && localHours < 17 && x > 15 ) || ( localHours > 9 && localHours < 17 && x < 15 ) || ( localHours > 20 || localHours < 6 ) ) {
+
+            // left dark, right dark,
+            if ( ( ( localHours < 6 || localHours >= 15 ) && x < 15 ) || ( ( localHours < 9 || localHours >= 20 ) && x > 15 ) ) {
               rMin = 50;
               rMax = 75;
               gMin = 85;
@@ -369,14 +368,12 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
             const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
             var rockZ = ( newZ - 10 );
             const newGryConst = function () {
-              // console.log( 'inside newGryConst: ' + ( Math.floor( Math.random() * 100 ) + 75 ) );
               return ( Math.floor( Math.random() * 100 ) + 75 );
             }
 
             // randomize rock color, within a specified color range.
             let newGrlet = newGryConst();
             var newGrey = randomClr( newGrlet, ( newGrlet + randomMinMax( 1, 20 ) ), newGrlet, ( newGrlet + randomMinMax( 1, 20 ) ), newGrlet, ( newGrlet + randomMinMax( 1, 20 ) ) );
-            // console.log( 'newGrey: ' + newGrey );
 
             // create DOM element for portions of a rock
             var r1 = document.createElement( 'i' );
@@ -404,7 +401,7 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
         //////////////////////////////////
         scope.spawnSnowPeak = function ( number ) {
           for ( var i = 0; i < number; i++ ) {
-
+            let node = document.getElementById( 'mountainScene-right' );
             // determines location of elements on a triangular plane.
             var aCoords = randomMinMax( -3, 33 );
             var x = aCoords;
@@ -416,31 +413,51 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
             var snowZ = ( newZ + 4 );
 
             // creates DOM elements to be worked upon
+            // front mountain
             var s1 = document.createElement( 'i' );
+            var s1a = document.createElement( 'i' );
             var s2 = document.createElement( 'i' );
             var s3 = document.createElement( 'i' );
             var s4 = document.createElement( 'i' );
+            var s4a = document.createElement( 'i' );
+            var s4b = document.createElement( 'i' );
+            var s4c = document.createElement( 'i' );
             var s5 = document.createElement( 'i' );
             var s6 = document.createElement( 'i' );
             var s7 = document.createElement( 'i' );
 
+            // back mountain
+            var sbm1 = document.createElement( 'i' );
+            var sbm2 = document.createElement( 'i' );
+            var sbm3 = document.createElement( 'i' );
+            var sbm4 = document.createElement( 'i' );
+
             // style the newly created DOM elements.
-            // top
+            // top-left
             s1.style.zIndex = ( snowZ );
             s1.style.borderWidth = '1.5em';
             s1.style.borderStyle = 'solid'
-            s1.style.borderColor = 'transparent transparent rgb(246,246,246)';
-            s1.style.left = ( -1.5 ) + 'em';
-            s1.style.bottom = ( -1.44 ) + 'em';
+            s1.style.borderColor = 'transparent rgb(234,234,234) transparent transparent';
+            s1.style.left = ( -2.9 ) + 'em';
+            s1.style.bottom = ( -2.9 ) + 'em';
             s1.style.borderRadius = '0.3em';
+
+            // top-right
+            s1a.style.zIndex = ( snowZ );
+            s1a.style.borderWidth = '1.5em';
+            s1a.style.borderStyle = 'solid'
+            s1a.style.borderColor = 'transparent transparent transparent rgb(246,246,246)';
+            s1a.style.left = ( -0.1 ) + 'em';
+            s1a.style.bottom = ( -2.9 ) + 'em';
+            s1a.style.borderRadius = '0.3em';
 
             // left
             s2.style.zIndex = ( snowZ );
             s2.style.borderWidth = '1.2em';
             s2.style.borderStyle = 'solid'
-            s2.style.borderColor = 'transparent rgb(246,246,246) transparent transparent';
+            s2.style.borderColor = 'transparent rgb(234,234,234) transparent transparent';
             s2.style.left = ( -3.7 ) + 'em';
-            s2.style.bottom = ( -3.63 ) + 'em';
+            s2.style.bottom = ( -3.69 ) + 'em';
             s2.style.borderRadius = '0.3em';
 
             // right
@@ -449,22 +466,48 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
             s3.style.borderStyle = 'solid'
             s3.style.borderColor = 'transparent transparent transparent rgb(246,246,246)';
             s3.style.left = ( 1.2 ) + 'em';
-            s3.style.bottom = ( -3.51 ) + 'em';
+            s3.style.bottom = ( -3.59 ) + 'em';
             s3.style.borderRadius = '0.3em';
 
-            // center
-            s4.style.zIndex = ( snowZ );
+            // center - mrectangle
+            s4.style.zIndex = ( snowZ - 10 );
             s4.style.height = ( 1.3 ) + 'em';
-            s4.style.width = ( 2.65 ) + 'em';
+            s4.style.width = ( 1.5 ) + 'em';
             s4.style.backgroundColor = 'rgb(246,246,246)';
-            s4.style.left = ( -1.4 ) + 'em';
+            s4.style.left = ( -0.1 ) + 'em';
             s4.style.bottom = ( -2.65 ) + 'em';
+
+            // s4a filter color on // center
+            s4a.style.zIndex = ( snowZ + 1 );
+            s4a.style.borderWidth = '1.2em';
+            s4a.style.borderStyle = 'solid'
+            s4a.style.borderColor = 'transparent rgb(234,234,234) transparent transparent';
+            s4a.style.left = ( -2.7 ) + 'em';
+            s4a.style.bottom = ( -3.5 ) + 'em';
+            s4a.style.borderRadius = '0.3em';
+
+            s4b.style.zIndex = ( snowZ );
+            s4b.style.borderWidth = '1.2em';
+            s4b.style.borderStyle = 'solid'
+            s4b.style.borderColor = 'transparent rgb(234,234,234) transparent transparent';
+            s4b.style.left = ( -3.7 ) + 'em';
+            s4b.style.bottom = ( -3.67 ) + 'em';
+            s4b.style.borderRadius = '0.3em';
+
+            s4c.style.zIndex = ( snowZ - 10 );
+            s4c.style.height = ( 1.3 ) + 'em';
+            s4c.style.width = ( 0.65 ) + 'em';
+            s4c.style.backgroundColor = 'rgb(234,234,234)';
+            s4c.style.left = ( -1.4 ) + 'em';
+            s4c.style.bottom = ( -2.65 ) + 'em';
+
+
 
             // middle-left
             s5.style.zIndex = ( snowZ );
             s5.style.borderWidth = '0.6em';
             s5.style.borderStyle = 'solid'
-            s5.style.borderColor = ' transparent transparent transparent rgb(246,246,246)';
+            s5.style.borderColor = ' transparent transparent transparent rgb(234,234,234)';
             s5.style.left = ( -1.4 ) + 'em';
             s5.style.bottom = ( -3.55 ) + 'em';
 
@@ -483,15 +526,56 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
             s7.style.borderColor = 'transparent rgb(246,246,246) transparent transparent';
             s7.style.left = ( -0.5 ) + 'em';
             s7.style.bottom = ( -3.48 ) + 'em';
-
             // append DOM elements to the previously existing DOM element, declared earlier.
             node.appendChild( s1 );
+            node.appendChild( s1a );
             node.appendChild( s2 );
             node.appendChild( s3 );
             node.appendChild( s4 );
+            node.appendChild( s4a );
+            node.appendChild( s4b );
+            node.appendChild( s4c );
             node.appendChild( s5 );
             node.appendChild( s6 );
             node.appendChild( s7 );
+            //------------------------\\
+            //---- Background Mtn ----\\
+            //--------  Snow  --------\\
+            node = document.getElementById( 'bgMountain-right' );
+            // top
+            sbm1.style.zIndex = ( snowZ );
+            sbm1.style.borderWidth = '1.6em';
+            sbm1.style.borderStyle = 'solid'
+            sbm1.style.borderColor = 'transparent transparent rgb(246,246,246)';
+            sbm1.style.left = ( -1.58 ) + 'em';
+            sbm1.style.bottom = ( -1.4 ) + 'em';
+            sbm1.style.borderRadius = '0.3em';
+
+            // left
+            sbm2.style.zIndex = ( snowZ );
+            sbm2.style.borderWidth = '1.6em';
+            sbm2.style.borderStyle = 'solid'
+            sbm2.style.borderColor = 'transparent rgb(234,234,234) transparent transparent';
+            sbm2.style.left = ( -3.2 ) + 'em';
+            sbm2.style.bottom = ( -3 ) + 'em';
+            sbm2.style.borderRadius = '0.3em';
+
+            // right
+            sbm3.style.zIndex = ( snowZ );
+            sbm3.style.borderWidth = '1.3em';
+            sbm3.style.borderStyle = 'solid'
+            sbm3.style.borderColor = 'transparent transparent transparent rgb(246,246,246)';
+            sbm3.style.left = ( -0.1 ) + 'em';
+            sbm3.style.bottom = ( -2.4 ) + 'em';
+            sbm3.style.borderRadius = '0.3em';
+
+
+
+
+
+            node.appendChild( sbm1 );
+            node.appendChild( sbm2 );
+            node.appendChild( sbm3 );
           }
         }
 
