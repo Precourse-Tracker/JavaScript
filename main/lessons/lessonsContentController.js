@@ -7,6 +7,7 @@ angular.module('myApp')
       $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
         $scope.testObject = lesson.data[0];
         $scope.theTitle = $scope.testObject.name;
+        lessonsContentService.setLessonName($scope.theTitle);
         $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
             entry.index = index;
             lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
@@ -44,10 +45,20 @@ angular.module('myApp')
       } else if (score == 100) {
         $scope.message = 'Awesome!!  You got a perfect score!!';
       }
+      lessonsContentService.updateProgress(score);
+      $scope.userAnswerArray = [];
+      $('.final-score').css({
+        'display': 'flex',
+        'flex-direction': 'column'
+      });
     }
     else {
       alert('Please answer all questions before submitting');
     }
+    $('html, body').animate({ scrollTop: 0 }, 300);
   }
-
+  $scope.resetTest = () => {
+    $scope.userAnswerArray = [];
+    $('html, body').animate({ scrollTop: 0 }, 300);
+  }
 }) // end lessonsContentController
