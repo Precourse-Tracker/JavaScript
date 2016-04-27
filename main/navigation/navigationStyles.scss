@@ -3,8 +3,8 @@ $lightBlue: #8FB9FF;
 $navFontColor: #FFF;
 
 @mixin menuBorder() {
-  // border-left: 1px solid grey;
-  // border-bottom: 1px solid grey;
+  border-left: 1px solid grey;
+  border-bottom: 1px solid grey;
 }
 
 ///////////////////////////////////
@@ -77,8 +77,5 @@ $navFontColor: #FFF;
     line-height: 35px;
     list-style: none;
   }
-  li:hover {
-    background-color: $lightBlue;
-    opacity: 0.3;
-  }
+
 }
