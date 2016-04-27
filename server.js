@@ -124,9 +124,11 @@ app.get('/logout', userController.logoutUser);
 
 //////////GET DATA////////////
 app.get('/api/assessment/js', unitController.getJSAssessment);
+app.get('/api/lessons/js/:lessonName', unitController.getJSLesson);
 
-
-
+/////////UPDATING USER////////
+app.put('/api/users', userController.updateUser);
+app.put('/api/lessons/progress', userController.updateProgress);
 
 /////////////Creating Data///////
 app.post('/api/lessons', unitController.createLesson);
@@ -136,3 +138,6 @@ app.post('/api/unit', unitController.createUnit);
 
 //////////CHECK IF USER EXISTS////////
 app.get('/api/users', userController.getUsers);
+
+//////////GET CURRENT LOGGED IN USER////////
+app.get('/user/current', userController.currentUser);

@@ -1,3 +1,10 @@
+$darkBlue: #406BB2;
+
+@mixin centerLF {
+  left: 50%;
+  transform: translate(-50%);
+}
+
 ////////////////////////////////
 // ----- lessons styles ----- //
 ////////////////////////////////
@@ -6,21 +13,22 @@
 }
 
 .content-wrapper {
-  width: 64vw;
-  height: 91vh;
+  width: calc(100% - 225px);
+  // height: 91vh;
   position: relative;
   float: left;
   // top: 0;
   // right: 0;
+  margin-bottom: 50px;
 }
 
 .video-placeholder {
-  width: 400px;
-  height: 150px;
+  width: 500px;
+  height: 300px;
   background: silver;
   // position: absolute;
   position: relative;
-  left: 55%;
+  left: 50%;
   transform: translate(-50%);
   margin-top: 25px;
 
@@ -35,12 +43,12 @@
 }
 
 .lessons-practice {
-  width: 400px;
+  width: 500px;
   height: 300px;
   background: rgba(0,0,0,0.1);
   // position: absolute;
   position: relative;
-  left: 55%;
+  left: 50%;
   transform: translate(-50%);
   // top: 50%;
   // transform: translate(-50%, -50%);
@@ -57,4 +65,17 @@
       margin: 10px 10px 15px auto;
     }
   }
+}
+
+#welcome-page {
+  width: 500px;
+  height: 300px;
+  color: white;
+  background: $darkBlue;
+  margin-top: 25px;
+  position: relative;
+  @include centerLF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,4 +1,4 @@
-angular.module('myApp', ['ui.router'])
+angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
 
 .config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
 
@@ -11,7 +11,13 @@ angular.module('myApp', ['ui.router'])
   })
   .state('home', {
     url: '/home',
-    templateUrl: './html/home/homeTemplate.html'
+    templateUrl: './html/home/homeTemplate.html',
+    controller: function($scope, loginService, lessonsContentService) {
+      let currentUser = loginService.getProfile();
+      currentUser.then(function(response) {
+        lessonsContentService.setCurrentUserId(response.data._id);
+      });
+    }
   })
   .state('lessons', {
     url: '/lessons',
