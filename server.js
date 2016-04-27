@@ -121,11 +121,11 @@ app.get( '/logout', userController.logoutUser );
 //////////GET DATA////////////
 app.get( '/api/assessment/js', unitController.getJSAssessment );
 app.get( '/api/lessons/js/:lessonName', unitController.getJSLesson );
-app.get( '/api/users', userController.getUsers );
+app.get( '/api/users/', userController.getUsers );
 
 /////////UPDATING USER////////
-app.put( '/api/users', userController.updateUser );
-// app.put( '/api/users/:id', userController.updateById );
+// app.put( '/api/users', userController.updateUser );
+app.put( '/api/users/', userController.updateUser );
 
 /////////////Creating Data///////
 app.post( '/api/lessons', unitController.createLesson );
