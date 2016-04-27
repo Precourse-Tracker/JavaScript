@@ -3,7 +3,7 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
       restrict: 'E',
       templateUrl: './html/mountain/mountainTemplate.html',
       controller: 'mountainController',
-      link: function ( scope, element, attrs, controller, transcludeFn, animate ) {
+      link: function ( scope, element, attrs, controller, transcludeFn, animate, mountainSvc ) {
         const xMin = -3;
         const xMax = 33;
 
@@ -101,9 +101,10 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
           return hsl;
         }
 
-        //////////////////////////////
-        // <------ The DOM -------> //
-        //////////////////////////////
+
+        //-------//////////////////////////-------//
+        //------- <------ The DOM -------> -------//
+        //-------//////////////////////////-------//
 
 
         // determines which DOM element to append created elements.
