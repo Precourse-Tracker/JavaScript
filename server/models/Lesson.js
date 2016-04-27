@@ -8,6 +8,12 @@ const lessonSchema = new Schema({
     multipleChoice: {type: Array},
     correctAnswer: {type: String, required: true, index: true},
   }],
+  lessonText: {type: String, required: true},
+  video: {type: String, required: true},
+  practice: [{
+    question: {type: String, required: true, index: true},
+    correctAnswer: {type: String, required: true}
+  }],
   score: {type: Number}
 })
 

@@ -47,7 +47,7 @@ module.exports = {
     })
   },
   getJSLesson(req, res, next) {
-    Lesson.find({name: req.params.lessonName}, (err, lesson) => {
+    Lesson.find({}, (err, lesson) => {
       if (err) {
         res.status(500).send(err);
       }

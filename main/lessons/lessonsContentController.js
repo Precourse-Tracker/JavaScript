@@ -2,17 +2,19 @@ angular.module('myApp')
 
 .controller('lessonsContentController', function($scope, lessonsContentService) {
   $scope.userAnswerArray = [];
-  $scope.lessonInfo = (input) => {
-      lessonsContentService.resetArray();
-      $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
-        $scope.testObject = lesson.data[0];
-        $scope.theTitle = $scope.testObject.name;
-        $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
-            entry.index = index;
-            lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
-        })
-    })
-  }
+  // $scope.lessonInfo = (input) => {
+  //     lessonsContentService.resetArray();
+  //     $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
+  //       $scope.testObject = lesson.data[0];
+  //       $scope.theTitle = $scope.testObject.name;
+  //       $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
+  //           entry.index = index;
+  //           lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
+  //       })
+  //   })
+  // }
+
+
   $scope.addAnswer = (userAnswer) => {
     $scope.userAnswerArray[userAnswer[1]]=userAnswer[0];
   }

@@ -1,5 +1,5 @@
 angular.module('myApp')
-.controller('loginController', function($scope, loginService){
+.controller('loginController', function($scope, loginService, lessonsContentService){
 
   $scope.createUser = function(newUser) {
     loginService.newUser(newUser).then(function() {
@@ -12,6 +12,12 @@ angular.module('myApp')
   $scope.userLogin = function(user) {
     loginService.userLogin(user);
   };
+
+  $scope.lessonInfo = () => {
+    lessonsContentService.getLessonInfo().then(function(response) {
+      $scope.lessons = response;
+    })
+  }
 
 // jquery animations
   $(document).ready(function(){

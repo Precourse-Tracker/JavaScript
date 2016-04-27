@@ -11,10 +11,14 @@ angular.module('myApp')
   this.resetArray = () => {
     correctAnswerArray = [];
   }
-  this.getLessonInfo = (input) => {
+  this.getLessonInfo = () => {
     return $http ({
       method: 'GET',
-      url: '/api/lessons/js/' + input
+      url: '/api/lessons/js'
+    }).then(function(response) {
+      console.log("response", response);
+      return response.data;
     })
   }
+  
 })  // end lessonsContentService
