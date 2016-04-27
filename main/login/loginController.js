@@ -1,6 +1,5 @@
 angular.module('myApp')
 .controller('loginController', function($scope, loginService){
-
   $scope.createUser = function(newUser) {
     loginService.newUser(newUser).then(function() {
       $scope.newUser.username = '';
