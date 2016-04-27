@@ -13,11 +13,6 @@ angular.module('myApp')
     loginService.userLogin(user);
   };
 
-  $scope.lessonInfo = () => {
-    lessonsContentService.getLessonInfo().then(function(response) {
-      $scope.lessons = response;
-    })
-  }
 
 // jquery animations
   $(document).ready(function(){

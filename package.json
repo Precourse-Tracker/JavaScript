@@ -21,6 +21,7 @@
     "angular": "^1.5.5",
     "angular-mocks": "^1.5.5",
     "angular-ui-router": "^0.2.18",
+    "angular-youtube-embed": "^1.2.0",
     "bcrypt": "^0.8.5",
     "body-parser": "^1.15.0",
     "cors": "^2.7.1",

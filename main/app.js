@@ -1,4 +1,4 @@
-angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
+angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker', 'youtube-embed'])
 
 .config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
 

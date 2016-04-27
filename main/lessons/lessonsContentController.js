@@ -15,6 +15,20 @@ angular.module('myApp')
   // }
 
 
+
+  getLessons = () => {
+    lessonsContentService.getLessonInfo().then(function(response) {
+      console.log(response[0].video);
+      $scope.video = response[0].video;
+      $scope.text = response[0].lessonText;
+
+    })
+  }
+
+  getLessons();
+
+
+
   $scope.addAnswer = (userAnswer) => {
     $scope.userAnswerArray[userAnswer[1]]=userAnswer[0];
   }
