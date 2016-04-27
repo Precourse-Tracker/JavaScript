@@ -20,7 +20,6 @@ module.exports = {
 
         getUsers(req, res) {
             User.find({}, function(err, users) {
-                console.log(users);
                 res.status(200).send(users);
             })
         },
@@ -30,24 +29,45 @@ module.exports = {
                 res.status(200).send(req.user);
             }
         },
-
-
-
-    updateUser(req, res) {
-      var assessment = req.body.progress.jsAssessment;
-      console.log('backend ctrl',assessment);
-      console.log(req.user);
-        User.findByIdAndUpdate( req.user, {
-          progress: {
-            jsAssessment: assessment
-          }
-        }, function(err, resp) {
-            if (err) {
-                res.status(500).send(err);
-            } else {
-                res.status(200).send(resp);
+      updateUser(req, res) {
+        var assessment = req.body.progress.jsAssessment;
+          User.findByIdAndUpdate( req.user, {
+            progress: {
+              jsAssessment: assessment
             }
-          })
-        }
-
-}
+        },
+        function(err, resp) {
+          if (err) {
+            res.status(500).send(err);
+          }
+          else {
+            res.status(200).send(resp);
+          }
+        })
+      },
+      updateProgress(req, res) {
+        var lesson = req.body.lessonName;
+        var newScore = req.body.score;
+        var userId = req.body.currentUserId;
+        User.findById(userId, function(err, response){
+          if (response.progress.lessons.length === 0) {
+            response.progress.lessons.push({name: lesson, score: newScore});
+            response.save();
+          }
+          else if (response.progress.lessons.length > 0){
+            var lessonExists = false;
+            response.progress.lessons.forEach(function(thisLesson) {
+              if (thisLesson.name === lesson) {
+                thisLesson.score = newScore;
+                response.save();
+                lessonExists = true;
+              }
+            })
+            if (!lessonExists) {
+              response.progress.lessons.push({name: lesson, score: newScore});
+              response.save();
+            }
+          }
+        })
+      }
+    }

@@ -11,7 +11,13 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
   })
   .state('home', {
     url: '/home',
-    templateUrl: './html/home/homeTemplate.html'
+    templateUrl: './html/home/homeTemplate.html',
+    controller: ["$scope", "loginService", "lessonsContentService", function($scope, loginService, lessonsContentService) {
+      let currentUser = loginService.getProfile();
+      currentUser.then(function(response) {
+        lessonsContentService.setCurrentUserId(response.data._id);
+      });
+    }]
   })
   .state('lessons', {
     url: '/lessons',
@@ -31,6 +37,111 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
   })
 
 }]) // end config
+
+angular.module('myApp')
+
+.controller('assessmentController', ["$scope", "assessmentService", "workerService", function($scope, assessmentService, workerService) {
+
+  assessmentService.getAssessment().then(function(response) {
+    var list = [];
+    _.each(response, function(item) {
+      for (var i = 0; i < item.questions.length; i++) {
+        list.push(item.questions[i]);
+      }
+    })
+    // console.log(list);
+    $scope.questions = list;
+  });
+
+$scope.eval = function(q, userCode) {
+
+
+  let qId = q._id;
+  let answer = q.answer;
+
+  workerService.worker(qId, answer, userCode).then(function(result) {
+    assessmentService.ticker(result);
+  })
+
+}
+
+$scope.submitAssessment = (length) => {
+  assessmentService.submitAssessment(length);
+}
+
+$scope.doSomeStuff = function(q) {
+    q.disabled = true;
+}
+
+
+}]);
+
+angular.module('myApp')
+
+.service('assessmentService', ["$q", "$http", function($q, $http) {
+
+
+
+    this.getAssessment = () => {
+        return $http({
+            method: 'GET',
+            url: '/api/assessment/js'
+        }).then((response) => {
+
+            return response.data;
+        })
+    }
+
+    var tick = 0;
+    this.ticker = (result) => {
+        if (result === true) {
+          tick += 1;
+        }else {
+            return 0;
+        }
+        console.log("tick count", tick);
+    }
+
+    this.submitAssessment = (length) => {
+      var totalScore = (tick / length) * 100;
+      totalScore = totalScore.toString();
+      console.log(totalScore);
+      return $http({
+        method: 'PUT',
+        url: '/api/users',
+        data: {
+          progress: {
+            jsAssessment: totalScore
+          }
+        }
+      }).success(function(resp) {
+        console.log(resp);
+      })
+    }
+
+}])
+
+angular.module('myApp').service('workerService', ["Webworker", function(Webworker) {
+
+  this.worker = (qId, answer, userCode) => {
+
+    function isSame(userCode, answer) {
+      if (userCode === answer) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    var myWorker = Webworker.create(isSame, {
+      isSame: true,
+      onReturn: function(data) {return data;}
+    });
+
+    var result = myWorker.run(userCode, answer);
+    return result;
+  }
+}])
 
 angular.module('myApp')
 
@@ -410,111 +521,6 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.controller('assessmentController', ["$scope", "assessmentService", "workerService", function($scope, assessmentService, workerService) {
-
-  assessmentService.getAssessment().then(function(response) {
-    var list = [];
-    _.each(response, function(item) {
-      for (var i = 0; i < item.questions.length; i++) {
-        list.push(item.questions[i]);
-      }
-    })
-    // console.log(list);
-    $scope.questions = list;
-  });
-
-$scope.eval = function(q, userCode) {
-
-
-  let qId = q._id;
-  let answer = q.answer;
-
-  workerService.worker(qId, answer, userCode).then(function(result) {
-    assessmentService.ticker(result);
-  })
-
-}
-
-$scope.submitAssessment = (length) => {
-  assessmentService.submitAssessment(length);
-}
-
-$scope.doSomeStuff = function(q) {
-    q.disabled = true;
-}
-
-
-}]);
-
-angular.module('myApp')
-
-.service('assessmentService', ["$q", "$http", function($q, $http) {
-
-
-
-    this.getAssessment = () => {
-        return $http({
-            method: 'GET',
-            url: '/api/assessment/js'
-        }).then((response) => {
-
-            return response.data;
-        })
-    }
-
-    var tick = 0;
-    this.ticker = (result) => {
-        if (result === true) {
-          tick += 1;
-        }else {
-            return 0;
-        }
-        console.log("tick count", tick);
-    }
-
-    this.submitAssessment = (length) => {
-      var totalScore = (tick / length) * 100;
-      totalScore = totalScore.toString();
-      console.log(totalScore);
-      return $http({
-        method: 'PUT',
-        url: '/api/users',
-        data: {
-          progress: {
-            jsAssessment: totalScore
-          }
-        }
-      }).success(function(resp) {
-        console.log(resp);
-      })
-    }
-
-}])
-
-angular.module('myApp').service('workerService', ["Webworker", function(Webworker) {
-
-  this.worker = (qId, answer, userCode) => {
-
-    function isSame(userCode, answer) {
-      if (userCode === answer) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    var myWorker = Webworker.create(isSame, {
-      isSame: true,
-      onReturn: function(data) {return data;}
-    });
-
-    var result = myWorker.run(userCode, answer);
-    return result;
-  }
-}])
-
-angular.module('myApp')
-
 .controller('lessonTestsController', ["$scope", function($scope) {
 
   // $scope.test = 'test on ctrl';
@@ -633,6 +639,7 @@ angular.module('myApp')
       $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
         $scope.testObject = lesson.data[0];
         $scope.theTitle = $scope.testObject.name;
+        lessonsContentService.setLessonName($scope.theTitle);
         $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
             entry.index = index;
             lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
@@ -670,6 +677,7 @@ angular.module('myApp')
       } else if (score == 100) {
         $scope.message = 'Awesome!!  You got a perfect score!!';
       }
+      lessonsContentService.updateProgress(score);
       $scope.userAnswerArray = [];
       $('.final-score').css({
         'display': 'flex',
@@ -704,8 +712,16 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.service('lessonsContentService', ["$http", function($http) {
+.service('lessonsContentService', ["$http", "loginService", function($http, loginService) {
   let correctAnswerArray = [];
+  let lessonName = '';
+  let currentUserId = '';
+  this.setCurrentUserId = (userId) => {
+    currentUserId = userId;
+  }
+  this.setLessonName = (input) => {
+    lessonName = input;
+  }
   this.setCorrectAnswer = (input, index) => {
     correctAnswerArray[index] = input;
   }
@@ -719,6 +735,13 @@ angular.module('myApp')
     return $http ({
       method: 'GET',
       url: '/api/lessons/js/' + input
+    })
+  }
+  this.updateProgress = (score) => {
+    return $http ({
+      method: 'PUT',
+      url: '/api/lessons/progress',
+      data: {score, lessonName, currentUserId}
     })
   }
 }])  // end lessonsContentService
@@ -750,7 +773,6 @@ angular.module('myApp')
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
-
   $scope.createUser = function(newUser) {
     loginService.newUser(newUser).then(function() {
       $scope.newUser.username = '';
