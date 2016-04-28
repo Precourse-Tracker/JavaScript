@@ -52,7 +52,7 @@ $lightBlue: #8FB9FF;
     margin: 2px auto;
   }
 
-  button:hover, button:active, button:focus, button.selected {
+  button:hover, #choiceClicked {
   	background-color: $lightBlue;
     color: #fff;
   	cursor: pointer;
