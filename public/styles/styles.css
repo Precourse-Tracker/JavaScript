@@ -198,7 +198,6 @@ button:hover {
   background: #8FB9FF;
   box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
 
-
 #side-bar-placeholder {
   width: 225px;
   height: 91vh;
@@ -544,6 +543,7 @@ button:hover {
 
 #login-section .expand {
   display: block !important; }
+
 
 .climber {
   position: relative; }
