@@ -14,7 +14,7 @@ angular.module('myApp')
       let lessonId = lessonsContentService.getTempId();
       scope.lessonContent = lessonsContentService.getLessonInfo(lessonId).then(function(lesson) {
         scope.testObject = lesson.data[0];
-        scope.theTitle = scope.testObject.name;
+        scope.title = scope.testObject.name;
         lessonsContentService.setLessonName(scope.theTitle);
         scope.testIndex = scope.testObject.questions.forEach(function(entry, index){
             entry.index = index;
