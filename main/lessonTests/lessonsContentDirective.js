@@ -18,7 +18,6 @@ angular.module('myApp')
         // lessonsContentService.setLessonName($scope.theTitle);
         lessonsContentService.setLessonName(scope.testObject.name);
         scope.title = lessonsContentService.getLessonName();
-        console.log(scope.theTitle);
         scope.testIndex = scope.testObject.questions.forEach(function(entry, index){
             entry.index = index;
             lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
