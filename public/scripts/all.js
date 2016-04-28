@@ -11,15 +11,23 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker', 'youtube-embed'])
   })
   .state('home', {
     url: '/home',
-    templateUrl: './html/home/homeTemplate.html'
+    templateUrl: './html/home/homeTemplate.html',
+    controller: ["$scope", "loginService", "lessonsContentService", function($scope, loginService, lessonsContentService) {
+      let currentUser = loginService.getProfile();
+      currentUser.then(function(response) {
+        lessonsContentService.setCurrentUserId(response.data._id);
+      });
+    }]
   })
   .state('lessons', {
     url: '/lessons',
-    templateUrl: './html/lessons/lessonsTemplate.html'
+    templateUrl: './html/lessons/lessonsTemplate.html',
+    controller: 'lessonsController'
   })
   .state('lessonTests', {
     url: '/lessonTests',
     templateUrl: './html/lessonTests/lessonTestsTemplate.html'
+    // controller: 'lessonsContentController'
   })
   .state('assessment', {
     url: '/assessment',
@@ -616,6 +624,7 @@ angular.module('myApp')
   }
 
 
+
 }])  // end lessonTestsController
 
 angular.module('myApp')
@@ -625,60 +634,23 @@ angular.module('myApp')
   return {
     restrict: 'A',
     link: function(scope, ele, attr) {
-
-      $('.grade-test').click(function() {
-        $('.final-score').css({
-          'display': 'flex',
-          'flex-direction': 'column'
-        });
-      })
       $('.reset-test').click(function() {
         $('.final-score').css('display', 'none');
       })
-
+      $('.lessons').click(function(){
+        $('.final-score').css('display', 'none');
+      })
     }
   }
 
 })  // end lessonTestsDirective
 
-// angular.module('myApp')
-//
-// .service('lessonTestsService', function($http) {
-//
-//   this.lessonTest = '';
-//
-//   this.setLessonTest = function(lesson) {
-//     lessonTest = lesson;
-//   }
-//
-//   this.getLessonTest = function() {
-//     // return lessonTest;
-//     // console.log(lessonTest);
-//     return $http({
-//       method: 'GET',
-//       url: './html/lessonTests/lessonFiles/' + lessonTest + '.html',
-//       type: 'html'
-//     })
-//   }
-//
-//
-// }) // end lessonTestsService
 
 angular.module('myApp')
 
 .controller('lessonsContentController', ["$scope", "lessonsContentService", function($scope, lessonsContentService) {
   $scope.userAnswerArray = [];
-  // $scope.lessonInfo = (input) => {
-  //     lessonsContentService.resetArray();
-  //     $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
-  //       $scope.testObject = lesson.data[0];
-  //       $scope.theTitle = $scope.testObject.name;
-  //       $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
-  //           entry.index = index;
-  //           lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
-  //       })
-  //   })
-  // }
+
 
 
 
@@ -687,7 +659,20 @@ angular.module('myApp')
       console.log(response[0].video);
       $scope.video = response[0].video;
       $scope.text = response[0].lessonText;
+    })
+  }
 
+  $scope.lessonInfo = (input) => {
+    lessonsContentService.setTempId(input);
+    lessonsContentService.resetArray();
+    $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
+      $scope.testObject = lesson.data[0];
+      $scope.theTitle = $scope.testObject.name;
+      lessonsContentService.setLessonName($scope.theTitle);
+      $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
+          entry.index = index;
+          lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
+      })
     })
   }
 
@@ -726,17 +711,28 @@ angular.module('myApp')
       } else if (score == 100) {
         $scope.message = 'Awesome!!  You got a perfect score!!';
       }
+      lessonsContentService.updateProgress(score);
+      $scope.userAnswerArray = [];
+      $('.final-score').css({
+        'display': 'flex',
+        'flex-direction': 'column'
+      });
     }
     else {
       alert('Please answer all questions before submitting');
     }
+    $('html, body').animate({ scrollTop: 0 }, 300);
+  $scope.resetTest = () => {
+    $scope.userAnswerArray = [];
+    $('html, body').animate({ scrollTop: 0 }, 300);
   }
+}
 
 }]) // end lessonsContentController
 
 angular.module('myApp')
 
-.directive('lessonsContentDirective', function() {
+.directive('lessonsContentDirective', ["lessonsContentService", function(lessonsContentService) {
   return {
     restrict: 'E',
     controller: 'lessonsContentController',
@@ -745,9 +741,71 @@ angular.module('myApp')
       title: '=',
       testObject: '=',
       testScore: '='
+    },
+    link: function(scope, ele, attr) {
+      let lessonId = lessonsContentService.getTempId();
+      scope.lessonContent = lessonsContentService.getLessonInfo(lessonId).then(function(lesson) {
+        scope.testObject = lesson.data[0];
+        scope.theTitle = scope.testObject.name;
+        lessonsContentService.setLessonName(scope.theTitle);
+        scope.testIndex = scope.testObject.questions.forEach(function(entry, index){
+            entry.index = index;
+            lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
+        })
+      })
     }
   }
-}) // end lessonsContentDirective
+}]) // end lessonsContentDirective
+
+angular.module('myApp')
+
+.service('lessonsContentService', ["$http", "loginService", function($http, loginService) {
+  let correctAnswerArray = [];
+  let lessonName = '';
+  let currentUserId = '';
+  let tempId = ''; // var for moving from lessons to lessontests
+  let clickedTopic = '';
+  this.setTempId = (input) => {  // set parameter to get when moving from lessons to lessontests
+    tempId = input;
+  }
+  this.setClickedTopic = (input) => {
+    clickedTopic = input;
+  }
+  this.setCurrentUserId = (userId) => {
+    currentUserId = userId;
+  }
+  this.setLessonName = (input) => {
+    lessonName = input;
+  }
+  this.setCorrectAnswer = (input, index) => {
+    correctAnswerArray[index] = input;
+  }
+  this.getTempId = () => {  // get when moving from lessons to lessontests
+    return tempId;
+  }
+  this.getClickedTopic = () => {
+    return clickedTopic;
+  }
+  this.getCorrectAnswerArray = () => {
+    return correctAnswerArray;
+  }
+  this.resetArray = () => {
+    correctAnswerArray = [];
+  }
+  this.getLessonInfo = (input) => {
+    return $http ({
+      method: 'GET',
+      url: '/api/lessons/js/' + input
+    })
+  }
+  this.updateProgress = (score) => {
+    return $http ({
+      method: 'PUT',
+      url: '/api/lessons/progress',
+      data: {score, lessonName, currentUserId}
+    })
+  }
+}])  // end lessonsContentService
 
 angular.module('myApp')
 
@@ -776,7 +834,15 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.directive('lessonsSideBarDirective', ["$state", function($state) {
+.controller('lessonsController', ["$scope", function($scope) {
+
+  
+
+}])  // end lessonsController
+
+angular.module('myApp')
+
+.directive('lessonsSideBarDirective', ["$state", "$http", "$q", "lessonsContentService", function($state, $http, $q, lessonsContentService) {
 
   return {
     restrict: 'E',
@@ -784,14 +850,30 @@ angular.module('myApp')
     templateUrl: './html/lessons/lessonsSideBarTemplate.html',
     link: function(scope, ele, attr) {
       $('.lesson-title').click(function() {
-        // console.log(this.parentNode);
-        $('.lesson-sections', this.parentNode).toggle('expand');
+        let that = this;
+        
+        if ($state.name !== 'lessons') {
+          $state.go('lessons')
+        }
+        $('.lesson-sections', that.parentNode).toggle('expand');
         $('.lesson-tests-wrapper').css('display', 'none');
       })
 
-      $('.lesson-test').click(function() {
+      let testNavigation = () => {
         $('.lesson-tests-wrapper').css('display', 'block');
         $('html, body').animate({ scrollTop: 0 }, 300);
+      }
+
+      $('.lesson-test').click(function() {
+        let lessonId = lessonsContentService.getTempId();
+        if ($state.name !== 'lessonTests') {
+          $state.go('lessonTests');
+          setTimeout(() => {
+            testNavigation();
+          }, 100);
+        } else {
+          testNavigation();
+        }
       }) // end lesson-test click
 
     } // end of directive link
@@ -801,6 +883,7 @@ angular.module('myApp')
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", "lessonsContentService", function($scope, loginService, lessonsContentService){
+
 
   $scope.createUser = function(newUser) {
     loginService.newUser(newUser).then(function() {
@@ -1367,93 +1450,3 @@ angular.module('myApp')
   }
 
 }) // end navigationDirective
-
-angular.module('myApp')
-
-.directive('jsArraysDirectives', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-arrays.html'
-  }
-}) // end jsArraysDirectives
-
-angular.module('myApp')
-
-.directive('jsConditionalDirective', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-conditional.html'
-  }
-}) // end jsConditionalDirective
-
-angular.module('myApp')
-
-.directive('jsDatatypesDirective', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-data-types.html'
-  }
-}) // end dataTypesDirective
-
-angular.module('myApp')
-
-.directive('jsFunctionsDirective', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-functions.html'
-  }
-}) // end varsTestDirective
-
-angular.module('myApp')
-
-.directive('jsIteratorsDirective', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-iterators.html'
-  }
-}) // end varsTestDirective
-
-angular.module('myApp')
-
-.directive('jsLogicalDirective', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-logical.html'
-  }
-}) // end varsTestDirective
-
-angular.module('myApp')
-
-.directive('jsObjectsDirective', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-objects.html'
-  }
-}) // end varsTestDirective
-
-angular.module('myApp')
-
-.directive('jsStringsContDirective', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-strings-cont.html'
-  }
-}) // end varsTestDirective
-
-angular.module('myApp')
-
-.directive('jsVariablesDirective', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-variables.html'
-  }
-}) // end varsTestDirective

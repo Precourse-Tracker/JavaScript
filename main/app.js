@@ -11,15 +11,23 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker', 'youtube-embed'])
   })
   .state('home', {
     url: '/home',
-    templateUrl: './html/home/homeTemplate.html'
+    templateUrl: './html/home/homeTemplate.html',
+    controller: function($scope, loginService, lessonsContentService) {
+      let currentUser = loginService.getProfile();
+      currentUser.then(function(response) {
+        lessonsContentService.setCurrentUserId(response.data._id);
+      });
+    }
   })
   .state('lessons', {
     url: '/lessons',
-    templateUrl: './html/lessons/lessonsTemplate.html'
+    templateUrl: './html/lessons/lessonsTemplate.html',
+    controller: 'lessonsController'
   })
   .state('lessonTests', {
     url: '/lessonTests',
     templateUrl: './html/lessonTests/lessonTestsTemplate.html'
+    // controller: 'lessonsContentController'
   })
   .state('assessment', {
     url: '/assessment',
