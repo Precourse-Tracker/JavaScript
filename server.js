@@ -96,7 +96,6 @@ app.use( passport.session() );
 
 
 ///////////////API AUTH////////////
-
 app.post( '/api/login', passport.authenticate( 'local-login', {
   failureRedirect: '/login'
 } ), function ( req, res ) {
@@ -114,7 +113,6 @@ app.post( '/api/signup', passport.authenticate( 'local-signup' ), function ( req
 //////progress tracker data//////
 app.get( '/api/tracker', progressController.getTrackerData );
 
-
 ///////////LOGOUT USER//////////
 app.get( '/logout', userController.logoutUser );
 
@@ -124,10 +122,17 @@ app.get( '/api/lessons/js/:lessonName', unitController.getJSLesson );
 app.get( '/api/users/', userController.getUsers );
 
 /////////UPDATING USER////////
-// app.put( '/api/users', userController.updateUser );
 app.put( '/api/users/', userController.updateUser );
+app.put('/api/lessons/progress', userController.updateProgress);
 
 /////////////Creating Data///////
-app.post( '/api/lessons', unitController.createLesson );
-app.post( '/api/assessment/js', unitController.createAssessment );
-app.post( '/api/unit', unitController.createUnit );
+app.post('/api/lessons', unitController.createLesson);
+app.post('/api/assessment/js', unitController.createAssessment);
+app.post('/api/unit', unitController.createUnit);
+
+
+//////////CHECK IF USER EXISTS////////
+app.get('/api/users', userController.getUsers);
+
+//////////GET CURRENT LOGGED IN USER////////
+app.get('/user/current', userController.currentUser);

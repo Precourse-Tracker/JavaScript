@@ -11,8 +11,7 @@ module.exports = {
         redirect: 'login'
       } );
     }
-  },
-  logoutUser( req, res, next ) {
+  },  logoutUser( req, res, next ) {
     req.logout();
     req.session.destroy();
     res.redirect( '/' );
@@ -29,7 +28,7 @@ module.exports = {
         }
         res.status( 200 )
           .send( message );
-          console.log(message);
+        console.log( message );
       } );
   },
 
@@ -41,9 +40,7 @@ module.exports = {
 
   updateUser( req, res ) {
     var assessment = req.body.progress.jsAssessment;
-    console.log( 'backend ctrl', assessment );
-    console.log( req.user );
-    User.findByIdAndUpdate("57150955710833b8272b9b2f", {
+    User.findByIdAndUpdate( req.user, {
       progress: {
         jsAssessment: assessment
       }
@@ -52,6 +49,37 @@ module.exports = {
         res.status( 500 ).send( err );
       } else {
         res.status( 200 ).send( resp );
+      }
+    } )
+  },
+
+  updateProgress( req, res ) {
+    var lesson = req.body.lessonName;
+    var newScore = req.body.score;
+    var userId = req.body.currentUserId;
+    User.findById( userId, function ( err, response ) {
+      if ( response.progress.lessons.length === 0 ) {
+        response.progress.lessons.push( {
+          name: lesson,
+          score: newScore
+        } );
+        response.save();
+      } else if ( response.progress.lessons.length > 0 ) {
+        var lessonExists = false;
+        response.progress.lessons.forEach( function ( thisLesson ) {
+          if ( thisLesson.name === lesson ) {
+            thisLesson.score = newScore;
+            response.save();
+            lessonExists = true;
+          }
+        } )
+        if ( !lessonExists ) {
+          response.progress.lessons.push( {
+            name: lesson,
+            score: newScore
+          } );
+          response.save();
+        }
       }
     } )
   }
