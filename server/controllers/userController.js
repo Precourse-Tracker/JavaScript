@@ -32,6 +32,7 @@ module.exports = {
       } );
   },
 
+
   currentUser( req, res, next ) {
     if ( req.user ) {
       res.status( 200 ).send( req.user );

@@ -3,7 +3,8 @@ angular.module('myApp').service('workerService', function(Webworker) {
   this.worker = (qId, answer, userCode) => {
 
     function isSame(userCode, answer) {
-      if (userCode === answer) {
+      var results = eval(userCode);
+      if (results.toString() === answer) {
         return true;
       } else {
         return false;

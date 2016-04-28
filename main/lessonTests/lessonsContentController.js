@@ -2,21 +2,40 @@ angular.module('myApp')
 
 .controller('lessonsContentController', function($scope, lessonsContentService) {
   $scope.userAnswerArray = [];
+
+
+
+
+  // getLessons = () => {
+  //   lessonsContentService.getLessonInfo().then(function(response) {
+  //     console.log(response[0].video);
+  //     $scope.video = response[0].video;
+  //     $scope.text = response[0].lessonText;
+  //   })
+  // }
+
   $scope.lessonInfo = (input) => {
     lessonsContentService.setTempId(input);
     lessonsContentService.resetArray();
     $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
-      $scope.testObject = lesson.data[0];
-      // $scope.theTitle = $scope.testObject.name;
-      // lessonsContentService.setLessonName($scope.theTitle);
-      lessonsContentService.setLessonName($scope.testObject.name);
-      $scope.title = lessonsContentService.getLessonName();
+      console.log('lesson', lesson);
+      console.log('lesson-video', lesson.data.video);
+      $scope.video = lesson.data.video;
+      $scope.testObject = lesson.data;
+      console.log('testObject', $scope.testObject.questions);
+      $scope.theTitle = $scope.testObject.name;
+      lessonsContentService.setLessonName($scope.theTitle);
       $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
           entry.index = index;
           lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
       })
     })
   }
+
+  // getLessons();
+
+
+
   $scope.addAnswer = (userAnswer) => {
     $scope.userAnswerArray[userAnswer[1]]=userAnswer[0];
   }
@@ -59,7 +78,6 @@ angular.module('myApp')
       alert('Please answer all questions before submitting');
     }
     $('html, body').animate({ scrollTop: 0 }, 300);
-  }
   $scope.resetTest = () => {
     $scope.userAnswerArray = [];
     $('html, body').animate({ scrollTop: 0 }, 300);
@@ -81,4 +99,6 @@ angular.module('myApp')
       "outline": 0
     });
   }
+}
+
 }) // end lessonsContentController

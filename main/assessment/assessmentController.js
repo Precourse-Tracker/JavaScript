@@ -15,7 +15,6 @@ angular.module('myApp')
 
 $scope.eval = function(q, userCode) {
 
-
   let qId = q._id;
   let answer = q.answer;
 

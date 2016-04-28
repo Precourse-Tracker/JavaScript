@@ -1,7 +1,7 @@
 <navigation-directive></navigation-directive>
 
 <!-- <unit-test-menu-directive></unit-test-menu-directive> -->
-<section unit-test-menu-directive id="dashboard-wrapper">
+<section unit-test-menu-directive id="dashboard-wrapper" ng-controller="dashboardController">
 
   <div id="dashboard">
 
@@ -21,7 +21,7 @@
 
 
     <div id="unit-subview">
-      <div id="js-graph-div" ><bars class="radarChart"></bars></div>
+      <div id="js-graph-div" ><bars class="radarChart" data="radarChartData"></bars></div>
       <div id="html-graph-div"><span>HTML</span></div>
       <div id="css-graph-div"><span>CSS</span></div>
       <div id="git-graph-div"><span>Git</span></div>

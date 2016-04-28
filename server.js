@@ -166,7 +166,9 @@ app.get( '/api/tracker', progressController.getTrackerData );
 app.get( '/logout', userController.logoutUser );
 
 //////////GET DATA////////////
-app.get( '/api/assessment/js', unitController.getJSAssessment );
+app.get('/api/assessment/js', unitController.getJSAssessment);
+app.get('/api/lessons/js', unitController.getJSLesson);
+app.get('/api/users/progress', unitController.getUserData);
 app.get( '/api/lessons/js/:lessonName', unitController.getJSLesson );
 app.get( '/api/users/', userController.getUsers );
 

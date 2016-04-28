@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     uglifycss = require('gulp-uglifycss'),
     stripCode = require('gulp-strip-code'),
     ngAnnotate = require('gulp-ng-annotate'),
-    watcher = gulp.watch(['./main/**/*.js', './main/styles/*.scss', './main/**/*.html', './main/jquery.js', './main/ng-webworker.js', './main/worker_wrapper.js', './main/ui-ace.js'], ['default']);
+    watcher = gulp.watch(['./main/**/*.js', './test/**/*.js', './main/styles/*.scss', './main/**/*.html', './main/jquery.js', './main/ng-webworker.js', './main/worker_wrapper.js', './main/ui-ace.js', './main/angular-youtube-embed.js'], ['default']);
 
 gulp.watch(['./main/**/*.js', './main/styles/*.scss', './main/**/*.html', './main/jquery.js'], ['default']);
 watcher.on('change', function(event) {
@@ -24,7 +24,7 @@ gulp.task('styles', function() { // .scss is newer file version of .sass
 });
 
 gulp.task('javascript', function() {
-  gulp.src(['./main/**/*.js', '!./main/jquery.js', '!./main/ng-webworker.js', '!./main/worker_wrapper.js', '!./main/ui-ace.js'])
+  gulp.src(['./main/**/*.js', './test/**/*.js', '!./main/jquery.js', '!./main/ng-webworker.js', '!./main/worker_wrapper.js', '!./main/ui-ace.js', '!./main/angular-youtube-embed.js'])
     .pipe(ngAnnotate())
     // .pipe(uglify())
     .pipe(concat('all.js'))
