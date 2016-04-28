@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+const express = require('express');
+const session = require('express-session');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
+const User = require('./server/models/User.js');
+// const secret = require('./server/secret.js');
+const secret = process.env.SECRET
+
+=======
 const express = require( 'express' );
 const session = require( 'express-session' );
 const mongoose = require( 'mongoose' );
@@ -7,6 +20,7 @@ const passport = require( 'passport' );
 const localStrategy = require( 'passport-local' ).Strategy;
 const User = require( './server/models/User.js' );
 const secret = require( './server/secret.js' );
+>>>>>>> master
 
 ///////CONTROLLERS/////////
 const userController = require( './server/controllers/userController.js' );
@@ -16,14 +30,42 @@ const progressController = require( './server/controllers/progressController.js'
 
 
 const app = express();
+<<<<<<< HEAD
+// const port = 6969;
+const port = 80;
+// app.listen(port, () => console.log(`listening on port ${port}`));
+app.listen(process.env.PORT, () => console.log(`listening on port ${port}`));
+=======
 const port = 6969;
 app.listen( port, () => console.log( `listening on port ${port}` ) );
+>>>>>>> master
 
 ///////////////////////////////
 //CONNECTING TO THE DATABASE//
 /////////////////////////////
+<<<<<<< HEAD
+
+// mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI);
+mongoose.connection.once('open', () => console.log('connected to Heroku and mLab'));
+
+/////////MIDDLEWARE///////////
+app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
+app.use(cors());
+app.use(session({
+// secret: secret.secret,
+secret: secret, //Heroku
+resave: false,
+saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+=======
 mongoose.connect( 'mongodb://localhost/courseTracker' );
 mongoose.connection.once( 'open', () => console.log( 'connected to MongoDB' ) );
+>>>>>>> master
 
 //////////LOGIN AUTH///////////
 passport.use( 'local-login', new localStrategy( {
@@ -42,6 +84,12 @@ passport.use( 'local-login', new localStrategy( {
       if ( !user.validatePassword( password ) ) {
         return cb( null, false );
       }
+<<<<<<< HEAD
+      cb(null, user);
+    });
+  });
+
+=======
       return cb( null, user );
     } );
   } ) );
@@ -93,6 +141,7 @@ app.use( session( {
 } ) );
 app.use( passport.initialize() );
 app.use( passport.session() );
+>>>>>>> master
 
 
 ///////////////API AUTH////////////
