@@ -1,6 +1,8 @@
 angular.module('myApp')
 
-.controller('lessonTestsController', function($scope) {
+.controller('lessonTestsController', function($scope, lessonsContentService) {
+
+
 
 
 

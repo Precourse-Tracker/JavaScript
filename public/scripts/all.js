@@ -1,4 +1,4 @@
-angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
+angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker', 'youtube-embed'])
 
 .config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
 
@@ -56,7 +56,6 @@ angular.module('myApp')
   });
 
 $scope.eval = function(q, userCode) {
-
 
   let qId = q._id;
   let answer = q.answer;
@@ -117,6 +116,7 @@ angular.module('myApp')
           }
         }
       }).success(function(resp) {
+        tick = 0;
         console.log(resp);
       })
     }
@@ -128,7 +128,8 @@ angular.module('myApp').service('workerService', ["Webworker", function(Webworke
   this.worker = (qId, answer, userCode) => {
 
     function isSame(userCode, answer) {
-      if (userCode === answer) {
+      var results = eval(userCode);
+      if (results.toString() === answer) {
         return true;
       } else {
         return false;
@@ -145,14 +146,49 @@ angular.module('myApp').service('workerService', ["Webworker", function(Webworke
   }
 }])
 
+angular.module('myApp').controller('dashboardController', ["$scope", "dashboardService", function($scope, dashboardService) {
+
+  getUserData = () => {
+    dashboardService.getUserData().then(function(response) {
+      console.log("controller", response.data.progress.lessons[0].score);
+      var total = response.data.progress.lessons[0].score;
+      $scope.radarChartData = total / 100;
+
+    })
+  }
+  getUserData();
+
+}])
+
+angular.module('myApp').service('dashboardService', ["$q", "$http", function($q, $http) {
+
+  this.getUserData = () => {
+    return $http({
+      method: 'GET',
+      url: '/api/users/progress'
+    }).then(function(response) {
+      // console.log("service", response);
+      return response;
+    })
+  }
+
+}])
+
 angular.module('myApp')
 
    .directive('bars', function () {
       return {
+         controller: 'dashboardController',
          restrict: 'EA',
          replace: true,
          template: '<div id="main"></div>',
+         scope: {
+           data: '='
+         },
          link: function (scope, element, attrs) {
+           console.log('scope pre info', scope);
+           var info = scope;
+          //  console.log(info.hasOwnProperty('data'));s
      /////////////////////////////////////////////////////////
      /////////////// The Radar Chart Function ////////////////
      /////////////////////////////////////////////////////////
@@ -174,7 +210,7 @@ angular.module('myApp')
        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
      var data = [
            [// JS Unit Lesson Tests
-           {axis:"Data Types",value:0.5},
+           {axis:"Data Types",value:0.66},
            {axis:"Variables",value:1},
            {axis:"Strings",value:0.87},
            {axis:"Arrays",value:0.85},
@@ -523,7 +559,9 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.controller('lessonTestsController', ["$scope", function($scope) {
+.controller('lessonTestsController', ["$scope", "lessonsContentService", function($scope, lessonsContentService) {
+
+
 
 
 
@@ -552,21 +590,40 @@ angular.module('myApp')
 
 .controller('lessonsContentController', ["$scope", "lessonsContentService", function($scope, lessonsContentService) {
   $scope.userAnswerArray = [];
+
+
+
+
+  // getLessons = () => {
+  //   lessonsContentService.getLessonInfo().then(function(response) {
+  //     console.log(response[0].video);
+  //     $scope.video = response[0].video;
+  //     $scope.text = response[0].lessonText;
+  //   })
+  // }
+
   $scope.lessonInfo = (input) => {
     lessonsContentService.setTempId(input);
     lessonsContentService.resetArray();
     $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
-      $scope.testObject = lesson.data[0];
-      // $scope.theTitle = $scope.testObject.name;
-      // lessonsContentService.setLessonName($scope.theTitle);
-      lessonsContentService.setLessonName($scope.testObject.name);
-      $scope.title = lessonsContentService.getLessonName();
+      console.log('lesson', lesson);
+      console.log('lesson-video', lesson.data.video);
+      $scope.video = lesson.data.video;
+      $scope.testObject = lesson.data;
+      console.log('testObject', $scope.testObject.questions);
+      $scope.theTitle = $scope.testObject.name;
+      lessonsContentService.setLessonName($scope.theTitle);
       $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
           entry.index = index;
           lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
       })
     })
   }
+
+  // getLessons();
+
+
+
   $scope.addAnswer = (userAnswer) => {
     $scope.userAnswerArray[userAnswer[1]]=userAnswer[0];
   }
@@ -609,7 +666,6 @@ angular.module('myApp')
       alert('Please answer all questions before submitting');
     }
     $('html, body').animate({ scrollTop: 0 }, 300);
-  }
   $scope.resetTest = () => {
     $scope.userAnswerArray = [];
     $('html, body').animate({ scrollTop: 0 }, 300);
@@ -631,6 +687,8 @@ angular.module('myApp')
       "outline": 0
     });
   }
+}
+
 }]) // end lessonsContentController
 
 angular.module('myApp')
@@ -648,11 +706,9 @@ angular.module('myApp')
     link: function(scope, ele, attr) {
       let lessonId = lessonsContentService.getTempId();
       scope.lessonContent = lessonsContentService.getLessonInfo(lessonId).then(function(lesson) {
-        scope.testObject = lesson.data[0];
-        // $scope.theTitle = $scope.testObject.name;
-        // lessonsContentService.setLessonName($scope.theTitle);
-        lessonsContentService.setLessonName(scope.testObject.name);
-        scope.title = lessonsContentService.getLessonName();
+        scope.testObject = lesson.data;
+        scope.theTitle = scope.testObject.name;
+        lessonsContentService.setLessonName(scope.theTitle);
         scope.testIndex = scope.testObject.questions.forEach(function(entry, index){
             entry.index = index;
             lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
@@ -765,7 +821,9 @@ angular.module('myApp')
 }])  // end lessonsSideBarDirective
 
 angular.module('myApp')
-.controller('loginController', ["$scope", "loginService", function($scope, loginService){
+.controller('loginController', ["$scope", "loginService", "lessonsContentService", function($scope, loginService, lessonsContentService){
+
+
   $scope.createUser = function(newUser) {
     loginService.newUser(newUser).then(function() {
       $scope.newUser.username = '';
@@ -777,6 +835,7 @@ angular.module('myApp')
   $scope.userLogin = function(user) {
     loginService.userLogin(user);
   };
+
 
 // jquery animations
   $(document).ready(function(){

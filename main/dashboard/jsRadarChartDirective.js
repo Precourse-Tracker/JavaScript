@@ -2,10 +2,17 @@ angular.module('myApp')
 
    .directive('bars', function () {
       return {
+         controller: 'dashboardController',
          restrict: 'EA',
          replace: true,
          template: '<div id="main"></div>',
+         scope: {
+           data: '='
+         },
          link: function (scope, element, attrs) {
+           console.log('scope pre info', scope);
+           var info = scope;
+          //  console.log(info.hasOwnProperty('data'));s
      /////////////////////////////////////////////////////////
      /////////////// The Radar Chart Function ////////////////
      /////////////////////////////////////////////////////////
@@ -27,7 +34,7 @@ angular.module('myApp')
        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
      var data = [
            [// JS Unit Lesson Tests
-           {axis:"Data Types",value:0.5},
+           {axis:"Data Types",value:0.66},
            {axis:"Variables",value:1},
            {axis:"Strings",value:0.87},
            {axis:"Arrays",value:0.85},

@@ -6,6 +6,7 @@
   }
   .ace_editor  {
     height : 200px;
+    width: 600px;
   }
   .assessment-eval {
     color: #fff;
@@ -47,5 +48,9 @@
   input {
     width: 100vw;
     height: 20vh;
+  }
+  .assessmentQ {
+    display: flex;
+    line-height: 40px;
   }
 }

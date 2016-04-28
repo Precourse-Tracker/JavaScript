@@ -3,6 +3,7 @@ const User = require('../models/User.js');
 const Lesson = require('../models/Lesson.js');
 const JSAssessment = require('../models/JSAssessment.js');
 const Unit = require('../models/Unit.js');
+const parseServ = require('../services/parseService.js');
 
 module.exports = {
   createLesson(req,res, next) {
@@ -47,12 +48,23 @@ module.exports = {
     })
   },
   getJSLesson(req, res, next) {
-    Lesson.find({name: req.params.lessonName}, (err, lesson) => {
+    Lesson.findOne({'name': req.params.lessonName}, (err, lesson) => {
       if (err) {
         res.status(500).send(err);
       }
       else {
         res.status(200).send(lesson);
+      }
+    })
+  },
+  getUserData(req, res, next) {
+    User.findById(req.user, (err, progress) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        parseServ.parseData(progress).then(function(data) {
+          res.status(200).send(data);
+        })
       }
     })
   }
