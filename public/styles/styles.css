@@ -159,6 +159,45 @@ a {
 #unit-subview #js-graph-div rect:hover {
   fill: #8FB9FF; }
 
+#home-wrapper {
+  font-family: 'Lato';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: -1; }
+
+.home-top {
+  margin-top: 10vh; }
+  .home-top div {
+    font-weight: bold;
+    top: 50%;
+    transform: translate(-50%); }
+
+button {
+  margin: 4em;
+  background: #406BB2;
+  padding: 10px 16px;
+  width: auto;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #fff;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+  border: 0;
+  outline: 0;
+  transition: all 0.25s; }
+
+button:hover {
+  background: #8FB9FF;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
+
 
 .lessonTests {
   position: relative;
@@ -251,45 +290,6 @@ a {
       cursor: pointer; }
       .submit-functions-test div input:hover {
         box-shadow: 0 0 10px #406BB2; }
-
-#home-wrapper {
-  font-family: 'Lato';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: -1; }
-
-.home-top {
-  margin-top: 10vh; }
-  .home-top div {
-    font-weight: bold;
-    top: 50%;
-    transform: translate(-50%); }
-
-button {
-  margin: 4em;
-  background: #406BB2;
-  padding: 10px 16px;
-  width: auto;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 14px;
-  color: #fff;
-  line-height: 16px;
-  letter-spacing: 0.5px;
-  border-radius: 2px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
-  border: 0;
-  outline: 0;
-  transition: all 0.25s; }
-
-button:hover {
-  background: #8FB9FF;
-  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
 
 #side-bar-placeholder {
   width: 225px;
