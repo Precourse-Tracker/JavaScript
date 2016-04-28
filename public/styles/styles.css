@@ -19,7 +19,8 @@ a {
   margin: 10px 0 10px 0; }
 
 #assessment-view .ace_editor {
-  height: 200px; }
+  height: 200px;
+  width: 600px; }
 
 #assessment-view .assessment-eval {
   color: #fff;
@@ -60,6 +61,10 @@ a {
 #assessment-view input {
   width: 100vw;
   height: 20vh; }
+
+#assessment-view .assessmentQ {
+  display: flex;
+  line-height: 40px; }
 
 #dashboard-wrapper {
   width: 100vw;

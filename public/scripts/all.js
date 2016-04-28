@@ -150,8 +150,10 @@ angular.module('myApp').controller('dashboardController', ["$scope", "dashboardS
 
   getUserData = () => {
     dashboardService.getUserData().then(function(response) {
-      console.log("controller", response.data);
-      $scope.radarChartData = response.data;
+      console.log("controller", response.data.progress.lessons[0].score);
+      var total = response.data.progress.lessons[0].score;
+      $scope.radarChartData = total / 100;
+
     })
   }
   getUserData();
@@ -184,8 +186,9 @@ angular.module('myApp')
            data: '='
          },
          link: function (scope, element, attrs) {
-           var data = scope;
-           console.log('radar', data.progress);
+           console.log('scope pre info', scope);
+           var info = scope;
+          //  console.log(info.hasOwnProperty('data'));s
      /////////////////////////////////////////////////////////
      /////////////// The Radar Chart Function ////////////////
      /////////////////////////////////////////////////////////
@@ -207,7 +210,7 @@ angular.module('myApp')
        height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
      var data = [
            [// JS Unit Lesson Tests
-           {axis:"Data Types",value:0.5},
+           {axis:"Data Types",value:0.66},
            {axis:"Variables",value:1},
            {axis:"Strings",value:0.87},
            {axis:"Arrays",value:0.85},
@@ -603,7 +606,11 @@ angular.module('myApp')
     lessonsContentService.setTempId(input);
     lessonsContentService.resetArray();
     $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
-      $scope.testObject = lesson.data[0];
+      console.log('lesson', lesson);
+      console.log('lesson-video', lesson.data.video);
+      $scope.video = lesson.data.video;
+      $scope.testObject = lesson.data;
+      console.log('testObject', $scope.testObject.questions);
       $scope.theTitle = $scope.testObject.name;
       lessonsContentService.setLessonName($scope.theTitle);
       $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
@@ -699,7 +706,7 @@ angular.module('myApp')
     link: function(scope, ele, attr) {
       let lessonId = lessonsContentService.getTempId();
       scope.lessonContent = lessonsContentService.getLessonInfo(lessonId).then(function(lesson) {
-        scope.testObject = lesson.data[0];
+        scope.testObject = lesson.data;
         scope.theTitle = scope.testObject.name;
         lessonsContentService.setLessonName(scope.theTitle);
         scope.testIndex = scope.testObject.questions.forEach(function(entry, index){

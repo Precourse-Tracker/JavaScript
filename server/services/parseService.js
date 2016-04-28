@@ -14,7 +14,6 @@ module.exports.parseData = (data) => {
   } catch(err) {
     return err;
   }
-  console.log("progressData", progressData);
 
   deferred.resolve(progressData);
 

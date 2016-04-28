@@ -8,7 +8,6 @@ const lessonSchema = new Schema({
     multipleChoice: {type: Array},
     correctAnswer: {type: String, required: true, index: true},
   }],
-  lessonText: {type: String, required: true},
   video: {type: String, required: true},
   practice: [{
     question: {type: String, required: true, index: true},
@@ -18,3 +17,6 @@ const lessonSchema = new Schema({
 })
 
 module.exports = mongoose.model('Lesson', lessonSchema);
+
+// https://www.youtube.com/watch?v=eyAqrXrG_3s
+// https://youtu.be/0cnFGUzGFvY

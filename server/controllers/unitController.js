@@ -48,7 +48,7 @@ module.exports = {
     })
   },
   getJSLesson(req, res, next) {
-    Lesson.find({}, (err, lesson) => {
+    Lesson.findOne({'name': req.params.lessonName}, (err, lesson) => {
       if (err) {
         res.status(500).send(err);
       }
@@ -59,12 +59,10 @@ module.exports = {
   },
   getUserData(req, res, next) {
     User.findById(req.user, (err, progress) => {
-      console.log("progress", progress);
       if (err) {
         res.status(500).send(err);
       } else {
         parseServ.parseData(progress).then(function(data) {
-          console.log('back data', data);
           res.status(200).send(data);
         })
       }

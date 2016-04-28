@@ -2,8 +2,10 @@ angular.module('myApp').controller('dashboardController', function($scope, dashb
 
   getUserData = () => {
     dashboardService.getUserData().then(function(response) {
-      console.log("controller", response.data);
-      $scope.radarChartData = response.data;
+      console.log("controller", response.data.progress.lessons[0].score);
+      var total = response.data.progress.lessons[0].score;
+      $scope.radarChartData = total / 100;
+
     })
   }
   getUserData();
