@@ -4,6 +4,14 @@ angular.module('myApp')
   let correctAnswerArray = [];
   let lessonName = '';
   let currentUserId = '';
+  let tempId = ''; // var for moving from lessons to lessontests
+  let clickedTopic = '';
+  this.setTempId = (input) => {  // set parameter to get when moving from lessons to lessontests
+    tempId = input;
+  }
+  this.setClickedTopic = (input) => {
+    clickedTopic = input;
+  }
   this.setCurrentUserId = (userId) => {
     currentUserId = userId;
   }
@@ -12,6 +20,12 @@ angular.module('myApp')
   }
   this.setCorrectAnswer = (input, index) => {
     correctAnswerArray[index] = input;
+  }
+  this.getTempId = () => {  // get when moving from lessons to lessontests
+    return tempId;
+  }
+  this.getClickedTopic = () => {
+    return clickedTopic;
   }
   this.getCorrectAnswerArray = () => {
     return correctAnswerArray;
