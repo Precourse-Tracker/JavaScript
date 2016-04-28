@@ -559,35 +559,6 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.controller('lessonTestsController', ["$scope", "lessonsContentService", function($scope, lessonsContentService) {
-
-
-
-
-
-}])  // end lessonTestsController
-
-angular.module('myApp')
-
-.directive('lessonTestsDirective', function() {
-
-  return {
-    restrict: 'A',
-    link: function(scope, ele, attr) {
-      $('.reset-test').click(function() {
-        $('.final-score').css('display', 'none');
-      })
-      $('.lessons').click(function(){
-        $('.final-score').css('display', 'none');
-      })
-    }
-  }
-
-})  // end lessonTestsDirective
-
-
-angular.module('myApp')
-
 .controller('lessonsContentController', ["$scope", "lessonsContentService", function($scope, lessonsContentService) {
   $scope.userAnswerArray = [];
 
@@ -773,6 +744,35 @@ angular.module('myApp')
 
 angular.module('myApp')
 
+.controller('lessonTestsController', ["$scope", "lessonsContentService", function($scope, lessonsContentService) {
+
+
+
+
+
+}])  // end lessonTestsController
+
+angular.module('myApp')
+
+.directive('lessonTestsDirective', function() {
+
+  return {
+    restrict: 'A',
+    link: function(scope, ele, attr) {
+      $('.reset-test').click(function() {
+        $('.final-score').css('display', 'none');
+      })
+      $('.lessons').click(function(){
+        $('.final-score').css('display', 'none');
+      })
+    }
+  }
+
+})  // end lessonTestsDirective
+
+
+angular.module('myApp')
+
 .controller('lessonsController', ["$scope", function($scope) {
 
   
@@ -926,13 +926,12 @@ angular.module( 'myApp' )
       mountainSvc.getUser( id )
         .then( function ( response ) {
           console.log(response);
-
           $scope.user = response.data
           console.log($scope.user[0]);
         } )
     }
-    console.log($scope.getUser('57150955710833b8272b9b2f'));
-    console.log($scope.user);
+    $scope.logevent = mountainSvc.logevent;
+    $scope.getCurrentUser = mountainSvc.getCurrentUser;
     // let user = getUser();
     // let progress = user.progress;
     // console.log(user);
@@ -946,8 +945,16 @@ angular.module( 'myApp' ).directive( 'mountainDirective', ["mountainSvc", functi
       templateUrl: './html/mountain/mountainTemplate.html',
       controller: 'mountainController',
       link: function ( scope, element, attrs, controller, transcludeFn, animate, mountainSvc ) {
+        scope.userProgress = {};
         const xMin = -3;
         const xMax = 33;
+
+        window.onload = function() {
+          console.log("document.onload");
+          scope.userProgress = scope.getCurrentUser();
+          let currentUser = scope.userProgress.response;
+          console.log(currentUser);
+        }
 
         // random number generator given a minimum and maximum range.
         const randomMinMax = function ( xMin, xMax ) {
@@ -1304,6 +1311,8 @@ angular.module( 'myApp' ).directive( 'mountainDirective', ["mountainSvc", functi
           let aCoords = randomMinMax( -3, 33 );
           let x = aCoords;
           let y = ( randomMinMax( 4, findY( aCoords ) ) - 0.5 );
+          // let prgoress =
+
 
           // z-index based on vertical position on screen.
           const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
@@ -1587,11 +1596,11 @@ angular.module( 'myApp' ).directive( 'mountainDirective', ["mountainSvc", functi
     return dirDefinition;
   }] ) // end mountainDirective
 
-angular.module( "myApp" ).service( "mountainSvc", ["$http", function ($http) {
+angular.module( "myApp" ).service( "mountainSvc", ["$http", function ( $http ) {
 
 
 
-  this.getUser = function (id) {
+  this.getUser = function ( id ) {
     console.log( id );
     return $http( {
         method: 'GET',
@@ -1601,6 +1610,23 @@ angular.module( "myApp" ).service( "mountainSvc", ["$http", function ($http) {
         return response
       } );
   };
+  this.logevent = function () {
+    console.log( 'event' );
+  };
+  this.getCurrentUser = function (){
+    console.log('getting currentUser');
+    return $http( {
+        method: 'GET',
+        url: '/user/current'
+      } )
+      .then( function ( response ) {
+        console.log('hey');
+        console.log(response);
+        return response
+      } );
+  };
+
+
 
 
 }] );

@@ -4,8 +4,16 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function ( mountainSvc
       templateUrl: './html/mountain/mountainTemplate.html',
       controller: 'mountainController',
       link: function ( scope, element, attrs, controller, transcludeFn, animate, mountainSvc ) {
+        scope.userProgress = {};
         const xMin = -3;
         const xMax = 33;
+
+        window.onload = function() {
+          console.log("document.onload");
+          scope.userProgress = scope.getCurrentUser();
+          let currentUser = scope.userProgress.response;
+          console.log(currentUser);
+        }
 
         // random number generator given a minimum and maximum range.
         const randomMinMax = function ( xMin, xMax ) {
@@ -362,6 +370,8 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function ( mountainSvc
           let aCoords = randomMinMax( -3, 33 );
           let x = aCoords;
           let y = ( randomMinMax( 4, findY( aCoords ) ) - 0.5 );
+          // let prgoress =
+
 
           // z-index based on vertical position on screen.
           const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
