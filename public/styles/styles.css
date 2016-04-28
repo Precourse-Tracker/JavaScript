@@ -13,54 +13,6 @@ a {
 
 
 
-#assessment-view .code-input-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0 10px 0; }
-
-#assessment-view .ace_editor {
-  height: 200px; }
-
-#assessment-view .assessment-eval {
-  color: #fff;
-  margin: 1em; }
-
-#assessment-view button {
-  background: #406BB2;
-  padding: 10px 16px;
-  width: auto;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 14px;
-  color: #fff;
-  line-height: 16px;
-  letter-spacing: 0.5px;
-  border-radius: 2px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
-  border: 0;
-  outline: 0;
-  transition: all 0.25s; }
-
-#assessment-view button:hover {
-  background: #8FB9FF;
-  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
-
-#assessment-view button:disabled {
-  visibility: hidden; }
-
-#assessment-view #submit-assessment {
-  float: right;
-  margin: 4em; }
-
-#assessment-view .stuff {
-  color: #406BB2;
-  width: 90vw;
-  margin: 1em; }
-
-#assessment-view input {
-  width: 100vw;
-  height: 20vh; }
-
 #dashboard-wrapper {
   width: 100vw;
   height: 91vh;
@@ -109,8 +61,8 @@ a {
 #unit-test-menu {
   width: 175px;
   background: white;
-  border-bottom: 1px solid grey;
-  border-right: 1px solid grey;
+  border-bottom: 1px solid #f2f2f2;
+  border-right: 1px solid #f2f2f2;
   position: absolute;
   display: none;
   z-index: 9; }
@@ -122,6 +74,8 @@ a {
     color: #406BB2;
     cursor: pointer;
     line-height: 35px; }
+  #unit-test-menu li:hover {
+    color: #8FB9FF; }
 
 #unit-subview {
   width: 100%;
@@ -160,6 +114,54 @@ a {
 
 #unit-subview #js-graph-div rect:hover {
   fill: #8FB9FF; }
+
+#assessment-view .code-input-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 10px 0; }
+
+#assessment-view .ace_editor {
+  height: 200px; }
+
+#assessment-view .assessment-eval {
+  color: #fff;
+  margin: 1em; }
+
+#assessment-view button {
+  background: #406BB2;
+  padding: 10px 16px;
+  width: auto;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #fff;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+  border: 0;
+  outline: 0;
+  transition: all 0.25s; }
+
+#assessment-view button:hover {
+  background: #8FB9FF;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
+
+#assessment-view button:disabled {
+  visibility: hidden; }
+
+#assessment-view #submit-assessment {
+  float: right;
+  margin: 4em; }
+
+#assessment-view .stuff {
+  color: #406BB2;
+  width: 90vw;
+  margin: 1em; }
+
+#assessment-view input {
+  width: 100vw;
+  height: 20vh; }
 
 #home-wrapper {
   font-family: 'Lato';
@@ -366,6 +368,7 @@ button:hover {
     text-decoration: none;
     color: white; }
   .lessons button {
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -958,14 +961,17 @@ i {
   height: 8.25vh;
   position: relative; }
 
+#home a {
+  color: #406BB2; }
+
 #navigation-bar {
   width: 100vw;
   height: 8.25vh;
   padding: 15px;
   font-family: 'Lato';
   font-weight: bold;
-  color: #FFF;
-  background: #406BB2;
+  color: #406BB2;
+  background: #f2f2f2;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -987,6 +993,8 @@ i {
   height: auto;
   font-family: 'Quicksand';
   background: white;
+  border-left: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
   display: none;
   position: absolute;
   right: 0;
@@ -999,5 +1007,4 @@ i {
     line-height: 35px;
     list-style: none; }
   #menu-navigation li:hover {
-    background-color: #8FB9FF;
-    opacity: 0.3; }
+    color: #8FB9FF; }
