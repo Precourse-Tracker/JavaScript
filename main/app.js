@@ -21,11 +21,13 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
   })
   .state('lessons', {
     url: '/lessons',
-    templateUrl: './html/lessons/lessonsTemplate.html'
+    templateUrl: './html/lessons/lessonsTemplate.html',
+    controller: 'lessonsController'
   })
   .state('lessonTests', {
     url: '/lessonTests',
     templateUrl: './html/lessonTests/lessonTestsTemplate.html'
+    // controller: 'lessonsContentController'
   })
   .state('assessment', {
     url: '/assessment',

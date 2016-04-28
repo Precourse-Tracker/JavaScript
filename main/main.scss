@@ -1,9 +1,6 @@
 // @import url(https://fonts.googleapis.com/css?family=Lato:300|Quicksand);
 // replaced font import with index.html link
-
-$darkBlue: #406BB2;
-$lightBlue: #8FB9FF;
-$navFontColor: #FFF;
+@import "variables";
 
 @mixin menuBorder() {
   border-left: 1px solid grey;
@@ -22,6 +19,7 @@ html, body {
 
 *, *::before, *::after {
   box-sizing: border-box;
+  // outline: 1px solid red;
 }
 
 a {

@@ -21,11 +21,13 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
   })
   .state('lessons', {
     url: '/lessons',
-    templateUrl: './html/lessons/lessonsTemplate.html'
+    templateUrl: './html/lessons/lessonsTemplate.html',
+    controller: 'lessonsController'
   })
   .state('lessonTests', {
     url: '/lessonTests',
     templateUrl: './html/lessonTests/lessonTestsTemplate.html'
+    // controller: 'lessonsContentController'
   })
   .state('assessment', {
     url: '/assessment',
@@ -523,68 +525,6 @@ angular.module('myApp')
 
 .controller('lessonTestsController', ["$scope", function($scope) {
 
-  // $scope.test = 'test on ctrl';
-  // $scope.blob = 'blob on ctrl';
-
-  $scope.functionsChoices = [null];
-  $scope.functionsCorrect = [
-    null, // initial null val
-    'a',  // q1
-    'b',  // q2
-    'a',  // q3
-    'c'   //q4
-  ]
-
-  $scope.q1 = (input) => {
-    $scope.functionsChoices[1] = input;
-    // console.log('q1 choice is ' + input);
-    console.log($scope.functionsChoices);
-  }
-
-  $scope.q2 = (input) => {
-    $scope.functionsChoices[2] = input;
-    // console.log('q2 choice is ' + input);
-    console.log($scope.functionsChoices);
-  }
-
-  $scope.q3 = (input) => {
-    $scope.functionsChoices[3] = input;
-    console.log($scope.functionsChoices);
-  }
-
-  $scope.q4 = (input) => {
-    $scope.functionsChoices[4] = input;
-    console.log($scope.functionsChoices);
-  }
-
-  $scope.gradeTest = () => {
-    let incorrect = null;
-    let correct = -1;
-    let finalScore = '';
-    let numQuestions = $scope.functionsCorrect.length - 1;
-    for (var i = 0; i < numQuestions + 1; i++) {
-      if ($scope.functionsChoices[i] == $scope.functionsCorrect[i]) {
-        correct++;
-      }
-    }
-    finalScore = correct / numQuestions * 100;
-    $scope.testScore = finalScore + '%';
-    if (finalScore <= 60) {
-      $scope.message = 'Good attempt! Please review the content and try again.';
-    } else if (finalScore <= 85) {
-      $scope.message = 'Nice job!  You\'re getter there!'
-    } else if (finalScore <= 99) {
-      $scope.message = 'Great job! You\'re close to 100%!';
-    } else if (finalScore == 100) {
-      $scope.message = 'Awesome!!  You got a perfect score!!';
-    }
-    $('html, body').animate({ scrollTop: 0 }, 300);
-  }
-
-  $scope.resetTest = () => {
-    $scope.functionsChoices = [];
-    $('html, body').animate({ scrollTop: 0 }, 300);
-  }
 
 
 }])  // end lessonTestsController
@@ -607,43 +547,22 @@ angular.module('myApp')
 
 })  // end lessonTestsDirective
 
-// angular.module('myApp')
-//
-// .service('lessonTestsService', function($http) {
-//
-//   this.lessonTest = '';
-//
-//   this.setLessonTest = function(lesson) {
-//     lessonTest = lesson;
-//   }
-//
-//   this.getLessonTest = function() {
-//     // return lessonTest;
-//     // console.log(lessonTest);
-//     return $http({
-//       method: 'GET',
-//       url: './html/lessonTests/lessonFiles/' + lessonTest + '.html',
-//       type: 'html'
-//     })
-//   }
-//
-//
-// }) // end lessonTestsService
 
 angular.module('myApp')
 
 .controller('lessonsContentController', ["$scope", "lessonsContentService", function($scope, lessonsContentService) {
   $scope.userAnswerArray = [];
   $scope.lessonInfo = (input) => {
-      lessonsContentService.resetArray();
-      $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
-        $scope.testObject = lesson.data[0];
-        $scope.theTitle = $scope.testObject.name;
-        lessonsContentService.setLessonName($scope.theTitle);
-        $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
-            entry.index = index;
-            lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
-        })
+    lessonsContentService.setTempId(input);
+    lessonsContentService.resetArray();
+    $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
+      $scope.testObject = lesson.data[0];
+      $scope.theTitle = $scope.testObject.name;
+      lessonsContentService.setLessonName($scope.theTitle);
+      $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
+          entry.index = index;
+          lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
+      })
     })
   }
   $scope.addAnswer = (userAnswer) => {
@@ -692,12 +611,29 @@ angular.module('myApp')
   $scope.resetTest = () => {
     $scope.userAnswerArray = [];
     $('html, body').animate({ scrollTop: 0 }, 300);
+    $('.quiz-button').css({
+      "background-color": "#ebebeb",
+      "color": "#406BB2"
+    })
+  }
+  //////testing buttton click////
+  $scope.answerClicked = ($event) => {
+    let temp = $event.currentTarget.parentNode;
+    $(temp).children('button').css({
+      "background-color": "#ebebeb",
+      "color": "#406BB2"
+    })
+    $($event.currentTarget).css({
+      "background-color": "#8FB9FF",
+      "color": "#fff",
+      "outline": 0
+    });
   }
 }]) // end lessonsContentController
 
 angular.module('myApp')
 
-.directive('lessonsContentDirective', function() {
+.directive('lessonsContentDirective', ["lessonsContentService", function(lessonsContentService) {
   return {
     restrict: 'E',
     controller: 'lessonsContentController',
@@ -706,9 +642,21 @@ angular.module('myApp')
       title: '=',
       testObject: '=',
       testScore: '='
+    },
+    link: function(scope, ele, attr) {
+      let lessonId = lessonsContentService.getTempId();
+      scope.lessonContent = lessonsContentService.getLessonInfo(lessonId).then(function(lesson) {
+        scope.testObject = lesson.data[0];
+        scope.theTitle = scope.testObject.name;
+        lessonsContentService.setLessonName(scope.theTitle);
+        scope.testIndex = scope.testObject.questions.forEach(function(entry, index){
+            entry.index = index;
+            lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
+        })
+      })
     }
   }
-}) // end lessonsContentDirective
+}]) // end lessonsContentDirective
 
 angular.module('myApp')
 
@@ -716,6 +664,14 @@ angular.module('myApp')
   let correctAnswerArray = [];
   let lessonName = '';
   let currentUserId = '';
+  let tempId = ''; // var for moving from lessons to lessontests
+  let clickedTopic = '';
+  this.setTempId = (input) => {  // set parameter to get when moving from lessons to lessontests
+    tempId = input;
+  }
+  this.setClickedTopic = (input) => {
+    clickedTopic = input;
+  }
   this.setCurrentUserId = (userId) => {
     currentUserId = userId;
   }
@@ -724,6 +680,12 @@ angular.module('myApp')
   }
   this.setCorrectAnswer = (input, index) => {
     correctAnswerArray[index] = input;
+  }
+  this.getTempId = () => {  // get when moving from lessons to lessontests
+    return tempId;
+  }
+  this.getClickedTopic = () => {
+    return clickedTopic;
   }
   this.getCorrectAnswerArray = () => {
     return correctAnswerArray;
@@ -748,7 +710,15 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.directive('lessonsSideBarDirective', ["$state", function($state) {
+.controller('lessonsController', ["$scope", function($scope) {
+
+  
+
+}])  // end lessonsController
+
+angular.module('myApp')
+
+.directive('lessonsSideBarDirective', ["$state", "$http", "$q", "lessonsContentService", function($state, $http, $q, lessonsContentService) {
 
   return {
     restrict: 'E',
@@ -756,14 +726,30 @@ angular.module('myApp')
     templateUrl: './html/lessons/lessonsSideBarTemplate.html',
     link: function(scope, ele, attr) {
       $('.lesson-title').click(function() {
-        // console.log(this.parentNode);
-        $('.lesson-sections', this.parentNode).toggle('expand');
+        let that = this;
+        
+        if ($state.name !== 'lessons') {
+          $state.go('lessons')
+        }
+        $('.lesson-sections', that.parentNode).toggle('expand');
         $('.lesson-tests-wrapper').css('display', 'none');
       })
 
-      $('.lesson-test').click(function() {
+      let testNavigation = () => {
         $('.lesson-tests-wrapper').css('display', 'block');
         $('html, body').animate({ scrollTop: 0 }, 300);
+      }
+
+      $('.lesson-test').click(function() {
+        let lessonId = lessonsContentService.getTempId();
+        if ($state.name !== 'lessonTests') {
+          $state.go('lessonTests');
+          setTimeout(() => {
+            testNavigation();
+          }, 100);
+        } else {
+          testNavigation();
+        }
       }) // end lesson-test click
 
     } // end of directive link
@@ -863,22 +849,37 @@ angular.module("myApp")
 }]);
 
 angular.module( 'myApp' )
-  .controller( 'mountainController', [ '$scope', 'loginService', function ( $scope, loginService ) {
+  .controller( 'mountainController', [ '$scope', 'loginService', 'mountainSvc', function ( $scope, loginService, mountainSvc ) {
+
 
     $scope.logoutUser = function () {
       loginService.logoutUser();
     };
 
+    $scope.getUser = function ( id ) {
+      mountainSvc.getUser( id )
+        .then( function ( response ) {
+          console.log(response);
+
+          $scope.user = response.data
+          console.log($scope.user[0]);
+        } )
+    }
+    console.log($scope.getUser('57150955710833b8272b9b2f'));
+    console.log($scope.user);
+    // let user = getUser();
+    // let progress = user.progress;
+    // console.log(user);
+    // console.log(progress);
 
 } ] );
 
-angular.module( 'myApp' )
-  .directive( 'mountainDirective', function () {
+angular.module( 'myApp' ).directive( 'mountainDirective', ["mountainSvc", function ( mountainSvc ) {
     var dirDefinition = {
       restrict: 'E',
       templateUrl: './html/mountain/mountainTemplate.html',
       controller: 'mountainController',
-      link: function ( scope, element, attrs, controller, transcludeFn, animate ) {
+      link: function ( scope, element, attrs, controller, transcludeFn, animate, mountainSvc ) {
         const xMin = -3;
         const xMax = 33;
 
@@ -899,6 +900,67 @@ angular.module( 'myApp' )
           return yMax;
         }
 
+        // converts hsl color values to rgb
+        function hslToRgb( h, s, l ) {
+          var r, g, b;
+          if ( s == 0 ) {
+            r = g = b = l; // achromatic
+          } else {
+            var hue2rgb = function hue2rgb( p, q, t ) {
+              if ( t < 0 ) t += 1;
+              if ( t > 1 ) t -= 1;
+              if ( t < 1 / 6 ) return p + ( q - p ) * 6 * t;
+              if ( t < 1 / 2 ) return q;
+              if ( t < 2 / 3 ) return p + ( q - p ) * ( 2 / 3 - t ) * 6;
+              return p;
+            }
+            var q = l < 0.5 ? l * ( 1 + s ) : l + s - l * s;
+            var p = 2 * l - q;
+            r = hue2rgb( p, q, h + 1 / 3 );
+            g = hue2rgb( p, q, h );
+            b = hue2rgb( p, q, h - 1 / 3 );
+          }
+          return [ Math.round( r * 255 ), Math.round( g * 255 ), Math.round( b * 255 ) ];
+        }
+
+        // converts rgb color value ot hsl
+        function rgb2hsl( rgbArr ) {
+          var r1 = rgbArr[ 0 ] / 255;
+          var g1 = rgbArr[ 1 ] / 255;
+          var b1 = rgbArr[ 2 ] / 255;
+
+          var maxColor = Math.max( r1, g1, b1 );
+          var minColor = Math.min( r1, g1, b1 );
+          //Calculate Lightness:
+          var L = ( maxColor + minColor ) / 2;
+          var S = 0;
+          var H = 0;
+          if ( maxColor != minColor ) {
+            //Calculate Saturation:
+            if ( L < 0.5 ) {
+              S = ( maxColor - minColor ) / ( maxColor + minColor );
+            } else {
+              S = ( maxColor - minColor ) / ( 2.0 - maxColor - minColor );
+            }
+            //Calculate Hue:
+            if ( r1 == maxColor ) {
+              H = ( g1 - b1 ) / ( maxColor - minColor );
+            } else if ( g1 == maxColor ) {
+              H = 2.0 + ( b1 - r1 ) / ( maxColor - minColor );
+            } else {
+              H = 4.0 + ( r1 - g1 ) / ( maxColor - minColor );
+            }
+          }
+          L = L * 100;
+          S = S * 100;
+          H = H * 60;
+          if ( H < 0 ) {
+            H += 360;
+          }
+          var result = [ H, S, L ];
+          return result;
+        }
+
         // creates a random color given a specific range
         const randomClr = function ( rdL, rdH, grL, grH, buL, buH ) {
           let rd = Math.floor( randomMinMax( rdL, rdH ) );
@@ -907,17 +969,96 @@ angular.module( 'myApp' )
           return ( 'rgb(' + rd + ', ' + grn + ', ' + bl + ')' );
         }
 
+        const lighten = function ( colorStr, amount ) {
+          color = colorStr.match( /\d+/g ).map( v => parseInt( v ) );
+          amount = ( amount === 0 ) ? 0 : ( amount || 10 );
+          let hsl = rgb2hsl( color );
+          hsl[ 2 ] += ( amount );
+          return hsl;
+        }
+
+
+        //-------//////////////////////////-------//
+        //------- <------ The DOM -------> -------//
+        //-------//////////////////////////-------//
+
+
         // determines which DOM element to append created elements.
         var node = document.getElementById( 'mountainScene-right' );
+        let mSLeft = document.getElementById( 'mountainScene-left' );
+        let mSRight = document.getElementById( 'mountainScene-right' );
+        let bgmLeft = document.getElementById( 'bgMountain-Left' );
+        let bgmRight = document.getElementById( 'bgMountain-right' );
+        let bgDirt = document.getElementById( 'bigDirt' );
+        var sk1 = document.createElement( 'i' );
+        var gr1 = document.createElement( 'i' );
 
 
+        //////////////////////////////
+        // <----- Time of Day ----> //
+        ////////////////////////// ////
+        // handles most time related styling changes
         // retrieves users time
         let dt = new Date();
         let tz = dt.getTimezoneOffset();
         let localHours = dt.getHours();
+        let sliderVal = localHours;
 
 
+        // TODO:
+        var slidePos = document.getElementById( 'sliderSun' ).value;
 
+        // simulates the passage of time.
+        timePassing = function ( newValue ) {
+          document.getElementById( "range" ).innerHTML = newValue;
+          slidePos = newValue;
+          localHours = newValue;
+          sliderVal = newValue;
+
+          // instantiating properties
+          mSLeft.style.borderBottomColor = 'hsl(30, 23%, 29%)';
+          mSRight.style.borderBottomColor = 'hsl(48, 15%, 40%)';
+          bgmLeft.style.borderBottomColor = 'rgb( 82, 59, 40 )';
+          bgmRight.style.borderBottomColor = 'rgb( 103, 95, 63 )';
+          bgDirt.style.borderColor = 'rgb(66, 59, 45)';
+          bgDirt.style.boxShadow = '13em -3.4em 1px -2.75em rgb(66, 59, 45)';
+          sk1.style.backgroundColor = 'rgb(28, 24, 94)';
+          gr1.style.backgroundColor = 'rgb(35, 48, 20)';
+
+          // grabs the element, retrieves it's color, parses it to an array of int values, logs it to the console.
+          mSLeft.rgbColor = mSLeft.style.borderBottomColor;
+          mSRight.rgbColor = mSRight.style.borderBottomColor;
+          bgmLeft.rgbColor = bgmLeft.style.borderBottomColor;
+          bgmRight.rgbColor = bgmRight.style.borderBottomColor;
+          bgDirt.rgbColor = bgDirt.style.borderColor;
+          sk1.rgbColor = sk1.style.backgroundColor;
+          gr1.rgbColor = gr1.style.backgroundColor;
+
+          // take that array, run it through the rgb to hsl function, then increase the lightness depending on time of day.
+          mSLeft.style.borderBottomColor = daylight( slidePos, mSLeft.rgbColor );
+          mSRight.style.borderBottomColor = daylight( slidePos, mSRight.rgbColor );
+          bgmLeft.style.borderBottomColor = daylight( slidePos, bgmLeft.rgbColor );
+          bgmRight.style.borderBottomColor = daylight( slidePos, bgmRight.rgbColor );
+          bgDirt.style.borderColor = daylight( slidePos, bgDirt.rgbColor );
+          bgDirt.style.boxShadow = ( bgDirt.style.borderColor + '13em -3.4em 1px -2.75em' );
+          sk1.style.backgroundColor = daylight( slidePos, sk1.rgbColor );
+          gr1.style.backgroundColor = daylight( slidePos, gr1.rgbColor );
+          return sliderVal;
+        }
+
+
+        // controls day and night phasing in and out.
+        const daylight = function ( slPos, rgbArr ) {
+          var mult = Math.round( slPos * 2 );
+          let newRgbArr = lighten( rgbArr, mult );
+          var hslFormatted = ( 'hsl(' + Math.round( newRgbArr[ 0 ] ) + ', ' + Math.round( newRgbArr[ 1 ] ) + '%, ' + Math.round( newRgbArr[ 2 ] ) + '%)' );
+          if ( slPos >= 12 ) {
+            mult = ( ( Math.abs( Math.round( slPos ) - 24 ) ) / 0.8 );
+            rgbArr = lighten( rgbArr, mult );
+            hslFormatted = ( 'hsl(' + Math.round( rgbArr[ 0 ] ) + ', ' + Math.round( rgbArr[ 1 ] ) + '%, ' + Math.round( rgbArr[ 2 ] ) + '%)' );
+          }
+          return hslFormatted;
+        }
 
 
         //////////////////////////////
@@ -925,120 +1066,80 @@ angular.module( 'myApp' )
         //////////////////////////////
 
         scope.spawnBackground = function ( date, trouble ) {
+            const node = document.getElementById( 'mtn-wrapper' );
 
-          var node = document.getElementById( 'mtn-wrapper' );
-
-          console.log( 'hey: ' + localHours );
-
-          var sk1 = document.createElement( 'i' );
-          var gr1 = document.createElement( 'i' );
-
-          // sky
-          sk1.style.backgroundColor = 'rgb(28, 24, 94)';
-          sk1.style.zIndex = ( -50 );
-          sk1.style.width = '100vw';
-          sk1.style.height = '45vh';
-          sk1.style.left = ( 0 ) + 'em';
-          sk1.style.top = ( -2 ) + 'vh';
-          sk1.style.margin = '0px';
-
-          // ground
-          gr1.style.backgroundColor = 'rgb(70, 97, 41)';
-          gr1.style.zIndex = ( -50 );
-          gr1.style.width = '100%';
-          gr1.style.height = '55vh';
-          gr1.style.left = ( 0 ) + 'em';
-          gr1.style.top = ( 35 ) + 'vh';
-          gr1.style.margin = '0px';
-
-          // It's a giant switch for prototyping, later it will be much cleaner, generated by js dynamically based on minutes given, smooth transitions between sky colors.
-          switch ( localHours ) {
-          case 5:
+            // sky
             sk1.style.backgroundColor = 'rgb(28, 24, 94)';
+            sk1.style.zIndex = ( -50 );
+            sk1.style.width = '100vw';
+            sk1.style.height = '50vh';
+            sk1.style.left = ( 0 ) + 'vw';
+            sk1.style.top = ( 0 ) + 'vh';
+            sk1.style.margin = '0px';
+
+            // ground
             gr1.style.backgroundColor = 'rgb(35, 48, 20)';
-            break;
+            gr1.style.zIndex = ( -50 );
+            gr1.style.width = '100%';
+            gr1.style.height = '50vh';
+            gr1.style.left = ( 0 ) + 'vw';
+            gr1.style.top = ( 50 ) + 'vh';
+            gr1.style.margin = '0px';
 
-          case 6:
-            sk1.style.backgroundColor = 'rgb(32, 25, 145)';
-            gr1.style.backgroundColor = 'rgb(41, 57, 23)';
-            break;
+            // TODO: distant horizon
+            // TODO: moon
+            // TODO: stars
 
-          case 7:
-            sk1.style.backgroundColor = 'rgb(27, 16, 208)';
-            gr1.style.backgroundColor = 'rgb(54, 75, 31)';
-            break;
+            node.appendChild( sk1 );
+            node.appendChild( gr1 );
 
-          case 8:
-            sk1.style.backgroundColor = 'rgb(16, 58, 208)';
-            gr1.style.backgroundColor = 'rgb(70, 97, 41)';
-            break;
+            scope.add = ( function () {
+              var counter = 0;
+              return function () {
+                return counter += 1;
 
-          case 9:
-            sk1.style.backgroundColor = 'rgb(16, 104, 208)';
-            gr1.style.backgroundColor = 'rgb(85, 117, 50)';
-            break;
-
-          default:
-            sk1.style.backgroundColor = 'rgb(16, 144, 208)';
-            gr1.style.backgroundColor = 'rgb(92, 140, 40)';
-            break;
-
-          case 19:
-            sk1.style.backgroundColor = 'rgb(16, 104, 208)';
-            gr1.style.backgroundColor = 'rgb(85, 117, 50)';
-            break;
-
-          case 20:
-            sk1.style.backgroundColor = 'rgb(16, 58, 208)';
-            gr1.style.backgroundColor = 'rgb(41, 57, 23)';
-            break;
-
-          case 21:
-            sk1.style.backgroundColor = 'rgb(32, 25, 145)';
-            gr1.style.backgroundColor = 'rgb(35, 48, 20)';
-            break;
-          }
-
-          // sun
-          // moon
-          // stars
+              }
+            } )();
+          } // end background
 
 
+        //////////////////////////////////
+        //  <--------- clouds --------> //
+        //////////////////////////////////
+        let cloudCount = 1;
+        scope.spawnClouds = function ( number ) {
+            const node = document.getElementById( 'mtn-wrapper' );
 
-          node.appendChild( sk1 );
-          node.appendChild( gr1 );
-
-
-
-
-
-
-          //////////////////////////////////
-          //  <--------- clouds --------> //
-          //////////////////////////////////
-          scope.spawnClouds = function ( number ) {
             for ( var i = 0; i < number; i++ ) {
-              var aCoords = randomMinMax( -3, 33 );
+              var aCoords = randomMinMax( -1, 11 );
               var x = aCoords;
               var y = randomMinMax( 5, findY( aCoords ) );
-
               const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
+              var cloudZ = ( Math.round( ( newZ / 10 ) - 16 ) );
 
-              var snowZ = ( newZ + 4 );
+              var cl1 = document.createElement( 'i' );
+              let cl1rId = ( 'newCloud' + cloudCount );
+              // let tmpLeft = 'calc(', (- 142), 'px', (- 50), 'vw)';
+              // let tmpLeft = 'calc( - 142px - 50vw );';
 
-              var s1 = document.createElement( 'i' );
+              let cl1r = function ( id ) {
+                var tmp = ( 'newCloud' + id );
+                document.getElementById( tmp );
+              }
 
-              s1.style.zIndex = ( snowZ );
-              s1.style.border = '1.08em solid transparent';
-              s1.style.borderBottom = '0.39em solid ' + '#FFF';
-              s1.style.left = ( x - 16.2 ) + 'em';
-              s1.style.bottom = ( y - 23.9 ) + 'em';
+              cl1.className = 'cloud';
+              cl1.id = ( cl1rId );
+              // cl1r.style.zIndex = ( cloudZ );
+              cl1.style.zIndex = ( cloudZ );
+              cl1.style.left = ( -42 ) + 'em';
+              cl1.style.top = ( aCoords ) + 'em';
+              cl1.style.animationDuration = ( ( randomMinMax( 30, 60 ) ) + 's' );
 
-              node.appendChild( s1 );
-
+              node.appendChild( cl1 );
+              cloudCount++;
             }
-          }
-        }
+          } // end spawnClouds
+
 
         //////////////////////////////
         // <------- Trees --------> //
@@ -1049,39 +1150,32 @@ angular.module( 'myApp' )
           for ( var i = 0; i < number; i++ ) {
 
             // determines where on the screen a tree will spawn
-            var aCoords = randomMinMax( -3, 33 );
-            var x = aCoords;
-            var y = ( randomMinMax( 5, findY( aCoords ) ) - 0.1 );
+            const aCoords = randomMinMax( -5, 35 );
+            const x = aCoords + 0.25;
+            const y = ( randomMinMax( 2, findY( aCoords ) ) + 0.2 );
 
             // z-index of each tree and tree portion based on verticle location on screen.
             const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
-            var trunkZ = newZ - 1;
+            const trunkZ = newZ - 1;
 
             // randomizes tree color within a specific range. depending on the time of day and side of mountain...
             let gMin = 70;
             let gMax = 180;
 
-            // left side spawns lighter trees in the morning, until afternoon.
-            // right side spawns lighter trees in the afternoon until dusk.
+            // left/North side spawns darker trees in the afternoon, until sunrise.
+            // right/South side spawns darker trees in the evening until mid-day.
             // only darker trees spawn after nightfall.
-            if ( ( localHours > 6 && localHours < 17 && x > 15 ) || ( localHours > 9 && localHours < 17 && x < 15 ) || ( localHours > 21 || localHours < 6 ) ) {
+
+            // left dark, right dark,
+            localHours = sliderVal;
+            if ( ( ( localHours < 6 || localHours >= 15 ) && x < 15 ) || ( ( localHours < 9 || localHours >= 20 ) && x > 15 ) ) {
               rMin = 50;
               rMax = 75;
               gMin = 85;
               gMax = 120;
               bMin = 50;
               bMax = 80;
-              console.log( 'localHours: ' + localHours );
-              console.log( 'x: ' + x );
-              console.log( 'y: ' + y );
             }
-
-
-            // both sides dark
-            // 21 until 6
-            // right side dark
-            // 21 until 10
-
 
             const newGrn = randomClr( 60, 90, gMin, gMax, 60, 90 );
 
@@ -1092,7 +1186,8 @@ angular.module( 'myApp' )
             var i4 = document.createElement( 'i' );
 
             // style the tree elements that make up one tree
-            // little guy top \\
+            // tree top \\
+            i1.className = 'treeParts';
             i1.style.zIndex = ( newZ );
             i1.style.border = '0.39em solid transparent';
             i1.style.borderBottom = '0.39em solid ' + newGrn;
@@ -1100,6 +1195,7 @@ angular.module( 'myApp' )
             i1.style.bottom = ( y - 23.9 ) + 'em';
 
             // mid branches \\
+            i2.className = 'treeParts';
             i2.style.zIndex = ( newZ );
             i2.style.border = '0.55em solid transparent';
             i2.style.borderBottom = '0.55em solid ' + newGrn;
@@ -1107,6 +1203,7 @@ angular.module( 'myApp' )
             i2.style.bottom = ( y - 24.25 ) + 'em';
 
             // base branches \\
+            i3.className = 'treeParts';
             i3.style.zIndex = ( newZ );
             i3.style.border = '0.55em solid transparent';
             i3.style.borderBottom = '0.75em solid ' + newGrn;
@@ -1114,6 +1211,7 @@ angular.module( 'myApp' )
             i3.style.bottom = ( y - 24.7 ) + 'em';
 
             // trunk bottom \\
+            i4.className = 'treeParts';
             i4.style.zIndex = ( trunkZ );
             i4.style.border = 'none';
             i4.style.width = '.15em';
@@ -1132,20 +1230,57 @@ angular.module( 'myApp' )
         }
 
 
-
-
         //////////////////////////////////
         //  <-------- Climber --------> //
         //////////////////////////////////
-        // scope.spawnClimber = function(){
-        //
-        // }
+        scope.spawnClimber = function ( number ) {
+          // determines location of climber
+          let aCoords = randomMinMax( -3, 33 );
+          let x = aCoords;
+          let y = ( randomMinMax( 4, findY( aCoords ) ) - 0.5 );
+
+          // z-index based on vertical position on screen.
+          const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
+          var climberZ = ( newZ + 20 );
+
+          // create DOM element for portions of a climber
+          var clmbr1 = document.createElement( 'i' );
+
+          // get progress, define position on mountain
 
 
+          // style the climber
+          clmbr1.style.zIndex = ( climberZ );
+          clmbr1.style.width = '50px';
+          clmbr1.style.height = '50px';
+          clmbr1.style.backgroundColor = 'red';
+          clmbr1.style.border = '0.39em solid transparent';
+          clmbr1.style.borderBottom = '0.39em solid ' + 'red';
 
+          // position
+          clmbr1.style.left = ( x - 16 ) + 'em';
+          clmbr1.style.bottom = ( y - 23.9 ) + 'em';
 
+          // spawn the actual climber pieces that make up one climber
+          node.appendChild( clmbr1 );
+        }
 
+        /*
+        progress.lessons = [ {lesson obj1: name, score}, ]
+        */
 
+        /*
+                scope.advanceClimber = function(){
+
+                  // move the climber based on progress
+                  const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
+                  var climberZ = ( newZ + 20 );
+                  var clmbr1 = document.createElement( 'i' );
+                  clmbr1.style.width = '50px';
+                  clmbr1.style.height = '50px';
+                  node.appendChild( clmbr1 );
+                }
+         */
 
         //////////////////////////////////
         //  <------  Mountain  ------>  //
@@ -1160,18 +1295,16 @@ angular.module( 'myApp' )
             var x = aCoords;
             var y = ( randomMinMax( 4, findY( aCoords ) ) - 0.5 );
 
-            // z-index based on verticle position on screen.
+            // z-index based on vertical position on screen.
             const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
             var rockZ = ( newZ - 10 );
             const newGryConst = function () {
-              console.log( 'inside newGryConst: ' + ( Math.floor( Math.random() * 100 ) + 75 ) );
               return ( Math.floor( Math.random() * 100 ) + 75 );
             }
 
             // randomize rock color, within a specified color range.
             let newGrlet = newGryConst();
             var newGrey = randomClr( newGrlet, ( newGrlet + randomMinMax( 1, 20 ) ), newGrlet, ( newGrlet + randomMinMax( 1, 20 ) ), newGrlet, ( newGrlet + randomMinMax( 1, 20 ) ) );
-            console.log( 'newGrey: ' + newGrey );
 
             // create DOM element for portions of a rock
             var r1 = document.createElement( 'i' );
@@ -1184,7 +1317,6 @@ angular.module( 'myApp' )
             r1.style.left = ( x - 16 ) + 'em';
             r1.style.bottom = ( y - 23.9 ) + 'em';
 
-
             // spawn the actual rock pieces that make up one rock
             node.appendChild( r1 );
 
@@ -1195,51 +1327,68 @@ angular.module( 'myApp' )
 
 
 
-
-
         //////////////////////////////////
         //  <------ Snow Peak ------> //
         //////////////////////////////////
         scope.spawnSnowPeak = function ( number ) {
           for ( var i = 0; i < number; i++ ) {
-
+            let node = document.getElementById( 'mountainScene-right' );
             // determines location of elements on a triangular plane.
             var aCoords = randomMinMax( -3, 33 );
             var x = aCoords;
             var y = randomMinMax( 5, findY( aCoords ) );
 
-            /* store low points in an array, new location is based on previous coords, so snow creeps down mountain. I can use the clusters on the ground as an interval to call this function, maybe every 8 clusters or something, the snow creeps further down. */
 
             // determines z-index of DOM elements to be created later.
             const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
             var snowZ = ( newZ + 4 );
 
             // creates DOM elements to be worked upon
+            // front mountain
             var s1 = document.createElement( 'i' );
+            var s1a = document.createElement( 'i' );
             var s2 = document.createElement( 'i' );
             var s3 = document.createElement( 'i' );
             var s4 = document.createElement( 'i' );
+            var s4a = document.createElement( 'i' );
+            var s4b = document.createElement( 'i' );
+            var s4c = document.createElement( 'i' );
             var s5 = document.createElement( 'i' );
             var s6 = document.createElement( 'i' );
             var s7 = document.createElement( 'i' );
 
+            // back mountain
+            var sbm1 = document.createElement( 'i' );
+            var sbm2 = document.createElement( 'i' );
+            var sbm3 = document.createElement( 'i' );
+            var sbm4 = document.createElement( 'i' );
+
             // style the newly created DOM elements.
-            // top
+            // top-left
             s1.style.zIndex = ( snowZ );
             s1.style.borderWidth = '1.5em';
             s1.style.borderStyle = 'solid'
-            s1.style.borderColor = 'transparent transparent rgb(246,246,246)';
-            s1.style.left = ( -1.5 ) + 'em';
-            s1.style.bottom = ( -1.44 ) + 'em';
+            s1.style.borderColor = 'transparent rgb(234,234,234) transparent transparent';
+            s1.style.left = ( -2.9 ) + 'em';
+            s1.style.bottom = ( -2.9 ) + 'em';
             s1.style.borderRadius = '0.3em';
+
+            // top-right
+            s1a.style.zIndex = ( snowZ );
+            s1a.style.borderWidth = '1.5em';
+            s1a.style.borderStyle = 'solid'
+            s1a.style.borderColor = 'transparent transparent transparent rgb(246,246,246)';
+            s1a.style.left = ( -0.1 ) + 'em';
+            s1a.style.bottom = ( -2.9 ) + 'em';
+            s1a.style.borderRadius = '0.3em';
 
             // left
             s2.style.zIndex = ( snowZ );
             s2.style.borderWidth = '1.2em';
             s2.style.borderStyle = 'solid'
-            s2.style.borderColor = 'transparent rgb(246,246,246) transparent transparent';
+            s2.style.borderColor = 'transparent rgb(234,234,234) transparent transparent';
             s2.style.left = ( -3.7 ) + 'em';
-            s2.style.bottom = ( -3.63 ) + 'em';
+            s2.style.bottom = ( -3.69 ) + 'em';
             s2.style.borderRadius = '0.3em';
 
             // right
@@ -1248,22 +1397,48 @@ angular.module( 'myApp' )
             s3.style.borderStyle = 'solid'
             s3.style.borderColor = 'transparent transparent transparent rgb(246,246,246)';
             s3.style.left = ( 1.2 ) + 'em';
-            s3.style.bottom = ( -3.51 ) + 'em';
+            s3.style.bottom = ( -3.59 ) + 'em';
             s3.style.borderRadius = '0.3em';
 
-            // center
-            s4.style.zIndex = ( snowZ );
+            // center - mrectangle
+            s4.style.zIndex = ( snowZ - 10 );
             s4.style.height = ( 1.3 ) + 'em';
-            s4.style.width = ( 2.65 ) + 'em';
+            s4.style.width = ( 1.5 ) + 'em';
             s4.style.backgroundColor = 'rgb(246,246,246)';
-            s4.style.left = ( -1.4 ) + 'em';
+            s4.style.left = ( -0.1 ) + 'em';
             s4.style.bottom = ( -2.65 ) + 'em';
+
+            // s4a filter color on // center
+            s4a.style.zIndex = ( snowZ + 1 );
+            s4a.style.borderWidth = '1.2em';
+            s4a.style.borderStyle = 'solid'
+            s4a.style.borderColor = 'transparent rgb(234,234,234) transparent transparent';
+            s4a.style.left = ( -2.7 ) + 'em';
+            s4a.style.bottom = ( -3.5 ) + 'em';
+            s4a.style.borderRadius = '0.3em';
+
+            s4b.style.zIndex = ( snowZ );
+            s4b.style.borderWidth = '1.2em';
+            s4b.style.borderStyle = 'solid'
+            s4b.style.borderColor = 'transparent rgb(234,234,234) transparent transparent';
+            s4b.style.left = ( -3.7 ) + 'em';
+            s4b.style.bottom = ( -3.67 ) + 'em';
+            s4b.style.borderRadius = '0.3em';
+
+            s4c.style.zIndex = ( snowZ - 10 );
+            s4c.style.height = ( 1.3 ) + 'em';
+            s4c.style.width = ( 0.65 ) + 'em';
+            s4c.style.backgroundColor = 'rgb(234,234,234)';
+            s4c.style.left = ( -1.4 ) + 'em';
+            s4c.style.bottom = ( -2.65 ) + 'em';
+
+
 
             // middle-left
             s5.style.zIndex = ( snowZ );
             s5.style.borderWidth = '0.6em';
             s5.style.borderStyle = 'solid'
-            s5.style.borderColor = ' transparent transparent transparent rgb(246,246,246)';
+            s5.style.borderColor = ' transparent transparent transparent rgb(234,234,234)';
             s5.style.left = ( -1.4 ) + 'em';
             s5.style.bottom = ( -3.55 ) + 'em';
 
@@ -1282,15 +1457,56 @@ angular.module( 'myApp' )
             s7.style.borderColor = 'transparent rgb(246,246,246) transparent transparent';
             s7.style.left = ( -0.5 ) + 'em';
             s7.style.bottom = ( -3.48 ) + 'em';
-
             // append DOM elements to the previously existing DOM element, declared earlier.
             node.appendChild( s1 );
+            node.appendChild( s1a );
             node.appendChild( s2 );
             node.appendChild( s3 );
             node.appendChild( s4 );
+            node.appendChild( s4a );
+            node.appendChild( s4b );
+            node.appendChild( s4c );
             node.appendChild( s5 );
             node.appendChild( s6 );
             node.appendChild( s7 );
+            //------------------------\\
+            //---- Background Mtn ----\\
+            //--------  Snow  --------\\
+            node = document.getElementById( 'bgMountain-right' );
+            // top
+            sbm1.style.zIndex = ( snowZ );
+            sbm1.style.borderWidth = '1.6em';
+            sbm1.style.borderStyle = 'solid'
+            sbm1.style.borderColor = 'transparent transparent rgb(246,246,246)';
+            sbm1.style.left = ( -1.58 ) + 'em';
+            sbm1.style.bottom = ( -1.4 ) + 'em';
+            sbm1.style.borderRadius = '0.3em';
+
+            // left
+            sbm2.style.zIndex = ( snowZ );
+            sbm2.style.borderWidth = '1.6em';
+            sbm2.style.borderStyle = 'solid'
+            sbm2.style.borderColor = 'transparent rgb(234,234,234) transparent transparent';
+            sbm2.style.left = ( -3.2 ) + 'em';
+            sbm2.style.bottom = ( -3 ) + 'em';
+            sbm2.style.borderRadius = '0.3em';
+
+            // right
+            sbm3.style.zIndex = ( snowZ );
+            sbm3.style.borderWidth = '1.3em';
+            sbm3.style.borderStyle = 'solid'
+            sbm3.style.borderColor = 'transparent transparent transparent rgb(246,246,246)';
+            sbm3.style.left = ( -0.1 ) + 'em';
+            sbm3.style.bottom = ( -2.4 ) + 'em';
+            sbm3.style.borderRadius = '0.3em';
+
+
+
+
+
+            node.appendChild( sbm1 );
+            node.appendChild( sbm2 );
+            node.appendChild( sbm3 );
           }
         }
 
@@ -1303,7 +1519,25 @@ angular.module( 'myApp' )
       }
     }
     return dirDefinition;
-  } ) // end mountainDirective
+  }] ) // end mountainDirective
+
+angular.module( "myApp" ).service( "mountainSvc", ["$http", function ($http) {
+
+
+
+  this.getUser = function (id) {
+    console.log( id );
+    return $http( {
+        method: 'GET',
+        url: '/api/users/?_id=' + id
+      } )
+      .then( function ( response ) {
+        return response
+      } );
+  };
+
+
+}] );
 
 angular.module('myApp')
 
@@ -1337,93 +1571,3 @@ angular.module('myApp')
   }
 
 }) // end navigationDirective
-
-angular.module('myApp')
-
-.directive('jsArraysDirectives', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-arrays.html'
-  }
-}) // end jsArraysDirectives
-
-angular.module('myApp')
-
-.directive('jsConditionalDirective', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-conditional.html'
-  }
-}) // end jsConditionalDirective
-
-angular.module('myApp')
-
-.directive('jsDatatypesDirective', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-data-types.html'
-  }
-}) // end dataTypesDirective
-
-angular.module('myApp')
-
-.directive('jsFunctionsDirective', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-functions.html'
-  }
-}) // end varsTestDirective
-
-angular.module('myApp')
-
-.directive('jsIteratorsDirective', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-iterators.html'
-  }
-}) // end varsTestDirective
-
-angular.module('myApp')
-
-.directive('jsLogicalDirective', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-logical.html'
-  }
-}) // end varsTestDirective
-
-angular.module('myApp')
-
-.directive('jsObjectsDirective', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-objects.html'
-  }
-}) // end varsTestDirective
-
-angular.module('myApp')
-
-.directive('jsStringsContDirective', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-strings-cont.html'
-  }
-}) // end varsTestDirective
-
-angular.module('myApp')
-
-.directive('jsVariablesDirective', function() {
-  return {
-    restrict: 'A',
-    controller: 'lessonTestsController',
-    templateUrl: './html/lessonTests/lessonFiles/js-lesson-variables.html'
-  }
-}) // end varsTestDirective
