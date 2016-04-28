@@ -114,8 +114,8 @@ a {
 #unit-test-menu {
   width: 175px;
   background: white;
-  border-bottom: 1px solid grey;
-  border-right: 1px solid grey;
+  border-bottom: 1px solid #f2f2f2;
+  border-right: 1px solid #f2f2f2;
   position: absolute;
   display: none;
   z-index: 9; }
@@ -127,6 +127,8 @@ a {
     color: #406BB2;
     cursor: pointer;
     line-height: 35px; }
+  #unit-test-menu li:hover {
+    color: #8FB9FF; }
 
 #unit-subview {
   width: 100%;
@@ -371,6 +373,7 @@ button:hover {
     text-decoration: none;
     color: white; }
   .lessons button {
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -977,14 +980,17 @@ i {
   height: 8.25vh;
   position: relative; }
 
+#home a {
+  color: #406BB2; }
+
 #navigation-bar {
   width: 100vw;
   height: 8.25vh;
   padding: 15px;
   font-family: 'Lato';
   font-weight: bold;
-  color: #FFF;
-  background: #406BB2;
+  color: #406BB2;
+  background: #f2f2f2;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1006,6 +1012,8 @@ i {
   height: auto;
   font-family: 'Quicksand';
   background: white;
+  border-left: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
   display: none;
   position: absolute;
   right: 0;
@@ -1018,5 +1026,4 @@ i {
     line-height: 35px;
     list-style: none; }
   #menu-navigation li:hover {
-    background-color: #8FB9FF;
-    opacity: 0.3; }
+    color: #8FB9FF; }

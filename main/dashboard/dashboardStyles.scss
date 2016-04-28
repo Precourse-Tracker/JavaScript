@@ -79,8 +79,8 @@ $lightBlue: #8FB9FF;
 #unit-test-menu {
   width: 175px;
   background: white;
-  border-bottom: 1px solid grey;
-  border-right: 1px solid grey;
+  border-bottom: 1px solid #f2f2f2;
+  border-right: 1px solid #f2f2f2;
   position: absolute;
   display: none;
   z-index: 9;
@@ -95,6 +95,9 @@ $lightBlue: #8FB9FF;
     color: $darkBlue;
     cursor: pointer;
     line-height: 35px;
+  }
+  li:hover {
+    color: $lightBlue;
   }
 }
 
