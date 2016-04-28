@@ -29,6 +29,7 @@ module.exports = {
         }
         res.status( 200 )
           .send( message );
+          console.log(message);
       } );
   },
 

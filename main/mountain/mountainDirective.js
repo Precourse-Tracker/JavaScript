@@ -1,4 +1,4 @@
-angular.module( 'myApp' ).directive( 'mountainDirective', function () {
+angular.module( 'myApp' ).directive( 'mountainDirective', function (mountainSvc) {
     var dirDefinition = {
       restrict: 'E',
       templateUrl: './html/mountain/mountainTemplate.html',
@@ -257,7 +257,7 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
               cl1.style.zIndex = ( cloudZ );
               cl1.style.left = ( -42 ) + 'em';
               cl1.style.top = ( aCoords ) + 'em';
-              cl1.style.animationDuration = ((randomMinMax(30, 60))+ 's');
+              cl1.style.animationDuration = ( ( randomMinMax( 30, 60 ) ) + 's' );
 
               node.appendChild( cl1 );
               cloudCount++;
@@ -357,7 +357,53 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
         //////////////////////////////////
         //  <-------- Climber --------> //
         //////////////////////////////////
+        scope.spawnClimber = function ( number ) {
+          // determines location of climber
+          let aCoords = randomMinMax( -3, 33 );
+          let x = aCoords;
+          let y = ( randomMinMax( 4, findY( aCoords ) ) - 0.5 );
 
+          // z-index based on vertical position on screen.
+          const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
+          var climberZ = ( newZ + 20 );
+
+          // create DOM element for portions of a climber
+          var clmbr1 = document.createElement( 'i' );
+
+          // get progress, define position on mountain
+
+
+          // style the climber
+          clmbr1.style.zIndex = ( climberZ );
+          clmbr1.style.width = '50px';
+          clmbr1.style.height = '50px';
+          clmbr1.style.backgroundColor = 'red';
+          clmbr1.style.border = '0.39em solid transparent';
+          clmbr1.style.borderBottom = '0.39em solid ' + 'red';
+
+          // position
+          clmbr1.style.left = ( x - 16 ) + 'em';
+          clmbr1.style.bottom = ( y - 23.9 ) + 'em';
+
+          // spawn the actual climber pieces that make up one climber
+          node.appendChild( clmbr1 );
+ /*
+ progress.lessons = [ {lesson obj1: name, score}, ]
+
+
+        }
+
+        scope.advanceClimber = function(){
+
+          // move the climber based on progress
+          const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
+          var climberZ = ( newZ + 20 );
+          var clmbr1 = document.createElement( 'i' );
+          clmbr1.style.width = '50px';
+          clmbr1.style.height = '50px';
+          node.appendChild( clmbr1 );
+        }
+ */
 
         //////////////////////////////////
         //  <------  Mountain  ------>  //
@@ -372,7 +418,7 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function () {
             var x = aCoords;
             var y = ( randomMinMax( 4, findY( aCoords ) ) - 0.5 );
 
-            // z-index based on verticle position on screen.
+            // z-index based on vertical position on screen.
             const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
             var rockZ = ( newZ - 10 );
             const newGryConst = function () {
