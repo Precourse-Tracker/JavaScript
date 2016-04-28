@@ -21,6 +21,9 @@ angular.module('myApp')
   this.setCorrectAnswer = (input, index) => {
     correctAnswerArray[index] = input;
   }
+  this.getLessonName = () => {
+    return lessonName;
+  }
   this.getTempId = () => {  // get when moving from lessons to lessontests
     return tempId;
   }
