@@ -186,8 +186,8 @@ angular.module('myApp')
          ];
      function RadarChart(id, data, options) {
      	var chart = {
-     	 w: 350,				//Width of the circle
-     	 h: 350,				//Height of the circle
+     	 w: 325,				//Width of the circle
+     	 h: 325,				//Height of the circle
      	 margin: {top: 100, right: 100, bottom: 100, left: 100}, //The margins of the SVG
      	 levels: 3,				//How many levels or inner circles should there be drawn
      	 maxValue: 100, 			//What is the value that the biggest circle will represent
@@ -523,52 +523,30 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.controller('lessonsController', ["$scope", function($scope) {
+.controller('lessonTestsController', ["$scope", function($scope) {
 
-  
 
-}])  // end lessonsController
+
+}])  // end lessonTestsController
 
 angular.module('myApp')
 
-.directive('lessonsSideBarDirective', ["$state", "$http", "$q", "lessonsContentService", function($state, $http, $q, lessonsContentService) {
+.directive('lessonTestsDirective', function() {
 
   return {
-    restrict: 'E',
-    controller: 'lessonsContentController',
-    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
+    restrict: 'A',
     link: function(scope, ele, attr) {
-      $('.lesson-title').click(function() {
-        let that = this;
-        
-        if ($state.name !== 'lessons') {
-          $state.go('lessons')
-        }
-        $('.lesson-sections', that.parentNode).toggle('expand');
-        $('.lesson-tests-wrapper').css('display', 'none');
+      $('.reset-test').click(function() {
+        $('.final-score').css('display', 'none');
       })
-
-      let testNavigation = () => {
-        $('.lesson-tests-wrapper').css('display', 'block');
-        $('html, body').animate({ scrollTop: 0 }, 300);
-      }
-
-      $('.lesson-test').click(function() {
-        let lessonId = lessonsContentService.getTempId();
-        if ($state.name !== 'lessonTests') {
-          $state.go('lessonTests');
-          setTimeout(() => {
-            testNavigation();
-          }, 100);
-        } else {
-          testNavigation();
-        }
-      }) // end lesson-test click
-
-    } // end of directive link
+      $('.lessons').click(function(){
+        $('.final-score').css('display', 'none');
+      })
+    }
   }
 
-}])  // end lessonsSideBarDirective
+})  // end lessonTestsDirective
+
 
 angular.module('myApp')
 
@@ -739,30 +717,52 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.controller('lessonTestsController', ["$scope", function($scope) {
+.controller('lessonsController', ["$scope", function($scope) {
 
+  
 
-
-}])  // end lessonTestsController
+}])  // end lessonsController
 
 angular.module('myApp')
 
-.directive('lessonTestsDirective', function() {
+.directive('lessonsSideBarDirective', ["$state", "$http", "$q", "lessonsContentService", function($state, $http, $q, lessonsContentService) {
 
   return {
-    restrict: 'A',
+    restrict: 'E',
+    controller: 'lessonsContentController',
+    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
     link: function(scope, ele, attr) {
-      $('.reset-test').click(function() {
-        $('.final-score').css('display', 'none');
+      $('.lesson-title').click(function() {
+        let that = this;
+        
+        if ($state.name !== 'lessons') {
+          $state.go('lessons')
+        }
+        $('.lesson-sections', that.parentNode).toggle('expand');
+        $('.lesson-tests-wrapper').css('display', 'none');
       })
-      $('.lessons').click(function(){
-        $('.final-score').css('display', 'none');
-      })
-    }
+
+      let testNavigation = () => {
+        $('.lesson-tests-wrapper').css('display', 'block');
+        $('html, body').animate({ scrollTop: 0 }, 300);
+      }
+
+      $('.lesson-test').click(function() {
+        let lessonId = lessonsContentService.getTempId();
+        if ($state.name !== 'lessonTests') {
+          $state.go('lessonTests');
+          setTimeout(() => {
+            testNavigation();
+          }, 100);
+        } else {
+          testNavigation();
+        }
+      }) // end lesson-test click
+
+    } // end of directive link
   }
 
-})  // end lessonTestsDirective
-
+}])  // end lessonsSideBarDirective
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
