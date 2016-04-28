@@ -1,0 +1,59 @@
+@import "./../variables";
+.cloud,
+.cloud:after,
+.cloud:before {
+    position: absolute;
+    padding: 0px;
+    margin: 0px;
+    content: '';
+    width: 75px;
+    height: 30px;
+    background: rgb(177, 190, 191);
+    -webkit-border-radius: 100px / 50px;
+    border-radius: 100px / 50px;
+    pointer-events: none;
+}
+.cloud {
+    top: 185px;
+    padding: 0px;
+    margin: 0px;
+    -webkit-animation: cloud 50s infinite linear;
+    animation: cloud 50s infinite linear;
+    box-shadow: -5px -2px 4px rgba(215, 244, 246, 0.9);
+    z-index: -4;
+
+}
+@-webkit-keyframes cloud {
+    0% {
+        left: -100px;
+    }
+    100% {
+        left: 110vw;
+    }
+}
+@keyframes cloud {
+    0% {
+        left: -100px;
+    }
+    100% {
+        left: 110vw;
+    }
+}
+.cloud:before {
+    content: '';
+    left: 31px;
+    top: -14px;
+    padding: 0px;
+    margin: 0px;
+    box-shadow: 5px -1px 4px white
+}
+.cloud:after {
+    content: '';
+    left: 31px;
+    top: -14px;
+    top: 2px;
+    left: 47px;
+    padding: 0px;
+    margin: 0px;
+    box-shadow: 7px -1px 4px white
+}
