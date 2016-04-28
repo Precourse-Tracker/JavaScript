@@ -3,15 +3,16 @@ angular.module('myApp')
 .controller('lessonsContentController', function($scope, lessonsContentService) {
   $scope.userAnswerArray = [];
   $scope.lessonInfo = (input) => {
-      lessonsContentService.resetArray();
-      $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
-        $scope.testObject = lesson.data[0];
-        $scope.theTitle = $scope.testObject.name;
-        lessonsContentService.setLessonName($scope.theTitle);
-        $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
-            entry.index = index;
-            lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
-        })
+    lessonsContentService.setTempId(input);
+    lessonsContentService.resetArray();
+    $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
+      $scope.testObject = lesson.data[0];
+      $scope.theTitle = $scope.testObject.name;
+      lessonsContentService.setLessonName($scope.theTitle);
+      $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
+          entry.index = index;
+          lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
+      })
     })
   }
   $scope.addAnswer = (userAnswer) => {
