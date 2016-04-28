@@ -1,4 +1,4 @@
-angular.module( 'myApp' ).directive( 'mountainDirective', function (mountainSvc) {
+angular.module( 'myApp' ).directive( 'mountainDirective', function ( mountainSvc ) {
     var dirDefinition = {
       restrict: 'E',
       templateUrl: './html/mountain/mountainTemplate.html',
@@ -387,23 +387,24 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function (mountainSvc)
 
           // spawn the actual climber pieces that make up one climber
           node.appendChild( clmbr1 );
- /*
- progress.lessons = [ {lesson obj1: name, score}, ]
-
-
         }
 
-        scope.advanceClimber = function(){
+        /*
+        progress.lessons = [ {lesson obj1: name, score}, ]
+        */
 
-          // move the climber based on progress
-          const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
-          var climberZ = ( newZ + 20 );
-          var clmbr1 = document.createElement( 'i' );
-          clmbr1.style.width = '50px';
-          clmbr1.style.height = '50px';
-          node.appendChild( clmbr1 );
-        }
- */
+        /*
+                scope.advanceClimber = function(){
+
+                  // move the climber based on progress
+                  const newZ = ( 220 + ( Math.floor( Math.floor( 10 - ( 100 * y ) ) / 10 ) ) );
+                  var climberZ = ( newZ + 20 );
+                  var clmbr1 = document.createElement( 'i' );
+                  clmbr1.style.width = '50px';
+                  clmbr1.style.height = '50px';
+                  node.appendChild( clmbr1 );
+                }
+         */
 
         //////////////////////////////////
         //  <------  Mountain  ------>  //
