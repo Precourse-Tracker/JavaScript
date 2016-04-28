@@ -6,13 +6,13 @@ angular.module('myApp')
 
 
 
-  getLessons = () => {
-    lessonsContentService.getLessonInfo().then(function(response) {
-      console.log(response[0].video);
-      $scope.video = response[0].video;
-      $scope.text = response[0].lessonText;
-    })
-  }
+  // getLessons = () => {
+  //   lessonsContentService.getLessonInfo().then(function(response) {
+  //     console.log(response[0].video);
+  //     $scope.video = response[0].video;
+  //     $scope.text = response[0].lessonText;
+  //   })
+  // }
 
   $scope.lessonInfo = (input) => {
     lessonsContentService.setTempId(input);
@@ -28,7 +28,7 @@ angular.module('myApp')
     })
   }
 
-  getLessons();
+  // getLessons();
 
 
 
