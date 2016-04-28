@@ -62,7 +62,7 @@ passport.use( 'local-login', new localStrategy( {
       }
       cb(null, user);
     });
-  });
+  })
 )
 
 //////////SIGNUP AUTH//////////
