@@ -2,10 +2,16 @@ angular.module('myApp')
 
    .directive('bars', function () {
       return {
+         controller: 'dashboardController',
          restrict: 'EA',
          replace: true,
          template: '<div id="main"></div>',
+         scope: {
+           data: '='
+         },
          link: function (scope, element, attrs) {
+           var data = scope;
+           console.log('radar', data.progress);
      /////////////////////////////////////////////////////////
      /////////////// The Radar Chart Function ////////////////
      /////////////////////////////////////////////////////////

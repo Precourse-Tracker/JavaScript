@@ -3,6 +3,7 @@ const User = require('../models/User.js');
 const Lesson = require('../models/Lesson.js');
 const JSAssessment = require('../models/JSAssessment.js');
 const Unit = require('../models/Unit.js');
+const parseServ = require('../services/parseService.js');
 
 module.exports = {
   createLesson(req,res, next) {
@@ -53,6 +54,19 @@ module.exports = {
       }
       else {
         res.status(200).send(lesson);
+      }
+    })
+  },
+  getUserData(req, res, next) {
+    User.findById(req.user, (err, progress) => {
+      console.log("progress", progress);
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        parseServ.parseData(progress).then(function(data) {
+          console.log('back data', data);
+          res.status(200).send(data);
+        })
       }
     })
   }

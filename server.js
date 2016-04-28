@@ -116,6 +116,7 @@ app.get('/logout', userController.logoutUser);
 //////////GET DATA////////////
 app.get('/api/assessment/js', unitController.getJSAssessment);
 app.get('/api/lessons/js', unitController.getJSLesson);
+app.get('/api/users/progress', unitController.getUserData);
 
 /////////UPDATING USER////////
 app.put('/api/users', userController.updateUser);
