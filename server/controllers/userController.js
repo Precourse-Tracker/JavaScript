@@ -29,17 +29,7 @@ module.exports = {
                 res.status(200).send(req.user);
             }
         },
-<<<<<<< HEAD
 
-
-
-    updateUser(req, res) {
-      var assessment = req.body.progress.jsAssessment;
-      console.log(req.user);
-        User.findByIdAndUpdate( req.user, {
-          progress: {
-            jsAssessment: assessment
-=======
       updateUser(req, res) {
         var assessment = req.body.progress.jsAssessment;
           User.findByIdAndUpdate( req.user, {
@@ -50,7 +40,6 @@ module.exports = {
         function(err, resp) {
           if (err) {
             res.status(500).send(err);
->>>>>>> master
           }
           else {
             res.status(200).send(resp);
