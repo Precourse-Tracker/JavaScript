@@ -873,13 +873,8 @@ i {
   height: auto;
   font-family: 'Quicksand';
   background: white;
-<<<<<<< HEAD
-  border-left: 1px solid grey;
-  border-bottom: 1px solid grey;
-=======
   border-left: 1px solid #f2f2f2;
   border-bottom: 1px solid #f2f2f2;
->>>>>>> master
   display: none;
   position: absolute;
   right: 0;
@@ -891,8 +886,5 @@ i {
     color: #406BB2;
     line-height: 35px;
     list-style: none; }
-<<<<<<< HEAD
-=======
   #menu-navigation li:hover {
     color: #8FB9FF; }
->>>>>>> master
