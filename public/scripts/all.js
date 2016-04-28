@@ -42,6 +42,111 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
 
 angular.module('myApp')
 
+.controller('assessmentController', ["$scope", "assessmentService", "workerService", function($scope, assessmentService, workerService) {
+
+  assessmentService.getAssessment().then(function(response) {
+    var list = [];
+    _.each(response, function(item) {
+      for (var i = 0; i < item.questions.length; i++) {
+        list.push(item.questions[i]);
+      }
+    })
+    // console.log(list);
+    $scope.questions = list;
+  });
+
+$scope.eval = function(q, userCode) {
+
+
+  let qId = q._id;
+  let answer = q.answer;
+
+  workerService.worker(qId, answer, userCode).then(function(result) {
+    assessmentService.ticker(result);
+  })
+
+}
+
+$scope.submitAssessment = (length) => {
+  assessmentService.submitAssessment(length);
+}
+
+$scope.doSomeStuff = function(q) {
+    q.disabled = true;
+}
+
+
+}]);
+
+angular.module('myApp')
+
+.service('assessmentService', ["$q", "$http", function($q, $http) {
+
+
+
+    this.getAssessment = () => {
+        return $http({
+            method: 'GET',
+            url: '/api/assessment/js'
+        }).then((response) => {
+
+            return response.data;
+        })
+    }
+
+    var tick = 0;
+    this.ticker = (result) => {
+        if (result === true) {
+          tick += 1;
+        }else {
+            return 0;
+        }
+        console.log("tick count", tick);
+    }
+
+    this.submitAssessment = (length) => {
+      var totalScore = (tick / length) * 100;
+      totalScore = totalScore.toString();
+      console.log(totalScore);
+      return $http({
+        method: 'PUT',
+        url: '/api/users',
+        data: {
+          progress: {
+            jsAssessment: totalScore
+          }
+        }
+      }).success(function(resp) {
+        console.log(resp);
+      })
+    }
+
+}])
+
+angular.module('myApp').service('workerService', ["Webworker", function(Webworker) {
+
+  this.worker = (qId, answer, userCode) => {
+
+    function isSame(userCode, answer) {
+      if (userCode === answer) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    var myWorker = Webworker.create(isSame, {
+      isSame: true,
+      onReturn: function(data) {return data;}
+    });
+
+    var result = myWorker.run(userCode, answer);
+    return result;
+  }
+}])
+
+angular.module('myApp')
+
    .directive('bars', function () {
       return {
          restrict: 'EA',
@@ -415,111 +520,6 @@ angular.module('myApp')
         profileMenu.toggle('expand')
       })
 */
-
-angular.module('myApp')
-
-.controller('assessmentController', ["$scope", "assessmentService", "workerService", function($scope, assessmentService, workerService) {
-
-  assessmentService.getAssessment().then(function(response) {
-    var list = [];
-    _.each(response, function(item) {
-      for (var i = 0; i < item.questions.length; i++) {
-        list.push(item.questions[i]);
-      }
-    })
-    // console.log(list);
-    $scope.questions = list;
-  });
-
-$scope.eval = function(q, userCode) {
-
-
-  let qId = q._id;
-  let answer = q.answer;
-
-  workerService.worker(qId, answer, userCode).then(function(result) {
-    assessmentService.ticker(result);
-  })
-
-}
-
-$scope.submitAssessment = (length) => {
-  assessmentService.submitAssessment(length);
-}
-
-$scope.doSomeStuff = function(q) {
-    q.disabled = true;
-}
-
-
-}]);
-
-angular.module('myApp')
-
-.service('assessmentService', ["$q", "$http", function($q, $http) {
-
-
-
-    this.getAssessment = () => {
-        return $http({
-            method: 'GET',
-            url: '/api/assessment/js'
-        }).then((response) => {
-
-            return response.data;
-        })
-    }
-
-    var tick = 0;
-    this.ticker = (result) => {
-        if (result === true) {
-          tick += 1;
-        }else {
-            return 0;
-        }
-        console.log("tick count", tick);
-    }
-
-    this.submitAssessment = (length) => {
-      var totalScore = (tick / length) * 100;
-      totalScore = totalScore.toString();
-      console.log(totalScore);
-      return $http({
-        method: 'PUT',
-        url: '/api/users',
-        data: {
-          progress: {
-            jsAssessment: totalScore
-          }
-        }
-      }).success(function(resp) {
-        console.log(resp);
-      })
-    }
-
-}])
-
-angular.module('myApp').service('workerService', ["Webworker", function(Webworker) {
-
-  this.worker = (qId, answer, userCode) => {
-
-    function isSame(userCode, answer) {
-      if (userCode === answer) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    var myWorker = Webworker.create(isSame, {
-      isSame: true,
-      onReturn: function(data) {return data;}
-    });
-
-    var result = myWorker.run(userCode, answer);
-    return result;
-  }
-}])
 
 angular.module('myApp')
 
