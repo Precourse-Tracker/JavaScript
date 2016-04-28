@@ -9,6 +9,11 @@ angular.module('myApp')
       title: '=',
       testObject: '=',
       testScore: '='
+    },
+    link: function (scope, ele, attr) {
+      $('.answer-clicked').click(function(){
+        console.log(this);
+      })
     }
   }
 }) // end lessonsContentDirective

@@ -60,5 +60,22 @@ angular.module('myApp')
   $scope.resetTest = () => {
     $scope.userAnswerArray = [];
     $('html, body').animate({ scrollTop: 0 }, 300);
+    $('.quiz-button').css({
+      "background-color": "#ebebeb",
+      "color": "#406BB2"
+    })
+  }
+  //////testing buttton click////
+  $scope.answerClicked = ($event) => {
+    let temp = $event.currentTarget.parentNode;
+    $(temp).children('button').css({
+      "background-color": "#ebebeb",
+      "color": "#406BB2"
+    })
+    $($event.currentTarget).css({
+      "background-color": "#8FB9FF",
+      "color": "#fff",
+      "outline": 0
+    });
   }
 }) // end lessonsContentController
