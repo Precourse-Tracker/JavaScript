@@ -23,6 +23,20 @@ angular.module('myApp')
             lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
         })
       })
+
+      //////testing buttton click////
+      scope.answerClicked = ($event) => {
+        let temp = $event.currentTarget.parentNode;
+        $(temp).children('button').css({
+          "background-color": "#ebebeb",
+          "color": "#406BB2"
+        })
+        $($event.currentTarget).css({
+          "background-color": "#8FB9FF",
+          "color": "#fff",
+          "outline": 0
+        });
+      }
     }
   }
 }) // end lessonsContentDirective
