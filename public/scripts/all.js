@@ -11,7 +11,13 @@ angular.module('myApp', ['ui.router', 'ui.ace', 'ngWebworker'])
   })
   .state('home', {
     url: '/home',
-    templateUrl: './html/home/homeTemplate.html'
+    templateUrl: './html/home/homeTemplate.html',
+    controller: ["$scope", "loginService", "lessonsContentService", function($scope, loginService, lessonsContentService) {
+      let currentUser = loginService.getProfile();
+      currentUser.then(function(response) {
+        lessonsContentService.setCurrentUserId(response.data._id);
+      });
+    }]
   })
   .state('lessons', {
     url: '/lessons',
@@ -178,8 +184,8 @@ angular.module('myApp')
          ];
      function RadarChart(id, data, options) {
      	var chart = {
-     	 w: 350,				//Width of the circle
-     	 h: 350,				//Height of the circle
+     	 w: 325,				//Width of the circle
+     	 h: 325,				//Height of the circle
      	 margin: {top: 100, right: 100, bottom: 100, left: 100}, //The margins of the SVG
      	 levels: 3,				//How many levels or inner circles should there be drawn
      	 maxValue: 100, 			//What is the value that the biggest circle will represent
@@ -590,17 +596,12 @@ angular.module('myApp')
   return {
     restrict: 'A',
     link: function(scope, ele, attr) {
-
-      $('.grade-test').click(function() {
-        $('.final-score').css({
-          'display': 'flex',
-          'flex-direction': 'column'
-        });
-      })
       $('.reset-test').click(function() {
         $('.final-score').css('display', 'none');
       })
-
+      $('.lessons').click(function(){
+        $('.final-score').css('display', 'none');
+      })
     }
   }
 
@@ -638,6 +639,7 @@ angular.module('myApp')
       $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
         $scope.testObject = lesson.data[0];
         $scope.theTitle = $scope.testObject.name;
+        lessonsContentService.setLessonName($scope.theTitle);
         $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
             entry.index = index;
             lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
@@ -675,12 +677,22 @@ angular.module('myApp')
       } else if (score == 100) {
         $scope.message = 'Awesome!!  You got a perfect score!!';
       }
+      lessonsContentService.updateProgress(score);
+      $scope.userAnswerArray = [];
+      $('.final-score').css({
+        'display': 'flex',
+        'flex-direction': 'column'
+      });
     }
     else {
       alert('Please answer all questions before submitting');
     }
+    $('html, body').animate({ scrollTop: 0 }, 300);
   }
-
+  $scope.resetTest = () => {
+    $scope.userAnswerArray = [];
+    $('html, body').animate({ scrollTop: 0 }, 300);
+  }
 }]) // end lessonsContentController
 
 angular.module('myApp')
@@ -700,8 +712,16 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.service('lessonsContentService', ["$http", function($http) {
+.service('lessonsContentService', ["$http", "loginService", function($http, loginService) {
   let correctAnswerArray = [];
+  let lessonName = '';
+  let currentUserId = '';
+  this.setCurrentUserId = (userId) => {
+    currentUserId = userId;
+  }
+  this.setLessonName = (input) => {
+    lessonName = input;
+  }
   this.setCorrectAnswer = (input, index) => {
     correctAnswerArray[index] = input;
   }
@@ -715,6 +735,13 @@ angular.module('myApp')
     return $http ({
       method: 'GET',
       url: '/api/lessons/js/' + input
+    })
+  }
+  this.updateProgress = (score) => {
+    return $http ({
+      method: 'PUT',
+      url: '/api/lessons/progress',
+      data: {score, lessonName, currentUserId}
     })
   }
 }])  // end lessonsContentService
@@ -746,7 +773,6 @@ angular.module('myApp')
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", function($scope, loginService){
-
   $scope.createUser = function(newUser) {
     loginService.newUser(newUser).then(function() {
       $scope.newUser.username = '';
