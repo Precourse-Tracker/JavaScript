@@ -569,55 +569,6 @@ button:hover {
 #login-section .expand {
   display: block !important; }
 
-#navigation-placeholder {
-  width: 100vw;
-  height: 8.25vh;
-  position: relative; }
-
-#navigation-bar {
-  width: 100vw;
-  height: 8.25vh;
-  padding: 15px;
-  font-family: 'Lato';
-  font-weight: bold;
-  color: #FFF;
-  background: #406BB2;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  z-index: 9; }
-
-#profile-wrapper {
-  cursor: pointer;
-  width: 70px;
-  height: 70px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
-#menu-navigation {
-  height: auto;
-  font-family: 'Quicksand';
-  background: white;
-  display: none;
-  position: absolute;
-  right: 0;
-  cursor: pointer;
-  z-index: 9; }
-  #menu-navigation ul {
-    padding-right: 25px; }
-  #menu-navigation li {
-    color: #406BB2;
-    line-height: 35px;
-    list-style: none; }
-  #menu-navigation li:hover {
-    background-color: #8FB9FF;
-    opacity: 0.3; }
-
 .climber {
   position: relative; }
 
@@ -1001,3 +952,52 @@ i {
   width: 0.31em;
   height: 0.31em;
   background-color: #522200; }
+
+#navigation-placeholder {
+  width: 100vw;
+  height: 8.25vh;
+  position: relative; }
+
+#navigation-bar {
+  width: 100vw;
+  height: 8.25vh;
+  padding: 15px;
+  font-family: 'Lato';
+  font-weight: bold;
+  color: #FFF;
+  background: #406BB2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 9; }
+
+#profile-wrapper {
+  cursor: pointer;
+  width: 70px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+#menu-navigation {
+  height: auto;
+  font-family: 'Quicksand';
+  background: white;
+  display: none;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  z-index: 9; }
+  #menu-navigation ul {
+    padding-right: 25px; }
+  #menu-navigation li {
+    color: #406BB2;
+    line-height: 35px;
+    list-style: none; }
+  #menu-navigation li:hover {
+    background-color: #8FB9FF;
+    opacity: 0.3; }
