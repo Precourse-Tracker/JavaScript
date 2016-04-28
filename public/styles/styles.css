@@ -159,6 +159,7 @@ a {
 #unit-subview #js-graph-div rect:hover {
   fill: #8FB9FF; }
 
+
 #home-wrapper {
   font-family: 'Lato';
   position: absolute;
@@ -197,7 +198,6 @@ button {
 button:hover {
   background: #8FB9FF;
   box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
-
 
 .lessonTests {
   position: relative;
