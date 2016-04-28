@@ -37,6 +37,7 @@ angular.module('myApp')
           }
         }
       }).success(function(resp) {
+        tick = 0;
         console.log(resp);
       })
     }

@@ -4,8 +4,8 @@ $lightBlue: #8FB9FF;
 $navFontColor: #FFF;
 
 @mixin menuBorder() {
-  // border-left: 1px solid grey;
-  // border-bottom: 1px solid grey;
+  border-left: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
 }
 
 ///////////////////////////////////
@@ -16,15 +16,19 @@ $navFontColor: #FFF;
   height: 8.25vh;
   position: relative;
 }
-
+#home {
+  a {
+    color: $darkBlue;
+  }
+}
 #navigation-bar {
   width: 100vw;
   height: 8.25vh;
   padding: 15px;
   font-family: 'Lato';
   font-weight: bold;
-  color: $navFontColor;
-  background: $darkBlue;
+  color: $darkBlue;
+  background: #f2f2f2;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -78,8 +82,8 @@ $navFontColor: #FFF;
     line-height: 35px;
     list-style: none;
   }
+
   li:hover {
-    background-color: $lightBlue;
-    opacity: 0.3;
+    color: $lightBlue;
   }
 }
