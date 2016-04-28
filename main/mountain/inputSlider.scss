@@ -1,0 +1,84 @@
+////////////////////////////
+// <----- Trackbar -----> //
+////////////////////////////
+@import "./../variables";
+input[type=range] {
+    -webkit-appearance: none;
+    width: 75%;
+    margin: 2.05px 0;
+    background: transparent;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0 0 0.1px $navFontColor, 0 0 0 $navFontColor;
+    height: 8vw;
+    width: 8vw;
+    border-radius: 50%;
+    background: $sunYellow;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: 1.5em;
+    z-index: -100;
+}
+input[type=range]::-moz-range-thumb {
+    box-shadow: 0 0 0.1px $navFontColor, 0 0 0 $navFontColor;
+    height: 8vw;
+    width: 8vw;
+    border-radius: 50%;
+    background: $sunYellow;
+    cursor: pointer;
+    margin-top: 1.5em;
+    z-index: -100;
+}
+input[type=range]::-ms-thumb {
+    box-shadow: 0 0 0.1px $navFontColor, 0 0 0 $navFontColor;
+    height: 8vw;
+    width: 8vw;
+    border-radius: 50%;
+    background: $sunYellow;
+    cursor: pointer;
+    margin-top: 1.5em;
+    z-index: -100;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: transparent;
+    -webkit-transition-timing-function: cubic-bezier(0,0,1,1);
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 70%;
+    height: 10.9px;
+    cursor: pointer;
+    background: transparent;
+    -webkit-transition-timing-function: cubic-bezier(0,0,1,1);
+}
+input[type=range]::-moz-range-track {
+    width: 70%;
+    height: 10.9px;
+    cursor: pointer;
+    background: transparent;
+}
+input[type=range]::-ms-track {
+    width: 70%;
+    height: 10.9px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    border-radius: 13px;
+    background: transparent;
+}
+input[type=range]::-ms-fill-upper {
+    border-radius: 13px;
+    background: transparent;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: transparent;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: transparent;
+}
+// end of trackbar...
