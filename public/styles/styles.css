@@ -11,54 +11,6 @@ a {
   text-decoration: none;
   color: white; }
 
-#assessment-view .code-input-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0 10px 0; }
-
-#assessment-view .ace_editor {
-  height: 200px; }
-
-#assessment-view .assessment-eval {
-  color: #fff;
-  margin: 1em; }
-
-#assessment-view button {
-  background: #406BB2;
-  padding: 10px 16px;
-  width: auto;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 14px;
-  color: #fff;
-  line-height: 16px;
-  letter-spacing: 0.5px;
-  border-radius: 2px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
-  border: 0;
-  outline: 0;
-  transition: all 0.25s; }
-
-#assessment-view button:hover {
-  background: #8FB9FF;
-  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
-
-#assessment-view button:disabled {
-  visibility: hidden; }
-
-#assessment-view #submit-assessment {
-  float: right;
-  margin: 4em; }
-
-#assessment-view .stuff {
-  color: #406BB2;
-  width: 90vw;
-  margin: 1em; }
-
-#assessment-view input {
-  width: 100vw;
-  height: 20vh; }
-
 #dashboard-wrapper {
   width: 100vw;
   height: 91vh;
@@ -158,6 +110,54 @@ a {
 
 #unit-subview #js-graph-div rect:hover {
   fill: #8FB9FF; }
+
+#assessment-view .code-input-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 10px 0; }
+
+#assessment-view .ace_editor {
+  height: 200px; }
+
+#assessment-view .assessment-eval {
+  color: #fff;
+  margin: 1em; }
+
+#assessment-view button {
+  background: #406BB2;
+  padding: 10px 16px;
+  width: auto;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #fff;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+  border: 0;
+  outline: 0;
+  transition: all 0.25s; }
+
+#assessment-view button:hover {
+  background: #8FB9FF;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
+
+#assessment-view button:disabled {
+  visibility: hidden; }
+
+#assessment-view #submit-assessment {
+  float: right;
+  margin: 4em; }
+
+#assessment-view .stuff {
+  color: #406BB2;
+  width: 90vw;
+  margin: 1em; }
+
+#assessment-view input {
+  width: 100vw;
+  height: 20vh; }
 
 #home-wrapper {
   font-family: 'Lato';
@@ -545,6 +545,55 @@ button:hover {
 #login-section .expand {
   display: block !important; }
 
+#navigation-placeholder {
+  width: 100vw;
+  height: 8.25vh;
+  position: relative; }
+
+#navigation-bar {
+  width: 100vw;
+  height: 8.25vh;
+  padding: 15px;
+  font-family: 'Lato';
+  font-weight: bold;
+  color: #FFF;
+  background: #406BB2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 9; }
+
+#profile-wrapper {
+  cursor: pointer;
+  width: 70px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+#menu-navigation {
+  height: auto;
+  font-family: 'Quicksand';
+  background: white;
+  display: none;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  z-index: 9; }
+  #menu-navigation ul {
+    padding-right: 25px; }
+  #menu-navigation li {
+    color: #406BB2;
+    line-height: 35px;
+    list-style: none; }
+  #menu-navigation li:hover {
+    background-color: #8FB9FF;
+    opacity: 0.3; }
+
 .climber {
   position: relative; }
 
@@ -832,52 +881,3 @@ i {
   background-color: green;
   left: 2.526315789473684em;
   top: 1.894736842105263em; }
-
-#navigation-placeholder {
-  width: 100vw;
-  height: 8.25vh;
-  position: relative; }
-
-#navigation-bar {
-  width: 100vw;
-  height: 8.25vh;
-  padding: 15px;
-  font-family: 'Lato';
-  font-weight: bold;
-  color: #FFF;
-  background: #406BB2;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  z-index: 9; }
-
-#profile-wrapper {
-  cursor: pointer;
-  width: 70px;
-  height: 70px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
-#menu-navigation {
-  height: auto;
-  font-family: 'Quicksand';
-  background: white;
-  display: none;
-  position: absolute;
-  right: 0;
-  cursor: pointer;
-  z-index: 9; }
-  #menu-navigation ul {
-    padding-right: 25px; }
-  #menu-navigation li {
-    color: #406BB2;
-    line-height: 35px;
-    list-style: none; }
-  #menu-navigation li:hover {
-    background-color: #8FB9FF;
-    opacity: 0.3; }
