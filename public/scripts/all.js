@@ -559,32 +559,52 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.controller('lessonTestsController', ["$scope", "lessonsContentService", function($scope, lessonsContentService) {
+.controller('lessonsController', ["$scope", function($scope) {
 
+  
 
-
-
-
-}])  // end lessonTestsController
+}])  // end lessonsController
 
 angular.module('myApp')
 
-.directive('lessonTestsDirective', function() {
+.directive('lessonsSideBarDirective', ["$state", "$http", "$q", "lessonsContentService", function($state, $http, $q, lessonsContentService) {
 
   return {
-    restrict: 'A',
+    restrict: 'E',
+    controller: 'lessonsContentController',
+    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
     link: function(scope, ele, attr) {
-      $('.reset-test').click(function() {
-        $('.final-score').css('display', 'none');
+      $('.lesson-title').click(function() {
+        let that = this;
+        
+        if ($state.name !== 'lessons') {
+          $state.go('lessons')
+        }
+        $('.lesson-sections', that.parentNode).toggle('expand');
+        $('.lesson-tests-wrapper').css('display', 'none');
       })
-      $('.lessons').click(function(){
-        $('.final-score').css('display', 'none');
-      })
-    }
+
+      let testNavigation = () => {
+        $('.lesson-tests-wrapper').css('display', 'block');
+        $('html, body').animate({ scrollTop: 0 }, 300);
+      }
+
+      $('.lesson-test').click(function() {
+        let lessonId = lessonsContentService.getTempId();
+        if ($state.name !== 'lessonTests') {
+          $state.go('lessonTests');
+          setTimeout(() => {
+            testNavigation();
+          }, 100);
+        } else {
+          testNavigation();
+        }
+      }) // end lesson-test click
+
+    } // end of directive link
   }
 
-})  // end lessonTestsDirective
-
+}])  // end lessonsSideBarDirective
 
 angular.module('myApp')
 
@@ -606,12 +626,14 @@ angular.module('myApp')
     lessonsContentService.setTempId(input);
     lessonsContentService.resetArray();
     $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
-      console.log('lesson', lesson);
-      console.log('lesson-video', lesson.data.video);
-      $scope.video = lesson.data.video;
+      // $scope.testObject = lesson.data[0];
+      // console.log('lesson', lesson);
+      // console.log('lesson-video', lesson.data.video);
       $scope.testObject = lesson.data;
-      console.log('testObject', $scope.testObject.questions);
-      $scope.theTitle = $scope.testObject.name;
+      $scope.video = lesson.data.video;
+      // console.log('testObject', $scope.testObject.questions);
+      // $scope.theTitle = $scope.testObject.name;
+      $scope.title = $scope.testObject.name;
       lessonsContentService.setLessonName($scope.theTitle);
       $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
           entry.index = index;
@@ -706,14 +728,30 @@ angular.module('myApp')
     link: function(scope, ele, attr) {
       let lessonId = lessonsContentService.getTempId();
       scope.lessonContent = lessonsContentService.getLessonInfo(lessonId).then(function(lesson) {
+        // scope.testObject = lesson.data[0];
         scope.testObject = lesson.data;
-        scope.theTitle = scope.testObject.name;
+        scope.title = scope.testObject.name;
+        // scope.theTitle = scope.testObject.name;
         lessonsContentService.setLessonName(scope.theTitle);
         scope.testIndex = scope.testObject.questions.forEach(function(entry, index){
             entry.index = index;
             lessonsContentService.setCorrectAnswer(entry.correctAnswer, index);
         })
       })
+
+      //////testing buttton click////
+      scope.answerClicked = ($event) => {
+        let temp = $event.currentTarget.parentNode;
+        $(temp).children('button').css({
+          "background-color": "#ebebeb",
+          "color": "#406BB2"
+        })
+        $($event.currentTarget).css({
+          "background-color": "#8FB9FF",
+          "color": "#fff",
+          "outline": 0
+        });
+      }
     }
   }
 }]) // end lessonsContentDirective
@@ -773,52 +811,32 @@ angular.module('myApp')
 
 angular.module('myApp')
 
-.controller('lessonsController', ["$scope", function($scope) {
+.controller('lessonTestsController', ["$scope", "lessonsContentService", function($scope, lessonsContentService) {
 
-  
 
-}])  // end lessonsController
+
+
+
+}])  // end lessonTestsController
 
 angular.module('myApp')
 
-.directive('lessonsSideBarDirective', ["$state", "$http", "$q", "lessonsContentService", function($state, $http, $q, lessonsContentService) {
+.directive('lessonTestsDirective', function() {
 
   return {
-    restrict: 'E',
-    controller: 'lessonsContentController',
-    templateUrl: './html/lessons/lessonsSideBarTemplate.html',
+    restrict: 'A',
     link: function(scope, ele, attr) {
-      $('.lesson-title').click(function() {
-        let that = this;
-        
-        if ($state.name !== 'lessons') {
-          $state.go('lessons')
-        }
-        $('.lesson-sections', that.parentNode).toggle('expand');
-        $('.lesson-tests-wrapper').css('display', 'none');
+      $('.reset-test').click(function() {
+        $('.final-score').css('display', 'none');
       })
-
-      let testNavigation = () => {
-        $('.lesson-tests-wrapper').css('display', 'block');
-        $('html, body').animate({ scrollTop: 0 }, 300);
-      }
-
-      $('.lesson-test').click(function() {
-        let lessonId = lessonsContentService.getTempId();
-        if ($state.name !== 'lessonTests') {
-          $state.go('lessonTests');
-          setTimeout(() => {
-            testNavigation();
-          }, 100);
-        } else {
-          testNavigation();
-        }
-      }) // end lesson-test click
-
-    } // end of directive link
+      $('.lessons').click(function(){
+        $('.final-score').css('display', 'none');
+      })
+    }
   }
 
-}])  // end lessonsSideBarDirective
+})  // end lessonTestsDirective
+
 
 angular.module('myApp')
 .controller('loginController', ["$scope", "loginService", "lessonsContentService", function($scope, loginService, lessonsContentService){

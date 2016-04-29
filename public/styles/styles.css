@@ -66,6 +66,67 @@ a {
   display: flex;
   line-height: 40px; }
 
+#home-wrapper {
+  font-family: 'Lato';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: -1; }
+
+.home-top {
+  margin-top: 10vh; }
+  .home-top div {
+    font-weight: bold;
+    top: 50%;
+    transform: translate(-50%); }
+
+button {
+  margin: 4em;
+  background: #406BB2;
+  padding: 10px 16px;
+  width: auto;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #fff;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+  border: 0;
+  outline: 0;
+  margin-top: 20px;
+  transition: all 0.25s; }
+
+button:hover {
+  background: #8FB9FF;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
+
+button {
+  margin: 4em;
+  background: #406BB2;
+  padding: 10px 16px;
+  width: auto;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #fff;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+  border: 0;
+  outline: 0;
+  transition: all 0.25s; }
+
+button:hover {
+  background: #8FB9FF;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
+
 #dashboard-wrapper {
   width: 100vw;
   height: 91vh;
@@ -168,159 +229,6 @@ a {
 #unit-subview #js-graph-div rect:hover {
   fill: #8FB9FF; }
 
-#home-wrapper {
-  font-family: 'Lato';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: -1; }
-
-.home-top {
-  margin-top: 10vh; }
-  .home-top div {
-    font-weight: bold;
-    top: 50%;
-    transform: translate(-50%); }
-
-button {
-  margin: 4em;
-  background: #406BB2;
-  padding: 10px 16px;
-  width: auto;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 14px;
-  color: #fff;
-  line-height: 16px;
-  letter-spacing: 0.5px;
-  border-radius: 2px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
-  border: 0;
-  outline: 0;
-  margin-top: 20px;
-  transition: all 0.25s; }
-
-button:hover {
-  background: #8FB9FF;
-  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
-
-button {
-  margin: 4em;
-  background: #406BB2;
-  padding: 10px 16px;
-  width: auto;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 14px;
-  color: #fff;
-  line-height: 16px;
-  letter-spacing: 0.5px;
-  border-radius: 2px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
-  border: 0;
-  outline: 0;
-  transition: all 0.25s; }
-
-button:hover {
-  background: #8FB9FF;
-  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
-
-
-.lessonTests {
-  position: relative;
-  left: 50%;
-  transform: translate(-50%);
-  width: 100%; }
-  .lessonTests .lessonTests > h2, .lessonTests .lessonTests > div {
-    position: absolute; }
-  .lessonTests h2 {
-    text-align: center;
-    color: #406BB2; }
-  .lessonTests .multiple-choice-wrapper {
-    max-width: 700px;
-    display: flex;
-    justify-content: center;
-    margin: auto; }
-  .lessonTests .test-question {
-    line-height: 3em; }
-  .lessonTests .quiz-options {
-    text-align: center; }
-  .lessonTests button {
-    background-color: #ebebeb;
-    border: #fff 1px solid;
-    color: #406BB2;
-    width: 21.775em;
-    height: 6em;
-    transition: 0.3s;
-    text-align: center;
-    font-size: 1em;
-    font-family: 'lato';
-    border: none;
-    border-radius: 0;
-    line-height: 2rem;
-    padding: 0 1rem;
-    text-align: center;
-    position: relative;
-    margin: 2px auto; }
-  .lessonTests button:hover, .lessonTests #choiceClicked {
-    background-color: #8FB9FF;
-    color: #fff;
-    cursor: pointer;
-    outline: 0; }
-  .lessonTests form:nth-child(1) {
-    margin-bottom: 25px; }
-
-.lesson-tests-wrapper {
-  width: 500px;
-  height: 100vh;
-  margin-bottom: 25px;
-  display: none; }
-  .lesson-tests-wrapper .lesson-tests-placeholder {
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    z-index: 1; }
-  .lesson-tests-wrapper section {
-    width: calc(100% - 5vw);
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    background: white;
-    z-index: 0; }
-
-.final-score {
-  width: 300px;
-  height: 100px;
-  color: white;
-  background: #406BB2;
-  padding: 20px;
-  position: relative;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  left: 50%;
-  transform: translate(-50%); }
-
-.submit-functions-test {
-  display: flex;
-  justify-content: center; }
-  .submit-functions-test div {
-    width: 200px;
-    margin-bottom: 25px;
-    display: flex;
-    flex-direction: column; }
-    .submit-functions-test div input {
-      height: 32px;
-      color: #406BB2;
-      margin: 5px;
-      border: none;
-      cursor: pointer; }
-      .submit-functions-test div input:hover {
-        box-shadow: 0 0 10px #406BB2; }
 
 #side-bar-placeholder {
   width: 225px;
@@ -463,6 +371,98 @@ iframe {
   display: flex;
   justify-content: center;
   align-items: center; }
+
+.lessonTests {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  width: 100%; }
+  .lessonTests .lessonTests > h2, .lessonTests .lessonTests > div {
+    position: absolute; }
+  .lessonTests h2 {
+    text-align: center;
+    color: #406BB2; }
+  .lessonTests .multiple-choice-wrapper {
+    max-width: 700px;
+    display: flex;
+    justify-content: center;
+    margin: auto; }
+  .lessonTests .test-question {
+    line-height: 3em; }
+  .lessonTests .quiz-options {
+    text-align: center; }
+  .lessonTests button {
+    background-color: #ebebeb;
+    border: #fff 1px solid;
+    color: #406BB2;
+    width: 21.775em;
+    height: 6em;
+    transition: 0.3s;
+    text-align: center;
+    font-size: 1em;
+    font-family: 'lato';
+    border: none;
+    border-radius: 0;
+    line-height: 2rem;
+    padding: 0 1rem;
+    text-align: center;
+    position: relative;
+    margin: 2px auto; }
+  .lessonTests button:hover, .lessonTests #choiceClicked {
+    background-color: #8FB9FF;
+    color: #fff;
+    cursor: pointer;
+    outline: 0; }
+  .lessonTests form:nth-child(1) {
+    margin-bottom: 25px; }
+
+.lesson-tests-wrapper {
+  width: 500px;
+  height: 100vh;
+  margin-bottom: 25px;
+  display: none; }
+  .lesson-tests-wrapper .lesson-tests-placeholder {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    z-index: 1; }
+  .lesson-tests-wrapper section {
+    width: calc(100% - 5vw);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    background: white;
+    z-index: 0; }
+
+.final-score {
+  width: 300px;
+  height: 100px;
+  color: white;
+  background: #406BB2;
+  padding: 20px;
+  position: relative;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  transform: translate(-50%); }
+
+.submit-functions-test {
+  display: flex;
+  justify-content: center; }
+  .submit-functions-test div {
+    width: 200px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column; }
+    .submit-functions-test div input {
+      height: 32px;
+      color: #406BB2;
+      margin: 5px;
+      border: none;
+      cursor: pointer; }
+      .submit-functions-test div input:hover {
+        box-shadow: 0 0 10px #406BB2; }
 
 #login-section body {
   height: 100%;

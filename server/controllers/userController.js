@@ -59,6 +59,7 @@ module.exports = {
     var newScore = req.body.score;
     var userId = req.body.currentUserId;
     User.findById( userId, function ( err, response ) {
+      console.log(response);
       if ( response.progress.lessons.length === 0 ) {
         response.progress.lessons.push( {
           name: lesson,

@@ -18,12 +18,14 @@ angular.module('myApp')
     lessonsContentService.setTempId(input);
     lessonsContentService.resetArray();
     $scope.lessonContent = lessonsContentService.getLessonInfo(input).then(function(lesson) {
-      console.log('lesson', lesson);
-      console.log('lesson-video', lesson.data.video);
-      $scope.video = lesson.data.video;
+      // $scope.testObject = lesson.data[0];
+      // console.log('lesson', lesson);
+      // console.log('lesson-video', lesson.data.video);
       $scope.testObject = lesson.data;
-      console.log('testObject', $scope.testObject.questions);
-      $scope.theTitle = $scope.testObject.name;
+      $scope.video = lesson.data.video;
+      // console.log('testObject', $scope.testObject.questions);
+      // $scope.theTitle = $scope.testObject.name;
+      $scope.title = $scope.testObject.name;
       lessonsContentService.setLessonName($scope.theTitle);
       $scope.testIndex = $scope.testObject.questions.forEach(function(entry, index){
           entry.index = index;
