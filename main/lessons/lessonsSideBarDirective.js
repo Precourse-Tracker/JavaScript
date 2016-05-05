@@ -9,7 +9,9 @@ angular.module('myApp')
     link: function(scope, ele, attr) {
       $('.lesson-title').click(function() {
         let that = this;
-        
+
+        $('#welcome-page').css('display', 'none');
+
         if ($state.name !== 'lessons') {
           $state.go('lessons')
         }

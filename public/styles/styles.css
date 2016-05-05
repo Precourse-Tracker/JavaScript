@@ -13,59 +13,6 @@ a {
 
 
 
-#assessment-view .code-input-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0 10px 0; }
-
-#assessment-view .ace_editor {
-  height: 200px;
-  width: 600px; }
-
-#assessment-view .assessment-eval {
-  color: #fff;
-  margin: 1em; }
-
-#assessment-view button {
-  background: #406BB2;
-  padding: 10px 16px;
-  width: auto;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 14px;
-  color: #fff;
-  line-height: 16px;
-  letter-spacing: 0.5px;
-  border-radius: 2px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
-  border: 0;
-  outline: 0;
-  transition: all 0.25s; }
-
-#assessment-view button:hover {
-  background: #8FB9FF;
-  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
-
-#assessment-view button:disabled {
-  visibility: hidden; }
-
-#assessment-view #submit-assessment {
-  float: right;
-  margin: 4em; }
-
-#assessment-view .stuff {
-  color: #406BB2;
-  width: 90vw;
-  margin: 1em; }
-
-#assessment-view input {
-  width: 100vw;
-  height: 20vh; }
-
-#assessment-view .assessmentQ {
-  display: flex;
-  line-height: 40px; }
-
 #dashboard-wrapper {
   width: 100vw;
   height: 91vh;
@@ -167,6 +114,59 @@ a {
 
 #unit-subview #js-graph-div rect:hover {
   fill: #8FB9FF; }
+
+#assessment-view .code-input-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 10px 0; }
+
+#assessment-view .ace_editor {
+  height: 200px;
+  width: 600px; }
+
+#assessment-view .assessment-eval {
+  color: #fff;
+  margin: 1em; }
+
+#assessment-view button {
+  background: #406BB2;
+  padding: 10px 16px;
+  width: auto;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #fff;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+  border: 0;
+  outline: 0;
+  transition: all 0.25s; }
+
+#assessment-view button:hover {
+  background: #8FB9FF;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1); }
+
+#assessment-view button:disabled {
+  visibility: hidden; }
+
+#assessment-view #submit-assessment {
+  float: right;
+  margin: 4em; }
+
+#assessment-view .stuff {
+  color: #406BB2;
+  width: 90vw;
+  margin: 1em; }
+
+#assessment-view input {
+  width: 100vw;
+  height: 20vh; }
+
+#assessment-view .assessmentQ {
+  display: flex;
+  line-height: 40px; }
 
 #home-wrapper {
   font-family: 'Lato';
@@ -365,10 +365,11 @@ iframe {
   color: white;
   background: #406BB2;
   margin-top: 25px;
-  position: relative;
+  position: absolute;
   left: 50%;
   transform: translate(-50%);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center; }
 

@@ -79,9 +79,10 @@ iframe {
   color: white;
   background: $darkBlue;
   margin-top: 25px;
-  position: relative;
+  position: absolute;;
   @include centerLF;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
