@@ -30,7 +30,7 @@ angular.module('myApp')
           $state.go('lessonTests');
           setTimeout(() => {
             testNavigation();
-          }, 100);
+          }, 200);
         } else {
           testNavigation();
         }
