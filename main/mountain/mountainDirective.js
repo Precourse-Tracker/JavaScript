@@ -8,11 +8,9 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function ( mountainSvc
         const xMin = -3;
         const xMax = 33;
 
-        window.onload = function() {
-          console.log("document.onload");
-          scope.userProgress = scope.getCurrentUser();
-          let currentUser = scope.userProgress.response;
-          console.log(currentUser);
+        window.onload = function(){
+          console.log('spawningBackground');
+          scope.spawnBackground(1);
         }
 
         // random number generator given a minimum and maximum range.
@@ -379,24 +377,53 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function ( mountainSvc
 
           // create DOM element for portions of a climber
           var clmbr1 = document.createElement( 'i' );
+          var clmbr2 = document.createElement( 'i' );
+          var clmbr3 = document.createElement( 'i' );
+          var clmbr4 = document.createElement( 'i' );
 
           // get progress, define position on mountain
 
 
           // style the climber
-          clmbr1.style.zIndex = ( climberZ );
-          clmbr1.style.width = '50px';
-          clmbr1.style.height = '50px';
-          clmbr1.style.backgroundColor = 'red';
-          clmbr1.style.border = '0.39em solid transparent';
-          clmbr1.style.borderBottom = '0.39em solid ' + 'red';
-
+          clmbr1.style.borderTop = '0.875em solid #007e0d';
+          clmbr1.style.borderBottom = '0.875em solid #007e0d';
+          clmbr1.style.borderLeft = '0.625em solid #007e0d';
+          clmbr1.style.borderRight = '0.625em solid #007e0d';
+          clmbr1.style.borderRadius = '0.625em / 0.875em';
+          clmbr1.style.left = '-2em';
+          clmbr1.style.top = '-1em';
           // position
-          clmbr1.style.left = ( x - 16 ) + 'em';
-          clmbr1.style.bottom = ( y - 23.9 ) + 'em';
+          // clmbr1.style.left = ( x - 16 ) + 'em';
+          // clmbr1.style.bottom = ( y - 23.9 ) + 'em';
+
+
+          clmbr2.style.borderTop = '0em solid #007e0d';
+          clmbr2.style.borderBottom = '0em solid #007e0d';
+          clmbr2.style.borderLeft = '0.125em solid #007e0d';
+          clmbr2.style.borderRight = '0.125em solid #007e0d';
+          clmbr2.style.borderRadius = '0.125em / 0.875em';
+          clmbr2.style.left = '2.75em';
+          clmbr2.style.top = '3.5em';
+
+          clmbr3.style.border = '0.5em solid transparent';
+          clmbr3.style.borderTop = '0.5em solid #007e0d';
+          clmbr3.style.left = '0.25em';
+          clmbr3.style.top = '1.5em';
+
+          clmbr4.style.borderTop = '0.25em solid red';
+          clmbr4.style.borderBottom = '0.25em solid red';
+          clmbr4.style.borderLeft = '0.25em solid red';
+          clmbr4.style.borderRight = '0.25em solid red';
+          clmbr4.style.borderRadius = '0.25em / 0.25em';
+          clmbr4.style.left = '0.1em';
+          clmbr4.style.top = '0.4em';
+
 
           // spawn the actual climber pieces that make up one climber
           node.appendChild( clmbr1 );
+          node.appendChild( clmbr2 );
+          node.appendChild( clmbr3 );
+          node.appendChild( clmbr4 );
         }
 
         /*
@@ -649,6 +676,22 @@ angular.module( 'myApp' ).directive( 'mountainDirective', function ( mountainSvc
         //////////////////////////////////
         //  <-------- closing --------> //
         //////////////////////////////////
+        // window.onload = function() {
+        //   console.log('ONLOAD')
+        //   scope.getUser('57222afbaf638500176957f9')
+        //   // .then(function(){
+        //   //   console.log('hey');
+        //   // })
+        //   console.log('from dir', scope.getUser('57222afbaf638500176957f9'));
+        // }
+
+        // window.onload = function() {
+
+          // scope.getCurrentUser().then(function(response){
+          //   console.log('this.dir.response');
+          // })
+          // console.log(scope.getCurrentUser());
+        // }
 
       }
     }

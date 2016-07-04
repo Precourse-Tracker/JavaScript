@@ -3,7 +3,7 @@ angular.module( "myApp" ).service( "mountainSvc", function ( $http ) {
 
 
   this.getUser = function ( id ) {
-    console.log( id );
+    // console.log( id );
     return $http( {
         method: 'GET',
         url: '/api/users/?_id=' + id
@@ -12,19 +12,20 @@ angular.module( "myApp" ).service( "mountainSvc", function ( $http ) {
         return response
       } );
   };
+
   this.logevent = function () {
     console.log( 'event' );
   };
+
   this.getCurrentUser = function (){
-    console.log('getting currentUser');
+    console.log('svc.getCurrentUser');
     return $http( {
         method: 'GET',
         url: '/user/current'
       } )
       .then( function ( response ) {
-        console.log('hey');
-        console.log(response);
-        return response
+        console.log('svc.then');
+        return response;
       } );
   };
 
